@@ -1,0 +1,26 @@
+vis 1
+  movie
+  year (movies.list)
+  genre (genres.list)
+  score (ratings.list)
+ 
+vis 2
+  movie
+  acteur (actors.list, actresses.list)
+  location (locations.list)
+  regisseur (directors.list)
+  acteur-bio (biographies.list)
+  taal (language.list)
+
+vis 3
+  movie
+  acteur (actors.list, actresses.list)
+  score (ratings.list)
+  keywords (keywords.list)
+
+vis 4
+  runtime (running-times.list)
+  aantal filmdagen (business.list)
+  budget (business.list)
+  omzet (business.list)
+  score (ratings.list)
