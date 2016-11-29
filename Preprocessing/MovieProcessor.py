@@ -1,5 +1,5 @@
-# Movieprocessor: Reads raw datafile about movies and converts this to .csv.
-# Authors: Michelle Gybels en Anaïs Ools
+# Movieprocessor: Reads raw datafile about movies and series and converts this to .csv.
+# Authors: Michelle Gybels
 
 import csv
 
@@ -23,7 +23,7 @@ def createSeriesFile():
     with open(outputLocationSeries, "w", newline="\n", encoding="utf-8") as serieOutput:
         csvWriter = csv.writer(serieOutput, delimiter=';', quotechar=';', quoting=csv.QUOTE_MINIMAL)
         csvWriter.writerow(
-            ["ID", "Title", "EpisodeTitle", "Season", "Episode", "Year", "Year", "EndYear", "Genre", "Country", "Rating"])
+            ["ID", "Title", "EpisodeTitle", "Season", "Episode", "Year", "Year", "EndYear", "Country", "Rating"])
 
 def extractLineData(line):
     isMovie = True
@@ -95,7 +95,7 @@ def writeSerieToFile(id, info, csvWriter):
 
     #Row: ["ID", "Title", "EpisodeTitle", "Season", "Episode", "Year", "Year", "EndYear", "Genre", "Country", "Rating"]
     #Info: (title, year, endYear, episodeTitle, season, episode)
-    csvWriter.writerow([id, info[0], info[3], info[4], info[5], info[1], info[2], "", "", "", "", "", "", "", ""])
+    csvWriter.writerow([id, info[0], info[3], info[4], info[5], info[1], info[2], "", "", "", "", "", "", ""])
     savedSeries += 1
 
 def processMovies():
@@ -126,7 +126,6 @@ def processMovies():
 
             if movieID % 100000 == 0:
                 print("STATE: %d movies processed. " % movieID)
-
 
 def doneMessage():
     print("Done!")
