@@ -9,19 +9,16 @@ from datetime import datetime
 
 actorsList = {}
 
-def processActors(file, endOfHeader, isMale):
-    skipHeader(file, endOfHeader, 3)
+def processActors(inputFile, csvWriter, endOfHeader, isMale):
+    skipHeader(inputFile, endOfHeader, 3)
     entries = 0
-    for line in file:
+    for line in inputFile:
         line = line.rstrip('\n')
-
         if line is "": # end of an actor's entry
             actorFirstName = ""
             actorLastName = ""
 
         else:
-            # print(line)
-
             # Actor name
             if not line.startswith("\t"):
                 actorName = line[:line.find("\t")]
@@ -68,7 +65,8 @@ def processActors(file, endOfHeader, isMale):
                 season = None
                 episode = None
 
-            result = (actorFirstName, actorLastName, title, year, role, isMovie, episodeName, season, episode)
+            r = (len(actorsList), actorFirstName, actorLastName, title, year, role, isMovie, episodeName, season, episode)
+            csvWriter.writerow([r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7], r[8], r[9]])
             # print(result, end="\n\n")
             entries += 1
 
@@ -147,23 +145,40 @@ def skipHeader(file, endOfHeader, additionalSkipLines):
 print("Started at ", end="")
 print(datetime.now().time())
 
+outputFile = open("Output/actorsInMovies.csv", "w", newline="\n", encoding="utf-8")
+csvWriter = csv.writer(outputFile, delimiter=';', quotechar=';', quoting=csv.QUOTE_MINIMAL)
+csvWriter.writerow(["ActorID", "FirstName", "LastName", "Title", "Year", "Role", "isMovie", "EpisodeTitle", "Season", "Episode"])
+
 # ACTORS
 print("Reading actors ----------------------------------------------------------------------------------------------------------------------------------------------")
 inputFile = open("Sources/actors.list", "r", encoding="utf8", errors="ignore")
-processActors(inputFile, "THE ACTORS LIST", True)
+processActors(inputFile, csvWriter, "THE ACTORS LIST", True)
 inputFile.close()
 
 # ACTRESSES
 print("Reading actresses -------------------------------------------------------------------------------------------------------------------------------------------")
 inputFile2 = open("Sources/actresses.list", "r", encoding="utf8", errors="ignore")
-processActors(inputFile2, "THE ACTRESSES LIST", False)
+processActors(inputFile2, csvWriter, "THE ACTRESSES LIST", False)
 inputFile2.close()
+
+outputFile.close()
 
 # BIOGRAPHIES
 print("Reading biographies -----------------------------------------------------------------------------------------------------------------------------------------")
 inputFile3 = open("Sources/biographies.list", "r", encoding="utf8", errors="ignore")
 processBiographies(inputFile3, "BIOGRAPHY LIST")
 inputFile3.close()
+
+outputFile = open("Output/actors.csv", "w", newline="\n", encoding="utf-8")
+csvWriter = csv.writer(outputFile, delimiter=';', quotechar=';', quoting=csv.QUOTE_MINIMAL)
+csvWriter.writerow(["ActorID", "FirstName", "LastName", "IsMale", "BirthYear", "BirthLocation", "DeathYear", "DeathLocation"])
+for item in actorsList:
+    t = actorsList[item]
+    if len(t) == 4:
+        csvWriter.writerow([t[0], t[1], t[2], t[3], None, None, None, None])
+    elif len(t) == 8:
+        csvWriter.writerow([t[0], t[1], t[2], t[3], t[4], t[5], t[6], t[7]])
+outputFile.close()
 
 print("Ended at ", end="")
 print(datetime.now().time())
