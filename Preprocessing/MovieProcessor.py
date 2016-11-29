@@ -23,8 +23,7 @@ def createSeriesFile():
     with open(outputLocationSeries, "w", newline="\n", encoding="utf-8") as serieOutput:
         csvWriter = csv.writer(serieOutput, delimiter=';', quotechar=';', quoting=csv.QUOTE_MINIMAL)
         csvWriter.writerow(
-            ["ID", "Title", "EpisodeTitle", "Season", "Episode", "Year", "Year", "EndYear", "Genre", "Country", "Rating", "Duration", "GrossRevenue", "Budget",
-             "FilmingDates", "Location"])
+            ["ID", "Title", "EpisodeTitle", "Season", "Episode", "Year", "Year", "EndYear", "Genre", "Country", "Rating"])
 
 def extractLineData(line):
     isMovie = True
@@ -51,8 +50,10 @@ def extractLineData(line):
         isMovie = False
         episodeInfo = line[line.find("{") + 1:line.find("}")]
         episodeNumber = episodeInfo[::-1][episodeInfo[::-1].find(")") + 1: episodeInfo[::-1].find("(")][::-1]
-        if "#" in episodeNumber and "." in episodeNumber[episodeNumber.find("(#"):]:
-            (season, episode) = episodeNumber[1:].split(".")                        #season, episode
+        if "#" in episodeNumber and "." in episodeNumber[episodeNumber.find("#"):]:
+            splittedNumber = episodeNumber[1:].split(".")
+            season = splittedNumber[len(splittedNumber)-2]                          #season
+            episode = splittedNumber[len(splittedNumber)-1]                         #episode
             episodeTitle = episodeInfo[0:episodeInfo.find("(#")].strip()            #episodeTitle
         else:
             (season, episode) = (0, 0)                                              #season, episode
@@ -92,8 +93,7 @@ def writeSerieToFile(id, info, csvWriter):
     global processedSeries, ignoredSeries, savedSeries
     processedSeries += 1
 
-    #Row: ["ID", "Title", "EpisodeTitle", "Season", "Episode", "Year", "Year", "EndYear", "Genre", "Country", "Rating", "Duration", "GrossRevenue", "Budget",
-    #         "FilmingDates", "Location"]
+    #Row: ["ID", "Title", "EpisodeTitle", "Season", "Episode", "Year", "Year", "EndYear", "Genre", "Country", "Rating"]
     #Info: (title, year, endYear, episodeTitle, season, episode)
     csvWriter.writerow([id, info[0], info[3], info[4], info[5], info[1], info[2], "", "", "", "", "", "", "", ""])
     savedSeries += 1
