@@ -56,8 +56,10 @@ def extractLineData(line):
             episode = splittedNumber[len(splittedNumber)-1]                         #episode
             episodeTitle = episodeInfo[0:episodeInfo.find("(#")].strip()            #episodeTitle
         else:
-            (season, episode) = (0, 0)                                              #season, episode
-            episodeTitle = episodeInfo[episodeInfo.find("(") + 1: episodeInfo.find(")")] #episodeTitle
+            (season, episode) = (0, 0)  # season, episode
+            episodeTitle = episodeInfo
+            if "(" in episodeInfo and ")" in episodeInfo:
+                episodeTitle = episodeInfo[episodeInfo.find("(") + 1: episodeInfo.find(")")] #episodeTitle
 
     endYearString = line[::-1][:4][::-1]
     if endYearString.isdigit():

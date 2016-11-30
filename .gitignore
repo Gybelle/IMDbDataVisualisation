@@ -3,5 +3,10 @@ Preprocessing/.idea/misc.xml
 Preprocessing/.idea/Preprocessing.iml
 Preprocessing/.idea/modules.xml
 Preprocessing/.idea/workspace.xml
-Preprocessing/Output/movies.csv
-Preprocessing/Output/series.csv
+.idea/IMDbDataVisualisation.iml
+.idea/modules.xml
+.idea/misc.xml
+.idea/vcs.xml
+.idea/workspace.xml
+Preprocessing/Output/*
+Preprocessing/Sources/*

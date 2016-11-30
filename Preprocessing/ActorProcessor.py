@@ -1,6 +1,6 @@
 # ActorProcessor: Reads raw datafile about actors and the biographies and converts this to .csv.
 # Run this file after running MovieProcessor.py
-# Authors: Anaïs Ools
+# Author: Anaïs Ools
 
 import csv
 import re
