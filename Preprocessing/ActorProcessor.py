@@ -1,17 +1,21 @@
 # ActorProcessor: Reads raw datafile about actors and the biographies and converts this to .csv.
-# Authors: Michelle Gybels en Anaïs Ools
-
-# Remarks for co-authors: Anaïs is working on this
+# Run this file after running MovieProcessor.py
+# Authors: Anaïs Ools
 
 import csv
 import re
 from datetime import datetime
 
 actorsList = {}
+moviesList = {}
+seriesList = {}
 
 def processActors(inputFile, csvWriter, endOfHeader, isMale):
     skipHeader(inputFile, endOfHeader, 3)
     entries = 0
+    ignored = 0
+    actorID = -1
+    actorExists = False
     for line in inputFile:
         line = line.rstrip('\n')
         if line is "": # end of an actor's entry
@@ -29,7 +33,8 @@ def processActors(inputFile, csvWriter, endOfHeader, isMale):
                 else:
                     actorFirstName = None
                     actorLastName = actorSplit[0]
-                actorsList[actorName] = (len(actorsList), actorFirstName, actorLastName, isMale)
+                actorID += 1
+                actorExists = False
             line = line[line.find("\t")+1:]
 
             # Title
@@ -65,14 +70,33 @@ def processActors(inputFile, csvWriter, endOfHeader, isMale):
                 season = None
                 episode = None
 
-            r = (len(actorsList), actorFirstName, actorLastName, title, year, role, isMovie, episodeName, season, episode)
-            csvWriter.writerow([r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7], r[8], r[9]])
-            # print(result, end="\n\n")
+            # MovieID or SeriesID
+            movieOrSeriesID = None
+            if isMovie:
+                find = title + "--" + year
+                if find in moviesList:
+                    movieOrSeriesID = moviesList[find]
+            else:
+                find = title + "--" + year + "--" + xstr(episodeName) + "--" + xstr(season) + "--" + xstr(episode)
+                if find in seriesList:
+                    movieOrSeriesID = seriesList[find]
+                elif episodeName and episodeName.startswith("(") and episodeName.endswith(")"):
+                    find = title + "--" + year + "--" + episodeName[1:len(episodeName)-1] + "--" + xstr(season) + "--" + xstr(episode)
+                    if find in seriesList:
+                        movieOrSeriesID = seriesList[find]
+
+            if movieOrSeriesID:
+                csvWriter.writerow([actorID, movieOrSeriesID, isMovie, role])
+                if not actorExists:
+                    actorsList[actorName] = (actorID, actorFirstName, actorLastName, isMale)
+                    actorExists = True
+            else:
+                ignored += 1
             entries += 1
 
-        if entries % 1000000 == 0:
+        if entries % 500000 == 0:
             print("Processed lines: %d" % entries)
-    print("Done, %d entries found." % entries)
+    print("Done, %d entries found. [Ignored: %d, Saved: %d]" % (entries, ignored, entries-ignored))
     print("Done, %d entries in actorslist." % len(actorsList))
 
 
@@ -115,6 +139,8 @@ def processBiographies(file, endOfHeader):
                 name = None
                 bornInfo = None
                 deathInfo = None
+        if entries == breakpoint:
+            break
     print("Biographies matched: %d" % entries)
 
 
@@ -140,14 +166,38 @@ def skipHeader(file, endOfHeader, additionalSkipLines):
             skipLines = additionalSkipLines
 
 
+def xstr(s):
+    if s is None:
+        return ""
+    return str(s)
+
+
 # EXECUTION --------------------------------------------------------------------
 
 print("Started at ", end="")
 print(datetime.now().time())
 
+# READ MOVIES AND SERIES
+print("Reading movie and series data...")
+movieFile = open("Output/movies.csv", "r", newline="\n", encoding="utf-8")
+for line in movieFile:
+    item = line.rstrip('\n').rstrip('\r').split(";")
+    result = item[1] + "--" + item[2]
+    moviesList[result] = item[0]
+seriesFile = open("Output/series.csv", "r", newline="\n", encoding="utf-8")
+for line in seriesFile:
+    item = line.rstrip('\n').rstrip('\r').split(";")
+    result = item[1] + "--" + item[5] + "--" + item[2] + "--" + item[3] + "--" + item[4]
+    seriesList[result] = item[0]
+# print(moviesList)
+# print(seriesList)
+movieFile.close()
+seriesFile.close()
+
+# OUTPUT FILE
 outputFile = open("Output/actorsInMovies.csv", "w", newline="\n", encoding="utf-8")
 csvWriter = csv.writer(outputFile, delimiter=';', quotechar=';', quoting=csv.QUOTE_MINIMAL)
-csvWriter.writerow(["ActorID", "FirstName", "LastName", "Title", "Year", "Role", "isMovie", "EpisodeTitle", "Season", "Episode"])
+csvWriter.writerow(["ActorID", "MovieOrSeriesID", "IsMovie", "Role"])
 
 # ACTORS
 print("Reading actors ----------------------------------------------------------------------------------------------------------------------------------------------")
