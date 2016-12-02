@@ -129,7 +129,7 @@ def processMovies():
                 writeSerieToFile(movieID, extractedMovieInfo, serieWriter)
 
             if movieID % 100000 == 0:
-                print("STATE: %d movies processed. " % movieID)
+                print("STATE: %d movies and series processed. " % movieID)
 
 def doneMessage():
     print("Done!")
