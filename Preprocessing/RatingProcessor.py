@@ -4,6 +4,7 @@
 import csv
 import re
 from datetime import datetime
+import shutil
 
 ratingsList = {}
 
@@ -34,31 +35,34 @@ def processRatings(file):
     print("  [%d ratings processed]" % len(ratingsList))
 
 
-def matchMovies(file):
+def matchMovies(file, csvWriter):
     count = 0
     matches = 0
     for line in file:
-        item = line.rstrip('\n').rstrip('\r').split(";")
-        movie = item[1].strip() + " (" + item[2] + ")"
+        items = line.rstrip('\r\n').split(";")
+        movie = items[1].strip() + " (" + items[2] + ")"
 
+        rating = ""
         if movie in ratingsList:
             matches += 1
+            rating = ratingsList[movie]
             ratingsList.pop(movie)
 
+        csvWriter.writerow(items + [rating,])
         count += 1
     print("  [Ratings found for %d movies]" % matches)
 
 
-def matchSeries(file):
+def matchSeries(file, csvWriter):
     count = 0
     matches = 0
     for line in file:
-        item = line.rstrip('\n').rstrip('\r').split(";")
-        title = item[1]
-        year = item[5]
-        episodeTitle = item[2]
-        season = item[3]
-        episode = item[4]
+        items = line.rstrip('\n').rstrip('\r').split(";")
+        title = items[1]
+        year = items[5]
+        episodeTitle = items[2]
+        season = items[3]
+        episode = items[4]
 
         series = "\"" + title.strip() + "\"" + " (" + year + ")"
         if episodeTitle is not "":
@@ -71,10 +75,13 @@ def matchSeries(file):
         elif season is not "0" and episode is not "0":
             series += " {(#" + season + "." + episode + ")}"
 
+        rating = ""
         if series in ratingsList:
             matches += 1
+            rating = ratingsList[series]
             ratingsList.pop(series)
 
+        csvWriter.writerow(items + [rating,])
         count += 1
     print("  [Ratings found for %d series]" % matches)
 
@@ -84,6 +91,30 @@ def skipHeader(file, endOfHeader):
     for line in file:
         if header and endOfHeader in line.strip():
             header = False
+
+
+def process(fileName, containsMovies):
+    # Open files
+    inputFileName = "Output/" + fileName + ".csv"
+    outputFileName = "Output/" + fileName + "_ratings.csv"
+    inputFile = open(inputFileName, "r", newline="\n", encoding="utf-8")
+    outputFile = open(outputFileName, "w", newline="\n", encoding="utf-8")
+
+    # Update header
+    csvWriter = csv.writer(outputFile, delimiter=';', quotechar=';', quoting=csv.QUOTE_MINIMAL)
+    headerList = inputFile.readline().strip('\r\n').split(";") + ["Rating", ]
+    csvWriter.writerow(headerList)
+
+    # Update data
+    if containsMovies:
+        matchMovies(inputFile, csvWriter)
+    else:
+        matchSeries(inputFile, csvWriter)
+
+    # Close and save
+    inputFile.close()
+    outputFile.close()
+    shutil.move(outputFileName, inputFileName)  # replace old movie csv with new one
 
 
 # EXECUTION --------------------------------------------------------------------
@@ -98,14 +129,10 @@ ratingsFile.close()
 count1 = len(ratingsList)
 
 print("\nAdding ratings to movies...")
-movieFile = open("Output/movies.csv", "r", newline="\n", encoding="utf-8")
-matchMovies(movieFile)
-movieFile.close()
+process("movies", True)
 
 print("\nAdding ratings to series...")
-seriesFile = open("Output/series.csv", "r", newline="\n", encoding="utf-8")
-matchSeries(seriesFile)
-seriesFile.close()
+process("series", False)
 
 count2 = len(ratingsList)
 # print("\nRatings remaining: %d\n" % count2)
