@@ -17,13 +17,13 @@ savedSeries = 0
 def createMoviesFile():
     with open(outputLocationMovies, "w", newline="\n", encoding="utf-8") as movieOutput:
         csvWriter = csv.writer(movieOutput, delimiter=';', quotechar=';', quoting=csv.QUOTE_MINIMAL)
-        csvWriter.writerow(["ID", "Title", "Year", "EndYear", "Country", "Rating", "Duration", "GrossRevenue", "Budget", "FilmingDates", "Location"])
+        csvWriter.writerow(["ID", "Title", "Year", "EndYear"])
 
 def createSeriesFile():
     with open(outputLocationSeries, "w", newline="\n", encoding="utf-8") as serieOutput:
         csvWriter = csv.writer(serieOutput, delimiter=';', quotechar=';', quoting=csv.QUOTE_MINIMAL)
         csvWriter.writerow(
-            ["ID", "Title", "EpisodeTitle", "Season", "Episode", "Year", "EndYear", "Country", "Rating"])
+            ["ID", "Title", "EpisodeTitle", "Season", "Episode", "Year", "EndYear"])
 
 def extractLineData(line):
     isMovie = True
@@ -90,7 +90,7 @@ def writeMovieToFile(id, info, csvWriter):
     if info[1] == 0 :
         ignoredMovies += 1
     else:
-        csvWriter.writerow([id, info[0], info[1], info[2], "", "", "", "", "", "", ""])
+        csvWriter.writerow([id, info[0], info[1], info[2]])
         savedMovies += 1
 
 def writeSerieToFile(id, info, csvWriter):
@@ -99,7 +99,7 @@ def writeSerieToFile(id, info, csvWriter):
 
     #Row: ["ID", "Title", "EpisodeTitle", "Season", "Episode", "Year", "EndYear", "Genre", "Country", "Rating"]
     #Info: (title, year, endYear, episodeTitle, season, episode)
-    csvWriter.writerow([id, info[0], info[3], info[4], info[5], info[1], info[2], "", "", ""])
+    csvWriter.writerow([id, info[0], info[3], info[4], info[5], info[1], info[2]])
     savedSeries += 1
 
 def processMovies():

@@ -108,11 +108,11 @@ matchSeries(seriesFile)
 seriesFile.close()
 
 count2 = len(ratingsList)
-print("\nRatings remaining: %d\n" % count2)
-for item in ratingsList:
-    print(item)
+# print("\nRatings remaining: %d\n" % count2)
+# for item in ratingsList:
+#     print(item)
 
-print("\n\n\n%d of %d ratings not matched with a movie. %d%% success" % (count2, count1, (count1-count2)/count1*100))
+print("\n%d of %d ratings not matched with a movie. %d%% success" % (count2, count1, (count1-count2)/count1*100))
 
 print("Ended at ", end="")
 print(datetime.now().time())
