@@ -1,11 +1,11 @@
-# Movieprocessor: Reads raw datafile about the genres of films and series and converts this to .csv.
+# GenreProcessor: Reads raw datafile about the genres of films and series and updates movies.csv.
 # Author: Michelle Gybels
 
 import csv
 import re
 import shutil
 
-inputFile = open("Sources/genres.list", "r", encoding="utf8", errors="ignore")
+sourceFileLocation = "Sources/genres.list"
 outputLocationMovies = "Output/movies.csv"
 outputLocationGenreDict = "Output/genresDict.csv"
 outputLocationMoviesUpdated = "Output/movies_genre.csv"
@@ -67,29 +67,32 @@ def extractLineData(line):
     return (isMovie, (title, year, genre))
 
 def processGenres():
-    print("STATE:\t Reading data from source.")
+    print("STATE:\t Reading genres data from source.")
     lineCount = 0
 
     #Skip header
     header = True
-    inGenreSection = False
-    for line in inputFile:
+    inDataSection = False
+    sourceFile = open(sourceFileLocation, "r", newline="\n", encoding="utf-8", errors="ignore")
+    for line in sourceFile:
         if not header:
             break
-        if header and inGenreSection and "=" in line:
+        if header and inDataSection and "=" in line:
             header = False
         if "THE GENRES LIST" in line and "8:" in line:
-            inGenreSection = True
+            inDataSection = True
 
 
-    for line in inputFile:
+    for line in sourceFile:
         lineCount += 1
         (isMovie, extractedInfo) = extractLineData(line.strip())
 
         addToDictionary(extractedInfo)
 
+    sourceFile.close()
     print("STATE:\t Finished reading data from source. %d lines processed." % lineCount)
     writeDictToFile()
+
 
 def genresToString(genreList):
     genreString = ""
@@ -189,14 +192,17 @@ def findGenresForMovie(movie):
         return ""
 
 def printEndGenreProcMessage():
+    print("------------------------------------------------")
     print("Processing Genres Finished")
     print("Genres processed for %d movies/series" % len(movieData))
     print("------------------------------------------------")
 
 def printEndMessage():
     global updatedMovieCount
+    print("------------------------------------------------")
     print("Updating Movies Finished")
     print("Movies updated: %d" % updatedMovieCount)
+    print("------------------------------------------------")
 
 processGenres()
 readDictInMemory()
