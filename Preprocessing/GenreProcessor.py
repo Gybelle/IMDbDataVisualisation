@@ -198,7 +198,7 @@ def printEndMessage():
     print("Updating Movies Finished")
     print("Movies updated: %d" % updatedMovieCount)
 
-#processGenres()
+processGenres()
 readDictInMemory()
 printEndGenreProcMessage()
 updateMovieDataFile()
