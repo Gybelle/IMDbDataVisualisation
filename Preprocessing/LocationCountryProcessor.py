@@ -1,14 +1,16 @@
-# LocationProcessor: Reads raw datafile about the location of films and series and updates movies.csv.
+# LocationProcessor: Reads raw datafile about the location and countries of films and series and updates movies.csv.
 # Author: Michelle Gybels
 
 import csv
 import re
 import shutil
 
-sourceFileLocation = "Sources/locations.list"
+processing = ""
+sourceFileLocation = ""
 movieFileLocation = "Output/movies.csv"
-dictFileLocation = "Output/locationDict.csv"
-movieFileUpdatedLocation = "Output/movies_locations.csv"
+dictFileLocation = ""
+movieFileUpdatedLocation = ""
+headerIndicator = ""
 
 #Dictionaries
 movieData = {}
@@ -86,20 +88,8 @@ def isYear(year):
         return True
     return False
 
-
-    # items = line.rstrip('\r\n').split(";")
-    # movie = items[1].strip() + " (" + items[2] + ")"
-    #
-    # rating = ""
-    # if movie in ratingsList:
-    #     matches += 1
-    #     rating = ratingsList[movie]
-    #     ratingsList.pop(movie)
-    #
-    # csvWriter.writerow(items + [rating, ])
-
-def processLocations():
-    print("STATE:\t Reading location data from source.")
+def process():
+    print("STATE:\t Reading data from source.")
     sourceFile = open(sourceFileLocation, "r", newline="\n", encoding="utf-8", errors="ignore")
     lineCount = 0
 
@@ -111,7 +101,7 @@ def processLocations():
             break
         if header and inDataSection and "=" in line:
             header = False
-        if "LOCATIONS LIST" in line:
+        if headerIndicator in line:
             inDataSection = True
 
     for line in sourceFile:
@@ -130,7 +120,11 @@ def updateMovieDataFile():
 
     # update header
     csvWriter = csv.writer(tempMovieFile, delimiter=';', quotechar=';', quoting=csv.QUOTE_MINIMAL)
-    header = movieFile.readline().strip('\r\n').split(";") + ["Locations", ]
+    if processing == "locations":
+        header = movieFile.readline().strip('\r\n').split(";") + ["Locations", ]
+    elif processing == "countries":
+        header = movieFile.readline().strip('\r\n').split(";") + ["Countries", ]
+
     csvWriter.writerow(header)
 
     for line in movieFile:
@@ -166,8 +160,8 @@ def findLocationsForMovie(movie):
 
 def printEndLocationProcMessage():
     print("------------------------------------------------")
-    print("Processing Locations Finished")
-    print("Locations processed for %d movies/series" % len(movieData))
+    print("Processing %s Finished" % (processing))
+    print("%s processed for %d movies/series" % (processing, len(movieData)))
     print("------------------------------------------------")
 
 def printEndMessage():
@@ -177,7 +171,38 @@ def printEndMessage():
     print("Movies updated: %d" % updatedMovieCount)
     print("------------------------------------------------")
 
+def updateGlobalVars(mode):
+    global processing, sourceFileLocation, movieFileLocation, dictFileLocation, movieFileUpdatedLocation, headerIndicator
+    processing = mode
+    if mode == "locations":
+        sourceFileLocation = "Sources/locations.list"
+        dictFileLocation = "Output/locationDict.csv"
+        movieFileUpdatedLocation = "Output/movies_locations.csv"
+        headerIndicator = "LOCATIONS LIST"
+    elif mode == "countries":
+        sourceFileLocation = "Sources/countries.list"
+        dictFileLocation = "Output/countriesDict.csv"
+        movieFileUpdatedLocation = "Output/movies_countries.csv"
+        headerIndicator = "COUNTRIES LIST"
+
+def processLocations():
+    print("State: Start processing locations")
+    updateGlobalVars("locations")
+    process()
+    printEndLocationProcMessage()
+    updateMovieDataFile()
+    printEndMessage()
+
+
+def processCountries():
+    print("State: Start processing countries")
+    updateGlobalVars("countries")
+    process()
+    printEndLocationProcMessage()
+    updateMovieDataFile()
+    printEndMessage()
+
+
 processLocations()
-printEndLocationProcMessage()
-updateMovieDataFile()
-printEndMessage()
+movieData.clear()
+processCountries()
