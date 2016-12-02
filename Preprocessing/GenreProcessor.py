@@ -3,14 +3,16 @@
 
 import csv
 import re
+import shutil
 
 inputFile = open("Sources/genres.list", "r", encoding="utf8", errors="ignore")
 outputLocationMovies = "Output/movies.csv"
 outputLocationGenreDict = "Output/genresDict.csv"
+outputLocationMoviesUpdated = "Output/movies_genre.csv"
 
 #Dictionaries
 movieData = {}
-moviesNotFound = []
+updatedMovieCount = 0
 
 def writeDictToFile():
     with open(outputLocationGenreDict, "w", newline="\n", encoding="utf-8") as dict:
@@ -21,59 +23,6 @@ def writeDictToFile():
             year = movie[1]
             genres = genresToString(movieData.get(movie))
             csvWriter.writerow([title, year, genres])
-
-def readMovieRecord(row):
-    rowString = ""
-
-    for element in row:
-        rowString += "," + element
-
-    movieRecord = rowString.split(";")
-
-    iRecord = 0
-    id = movieRecord[iRecord]
-    r = re.compile('[0-9][0-9][0-9][0-9]')  # To find year
-
-    yearFound = False
-    title = ""
-    year = 0
-
-    while iRecord < len(movieRecord) - 1 and not yearFound:
-        iRecord += 1
-        if re.fullmatch(r, movieRecord[iRecord]):
-            yearFound = True
-            year = movieRecord[iRecord]
-            title = title[:-1]
-        else:
-            titlePart = movieRecord[iRecord]
-            title += titlePart
-            if titlePart != "":
-                title += ";"
-    title.strip()
-
-    if iRecord < len(movieRecord) - 9:
-        # Read the other fields
-        endYear = movieRecord[iRecord + 1]
-        genre = movieRecord[iRecord + 2]
-        country = movieRecord[iRecord + 3]
-        rating = movieRecord[iRecord + 4]
-        duration = movieRecord[iRecord + 5]
-        grossRevenue = movieRecord[iRecord + 6]
-        budget = movieRecord[iRecord + 7]
-        filmingDates = movieRecord[iRecord + 8]
-        location = movieRecord[iRecord + 9]
-    else:
-        (endYear, genre, country, rating, duration, grossRevenue, budget, filmingDates, location) =  ("", "", "", "", "", "", "", "", "")
-
-    return (id, title, year, endYear, genre, country, rating, duration, grossRevenue, budget, filmingDates, location)
-
-def findGenresForMovie(movie):
-    #print(movie)
-    genreList = movieData.get(movie)
-    if genreList:
-        return genreList
-    else:
-        return ""
 
 def addToDictionary(info):
     key = (info[0], info[1])
@@ -192,11 +141,72 @@ def readDictInMemory():
                 key = (title, year)
                 movieData[key] = genreList
 
+def updateMovieDataFile():
+    movieFile = open(outputLocationMovies, "r", newline="\n", encoding="utf-8")
+    tempMovieFile = open(outputLocationMoviesUpdated, "w", newline="\n", encoding="utf-8")
+
+    #update header
+    csvWriter = csv.writer(tempMovieFile, delimiter=';', quotechar=';', quoting=csv.QUOTE_MINIMAL)
+    header = movieFile.readline().strip('\r\n').split(";") + ["Genre", ]
+    csvWriter.writerow(header)
+
+    for line in movieFile:
+        movieInfo = readMovieRecord(line)
+        movieGenres = findGenresForMovie(movieInfo)
+
+        if movieGenres != "":
+            genreString = ";" + movieGenres
+            updatedLine = line.strip() + genreString + "\n"
+            tempMovieFile.write(updatedLine)
+
+    movieFile.close()
+    tempMovieFile.close()
+    shutil.move(outputLocationMoviesUpdated, outputLocationMovies)
+
+def readMovieRecord(line):
+    movieRecord = line.rstrip('\n').rstrip('\r').split(";")
+    title = movieRecord[1].strip()
+    year = movieRecord[2]
+    if title == "" and not isYear(year):
+        title = movieRecord[2]
+        year = movieRecord[3]
+
+    return (title, year)
+
+def isYear(year):
+    r = re.compile('[0-9][0-9][0-9][0-9]')
+    if re.match(r, year):
+        return True
+    return False
+
+def findGenresForMovie(movie):
+    global updatedMovieCount
+    genreList = movieData.get(movie)
+    if genreList:
+        updatedMovieCount += 1
+        return genreList
+    else:
+        return ""
+
+def printEndGenreProcMessage():
+    print("Processing Genres Finished")
+    print("Genres processed for %d movies/series" % len(movieData))
+    print("------------------------------------------------")
+
+def printEndMessage():
+    global updatedMovieCount
+    print("Updating Movies Finished")
+    print("Movies updated: %d" % updatedMovieCount)
+
+#processGenres()
+readDictInMemory()
+printEndGenreProcMessage()
+updateMovieDataFile()
+printEndMessage()
 
 
 
 
-processGenres()
 
 
 
