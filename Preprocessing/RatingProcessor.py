@@ -79,11 +79,6 @@ def matchSeries(file, csvWriter):
             rating = ratingsList[series]
             ratingsList.pop(series)
 
-        if "Black Mirror" in line and "White Christmas" in line:
-            print(line)
-            print((title, year, episodeTitle, season, episode))
-            print(series)
-
         csvWriter.writerow(items + [rating,])
         count += 1
     print("  [Ratings found for %d series]" % matches)
