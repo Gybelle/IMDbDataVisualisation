@@ -66,13 +66,11 @@ def matchSeries(file, csvWriter):
 
         series = "\"" + title.strip() + "\"" + " (" + year + ")"
         if episodeTitle is not "":
-            if len(episodeTitle) == 10 and episodeTitle[4] == "-" and episodeTitle[7] == "-":
-                episodeTitle = "(" + episodeTitle + ")"
             series += " {" + episodeTitle
-            if season is not "0" and episode is not "0":
+            if season is not "0":
                 series += " (#" + season + "." + episode + ")"
             series += "}"
-        elif season is not "0" and episode is not "0":
+        elif season is not "0":
             series += " {(#" + season + "." + episode + ")}"
 
         rating = ""
@@ -80,6 +78,11 @@ def matchSeries(file, csvWriter):
             matches += 1
             rating = ratingsList[series]
             ratingsList.pop(series)
+
+        if "Black Mirror" in line and "White Christmas" in line:
+            print(line)
+            print((title, year, episodeTitle, season, episode))
+            print(series)
 
         csvWriter.writerow(items + [rating,])
         count += 1

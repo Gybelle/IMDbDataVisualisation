@@ -22,10 +22,87 @@ def createMoviesFile():
 def createSeriesFile():
     with open(outputLocationSeries, "w", newline="\n", encoding="utf-8") as serieOutput:
         csvWriter = csv.writer(serieOutput, delimiter=';', quotechar=';', quoting=csv.QUOTE_MINIMAL)
-        csvWriter.writerow(
-            ["ID", "Title", "EpisodeTitle", "Season", "Episode", "Year", "EndYear"])
+        csvWriter.writerow(["ID", "Title", "EpisodeTitle", "Season", "Episode", "Year", "EndYear"])
 
 def extractLineData(line):
+    isMovie = True
+    line = line.replace("{{SUSPENDED}}", "")
+
+    # Find three parts in line
+    line = line.strip()
+    yearInfo = line[line.rfind("\t"):].strip()
+    line = line[:line.rfind("\t")].strip()
+    episodeInfo = ""
+    if "{" in line and "}" in line:
+        episodeInfo = line[line.rfind("{")+1:line.rfind("}")]
+        line = line[:line.rfind("{")]
+        isMovie = False
+    titleInfo = line.strip()
+
+    # Process
+    (title, year, isMovie) = processTitleInfo(titleInfo, isMovie)
+    (year, endYear) = processYearInfo(year, yearInfo, isMovie)
+
+    if isMovie:
+        return (isMovie, (title, year, endYear))
+    else:
+        (episodeTitle, season, episode) = processEpisodeInfo(episodeInfo)
+        return (isMovie, (title, year, endYear, episodeTitle, season, episode))
+
+def processTitleInfo(titleInfo, isMovie):
+    if titleInfo.endswith(" (TV)") or titleInfo.endswith(" (VG)"):
+        titleInfo = titleInfo[:-5]
+    if titleInfo.endswith(" (V)"):
+        titleInfo = titleInfo[:-4]
+    title = titleInfo[:titleInfo.rfind("(")].strip()
+    year = titleInfo[titleInfo.rfind("(") + 1:titleInfo.rfind(")")].strip()
+    if title.startswith("\"") and title.endswith("\""):
+        isMovie = False
+        title = title[1:-1]
+    title.replace(";", ",")
+    title = title.replace("'", "\'")
+    return (title.strip(), year, isMovie)
+
+def processYearInfo(year, yearInfo, isMovie):
+    if len(year) > 4:
+        year = year[:4]
+    endYear = year
+    if "-" in yearInfo:
+        years = yearInfo.split("-")
+        endYear = years[1]
+        if len(endYear) > 4:
+            endYear = endYear[:4]
+    if len(year) < 4 and len(endYear) == 4:
+        year = endYear
+    if year == "????":
+        year = 0
+    if endYear == "????":
+        endYear = 0
+    return (year, endYear)
+
+def processEpisodeInfo(episodeInfo):
+    season = 0
+    episode = 0
+    title = ""
+    if "(" in episodeInfo and ")" in episodeInfo:
+        seasonInfo = episodeInfo[episodeInfo.rfind("(")+1:episodeInfo.rfind(")")]
+        if "#" in seasonInfo and "." in seasonInfo:
+            season = seasonInfo[1:seasonInfo.find(".")].strip()
+            episode = seasonInfo[seasonInfo.find(".")+1:].strip()
+            title = episodeInfo[:episodeInfo.rfind("(")]
+        else:
+            title = episodeInfo
+    else:
+        title = episodeInfo
+    title = title.replace(";", ",")
+    title = title.replace("'", "\'")
+    if title.endswith(" (TV)") or title.endswith(" (VG)"):
+        title = title[:-5]
+    if title.endswith(" (V)"):
+        title = title[:-4]
+    return title.strip(), season, episode
+
+def extractLineData2(line):
     isMovie = True
 
     title = line[line.find("\"") + 1:line[line.find("\"") + 1:].find("\"") + 1]     #title
@@ -83,7 +160,7 @@ def writeMovieToFile(id, info, csvWriter):
     global processedMovies, ignoredMovies, savedMovies
     processedMovies += 1
 
-    #Row: ["ID", "Title", "Year", "EndYear", "Genre", "Country", "Rating", "Duration", "GrossRevenue", "Budget", "FilmingDates", "Location"]
+    #Row: ["ID", "Title", "Year", "EndYear"]
     #Info: (title, year, endYear)
 
     #Ignore if movie has no year
@@ -97,7 +174,7 @@ def writeSerieToFile(id, info, csvWriter):
     global processedSeries, ignoredSeries, savedSeries
     processedSeries += 1
 
-    #Row: ["ID", "Title", "EpisodeTitle", "Season", "Episode", "Year", "EndYear", "Genre", "Country", "Rating"]
+    #Row: ["ID", "Title", "EpisodeTitle", "Season", "Episode", "Year", "EndYear"]
     #Info: (title, year, endYear, episodeTitle, season, episode)
     csvWriter.writerow([id, info[0], info[3], info[4], info[5], info[1], info[2]])
     savedSeries += 1
