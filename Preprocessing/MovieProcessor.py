@@ -67,7 +67,9 @@ def processYearInfo(year, yearInfo, isMovie):
     if len(year) > 4:
         year = year[:4]
     endYear = year
-    if "-" in yearInfo:
+    if len(yearInfo) == 4 and year == "????":
+        year = yearInfo
+    elif "-" in yearInfo:
         years = yearInfo.split("-")
         endYear = years[1]
         if len(endYear) > 4:
