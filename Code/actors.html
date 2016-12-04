@@ -1,0 +1,147 @@
+<!-- Examples: https://github.com/d3/d3/wiki/Gallery -->
+<html>
+	<head>
+		<title>Actors and their movies</title>
+
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<!-- Optional Bootstrap theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+		<style>
+			body {
+				padding: 20px;
+			}
+
+			.box {
+				padding: 10px;
+			}
+
+			.box div {
+				padding: 10px;
+			}
+
+			div.map-visualisation {
+				background-color: blue; 
+				height: 600px;
+				border: solid black 2px;
+			}
+
+			div.search-box {
+				background-color: gray;
+				height: 600px;
+				border: solid black 2px;
+			}
+
+
+			div.acting-ages {
+				background-color: orange;
+				height: 200px;
+				border: solid black 2px;
+			}
+
+			div.information-panel {
+				background-color: red;
+				height: 200px;
+				border: solid black 2px;
+			}
+
+			div.spoken-languages {
+				background-color: green;
+				height: 200px;
+				border: solid black 2px;
+			}
+
+		</style>
+
+
+	</head>
+	<body>
+    	<h1>IMDb: Actors and their movies</h1>
+
+    	<div class="row">
+    		<!-- map visualisation -->
+	    	<div class="col-md-8 box">
+		    	<div class="map-visualisation">
+		    		<p>Map</p>
+		    		<a target="_blank" style="color: cyan" href="https://bost.ocks.org/mike/leaflet/">A nice library to display interactive maps combined with D3.js</a>
+		    	</div>
+	    	</div>
+	    	<!-- end map visualisation -->
+
+			<!-- search box -->
+	    	<div class="col-md-4 box">
+		    	<div class="search-box">
+		    		<p>Search box</p>
+
+
+
+		            <div id="custom-search-input">
+		                <div class="btn-group" role="group" aria-label="...">
+						  <button type="button" class="btn btn-default">Actors</button>
+						  <button type="button" class="btn btn-default">Movies</button>
+						</div>
+		                <div class="input-group col-md-12">
+		                    <input type="text" class="form-control input-lg" placeholder="Search..." />
+		                    <span class="input-group-btn">
+		                        <button class="btn btn-info btn-lg" type="button">
+		                            <i class="glyphicon glyphicon-search"></i>
+		                        </button>
+		                    </span>
+		                </div>
+		            </div>
+
+
+		    	</div>
+	    	</div>
+	    	<!-- end search box -->
+    	</div> <!-- end row -->
+
+
+    	<div class="row">
+    		<!-- Information -->
+	    	<div class="col-md-2 box">
+		    	<div class="information-panel">
+		    		<p>Information</p>
+		    	</div>
+	    	</div>
+	    	<!-- end information -->
+
+			<!-- acting ages -->
+	    	<div class="col-md-7 box">
+		    	<div class="acting-ages">
+		    		<p>Acting ages</p>
+		    	</div>
+	    	</div>
+	    	<!-- end acting ages -->
+
+			<!-- spoken languages -->
+	    	<div class="col-md-3 box">
+		    	<div class="spoken-languages">
+		    		<p>Spoken Languages</p>
+		    	</div>
+	    	</div>
+	    	<!-- end spoken languages -->
+
+    	</div> <!-- end row -->
+
+
+
+
+  	</body>
+
+	
+	<!-- JQuery -->
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+	<!-- Bootstrap-->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<!-- D3.js -->
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+
+	<!-- Custom JS -->
+	<script>
+
+
+
+	</script>
+</html>
