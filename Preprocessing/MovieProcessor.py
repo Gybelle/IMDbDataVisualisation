@@ -1,5 +1,8 @@
-# Movieprocessor: Reads raw datafile about movies and series and converts this to .csv.
-# Author: Michelle Gybels
+'''
+Movieprocessor: Reads raw datafile about movies and series and converts this to .csv.
+Author: Michelle Gybels
+'''
+
 
 import csv
 

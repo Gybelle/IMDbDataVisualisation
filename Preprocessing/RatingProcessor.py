@@ -1,5 +1,7 @@
-# RatingProcessor: Reads raw datafile about ratings and updates movies.csv.
-# Author: Anaïs Ools
+'''
+RatingProcessor: Reads raw datafile about ratings and updates movies.csv.
+Author: Anaïs Ools
+'''
 
 import csv
 import re

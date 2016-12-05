@@ -1,5 +1,7 @@
-# RunningTimesProcessor: Reads raw datafile about running times and updates movies.csv.
-# Author: Anaïs Ools
+'''
+RunningTimesProcessor: Reads raw datafile about running times and updates movies.csv.
+Author: Anaïs Ools
+'''
 
 import csv
 import re

@@ -1,5 +1,7 @@
-# LocationProcessor: Reads raw datafile about the location and countries of films and series and updates movies.csv.
-# Author: Michelle Gybels
+'''
+LocationProcessor: Reads raw datafile about the location and countries of films and series and updates movies.csv.
+Author: Michelle Gybels
+'''
 
 import csv
 import re
@@ -192,7 +194,6 @@ def processLocations():
     printEndLocationProcMessage()
     updateMovieDataFile()
     printEndMessage()
-
 
 def processCountries():
     print("State: Start processing countries")

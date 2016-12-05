@@ -1,5 +1,8 @@
-# LocationProcessor: Reads raw datafile about the keywords of films and series and updates series.csv.
-# Author: Michelle Gybels
+'''
+LocationProcessor: Reads raw datafile about the keywords of films and series and updates series.csv.
+Author: Michelle Gybels
+'''
+
 
 import csv
 import re
@@ -15,7 +18,7 @@ updatedSerieCount = 0
 
 def addSerieToDictionary(serieRecord):
     title = serieRecord[0]
-    episode = serieRecord[2]  #(season, episodeNr)
+    episode = serieRecord[2]  # (season, episodeNr)
     key = (title, episode)
     serieData[key] = []       # initialize empty keyword list for every episode
 
@@ -40,6 +43,8 @@ def readSeriesInMemory():
     serieFile.close()
 
 def processKeywords():
+    sourceFile = open(sourceFileLocation, "r", newline="\n", encoding="utf-8")
+
     print("Write this!")    #TODO write this :)
 
 
