@@ -1,5 +1,6 @@
 '''
 RunningTimesProcessor: Reads raw datafile about running times and updates movies.csv.
+Run this file after running MovieProcessor.py
 Author: Anaïs Ools
 '''
 

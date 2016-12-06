@@ -1,5 +1,6 @@
 '''
 BusinessProcessor: Reads raw datafile about business and updates movies.csv.
+Run this file after running MovieProcessor.py
 Author: Anaïs Ools
 '''
 

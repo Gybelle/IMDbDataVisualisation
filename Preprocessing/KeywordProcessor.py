@@ -1,5 +1,6 @@
 '''
 KeywordProcessor: Reads raw datafile about the keywords of films and series and updates series.csv.
+Run this file after running MovieProcessor.py
 Author: Michelle Gybels
 '''
 
