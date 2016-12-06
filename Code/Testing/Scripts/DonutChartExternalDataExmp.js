@@ -6,12 +6,12 @@ function createDonutChartExternalDataTest(divID){
   var donutWidth = 75;
 
   //Define color scale
-  var color =  d3.scale.category20()
+  var color =  d3.scale.category20b()
   // Alternative:
   //var color = d3.scaleOrdinal()
     //.range(['#A60F2B', '#648C85', '#B3F2C9', '#528C18', '#C3F25C']);
 
-  var svg = d3.select('divID')
+  var svg = d3.select(divID)
     .append('svg').attr('width', width).attr('height', height)
     .append('g').attr('transform', 'translate(' + (width / 2) +  ',' + (height / 2) + ')');
 
