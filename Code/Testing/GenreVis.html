@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>"IMDb: Genres"</title>
+		<script type="text/javascript" src="Scripts/Genre_ProductionRate.js"></script>
+		<style>
+  		.legend {
+    		font-size: 12px;
+  		}
+
+  		rect {
+    		stroke-width: 2;
+  		}
+</style>
+	</head>
+
+	<body>
+		<div id="genreProductionRate"></div>
+
+		<script src="https://d3js.org/d3.v3.min.js"></script>
+		<script>
+      width = 500;
+      height = 300;
+      createLineChart('#genreProductionRate', width, height);
+    </script>
+
+	</body>
+
+</html>
