@@ -153,9 +153,9 @@ print("\nAdding languages to series...")
 process("series", False)
 
 count2 = len(languagesList)
-print("\nLanguages remaining: %d\n" % count2)
-for item in languagesList:
-    print(item)
+# print("\nLanguages remaining: %d\n" % count2)
+# for item in languagesList:
+#     print(item)
 
 print("\n%d of %d languages not matched with a movie. %d%% success" % (count2, count1, (count1-count2)/count1*100))
 
