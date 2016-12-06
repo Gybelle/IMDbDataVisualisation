@@ -1,5 +1,6 @@
 '''
 LanguageProcessor: Reads raw datafile about languages and updates movies.csv.
+Run this file after running MovieProcessor.py
 Author: Anaïs Ools
 '''
 

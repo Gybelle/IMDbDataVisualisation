@@ -141,8 +141,6 @@ def processBiographies(file, endOfHeader):
                 name = None
                 bornInfo = None
                 deathInfo = None
-        if entries == breakpoint:
-            break
     print("Biographies matched: %d" % entries)
 
 
