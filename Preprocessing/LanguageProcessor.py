@@ -20,14 +20,17 @@ def processLanguages(file):
     for line in file:
         line = line.strip()
         if "\t" in line and "(????)" not in line:
-            movie = correctTitle(line.split("\t")[0])
-            language = line.split("\t")[1].strip()
+            movie = correctTitle(line[:line.find("\t")])
+            language = line[line.find("\t")+1:].strip()
+            if "\t" in language:
+                language = language[:language.find("\t")].strip()
 
             # add to languages list
-            if movie in languagesList:
-                languagesList[movie].append(language)
-            else:
+            if language and movie not in languagesList:
                 languagesList[movie] = [language]
+            elif language and language not in languagesList[movie]:
+                languagesList[movie].append(language)
+
             count += 1
     print("  [%d languages processed]" % len(languagesList))
 
@@ -153,9 +156,9 @@ print("\nAdding languages to series...")
 process("series", False)
 
 count2 = len(languagesList)
-print("\nLanguages remaining: %d\n" % count2)
-for item in languagesList:
-    print(item)
+# print("\nLanguages remaining: %d\n" % count2)
+# for item in languagesList:
+#     print(item)
 
 print("\n%d of %d languages not matched with a movie. %d%% success" % (count2, count1, (count1-count2)/count1*100))
 

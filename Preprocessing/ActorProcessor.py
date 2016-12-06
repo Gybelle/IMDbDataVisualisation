@@ -10,101 +10,83 @@ from datetime import datetime
 
 actorsList = {}
 moviesList = {}
-seriesList = {}
 
 def processActors(inputFile, csvWriter, endOfHeader, isMale):
     skipHeader(inputFile, endOfHeader, 3)
     entries = 0
     ignored = 0
     actorID = -1
-    actorExists = False
     for line in inputFile:
         line = line.rstrip('\n')
         if line is "": # end of an actor's entry
             actorFirstName = ""
             actorLastName = ""
-
         else:
             # Actor name
             if not line.startswith("\t"):
                 actorName = line[:line.find("\t")]
-                actorSplit = actorName.split(", ")
-                if len(actorSplit) > 1:
-                    actorFirstName = actorSplit[1]
-                    actorLastName = actorSplit[0]
+                actorInfo = actorName.split(", ")
+                actorLastName = actorInfo[0]
+                if len(actorInfo) > 1:
+                    actorFirstName = actorInfo[1]
                 else:
                     actorFirstName = None
-                    actorLastName = actorSplit[0]
                 actorID += 1
-                actorExists = False
-            line = line[line.find("\t")+1:]
+                line = line[line.find("\t")+1:]
 
-            # Title
-            title = line[:line.find("(")].strip()
-            isMovie = True
-            if title.startswith("\"") and title.endswith("\""):
-                title = title[1:len(title)-1]
-                isMovie = False
-
-            # Year
-            year = line[line.find("(")+1:line.find(")")]
+            line = line.strip()
+            if line.endswith(">") and "<" in line:
+                line = line[:line.rfind("<")].strip()
 
             # Role
+            role = None
             if "[" in line and "]" in line:
-                role = line[line.find("[")+1:line.find("]")]
-            else:
-                role = None
+                role = line[line.rfind("[")+1:line.rfind("]")]
+                line = line[:line.rfind("[")].strip()
 
-            # Episode info
-            if not isMovie and "{" in line and "}" in line:
-                episodeInfo = line[line.find("{")+1:line.find("}")]
-                if "(#" in episodeInfo and ")" in episodeInfo:
-                    episodeName = episodeInfo[:episodeInfo.find("(#")]
-                    seasonInfo = episodeInfo[episodeInfo.find("(#")+2:]
-                    season = seasonInfo[:seasonInfo.find(".")]
-                    episode = seasonInfo[seasonInfo.find(".")+1:seasonInfo.find(")")]
-                else:
-                    episodeName = episodeInfo
-                    season = None
-                    episode = None
-            elif isMovie:
-                episodeName = None
-                season = None
-                episode = None
-
-            # MovieID or SeriesID
-            movieOrSeriesID = None
-            if isMovie:
-                find = title + "--" + year
-                if find in moviesList:
-                    movieOrSeriesID = moviesList[find]
-            else:
-                find = title + "--" + year + "--" + xstr(episodeName) + "--" + xstr(season) + "--" + xstr(episode)
-                if find in seriesList:
-                    movieOrSeriesID = seriesList[find]
-                elif episodeName and episodeName.startswith("(") and episodeName.endswith(")"):
-                    find = title + "--" + year + "--" + episodeName[1:len(episodeName)-1] + "--" + xstr(season) + "--" + xstr(episode)
-                    if find in seriesList:
-                        movieOrSeriesID = seriesList[find]
-
-            if movieOrSeriesID:
-                csvWriter.writerow([actorID, movieOrSeriesID, isMovie, role])
-                if not actorExists:
+            # Movie
+            movie = correctTitle(line)
+            if movie in moviesList:
+                movieID, isMovie = moviesList[movie]
+                csvWriter.writerow([actorID, movieID, isMovie, role])
+                if actorName not in actorsList:
                     actorsList[actorName] = (actorID, actorFirstName, actorLastName, isMale)
-                    actorExists = True
             else:
                 ignored += 1
             entries += 1
-
         if entries % 500000 == 0:
             print("Processed lines: %d" % entries)
-    print("Done, %d entries found. [Ignored: %d, Saved: %d]" % (entries, ignored, entries-ignored))
-    print("Done, %d entries in actorslist." % len(actorsList))
+    print("Done, %d entries processed. [Ignored: %d, Saved: %d, %d%%]" % (entries, ignored, entries-ignored, ((entries-ignored)/entries)*100))
+    print("Done, %d actors in actorslist." % len(actorsList))
+
+
+def correctTitle(title):
+    title = title.strip()
+    while title.endswith(")") and "(" in title:
+        pars = title[title.rfind("(")+1:title.rfind(")")]
+        if "as " in pars or "credit" in pars or "voice" in pars or "archive" in pars:
+            title = title[:title.rfind("(")].strip()
+        else:
+            break
+
+    title = title.replace("{{SUSPENDED}}", "").strip()
+    if title.endswith(" (TV)") or title.endswith(" (VG)"):
+        title = title[:-5]
+    if title.endswith(" (V)"):
+        title = title[:-4]
+    if "/" in title:
+        firstPar = title.find("(")
+        secondPar = title.find(")")
+        slash = title.rfind("/")
+        if firstPar < slash and slash < secondPar:
+            title = title[:slash] + ")"
+    return title.strip()
 
 
 def processBiographies(file, endOfHeader):
     skipHeader(file, endOfHeader, 1)
     entries = 0
+    matched = 0
     name = None
     bornInfo = None
     deathInfo = None
@@ -120,6 +102,7 @@ def processBiographies(file, endOfHeader):
                 deathInfo = line[4:]
             elif "-----" in line:
                 if name and (bornInfo or deathInfo):
+                    entries += 1
                     if name in actorsList:
                         bornDate = None
                         bornLocation = None
@@ -137,11 +120,11 @@ def processBiographies(file, endOfHeader):
                                     deathLocation = deathLocation[:deathLocation.find("(")].strip()
                         bio = (bornDate, bornLocation, deathDate, deathLocation)
                         actorsList[name] = actorsList[name] + bio
-                        entries += 1
+                        matched += 1
                 name = None
                 bornInfo = None
                 deathInfo = None
-    print("Biographies matched: %d" % entries)
+    print("Biographies matched: %d of %d, %d%%" % (matched, entries, (1-matched/entries)*100))
 
 
 def stringToDate(s):
@@ -166,10 +149,22 @@ def skipHeader(file, endOfHeader, additionalSkipLines):
             skipLines = additionalSkipLines
 
 
-def xstr(s):
-    if s is None:
-        return ""
-    return str(s)
+def readMovies(movieFile, seriesFile):
+    for line in movieFile:
+        items = line.rstrip('\r\n').split(";")
+        movie = items[1].strip() + " (" + items[2] + ")"
+        moviesList[movie] = (items[0], True)
+    for line in seriesFile:
+        items = line.rstrip('\n').rstrip('\r').split(";")
+        series = "\"" + items[1].strip() + "\"" + " (" + items[5] + ")"
+        if items[2] is not "":
+            series += " {" + items[2]
+            if items[3] is not "0":
+                series += " (#" + items[3] + "." + items[4] + ")"
+            series += "}"
+        elif items[3] is not "0":
+            series += " {(#" + items[3] + "." + items[4] + ")}"
+        moviesList[series] = (items[0], False)
 
 
 # EXECUTION --------------------------------------------------------------------
@@ -180,17 +175,8 @@ print(datetime.now().time())
 # READ MOVIES AND SERIES
 print("Reading movie and series data...")
 movieFile = open("Output/movies.csv", "r", newline="\n", encoding="utf-8")
-for line in movieFile:
-    item = line.rstrip('\n').rstrip('\r').split(";")
-    result = item[1] + "--" + item[2]
-    moviesList[result] = item[0]
 seriesFile = open("Output/series.csv", "r", newline="\n", encoding="utf-8")
-for line in seriesFile:
-    item = line.rstrip('\n').rstrip('\r').split(";")
-    result = item[1] + "--" + item[5] + "--" + item[2] + "--" + item[3] + "--" + item[4]
-    seriesList[result] = item[0]
-# print(moviesList)
-# print(seriesList)
+readMovies(movieFile, seriesFile)
 movieFile.close()
 seriesFile.close()
 
@@ -219,6 +205,7 @@ inputFile3 = open("Sources/biographies.list", "r", encoding="utf8", errors="igno
 processBiographies(inputFile3, "BIOGRAPHY LIST")
 inputFile3.close()
 
+# WRITE ACTORS TO FILE
 outputFile = open("Output/actors.csv", "w", newline="\n", encoding="utf-8")
 csvWriter = csv.writer(outputFile, delimiter=';', quotechar=';', quoting=csv.QUOTE_MINIMAL)
 csvWriter.writerow(["ActorID", "FirstName", "LastName", "IsMale", "BirthYear", "BirthLocation", "DeathYear", "DeathLocation"])
