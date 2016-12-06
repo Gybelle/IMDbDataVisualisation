@@ -5,7 +5,6 @@ Author: Anaïs Ools
 '''
 
 import csv
-import re
 import calendar
 from datetime import datetime
 import shutil
