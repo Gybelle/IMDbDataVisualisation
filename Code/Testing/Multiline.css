@@ -1,7 +1,7 @@
 /* Based on: http://bl.ocks.org/asielen/44ffca2877d0132572cb */
 
 #genreProductionRate {
-    max-width: 500px;
+    max-width: 1000px;
     min-width: 300px;
     margin: 0 auto;
     background-color: #FAF7F7;
@@ -42,7 +42,7 @@
     shape-rendering: crispEdges;
 }
 #genreProductionRate .axis path {
-    stroke-width: 2px;
+    stroke-width: 1px;
 }
 
 #genreProductionRate .line {

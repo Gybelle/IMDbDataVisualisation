@@ -21,40 +21,68 @@ function genreProductionRate(divID, w, h) {
     var y = d3.scale.linear().range([h, 0]);
 
     // Axes:
-    var xAxis = d3.svg.axis().scale(x).orient("bottom").ticks(5);
-    var yAxis = d3.svg.axis().scale(y).orient("left").ticks(5);
+    var xAxis = d3.svg.axis().scale(x).orient("bottom").ticks(20);
+    var yAxis = d3.svg.axis().scale(y).orient("left").ticks(20);
 
     //Define the line
     var countLine = d3.svg.line()
             .x(function (d) {
-                return x(d.year);
+                return x(d.Year);
             })
             .y(function (d) {
-                return y(d.count);
+                return y(d.Count);
             });
 
     // Get the data
-    d3.dsv(';')("genreTestData.csv", function (error, data) {
+    d3.dsv(';')("GenreYearCounty.csv", function (error, data) {
         data.forEach(function (d) {
-            d.year = parseDate(d.year);
-            d.count = +d.count;
-            //console.log(d)
+            d.Year = parseDate(d.Year);
+            d.Count = +d.Count;
         });
+        var newData = data.sort(function (a, b) {
+            return d3.ascending(a.Year, b.Year)
+        });
+        // FILTERS KOMEN HIER
+        newData = d3.nest()
+                .key(function (d) {
+                    return d.Genre;
+                })
+                .rollup(function (d) {
+                    return {
+                        Year: d.Year,
+                        Count: d3.sum(d, function (g) { return g.Count; })
+                    };
+                })
+                .map(newData);
+        console.log(newData);
+        data = newData;
+
+//        data = d3.nest()
+//                .key(function (d) {
+//                    return d.Genre, d.Year;
+//                })
+//                .rollup(function (d) {
+//                    return d3.sum(d, function (g) {
+//                        return g.Count;
+//                    });
+//                })
+//                .entries(data)
 
         // Scale the range of the data
         x.domain(d3.extent(data, function (d) {
-            return d.year;
+            return d.Year;
         }));
         y.domain([0, d3.max(data, function (d) {
-                return d.count;
+                return d.Count;
             })]);
 
         // Group entries
         var groupedData = d3.nest()
                 .key(function (d) {
-                    return d.genre;
+                    return d.Genre;
                 })
                 .entries(data);
+        console.log(groupedData);
 
         // Add data lines to svg
         groupedData.forEach(function (d) {

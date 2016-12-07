@@ -24,6 +24,9 @@ def locationsToString(locationList):
 
     if locationList:
         for location in locationList:
+            location = location.replace(";", ",")
+            if "(" in location and ")" in location:
+                location = location[:location.find("(")] + location[location.find(")")+1:]
             locationString += location + "*"
 
     return locationString[:-1]
