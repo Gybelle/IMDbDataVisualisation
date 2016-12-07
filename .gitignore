@@ -12,3 +12,7 @@ Preprocessing/Output/*
 Preprocessing/Sources/*
 Preprocessing/.idea/vcs.xml
 Presentations/~$00_Mockups-IMDb_dataset.pptx
+Data/actors.csv
+Data/series.csv
+Data/actorsInMovies.csv
+Data/movies.csv

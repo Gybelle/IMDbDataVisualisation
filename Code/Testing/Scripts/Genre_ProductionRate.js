@@ -21,8 +21,8 @@ function genreProductionRate(divID, w, h) {
     var y = d3.scale.linear().range([h, 0]);
 
     // Axes:
-    var xAxis = d3.svg.axis().scale(x).orient("bottom").ticks(20);
-    var yAxis = d3.svg.axis().scale(y).orient("left").ticks(20);
+    var xAxis = d3.svg.axis().scale(x).orient("bottom").ticks(10);
+    var yAxis = d3.svg.axis().scale(y).orient("left").ticks(10);
 
     //Define the line
     var countLine = d3.svg.line()
@@ -36,59 +36,59 @@ function genreProductionRate(divID, w, h) {
     // Get the data
     d3.dsv(';')("GenreYearCounty.csv", function (error, data) {
         data.forEach(function (d) {
-            d.Year = parseDate(d.Year);
+//            d.Year = parseDate(d.Year);
             d.Count = +d.Count;
         });
-        var newData = data.sort(function (a, b) {
-            return d3.ascending(a.Year, b.Year)
+        data.sort(function (a, b) {
+            return d3.ascending(a.Year, b.Year);
         });
         // FILTERS KOMEN HIER
-        newData = d3.nest()
-                .key(function (d) {
-                    return d.Genre;
-                })
-                .rollup(function (d) {
-                    return {
-                        Year: d.Year,
-                        Count: d3.sum(d, function (g) { return g.Count; })
-                    };
-                })
-                .map(newData);
-        console.log(newData);
-        data = newData;
-
-//        data = d3.nest()
-//                .key(function (d) {
-//                    return d.Genre, d.Year;
-//                })
-//                .rollup(function (d) {
-//                    return d3.sum(d, function (g) {
-//                        return g.Count;
-//                    });
-//                })
-//                .entries(data)
-
-        // Scale the range of the data
-        x.domain(d3.extent(data, function (d) {
-            return d.Year;
-        }));
-        y.domain([0, d3.max(data, function (d) {
-                return d.Count;
-            })]);
 
         // Group entries
         var groupedData = d3.nest()
                 .key(function (d) {
                     return d.Genre;
                 })
+                .key(function (d) {
+                    return d.Year;
+                })
+                .rollup(function (d) {
+                    return {
+                        Count: d3.sum(d, function (g) {
+                            return g.Count;
+                        })};
+                })
                 .entries(data);
-        console.log(groupedData);
+
+        var maxCount = 0
+        groupedData.forEach(function (d) {
+            d.values.forEach(function (g) {
+                if (g.values.Count > maxCount) {
+                    maxCount = g.values.Count;
+                }
+            });
+        });
+
+        // Scale the range of the data
+        x.domain(d3.extent(data, function (d) {
+            return parseDate(d.Year);
+        }));
+        y.domain([0, maxCount]);
 
         // Add data lines to svg
         groupedData.forEach(function (d) {
+            // Aggregate data
+            var newValues = [];
+            d.values.forEach(function (g) {
+                newValues.push({
+                    Year: parseDate(g.key),
+                    Count: g.values.Count
+                });
+            });
+            // Draw data
             svg.append("path")
                     .attr("class", "line")
-                    .attr("d", countLine(d.values))
+                    .attr("d", countLine(newValues))
                     .style("stroke", color(d.key));
         });
 
