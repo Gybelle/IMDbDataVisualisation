@@ -12,9 +12,11 @@
 
         <script src="https://d3js.org/d3.v3.min.js"></script>
         <script>
-            width = 1000;
-            height = 700;
-            genreProductionRate('#genreProductionRate', width, height);
+            width = 700;
+            height = 300;
+            genreFilter = null; //["Drama", "Crime", "Fantasy", "Horror"]
+            countryFilter = null;
+            genreProductionRate('#genreProductionRate', width, height, "1000", "3000", genreFilter, countryFilter);
         </script>
 
     </body>
