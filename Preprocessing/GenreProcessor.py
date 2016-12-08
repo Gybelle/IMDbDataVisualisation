@@ -1,5 +1,9 @@
-# GenreProcessor: Reads raw datafile about the genres of films and series and updates movies.csv.
-# Author: Michelle Gybels
+'''
+GenreProcessor: Reads raw datafile about the genres of films and series and updates movies.csv.
+Run this file after running MovieProcessor.py
+Author: Michelle Gybels
+'''
+
 
 import csv
 import re

@@ -1,5 +1,8 @@
-# RunningTimesProcessor: Reads raw datafile about running times and updates movies.csv.
-# Author: Anaïs Ools
+'''
+RunningTimesProcessor: Reads raw datafile about running times and updates movies.csv.
+Run this file after running MovieProcessor.py
+Author: Anaïs Ools
+'''
 
 import csv
 import re
@@ -146,9 +149,9 @@ print("\nAdding running times to series...")
 process("series", False)
 
 count2 = len(runningTimesDictionary)
-print("\nRunning times remaining: %d\n" % count2)
-for item in runningTimesDictionary:
-    print(item)
+# print("\nRunning times remaining: %d\n" % count2)
+# for item in runningTimesDictionary:
+#     print(item)
 
 print("\n%d of %d running times not matched with a movie. %d%% success" % (count2, count1, (count1-count2)/count1*100))
 

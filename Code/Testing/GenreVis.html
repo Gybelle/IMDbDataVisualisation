@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>IMDb: Genres</title>
+        <script type="text/javascript" src="Scripts/Genre_ProductionRate.js"></script>
+        <link rel="stylesheet" type="text/css" href="Multiline.css">
+    </head>
+
+    <body>
+        <div id="genreProductionRate"></div>
+
+        <script src="https://d3js.org/d3.v3.min.js"></script>
+        <script>
+            width = 700;
+            height = 300;
+            genreFilter = null; //["Drama", "Crime", "Fantasy", "Horror"]
+            countryFilter = null;
+            genreProductionRate('#genreProductionRate', width, height, "1000", "3000", genreFilter, countryFilter);
+        </script>
+
+    </body>
+
+</html>

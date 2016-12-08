@@ -1,8 +1,10 @@
-# RatingProcessor: Reads raw datafile about ratings and updates movies.csv.
-# Author: Anaïs Ools
+'''
+RatingProcessor: Reads raw datafile about ratings and updates movies.csv.
+Run this file after running MovieProcessor.py
+Author: Anaïs Ools
+'''
 
 import csv
-import re
 from datetime import datetime
 import shutil
 

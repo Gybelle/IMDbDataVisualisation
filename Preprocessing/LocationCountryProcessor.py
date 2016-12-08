@@ -1,5 +1,8 @@
-# LocationProcessor: Reads raw datafile about the location and countries of films and series and updates movies.csv.
-# Author: Michelle Gybels
+'''
+LocationProcessor: Reads raw datafile about the location and countries of films and series and updates movies.csv.
+Run this file after running MovieProcessor.py
+Author: Michelle Gybels
+'''
 
 import csv
 import re
@@ -21,6 +24,9 @@ def locationsToString(locationList):
 
     if locationList:
         for location in locationList:
+            location = location.replace(";", ",")
+            if "(" in location and ")" in location:
+                location = location[:location.find("(")] + location[location.find(")")+1:]
             locationString += location + "*"
 
     return locationString[:-1]
@@ -192,7 +198,6 @@ def processLocations():
     printEndLocationProcMessage()
     updateMovieDataFile()
     printEndMessage()
-
 
 def processCountries():
     print("State: Start processing countries")
