@@ -1,0 +1,353 @@
+<!-- Examples: https://github.com/d3/d3/wiki/Gallery -->
+<html>
+	<head>
+		<title>Actors and their movies</title>
+		<meta charset="UTF-8">
+
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<!-- Optional Bootstrap theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+		<style>
+			body {
+				padding: 20px;
+			}
+
+			.box {
+				padding: 10px;
+			}
+
+			.box div {
+				padding: 10px;
+			}
+
+			div.map-visualisation {
+				background-color: blue; 
+				height: 600px;
+				border: solid black 2px;
+			}
+
+			div.search-box {
+				background-color: #F2F2F2;
+				height: 600px;
+				border: solid black 2px;
+			}
+
+			div.search-box div#custom-search-input {
+				height: 30%;
+			}
+
+			div.search-box div#filter-results {
+				height: 70%;
+				overflow: scroll;
+			}
+
+
+			div.acting-ages {
+				background-color: #F2F2F2;
+				height: 200px;
+				border: solid black 2px;
+			}
+
+			div.acting-ages div#female-images {
+				width: 100%;
+				display: inline-block;
+				
+				text-align: justify;
+				line-height: 0;
+
+			}
+
+			div.acting-ages img.age-image,
+			div.acting-ages div.legend {
+				display: inline-block;
+				vertical-align: middle;
+			}
+
+
+			div.acting-ages div#female-images:after {
+				content: "";
+				width: 100%;
+				display: inline-block;
+				vertical-align: bottom;
+			}
+
+			div.information-panel {
+				background-color: #F2F2F2;
+				height: 200px;
+				border: solid black 2px;
+			}
+
+			div.information-panel h3.male {
+				color: blue;
+			}
+
+			div.information-panel h3.female {
+				color: #FF69B4;
+			}
+
+			div.spoken-languages {
+				background-color: #F2F2F2;
+				height: 200px;
+				border: solid black 2px;
+			}
+
+		</style>
+
+
+	</head>
+	<body>
+    	<h1>IMDb: Actors and their movies</h1>
+
+    	<div class="row">
+    		<!-- map visualisation -->
+	    	<div class="col-md-8 box">
+		    	<div class="map-visualisation">
+		    		<p>Map</p>
+		    		<a target="_blank" style="color: cyan" href="https://bost.ocks.org/mike/leaflet/">A nice library to display interactive maps combined with D3.js</a>
+		    	</div>
+	    	</div>
+	    	<!-- end map visualisation -->
+
+			<!-- search box -->
+	    	<div class="col-md-4 box">
+		    	<div class="search-box">
+
+		            <div id="custom-search-input">
+		    			<p>Search box</p>
+		                <div class="btn-group" role="group" aria-label="...">
+						  <button type="button" class="btn btn-default">Actors</button>
+						  <button type="button" class="btn btn-default">Movies</button>
+						</div>
+		                <div class="input-group col-md-12">
+		                    <input type="text" class="form-control input-lg" placeholder="Search..." id="custom-search-input-field"/>
+		                    <span class="input-group-btn">
+		                        <button class="btn btn-info btn-lg" type="button">
+		                            <i class="glyphicon glyphicon-search"></i>
+		                        </button>
+		                    </span>
+		                </div>
+		            </div>
+
+		            <div id="filter-results">
+		            	
+
+		            </div>
+
+		    	</div>
+	    	</div>
+	    	<!-- end search box -->
+    	</div> <!-- end row -->
+
+
+    	<div class="row">
+    		<!-- Information -->
+	    	<div class="col-md-2 box">
+		    	<div class="information-panel">
+		    		<h3><span class="first-name">Jane</span> <span class="last-name">Doe</span></h3>
+		    		<p class="birth-location">Los Angeles</p>
+		    		<p><span class="birth-year">1947</span> <span class="death-year">- 2014</span></p>
+		    	</div>
+	    	</div>
+	    	<!-- end information -->
+
+			<!-- acting ages -->
+	    	<div class="col-md-7 box">
+		    	<div class="acting-ages">
+		    		<h3>Acting ages</h3>
+		    		
+		    		<div id="female-images">
+		    			<img class="age-image female" src="img/girl_1.png" />
+		    			<img class="age-image female" src="img/girl_2.png" />
+		    			<img class="age-image female" src="img/girl_3.png" />
+		    			<img class="age-image female" src="img/girl_4.png" />
+		    			<img class="age-image female" src="img/girl_5.png" />
+		    			<img class="age-image female" src="img/girl_6.png" />
+		    			<img class="age-image female" src="img/girl_7.png" />
+		    			
+			    		<div class="legend">
+			    			<p>
+			    				24 movies
+			    			</p>
+			    			<p>
+			    				12 movies
+			    			</p>
+			    			<p>
+			    				0 movies
+			    			</p>
+			    		</div>
+
+		    		</div>
+		    	</div>
+	    	</div>
+	    	<!-- end acting ages -->
+
+			<!-- spoken languages -->
+	    	<div class="col-md-3 box">
+		    	<div class="spoken-languages">
+		    		<p>Spoken Languages</p>
+		    	</div>
+	    	</div>
+	    	<!-- end spoken languages -->
+
+    	</div> <!-- end row -->
+
+
+
+
+  	</body>
+
+	
+	<!-- JQuery -->
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+	<!-- Bootstrap-->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<!-- D3.js -->
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+
+	<!-- Custom JS -->
+	<script>
+
+	/**
+	 * CODE TO LOAD THE DATA
+	 */
+	var actors = [];
+	var movies = [];
+
+	d3.csv("data/actors.csv", function(data) {
+	  data.forEach(function(d) {
+	    d.ActorID = +d.ActorID;
+		d.BirthYear = +d.BirthYear;
+	    d.DeathYear = +d.DeathYear;
+	    //d.FirstName = d.FirstName.toLowerCase();
+	    //d.LastName = d.LastName.toLowerCase();
+	  });
+	  actors = data;
+
+    	onFilter();
+
+	});
+
+	d3.csv("data/movies.csv", function(data) {
+	  data.forEach(function(d) {
+	    d.ID = +d.ID;
+		d.Year = +d.Year;
+	    d.EndYear = +d.EndYear;
+	  });
+	  movies = data;
+	});
+
+	/**
+	 * SEARCH RELATED CODE
+	 */
+    
+    d3.select('#custom-search-input-field').on('keyup', onFilter);
+    
+    function onFilter(){
+      var filterText = d3.select('#custom-search-input-field').property('value');
+      
+      filteredData = actors; //todo: change this based on selected type(s)
+
+      if (filterText !== ""){
+        var filteredData = filteredData.filter(function(d){
+        	var returnValue = 
+        		   d.FirstName.toLowerCase().indexOf(filterText.toLowerCase()) === 0
+        		|| d.LastName.toLowerCase().indexOf(filterText.toLowerCase()) === 0;
+          return (returnValue);
+        });
+      }
+      
+      d3.select('#filter-results').html(
+        filteredData.map(function(d){
+        	var returnValue = "" +
+        		"<a class=\"selectActor\" href=\"#\" data-actorid=\"" + d.ActorID + "\"  >" +
+        		d.FirstName + " " + d.LastName +
+        		"</a>";
+
+          return returnValue;
+        }).join("<br/>")
+      );
+      
+    }
+
+
+    /**
+     * CODE TO SELECT AN ACTOR
+     */
+
+    // When selecting an actor:
+	$(document.body).on('click', '.selectActor' ,function(){
+		//is this possible in D3?
+		var actorID = $(this).data("actorid");
+
+		var filtered = actors.filter(function(d){
+		    return (d.ActorID === actorID);
+        });
+
+		if (filtered.length === 0)
+			return;
+
+		var actor = filtered[0];
+		updatePersonalInformation(actor);
+		updateActingAges(actor);
+		updateSpokenLanguages(actor);
+		updateMap(actor);
+	});
+
+	function updatePersonalInformation(actor) {
+		console.log(actor);
+		var $name = $('.information-panel > h3');
+		var $firstName = $('.information-panel > h3 > span.first-name');
+		var $lastName = $('.information-panel > h3 > span.last-name');
+		var $birthLocation = $('.information-panel > p.birth-location');
+		var $birthYear = $('.information-panel > p > span.birth-year');
+		var $deathYear = $('.information-panel > p > span.death-year');
+
+		//Example of how to handle male/female
+		if (actor.IsMale === "True") {
+			console.log("MALE");
+			$name.addClass('male');
+			$name.removeClass('female');
+		} else {
+			console.log("FEMALE");
+			$name.addClass('female');
+			$name.removeClass('male');
+		}
+
+		$firstName.html(actor.FirstName);
+		$lastName.html(actor.LastName);
+		
+		if (actor.BirthLocation.trim() === "") {
+			$birthLocation.html("<i>Location of birth unknown</i>")
+		} else {
+			$birthLocation.html(actor.BirthLocation);
+		}
+
+		if (actor.BirthYear > 0) {
+			$birthYear.html(actor.BirthYear);
+			if (actor.DeathYear > 0) {
+				$deathYear.html("- " + actor.DeathYear);
+			} else {
+				$deathYear.html("");
+			}
+		} else {
+			$birthYear.html("<i>Date of birth unknown</i>");
+			$deathYear.html("");
+		}
+	}
+
+	function updateActingAges(actor) {
+
+	}
+
+	function updateSpokenLanguages(actor) {
+		
+	}
+
+	function updateMap(actor) {
+
+	}
+
+	</script>
+</html>
