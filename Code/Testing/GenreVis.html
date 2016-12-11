@@ -4,19 +4,24 @@
         <meta charset="utf-8">
         <title>IMDb: Genres</title>
         <script type="text/javascript" src="Scripts/Genre_ProductionRate.js"></script>
+        <script type="text/javascript" src="Scripts/Genre_ProductionMax.js"></script>
         <link rel="stylesheet" type="text/css" href="Multiline.css">
     </head>
 
-    <body>
-        <div id="genreProductionRate"></div>
+    <body> 
+       <div class="chart" id="genreProductionMax"></div>
+       <div class="chart" id="genreProductionRate"></div>
 
         <script src="https://d3js.org/d3.v3.min.js"></script>
         <script>
             width = 700;
             height = 300;
-            genreFilter = null; //["Drama", "Crime", "Fantasy", "Horror"]
+            genreFilter = ["Adult", "Comedy"]; // null
             countryFilter = null;
-            genreProductionRate('#genreProductionRate', width, height, "1000", "3000", genreFilter, countryFilter);
+            beginYear = "1998"
+            endYear = "2005"
+            genreProductionRate('#genreProductionRate', width, height, beginYear, endYear, genreFilter, countryFilter);
+            genreProductionMax('#genreProductionMax', width, height, beginYear, endYear, genreFilter, countryFilter);
         </script>
 
     </body>
