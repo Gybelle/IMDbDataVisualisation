@@ -16,3 +16,4 @@ Data/actors.csv
 Data/series.csv
 Data/actorsInMovies.csv
 Data/movies.csv
+Preprocessing/__pycache__/*
