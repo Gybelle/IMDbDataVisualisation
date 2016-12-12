@@ -36,8 +36,8 @@ function genreProductionMax(divID, w, h, beginYearString, endYearString, genreFi
     // Get the data
     d3.dsv(';')("GenreYearCounty.csv", function (error, data) {
         data.forEach(function (d) {
-            //d.Year = parseDate(d.Year);
             d.Count = +d.Count;
+            d.Rating = +d.AvgRating;
         });
         data.sort(function (a, b) {
             return d3.ascending(a.Year, b.Year);
@@ -58,6 +58,9 @@ function genreProductionMax(divID, w, h, beginYearString, endYearString, genreFi
                 return d.Country == countryFilter;
             });
         }
+        data = data.filter(function (d) {
+            return d.AvgRating != 0;
+        });
 
         // Group entries by (year, genre)
         var groupedData = d3.nest()
@@ -67,35 +70,41 @@ function genreProductionMax(divID, w, h, beginYearString, endYearString, genreFi
                 .key(function (d) {
                     return d.Genre;
                 })
-                .rollup(function (d) {
-                    return {
-                        Count: d3.sum(d, function (g) {
-                            return g.Count;
-                        })};
-                })
                 .entries(data);
+        console.log(groupedData);
 
         // Group entries again, by genre
         var maxPerYear = [];
         groupedData.forEach(function (d) { // for each year
             var maxGenre = null;
-            var maxGenreCount = -1;
+            var maxGenreRating = -1;
             d.values.forEach(function (g) { // for each genre within year
-                if (g.values.Count > maxGenreCount) {
+                var totalRating = 0;
+                var count = 0;
+                g.values.forEach(function(m) { // for each country-entry
+                    totalRating += m.Count * m.Rating;
+                    count += m.Count;
+                });
+                var avg = totalRating / count;
+                
+                if (avg > maxGenreRating) {
                     maxGenre = g.key;
-                    maxGenreCount = g.values.Count;
+                    maxGenreRating = avg;
                 }
+                console.log(d.key, g.key, avg);
             });
             maxPerYear.push({
                 Year: parseDate(d.key),
                 MaxGenre: maxGenre,
-                MaxGenreCount: maxGenreCount
+                MaxGenreCount: maxGenreRating
             });
         });
 
         // Scale the range of the data
         //x.domain(d3.extent(data, function (d) { return parseDate(d.Year); }));
-        x.domain(maxPerYear.map(function (d) { return d.Year; }));
+        x.domain(maxPerYear.map(function (d) {
+            return d.Year;
+        }));
         //x.domain([beginYear, endYear]);
         y.domain([0, 1]);
 
@@ -105,10 +114,10 @@ function genreProductionMax(divID, w, h, beginYearString, endYearString, genreFi
                 .attr("transform", "translate(0," + h + ")")
                 .call(xAxis);
         /* Uncomment to add y axis
-        svg.append("g")
-                .attr("class", "y axis")
-                .call(yAxis);
-        */
+         svg.append("g")
+         .attr("class", "y axis")
+         .call(yAxis);
+         */
 
         // Add data to svg
         svg.selectAll("bar")
