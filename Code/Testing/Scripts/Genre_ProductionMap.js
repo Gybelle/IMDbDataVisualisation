@@ -10,12 +10,13 @@ function genreProductionMap(divID, w, h, beginYearString, endYearString, genreFi
     w = w - margin.left - margin.right;
     h = h - margin.top - margin.bottom;
 
-    var map = L.map(divID).setView([0, 0], 13);
-    mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
-    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; ' + mapLink + ' Contributors',
-        maxZoom: 18
+    var map = L.map(divID).setView([0.0, 0.0], 2);
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw', {
+        minZoom: 2,
+        maxZoom: 18,
+        id: 'mapbox.streets'
     }).addTo(map);
+    map.keyboard.disable();
 
     // Add an SVG element to Leaflet’s overlay pane
     var svg = d3.select(map.getPanes().overlayPane).append("svg");

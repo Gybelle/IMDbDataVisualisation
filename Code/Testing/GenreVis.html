@@ -7,22 +7,27 @@
         <script type="text/javascript" src="Scripts/Genre_ProductionMax.js"></script>
         <link rel="stylesheet" type="text/css" href="Multiline.css"/>
         
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
-        <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+        <!--<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />-->
+        <!--<script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>-->
         <!--<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css"/>-->
         <!--<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>-->
         <!--<script src="Testing/Scripts/leaflet/leaflet-0.7.2/leaflet.ajax.min.js"></script>-->
+        <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
+        <link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
+        <link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
+        <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+        <script src="js/leaflet-0.7.2/leaflet.ajax.min.js"></script>
+        <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-pip/v0.0.2/leaflet-pip.js'></script>
         
         <script type="text/javascript" src="Scripts/Genre_ProductionMap.js"></script>
     </head>
 
     <body> 
-        <div class="map" id="mapid"></div>
+        <div class="map" id="map"></div>
         <div class="chart" id="genreProductionMax"></div>
         <div class="chart" id="genreProductionRate"></div>
 
         <script src="https://d3js.org/d3.v3.min.js"></script>
-        <script src="Testing/Scripts/leaflet/leaflet.js"></script>
         <script>
             width = 700;
             height = 300;
@@ -32,7 +37,7 @@
             endYear = "2010"
             genreProductionRate('#genreProductionRate', width, height, beginYear, endYear, genreFilter, countryFilter);
             genreProductionMax('#genreProductionMax', width, height, beginYear, endYear, genreFilter, countryFilter);
-            genreProductionMap('#mapid', 1000, 500, beginYear, endYear, genreFilter);
+            genreProductionMap('map', 1000, 500, beginYear, endYear, genreFilter);
         </script>
 
     </body>
