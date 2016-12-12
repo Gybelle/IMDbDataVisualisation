@@ -5,14 +5,24 @@
         <title>IMDb: Genres</title>
         <script type="text/javascript" src="Scripts/Genre_ProductionRate.js"></script>
         <script type="text/javascript" src="Scripts/Genre_ProductionMax.js"></script>
-        <link rel="stylesheet" type="text/css" href="Multiline.css">
+        <link rel="stylesheet" type="text/css" href="Multiline.css"/>
+        
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+        <!--<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css"/>-->
+        <!--<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>-->
+        <!--<script src="Testing/Scripts/leaflet/leaflet-0.7.2/leaflet.ajax.min.js"></script>-->
+        
+        <script type="text/javascript" src="Scripts/Genre_ProductionMap.js"></script>
     </head>
 
     <body> 
-       <div class="chart" id="genreProductionMax"></div>
-       <div class="chart" id="genreProductionRate"></div>
+        <div class="map" id="mapid"></div>
+        <div class="chart" id="genreProductionMax"></div>
+        <div class="chart" id="genreProductionRate"></div>
 
         <script src="https://d3js.org/d3.v3.min.js"></script>
+        <script src="Testing/Scripts/leaflet/leaflet.js"></script>
         <script>
             width = 700;
             height = 300;
@@ -22,6 +32,7 @@
             endYear = "2010"
             genreProductionRate('#genreProductionRate', width, height, beginYear, endYear, genreFilter, countryFilter);
             genreProductionMax('#genreProductionMax', width, height, beginYear, endYear, genreFilter, countryFilter);
+            genreProductionMap('#mapid', 1000, 500, beginYear, endYear, genreFilter);
         </script>
 
     </body>

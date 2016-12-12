@@ -2,8 +2,6 @@
 // Inspiration: http://bl.ocks.org/d3noob/8952219
 
 function genreProductionMax(divID, w, h, beginYearString, endYearString, genreFilter, countryFilter) {
-    console.log("Hoi");
-
     // Define color scale
     var color = d3.scale.ordinal()
             .domain(["Documentary", "Short", "Comedy", "Family", "Sport", "Action", "Animation", "Romance", "Drama", "Western", "News", "Horror", "History", "Crime", "Sci-Fi", "Biography", "Fantasy", "Music", "War", "Adventure", "Thriller", "Musical", "Mystery", "Adult", "Film-Noir", "Reality-TV", "Talk-Show", "Game-Show", "Erotica", "Experimental", "Commercial", "Sex", "Hardcore"])
@@ -71,7 +69,6 @@ function genreProductionMax(divID, w, h, beginYearString, endYearString, genreFi
                     return d.Genre;
                 })
                 .entries(data);
-        console.log(groupedData);
 
         // Group entries again, by genre
         var maxPerYear = [];
@@ -91,7 +88,6 @@ function genreProductionMax(divID, w, h, beginYearString, endYearString, genreFi
                     maxGenre = g.key;
                     maxGenreRating = avg;
                 }
-                console.log(d.key, g.key, avg);
             });
             maxPerYear.push({
                 Year: parseDate(d.key),
