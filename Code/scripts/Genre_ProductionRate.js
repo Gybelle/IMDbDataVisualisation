@@ -41,7 +41,7 @@ function genreProductionRate(divID, w, h, beginYearString, endYearString, genreF
             });
 
     // Get the data
-    d3.dsv(';')("GenreYearCounty.csv", function (error, data) {
+    d3.dsv(';')("data/GenreYearCounty.csv", function (error, data) {
         data.forEach(function (d) {
             //d.Year = parseDate(d.Year);
             d.Count = +d.Count;

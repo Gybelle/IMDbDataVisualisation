@@ -15,7 +15,9 @@
         <script type="text/javascript" src="plugins/bootstrap-3.3.7/js/bootstrap.js"></script>
         <script type="text/javascript" src="plugins/ion.rangeSlider-2.1.5/js/ion-rangeSlider/ion.rangeSlider.min.js"></script>
             <!-- source: http://ionden.com/a/plugins/ion.rangeSlider/demo.html -->
-        <script type="text/javascript" src="scripts/rangepicker.js"></script>
+        <script type="text/javascript" src="scripts/Rangepicker.js"></script>
+        <script type="text/javascript" src="scripts/Genre_ProductionRate.js"></script>
+        <script type="text/javascript" src="scripts/Genre_ProductionMax.js"></script>
     </head>
 
     <body>
@@ -44,12 +46,32 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">Linechart</div>
-          <div class="col-md-6">Barchart</div>
+          <div class="col-md-6">
+            <div class="chart" id="genreProductionRate"></div>
+          </div>
+          <div class="col-md-6">
+            <div class="chart" id="genreProductionMax"></div>
+          </div>
         </div>
 
+        <script src="https://d3js.org/d3.v3.min.js"></script>
+        <script src="//d3js.org/queue.v1.min.js"></script>
+        <script src="//d3js.org/topojson.v1.min.js"></script>
+        <script>
+          var minYear = 1850;
+          var maxYear = 2016;
+          createRangePicker("#range_picker", minYear, maxYear);
 
-        <script>createRangePicker("#range_picker", 1850, 2016);</script>
+          width = 700;
+          height = 300;
+          genreFilter = ["Comedy", "Action", "Animation", "Fantasy", "Western"]; // null
+          countryFilter = null;
+          beginYear = "1990"
+          endYear = "2010"
+          genreProductionRate('#genreProductionRate', width, height, beginYear, endYear, genreFilter, countryFilter);
+          genreProductionMax('#genreProductionMax', width, height, beginYear, endYear, genreFilter, countryFilter);
+
+        </script>
     </body>
 
 </html>

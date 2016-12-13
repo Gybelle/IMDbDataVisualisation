@@ -32,7 +32,7 @@ function genreProductionMax(divID, w, h, beginYearString, endYearString, genreFi
     var yAxis = d3.svg.axis().scale(y).orient("left").ticks(1);
 
     // Get the data
-    d3.dsv(';')("GenreYearCounty.csv", function (error, data) {
+    d3.dsv(';')("data/GenreYearCounty.csv", function (error, data) {
         data.forEach(function (d) {
             d.Count = +d.Count;
             d.Rating = +d.AvgRating;
@@ -83,7 +83,7 @@ function genreProductionMax(divID, w, h, beginYearString, endYearString, genreFi
                     count += m.Count;
                 });
                 var avg = totalRating / count;
-                
+
                 if (avg > maxGenreRating) {
                     maxGenre = g.key;
                     maxGenreRating = avg;

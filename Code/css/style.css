@@ -9,7 +9,6 @@ body {
   padding-bottom:0 !important;
   height: 30px;
 }
-
 .navbar {
   min-height:30px !important;
   margin-bottom: 0px;
@@ -23,4 +22,105 @@ body {
   padding-right: 12px;
 }
 
-/* -------------------------------- Other -------------------------------- */
+/* -------------------------------- Multiline (linechart) -------------------------------- */
+                              /* Based on: http://bl.ocks.org/asielen/44ffca2877d0132572cb */
+
+.chart {
+    max-width: 700px;
+    min-width: 300px;
+    margin: 0 auto;
+    background-color: #FAF7F7;
+}
+.chart .inner-wrapper {
+    position: relative;
+    padding-bottom: 50%;
+    width: 100%;
+}
+
+.chart .outer-box {
+    position: absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
+}
+
+.chart .inner-box {
+    width: 100%;
+    height: 100%;
+}
+
+.chart text {
+    font-family: sans-serif;
+    font-size: 11px;
+}
+.chart p {
+    font-size: 16px;
+    margin-top:5px;
+    margin-bottom: 40px;
+}
+.chart .axis path,
+.chart .axis line {
+    fill: none;
+    stroke: #1F1F2E;
+    stroke-opacity: 0.7;
+    shape-rendering: crispEdges;
+}
+.chart .axis path {
+    stroke-width: 1px;
+}
+.chart .line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 3px;
+}
+.chart .legend  {
+    min-width: 200px;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    font-size: 16px;
+    padding: 10px 40px;
+}
+.chart .legend > div {
+    margin: 0px 25px 10px 0px;
+    flex-grow: 0;
+}
+.chart .legend p {
+    display:inline;
+    font-size: 0.8em;
+    font-family: sans-serif;
+    font-weight: 600;
+}
+.chart .legend .series-marker {
+    height: 1em;
+    width: 1em;
+    border-radius: 35%;
+    background-color: crimson;
+    display: inline-block;
+    margin-right: 4px;
+    margin-bottom: -0.16rem;
+}
+.chart .overlay {
+    fill: none;
+    pointer-events: all;
+}
+.chart .focus circle {
+    fill: crimson;
+    stroke: crimson;
+    stroke-width: 2px;
+    fill-opacity: 15%;
+}
+.chart .focus rect {
+    fill: lightblue;
+    opacity: 0.4;
+    border-radius: 2px;
+}
+.chart .focus.line {
+    stroke: steelblue;
+    stroke-dasharray: 2,5;
+    stroke-width: 2;
+    opacity: 0.5;
+}
+
+@media (max-width:500px){
+    #genreProductionRate .line {stroke-width: 3px;}
+    #genreProductionRate .legend {font-size: 14px;}
+}
