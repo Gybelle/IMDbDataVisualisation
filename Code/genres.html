@@ -1,153 +1,55 @@
-<!-- Examples: https://github.com/d3/d3/wiki/Gallery -->
 <html>
-	<head>
-		<title>Genres Visualisation</title>
+    <head>
+        <meta charset="utf-8">
+        <title>IMDb: Genres</title>
 
-		<!-- Bootstrap -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-		<!-- Optional Bootstrap theme -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-		<!-- Seiyira Bootstrap Slider -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.5.3/css/bootstrap-slider.min.css">
+        <!-- Stylesheets -->
+        <link href="plugins/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">   <!-- Bootstrap -->
+        <link href="plugins/ion.rangeSlider-2.1.5/css/ion.rangeSlider.css" rel="stylesheet">
+        <link href="plugins/ion.rangeSlider-2.1.5/css/normalize.css" rel="stylesheet">
+        <link href="plugins/ion.rangeSlider-2.1.5/css/ion.rangeSlider.skinFlat.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
 
-		<style>
-			body {
-				padding: 20px;
-			}
+        <!-- Scripts -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="plugins/bootstrap-3.3.7/js/bootstrap.js"></script>
+        <script type="text/javascript" src="plugins/ion.rangeSlider-2.1.5/js/ion-rangeSlider/ion.rangeSlider.min.js"></script>
+            <!-- source: http://ionden.com/a/plugins/ion.rangeSlider/demo.html -->
+        <script type="text/javascript" src="scripts/rangepicker.js"></script>
+    </head>
 
-			.box {
-				padding: 10px;
-			}
+    <body>
+        <!----------------------------------------------- Navigator ----------------------------------------------->
+        <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="index.html">IMDb Data Visualisation</a>
+            </div>
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="genres.html">Genres</a></li>
+              <li><a href="actors.html">Actors</a></li>
+              <li><a href="series.html">Series</a></li>
+              <li><a href="flows.html">Flows</a></li>
+            </ul>
+          </div>
+        </nav>
 
-			.box div {
-				padding: 10px;
-			}
-
-			div.map-visualisation {
-				background-color: blue; 
-				height: 600px;
-				border: solid black 2px;
-			}
-
-			div.occurences-popularity {
-				background-color: gray;
-				height: 600px;
-				border: solid black 2px;
-			}
-
-
-			div.time-slider {
-				background-color: orange;
-				height: 50px;
-				border: solid black 2px;
-			}
-
-			div.production-rate {
-				background-color: red;
-				height: 200px;
-				border: solid black 2px;
-			}
-
-			div.popular-time {
-				background-color: green;
-				height: 200px;
-				border: solid black 2px;
-			}
+        <div class="row">
+          <div class="col-md-8">Map</div>
+          <div class="col-md-4">Bubbles</div>
+        </div>
+        <div class="row range_slider">
+          <div class="col-md-12">
+            <input id="range_picker" class="range_slider"></input>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">Linechart</div>
+          <div class="col-md-6">Barchart</div>
+        </div>
 
 
+        <script>createRangePicker("#range_picker", 1850, 2016);</script>
+    </body>
 
-			#slider {
-				width: 100%;
-			}
-
-			#slider .slider-track-high {
-				background: blue;
-			}
-
-			#slider .slider-track-low {
-				background: blue;
-			}
-
-			#slider .slider-selection {
-				background: yellow;
-			}
-
-		</style>
-
-
-	</head>
-	<body>
-    	<h1>IMDb: Genres</h1>
-
-    	<div class="row">
-    		<!-- map visualisation -->
-	    	<div class="col-md-8 box">
-		    	<div class="map-visualisation">
-		    		<p>Map</p>
-		    		<a target="_blank" style="color: cyan" href="https://bost.ocks.org/mike/leaflet/">A nice library to display interactive maps combined with D3.js</a>
-		    	</div>
-	    	</div>
-	    	<!-- end map visualisation -->
-
-			<!-- occurences/popularity -->
-	    	<div class="col-md-4 box">
-		    	<div class="occurences-popularity">
-		    		<p>Occurences/Popularity</p>
-		    	</div>
-	    	</div>
-	    	<!-- end occurences/popularity -->
-    	</div> <!-- end row -->
-
-    	<div class="row">
-    		<!-- time slider -->
-	    	<div class="col-md-12 box">
-		    	<div class="time-slider">
-					<!-- Range slider, low and high tracks, and selection: -->
-					<input id="range-slider" type="text"/><br/>
-		    	</div>
-	    	</div>
-	    	<!-- end time slider -->
-
-    	</div> <!-- end row -->
-
-    	<div class="row">
-    		<!-- production rate -->
-	    	<div class="col-md-6 box">
-		    	<div class="production-rate">
-		    		<p>Genre production rate in time</p>
-		    	</div>
-	    	</div>
-	    	<!-- end production rate -->
-
-			<!-- popular vs time -->
-	    	<div class="col-md-6 box">
-		    	<div class="popular-time">
-		    		<p>Most popular genre in time</p>
-		    	</div>
-	    	</div>
-	    	<!-- end popular vs time -->
-    	</div> <!-- end row -->
-
-
-
-
-  	</body>
-
-	
-	<!-- JQuery -->
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-	<!-- Bootstrap-->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	<!-- D3.js -->
-	<script src="https://d3js.org/d3.v4.min.js"></script>
-	<!-- Seiyira Bootstrap Slider-->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.5.3/bootstrap-slider.min.js"></script>
-
-	<!-- Custom JS -->
-	<script>
-
-
-		$("#range-slider").slider({ id: "slider", min: 1890, max: 2016, range: true, value: [1930, 2000] });
-
-	</script>
 </html>

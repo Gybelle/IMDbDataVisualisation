@@ -1,0 +1,26 @@
+/* -------------------------------- Basics -------------------------------- */
+body {
+  padding: 0px;
+}
+
+/* -------------------------------- Navigator (overwrite Bootstrap) -------------------------------- */
+.navbar-nav > li > a, .navbar-brand {
+  padding-top:5px !important;
+  padding-bottom:0 !important;
+  height: 30px;
+}
+
+.navbar {
+  min-height:30px !important;
+  margin-bottom: 0px;
+}
+
+/* -------------------------------- Slider -------------------------------- */
+.range_slider{
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+/* -------------------------------- Other -------------------------------- */
