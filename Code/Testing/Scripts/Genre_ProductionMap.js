@@ -1,4 +1,6 @@
-// Inspiration: http://bl.ocks.org/d3noob/d8be922a10cb0b148cd5
+// Inspiration: https://gist.github.com/d3noob/9211665
+// Country data source: http://bl.ocks.org/mbostock/raw/4090846/world-110m.json
+// Country data source: http://bl.ocks.org/mbostock/raw/4090846/world-country-names.tsv
 
 function genreProductionMap(divID, w, h, beginYearString, endYearString, genreFilter) {
     // Define color scale
@@ -10,17 +12,31 @@ function genreProductionMap(divID, w, h, beginYearString, endYearString, genreFi
     w = w - margin.left - margin.right;
     h = h - margin.top - margin.bottom;
 
-    var map = L.map(divID).setView([0.0, 0.0], 2);
-    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw', {
-        minZoom: 2,
-        maxZoom: 18,
-        id: 'mapbox.streets'
-    }).addTo(map);
-    map.keyboard.disable();
+    // CREATING MAP ------------------------------------------------------------
+    var map = createMap(divID);
 
-    // Add an SVG element to Leaflet’s overlay pane
+    // Add an svg element the map
     var svg = d3.select(map.getPanes().overlayPane).append("svg");
     var g = svg.append("g").attr("class", "leaflet-zoom-hide");
+
+    // LOADING COUNTRY DATA ----------------------------------------------------
+    d3.tsv("js/mbostock/world-country-names.tsv", function (error, countries) {
+        countries = countries.filter(function (d) {
+            return d.name == "Belgium";
+        });
+        console.log(countries);
+        
+        d3.json("js/mbostock/world-110m.json", function (error, countryData) {
+            
+            console.log(countryData);
+        });
+    });
+    //var countryData = d3.json, "js/mbostock/world-110m.json"
+    //.defer(d3.tsv, "js/mbostock/world-country-names.tsv")
+    //.await(ready);
+
+
+
 
 //    var svg = d3.select(divID)
 //            .append('svg')
@@ -141,4 +157,18 @@ function genreProductionMap(divID, w, h, beginYearString, endYearString, genreFi
 //            series.append('p').text(d.key);
 //        });
 //    });
+}
+
+/* Initialize map using LeafLet. The created map is returned. */
+function createMap(divID) {
+    var map = L.map(divID, {
+        center: [20.0, 5.0],
+        minZoom: 2,
+        zoom: 2
+    });
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw', {
+        id: 'mapbox.light'
+    }).addTo(map);
+    map.keyboard.disable();
+    return map;
 }
