@@ -54,7 +54,8 @@ function createRangePicker(divID, idLineChart, idBarChart,idBubbleChart){
         heightNavbar = document.getElementById("menubar").offsetHeight;
         heightSlider = document.getElementById("yearSlider").offsetHeight;
         heightLargeRow = $(document).height() - heightNavbar - heightSlider - heightSmallRow;
-
+        widthSmallLargeChart = document.getElementById("colBubbleChart").offsetWidth;
+        $(".small_large_chart").css('width', widthSmallLargeChart);
 
         //Create new charts
         genreProductionRate("#"+idLineChart, widthSmallChart, heightSmallRow, data.from.toString(), data.to.toString(), genreFilter, countryFilter);
