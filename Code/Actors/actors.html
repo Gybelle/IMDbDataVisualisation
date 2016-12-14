@@ -158,14 +158,21 @@
 		    		<h3>Acting ages</h3>
 		    		
 		    		<div id="female-images">
-		    			<img class="age-image female" src="img/girl_1.png" />
-		    			<img class="age-image female" src="img/girl_2.png" />
-		    			<img class="age-image female" src="img/girl_3.png" />
-		    			<img class="age-image female" src="img/girl_4.png" />
-		    			<img class="age-image female" src="img/girl_5.png" />
-		    			<img class="age-image female" src="img/girl_6.png" />
-		    			<img class="age-image female" src="img/girl_7.png" />
-		    			
+	    				0
+		    			<img class="age-image female range-0 saturate" src="img/girl_1.png" />
+		    			3
+		    			<img class="age-image female range-1" src="img/girl_2.png" />
+		    			6
+		    			<img class="age-image female range-2" src="img/girl_3.png" />
+		    			12
+		    			<img class="age-image female range-3" src="img/girl_4.png" />
+		    			18
+		    			<img class="age-image female range-4" src="img/girl_5.png" />
+		    			30
+		    			<img class="age-image female range-5" src="img/girl_6.png" />
+		    			60
+		    			<img class="age-image female range-6" src="img/girl_7.png" />
+		    			67
 			    		<div class="legend">
 			    			<p>
 			    				24 movies
@@ -214,6 +221,7 @@
 	 */
 	var actors = [];
 	var movies = [];
+	var actorsInMovies = [];
 
 	d3.csv("data/actors.csv", function(data) {
 	  data.forEach(function(d) {
@@ -237,6 +245,15 @@
 	  });
 	  movies = data;
 	});
+
+	d3.csv("data/actorsInMovies.csv", function(data) {
+		data.forEach(function(d) {
+			d.ActorID = +d.ActorID;
+			d.MovieOrSeriesID = +d.MovieOrSeriesID;
+			d.isMovie = +d.isMovie;
+		})
+		actorsInMovies = data;
+	})
 
 	/**
 	 * SEARCH RELATED CODE
@@ -296,7 +313,6 @@
 	});
 
 	function updatePersonalInformation(actor) {
-		console.log(actor);
 		var $name = $('.information-panel > h3');
 		var $firstName = $('.information-panel > h3 > span.first-name');
 		var $lastName = $('.information-panel > h3 > span.last-name');
@@ -306,11 +322,9 @@
 
 		//Example of how to handle male/female
 		if (actor.IsMale === "True") {
-			console.log("MALE");
 			$name.addClass('male');
 			$name.removeClass('female');
 		} else {
-			console.log("FEMALE");
 			$name.addClass('female');
 			$name.removeClass('male');
 		}
@@ -338,7 +352,47 @@
 	}
 
 	function updateActingAges(actor) {
+		var actorID = actor.ActorID;
+		var ranges = [0,0,0,0,0,0,0];
+		var actorBirthYear = actor.BirthYear;
 
+		if (actorBirthYear == 0 || actorBirthYear === undefined ) {
+			console.log("No birthyear available, calculating acting ages is impossible.");
+			return;
+		}
+
+		//calculate the occurences for each age range
+		var movieIDsForActor = actorsInMovies.filter(function(d){
+		    return (d.ActorID === actorID);
+        });
+
+        for (var i = 0; i < movieIDsForActor.length; i++) {
+        	var movieID = movieIDsForActor[i].MovieOrSeriesID;
+	        var movie = movies.filter(function(d){
+			    return (d.ID === movieID);
+	        })[0];
+	        var age = movie.Year - actorBirthYear;
+
+	        if (age >= 0 && age < 3) {
+	        	ranges[0] = ranges[0] + 1;
+	        } else if (age >= 3 && age < 6) {
+	        	ranges[1]++;
+	        } else if (age >= 6 && age < 12) {
+	        	ranges[2]++;
+	        } else if (age >= 12 && age < 18) {
+	        	ranges[3]++;
+	        } else if (age >= 18 && age < 30) {
+	        	ranges[4]++;
+	        } else if (age >= 30 && age < 60) {
+	        	ranges[5]++;
+	        } else if (age >= 60 && age < 67) {
+	        	ranges[6]++;
+	        }
+        }
+
+
+        //Now update the images 
+        //todo? maybe use a SVG to draw the image, and manipulate color there
 	}
 
 	function updateSpokenLanguages(actor) {
