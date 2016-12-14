@@ -32,7 +32,8 @@ function createRangePicker(divID, idLineChart, idBarChart, idMap, idBubbleChart)
       prettify_enabled: false,
       grid_snap: false,
       onFinish: function (data) {
-        genreFilter = ["Comedy", "Action", "Animation", "Fantasy", "Western"]; // null
+        //genreFilter = ["Comedy", "Action", "Animation", "Fantasy", "Western"]; // null
+        genreFilter = null;
         countryFilter = null;
 
         //Remover children from previous charts...
