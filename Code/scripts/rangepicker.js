@@ -1,6 +1,6 @@
 minVal = 0, maxVal = 0, fromVal = 0, toVal = 0;
 
-function createRangePicker(divID, idLineChart, idBarChart,idBubbleChart){
+function createRangePicker(divID, idLineChart, idBarChart, idMap, idBubbleChart){
   d3.dsv(';')("data/GenreYearCounty.csv", function (error, data) {
     var min = 4000;
     var max = 0;
@@ -56,10 +56,14 @@ function createRangePicker(divID, idLineChart, idBarChart,idBubbleChart){
         heightLargeRow = $(document).height() - heightNavbar - heightSlider - heightSmallRow;
         widthSmallLargeChart = document.getElementById("colBubbleChart").offsetWidth;
         $(".small_large_chart").css('width', widthSmallLargeChart);
+        // mapchart
+        widthLargeChart = document.getElementById("colGenreMap").offsetWidth;
+        $(".large_chart").css('width', widthLargeChart);
 
         //Create new charts
         genreProductionRate("#"+idLineChart, widthSmallChart, heightSmallRow, data.from.toString(), data.to.toString(), genreFilter, countryFilter);
         genreProductionMax("#"+idBarChart, widthSmallChart, heightSmallRow, data.from.toString(), data.to.toString(), genreFilter, countryFilter);
+        genreProductionMap("#"+idMap, widthLargeChart, heightLargeRow, data.from.toString(), data.to.toString(), genreFilter);
         genreBubbles("#"+idBubbleChart, widthSmallLargeChart, heightLargeRow, data.from.toString(), data.to.toString(), genreFilter, countryFilter);
       }
     });
