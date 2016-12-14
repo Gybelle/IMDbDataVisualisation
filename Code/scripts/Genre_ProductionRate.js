@@ -2,13 +2,13 @@
 
 function genreProductionRate(divID, w, h, beginYearString, endYearString, genreFilter, countryFilter) {
     // Define color scale
-//    var color = d3.scale.category20();
+    //    var color = d3.scale.category20();
     var color = d3.scale.ordinal()
             .domain(["Documentary", "Short", "Comedy", "Family", "Sport", "Action", "Animation", "Romance", "Drama", "Western", "News", "Horror", "History", "Crime", "Sci-Fi", "Biography", "Fantasy", "Music", "War", "Adventure", "Thriller", "Musical", "Mystery", "Adult", "Film-Noir", "Reality-TV", "Talk-Show", "Game-Show", "Erotica", "Experimental", "Commercial", "Sex", "Hardcore"])
             .range(["#6599C0", "#F0CC76", "#64BD91", "#F59A6E", "#AFD572", "#FF7F0E", "#E2D35C", "#D84E67", "#7073A0", "#58B16F", "#A2C5A5", "#C25D7F", "#FCD450", "#FF183C", "#2AB1CF", "#348B85", "#70C256", "#72CAFA", "#3A5DA1", "#4EA6AA", "#916589", "#C25D7F", "#4EE69B", "#D6AA51", "#DE6E48", "#AD6A8B", "#73539F", "#FF185D", "#57C27C", "#696C97", "#F7B6D2", "#DA707A", "#878787"]);
 
 
-    var margin = {top: 50, right: 50, bottom: 50, left: 50};
+    var margin = {top: 36, right: 36, bottom: 36, left: 42};
     w = w - margin.left - margin.right;
     h = h - margin.top - margin.bottom;
 
@@ -124,11 +124,12 @@ function genreProductionRate(divID, w, h, beginYearString, endYearString, genreF
                 .call(yAxis);
 
         // The Legend
+        /*
         var legend = d3.select(divID).append('div').attr("class", "legend");
         groupedData.forEach(function (d) {
             series = legend.append('div');
             series.append('div').attr("class", "series-marker").style("background-color", color(d.key));
             series.append('p').text(d.key);
-        });
+        });*/
     });
 }

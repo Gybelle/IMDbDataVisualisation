@@ -1,6 +1,8 @@
 /* -------------------------------- Basics -------------------------------- */
 body {
   padding: 0px;
+  /*background-color: #FBF8EF;*/
+  /*background-color: #FFDBCE;*/
 }
 
 /* -------------------------------- Navigator (overwrite Bootstrap) -------------------------------- */
@@ -26,8 +28,7 @@ body {
                               /* Based on: http://bl.ocks.org/asielen/44ffca2877d0132572cb */
 
 .chart {
-    max-width: 700px;
-    min-width: 300px;
+    height: 200px;
     margin: 0 auto;
     background-color: #FAF7F7;
 }

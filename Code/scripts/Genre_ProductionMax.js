@@ -1,13 +1,15 @@
 // Inspiration: https://bl.ocks.org/mbostock/3885304
 // Inspiration: http://bl.ocks.org/d3noob/8952219
+// (Barchart)
 
 function genreProductionMax(divID, w, h, beginYearString, endYearString, genreFilter, countryFilter) {
+  console.log("michelle");
     // Define color scale
     var color = d3.scale.ordinal()
             .domain(["Documentary", "Short", "Comedy", "Family", "Sport", "Action", "Animation", "Romance", "Drama", "Western", "News", "Horror", "History", "Crime", "Sci-Fi", "Biography", "Fantasy", "Music", "War", "Adventure", "Thriller", "Musical", "Mystery", "Adult", "Film-Noir", "Reality-TV", "Talk-Show", "Game-Show", "Erotica", "Experimental", "Commercial", "Sex", "Hardcore"])
             .range(["#6599C0", "#F0CC76", "#64BD91", "#F59A6E", "#AFD572", "#FF7F0E", "#E2D35C", "#D84E67", "#7073A0", "#58B16F", "#A2C5A5", "#C25D7F", "#FCD450", "#FF183C", "#2AB1CF", "#348B85", "#70C256", "#72CAFA", "#3A5DA1", "#4EA6AA", "#916589", "#C25D7F", "#4EE69B", "#D6AA51", "#DE6E48", "#AD6A8B", "#73539F", "#FF185D", "#57C27C", "#696C97", "#F7B6D2", "#DA707A", "#878787"]);
 
-    var margin = {top: 50, right: 50, bottom: 50, left: 50};
+    var margin = {top: 36, right: 56, bottom: 36, left: 36};
     w = w - margin.left - margin.right;
     h = h - margin.top - margin.bottom;
 
@@ -29,7 +31,7 @@ function genreProductionMax(divID, w, h, beginYearString, endYearString, genreFi
 
     // Axes:
     var xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(d3.time.format("%Y")); // .ticks(10)
-    var yAxis = d3.svg.axis().scale(y).orient("left").ticks(1);
+    var yAxis = d3.svg.axis().scale(y).orient("left").ticks(10);
 
     // Get the data
     d3.dsv(';')("data/GenreYearCounty.csv", function (error, data) {

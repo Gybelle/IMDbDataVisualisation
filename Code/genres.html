@@ -46,10 +46,10 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
+          <div id="colLineChart" class="col-md-6">
             <div class="chart" id="genreProductionRate"></div>
           </div>
-          <div class="col-md-6">
+          <div id="colBarChart" class="col-md-6">
             <div class="chart" id="genreProductionMax"></div>
           </div>
         </div>
@@ -58,19 +58,7 @@
         <script src="//d3js.org/queue.v1.min.js"></script>
         <script src="//d3js.org/topojson.v1.min.js"></script>
         <script>
-          var minYear = 1850;
-          var maxYear = 2016;
-          createRangePicker("#range_picker", minYear, maxYear);
-
-          width = 700;
-          height = 300;
-          genreFilter = ["Comedy", "Action", "Animation", "Fantasy", "Western"]; // null
-          countryFilter = null;
-          beginYear = "1990"
-          endYear = "2010"
-          genreProductionRate('#genreProductionRate', width, height, beginYear, endYear, genreFilter, countryFilter);
-          genreProductionMax('#genreProductionMax', width, height, beginYear, endYear, genreFilter, countryFilter);
-
+          createRangePicker("#range_picker", "genreProductionRate", "genreProductionMax");
         </script>
     </body>
 
