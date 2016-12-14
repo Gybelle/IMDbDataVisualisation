@@ -48,6 +48,12 @@ function createMap(divID) {
     return map;
 }
 
+function clearMapLayers() {
+    map.eachLayer(function (layer) {
+        map.removeLayer(layer);
+    });
+}
+
 function addCountryToMap(countryData, fillColor) {
     L.geoJson(countryData, {
         fillColor: fillColor,

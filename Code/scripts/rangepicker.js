@@ -44,6 +44,8 @@ function createRangePicker(divID, idLineChart, idBarChart, idMap, idBubbleChart)
         while(nodeBarChart.firstChild){
           nodeBarChart.removeChild(nodeBarChart.firstChild);
         }
+        var nodeMapChart = document.getElementById(idMap);
+        //clearMapLayers();
 
         //Set width of charts
           //bar- and linechart:
@@ -59,11 +61,12 @@ function createRangePicker(divID, idLineChart, idBarChart, idMap, idBubbleChart)
         // mapchart
         widthLargeChart = document.getElementById("colGenreMap").offsetWidth;
         $(".large_chart").css('width', widthLargeChart);
+        $(".large_chart").css('height', heightLargeRow);
 
         //Create new charts
         genreProductionRate("#"+idLineChart, widthSmallChart, heightSmallRow, data.from.toString(), data.to.toString(), genreFilter, countryFilter);
         genreProductionMax("#"+idBarChart, widthSmallChart, heightSmallRow, data.from.toString(), data.to.toString(), genreFilter, countryFilter);
-        genreProductionMap("#"+idMap, widthLargeChart, heightLargeRow, data.from.toString(), data.to.toString(), genreFilter);
+        genreProductionMap(idMap, widthLargeChart, heightLargeRow, data.from.toString(), data.to.toString(), genreFilter);
         genreBubbles("#"+idBubbleChart, widthSmallLargeChart, heightLargeRow, data.from.toString(), data.to.toString(), genreFilter, countryFilter);
       }
     });
