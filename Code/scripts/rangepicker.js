@@ -1,6 +1,6 @@
 minVal = 0, maxVal = 0, fromVal = 0, toVal = 0;
 
-function createRangePicker(divID, idLineChart, idBarChart){
+function createRangePicker(divID, idLineChart, idBarChart,idBubbleChart){
   d3.dsv(';')("data/GenreYearCounty.csv", function (error, data) {
     var min = 4000;
     var max = 0;
@@ -32,16 +32,11 @@ function createRangePicker(divID, idLineChart, idBarChart){
       prettify_enabled: false,
       grid_snap: false,
       onFinish: function (data) {
-        //width = 700;
-        width = document.getElementById("colLineChart").offsetWidth;
-        height = 300;
-
         genreFilter = ["Comedy", "Action", "Animation", "Fantasy", "Western"]; // null
         countryFilter = null;
 
         //Remover children from previous charts...
         var nodeLineChart = document.getElementById(idLineChart);
-        height = document.getElementById("colLineChart").offsetHeight;
         while(nodeLineChart.firstChild){
           nodeLineChart.removeChild(nodeLineChart.firstChild);
         }
@@ -50,12 +45,21 @@ function createRangePicker(divID, idLineChart, idBarChart){
           nodeBarChart.removeChild(nodeBarChart.firstChild);
         }
 
-        //Set width of chart
-        $(".chart").css('width',width);
+        //Set width of charts
+          //bar- and linechart:
+        heightSmallRow = nodeLineChart.offsetHeight;
+        widthSmallChart = document.getElementById("colLineChart").offsetWidth;
+        $(".chart").css('width', widthSmallChart);
+          //bubblechart:
+        heightNavbar = document.getElementById("menubar").offsetHeight;
+        heightSlider = document.getElementById("yearSlider").offsetHeight;
+        heightLargeRow = $(document).height() - heightNavbar - heightSlider - heightSmallRow;
+
 
         //Create new charts
-        genreProductionRate("#"+idLineChart, width, height, data.from.toString(), data.to.toString(), genreFilter, countryFilter);
-        genreProductionMax("#"+idBarChart, width, height, data.from.toString(), data.to.toString(), genreFilter, countryFilter);
+        genreProductionRate("#"+idLineChart, widthSmallChart, heightSmallRow, data.from.toString(), data.to.toString(), genreFilter, countryFilter);
+        genreProductionMax("#"+idBarChart, widthSmallChart, heightSmallRow, data.from.toString(), data.to.toString(), genreFilter, countryFilter);
+        genreBubbles("#"+idBubbleChart, widthSmallLargeChart, heightLargeRow, data.from.toString(), data.to.toString(), genreFilter, countryFilter);
       }
     });
 

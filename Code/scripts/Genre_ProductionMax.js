@@ -3,7 +3,6 @@
 // (Barchart)
 
 function genreProductionMax(divID, w, h, beginYearString, endYearString, genreFilter, countryFilter) {
-  console.log("michelle");
     // Define color scale
     var color = d3.scale.ordinal()
             .domain(["Documentary", "Short", "Comedy", "Family", "Sport", "Action", "Animation", "Romance", "Drama", "Western", "News", "Horror", "History", "Crime", "Sci-Fi", "Biography", "Fantasy", "Music", "War", "Adventure", "Thriller", "Musical", "Mystery", "Adult", "Film-Noir", "Reality-TV", "Talk-Show", "Game-Show", "Erotica", "Experimental", "Commercial", "Sex", "Hardcore"])

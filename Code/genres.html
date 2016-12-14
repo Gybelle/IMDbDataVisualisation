@@ -22,7 +22,7 @@
 
     <body>
         <!----------------------------------------------- Navigator ----------------------------------------------->
-        <nav class="navbar navbar-inverse">
+        <nav id="menubar" class="navbar navbar-inverse">
           <div class="container-fluid">
             <div class="navbar-header">
               <a class="navbar-brand" href="index.html">IMDb Data Visualisation</a>
@@ -42,7 +42,7 @@
             <div class="small_large_chart" id="genreBubbles"></div>
           </div>
         </div>
-        <div class="row range_slider">
+        <div id="yearSlider" class="row range_slider">
           <div class="col-md-12">
             <input id="range_picker" class="range_slider"></input>
           </div>
@@ -60,7 +60,7 @@
         <script src="//d3js.org/queue.v1.min.js"></script>
         <script src="//d3js.org/topojson.v1.min.js"></script>
         <script>
-          createRangePicker("#range_picker", "genreProductionRate", "genreProductionMax");
+          createRangePicker("#range_picker", "genreProductionRate", "genreProductionMax", "genreBubbles");
         </script>
     </body>
 
