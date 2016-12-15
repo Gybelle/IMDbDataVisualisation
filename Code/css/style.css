@@ -128,3 +128,7 @@ body {
     #genreProductionRate .line {stroke-width: 3px;}
     #genreProductionRate .legend {font-size: 14px;}
 }
+
+.bubble{
+  display: inline-block;
+}
