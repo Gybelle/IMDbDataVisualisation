@@ -1,6 +1,6 @@
 //Inspiration: https://jrue.github.io/coding/2014/exercises/basicbubblepackchart/
 
-function genreBubbles(divID, w, h, beginYearString, endYearString, genreFilter, countryFilter) {
+function genreBubbles(divID, w, h, inputdata) {
   var margin = {top: 6, right: 6, bottom: 6, left: 6};
   w = w - margin.left - margin.right;
   h = h - margin.top - margin.bottom;
@@ -15,7 +15,7 @@ function genreBubbles(divID, w, h, beginYearString, endYearString, genreFilter, 
             .attr('class', 'genreBubble');
 
 
-  data = filterData(genreYearCountryData, beginYearString, endYearString, genreFilter)
+  data = groupDataBubbleChart(inputdata)
           .map(function(d){ d.value = +d["Count"]; return d;});
 
   // Chart setup
@@ -56,10 +56,7 @@ function genreBubbles(divID, w, h, beginYearString, endYearString, genreFilter, 
 
 }
 
-function filterData(data, beginYear, endYear, genreFilter) {
-    data = filterYear(data, beginYear, endYear);
-    data = filterGenre(data, genreFilter);
-
+function groupDataBubbleChart(data) {
     //Group by genre
     var groupedData = d3.nest()
             .key(function (d){

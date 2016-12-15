@@ -2,38 +2,10 @@
 // Country data source: http://bl.ocks.org/mbostock/raw/4090846/world-110m.json
 // Country data source: http://bl.ocks.org/mbostock/raw/4090846/world-country-names.tsv
 
-function genreProductionMap(divID, w, h, beginYearString, endYearString, genreFilter) {
-    var margin = {top: 50, right: 50, bottom: 50, left: 50};
-    w = w - margin.left - margin.right;
-    h = h - margin.top - margin.bottom;
-
-    // CREATING MAP ------------------------------------------------------------
-    map = createMap(divID);
-
-    // Add an svg element the map
-    var svg = d3.select(map.getPanes().overlayPane).append("svg");
-    var g = svg.append("g").attr("class", "leaflet-zoom-hide");
-
-    // ADD DATA TO MAP ---------------------------------------------------------
-    d3.json("data/countries.geo.json", function (error, geojson) { // open file with world data
-        // Filter data
-        var data = filterAndGroupData(genreYearCountryData, beginYearString, endYearString, genreFilter);
-
-        // Add geojson countries to map
-        for (var r = 0; r < geojson.features.length; r++) { // for each country in geojson
-            var countryData = geojson.features[r];
-            var countryName = countryData.properties.name;
-            var countryCode = findCountryCode(countryName);
-            var genre = findGenreOfCountry(countryCode, data);
-            if (genre != null) {
-                addCountryToMap(countryData, colors[genre]);
-            }
-        }
-    });
-}
+var map = null;
 
 /* Initialize map using LeafLet. The created map is returned. */
-function createMap(divID) {
+function createGenreProductionMap(divID) {
     var map = L.map(divID, {
         center: [20.0, 5.0],
         minZoom: 2,
@@ -45,29 +17,53 @@ function createMap(divID) {
         noWrap: true
     }).addTo(map);
     map.keyboard.disable();
+
+    //var svg = d3.select(map.getPanes().overlayPane).append("svg");
+    //var g = svg.append("g").attr("class", "leaflet-zoom-hide");
     return map;
 }
 
-function clearMapLayers() {
-    map.eachLayer(function (layer) {
-        map.removeLayer(layer);
+function updateMap(map, inputdata) {
+    clearMapLayers(map);
+    d3.json("data/countries.geo.json", function (error, geojson) { // open file with world data
+        // Group data
+        var data = groupDataMap(inputdata);
+        // Add geojson countries to map
+        for (var r = 0; r < geojson.features.length; r++) { // for each country in geojson
+            var countryData = geojson.features[r];
+            var countryName = countryData.properties.name;
+            var countryCode = findCountryCode(countryName);
+            var genre = findGenreOfCountry(countryCode, data);
+            if (genre != null) {
+                addCountryToMap(map, countryData, colors[genre]);
+            }
+        }
     });
 }
 
-function addCountryToMap(countryData, fillColor) {
-    L.geoJson(countryData, {
-        fillColor: fillColor,
-        color: "#000000",
-        weight: 0.5,
-        opacity: 0.8,
-        fillOpacity: 0.8
-    }).addTo(map);
+function clearMapLayers(map) {
+    map.eachLayer(function (layer) {
+        if (layer["container"] != null) {
+            map.removeLayer(layer);
+        }
+    });
 }
 
-function filterAndGroupData(data, beginYear, endYear, genreFilter) {
-    data = filterYear(data, beginYear, endYear);
-    data = filterGenre(data, genreFilter);
+function addCountryToMap(map, countryData, fillColor) {
+    if (map != null) {
+        L.geoJson(countryData, {
+            fillColor: fillColor,
+            color: "#000000",
+            weight: 0.5,
+            opacity: 0.8,
+            fillOpacity: 0.8
+        }).addTo(map);
+    } else {
+        console.log("Map is null");
+    }
+}
 
+function groupDataMap(data) {
     // Find max per country
     var groupedData = d3.nest()
             .key(function (d) {

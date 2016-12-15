@@ -25,7 +25,6 @@
         <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-pip/v0.0.2/leaflet-pip.js'></script>
         <script src="plugins/liquidFillGauge.js" language="JavaScript"></script>
 
-        <script src="data/genreYearCountryData.js"></script>
         <script src="data/genreColors.js"></script>
         <script src="data/countryCodes.js"></script>
         <script type="text/javascript" src="scripts/Genre_ProductionRate.js"></script>
@@ -34,6 +33,7 @@
         <!-- <script type="text/javascript" src="scripts/Genre_BubbleChart.js"></script> -->
         <script type="text/javascript" src="scripts/Genre_BubbleChartNez.js"></script>
         <script type="text/javascript" src="scripts/rangepicker.js"></script>
+        <script type="text/javascript" src="scripts/createCharts.js"></script>
     </head>
 
     <body>
@@ -62,7 +62,7 @@
         </div>
         <div id="yearSlider" class="row range_slider">
           <div class="col-md-12">
-            <input id="range_picker" class="range_slider"></input>
+            <input id="range_picker" class="range_slider"/>
           </div>
         </div>
         <div class="row">
@@ -75,7 +75,7 @@
         </div>
 
         <script>
-          createRangePicker("#range_picker", "genreProductionRate", "genreProductionMax", "genreMap", "genreBubbles");
+          initialiseCharts("range_picker", "genreProductionRate", "genreProductionMax", "genreMap", "genreBubbles");
         </script>
     </body>
 
