@@ -44,6 +44,26 @@ function genreBubbles(divID, w, h, beginYearString, endYearString, genreFilter, 
       .attr("cy", function(d){ return d.y; })
       .style("fill", function(d) {return colors[d.Genre];});
 
+
+
+
+  // Format the text within each bubble
+    bubbles.append("text")
+            .attr("x", function(d){ return d.x; })
+            .attr("y", function(d){ return d.y + 5; })
+            .attr("text-anchor", "middle")
+            .text(function(d){
+              if(d.r > 20){
+                return d.Genre;
+              }
+              return "";
+            })
+            .style({
+                "fill":"white",
+                "font-family":"Helvetica Neue, Helvetica, Arial, san-serif",
+                "font-size": "12px",
+            });
+  
 }
 
 function filterData(data, beginYear, endYear, genreFilter) {
