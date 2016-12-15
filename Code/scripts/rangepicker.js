@@ -37,6 +37,10 @@ function createRangePicker(divID, idLineChart, idBarChart, idMap, idBubbleChart)
         countryFilter = null;
 
         //Remover children from previous charts...
+        var nodeBubbleChart = document.getElementById(idBubbleChart);
+        while(nodeBubbleChart.firstChild){
+          nodeBubbleChart.removeChild(nodeBubbleChart.firstChild);
+        }
         var nodeLineChart = document.getElementById(idLineChart);
         while(nodeLineChart.firstChild){
           nodeLineChart.removeChild(nodeLineChart.firstChild);
