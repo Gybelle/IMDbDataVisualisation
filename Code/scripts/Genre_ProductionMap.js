@@ -43,7 +43,7 @@ function updateMap(map, inputdata) {
 
 function clearMapLayers(map) {
     map.eachLayer(function (layer) {
-        if (layer["container"] != null) {
+        if (layer._path != undefined) {
             map.removeLayer(layer);
         }
     });

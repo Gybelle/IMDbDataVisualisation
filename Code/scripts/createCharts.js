@@ -63,7 +63,7 @@ function createCharts() {
 // UPDATE ----------------------------------------------------------------------
 
 function updateView(beginYear, endYear, genreFilter, countryFilter) {
-    console.log("Updating to " + beginYear.getFullYear() + "-" + endYear.getFullYear());
+    //console.log("Updating to " + beginYear.getFullYear() + "-" + endYear.getFullYear());
 
     filterData(beginYear, endYear, genreFilter, countryFilter);
     setChartLayout();
@@ -84,7 +84,7 @@ function updateView(beginYear, endYear, genreFilter, countryFilter) {
     }
     genreProductionMax("#" + divIDBarChart, widthSmallChart, heightSmallRow, genreYearCountryData_filteredByCountry);
     genreProductionRate("#" + divIDLineChart, widthSmallChart, heightSmallRow, genreYearCountryData_filteredByCountry);
-    //genreBubbles("#" + divIDBubbleChart, widthSmallLargeChart, heightLargeRow, genreYearCountryData_filteredByCountry);
+    genreBubbles("#" + divIDBubbleChart, widthSmallLargeChart, heightLargeRow, genreYearCountryData_filteredByCountry);
 }
 
 function setChartLayout() {
