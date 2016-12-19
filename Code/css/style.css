@@ -261,6 +261,7 @@ body {
 }
 
 .checkBoxImg { /* child 2 */
+  margin-top: 12px;
   width: 15px;
   height: 15px;
   -webkit-border-radius: 15px;
