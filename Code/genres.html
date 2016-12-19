@@ -39,44 +39,95 @@
     </head>
 
     <body>
-        <!-- --------------------------------------------- Navigator --------------------------------------------- -->
-        <nav id="menubar" class="navbar navbar-inverse">
-          <div class="container-fluid">
-            <div class="navbar-header">
-              <a class="navbar-brand" href="index.html">IMDb Data Visualisation</a>
-            </div>
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="genres.html">Genres</a></li>
-              <li><a href="actors.html">Actors</a></li>
-              <li><a href="series.html">Series</a></li>
-              <li><a href="flows.html">Flows</a></li>
-            </ul>
-          </div>
-        </nav>
+        <div id="wrapper" class="toggled">
 
-        <div class="row large_row">
-            <div id="colGenreMap" class="col-md-8">
-                <div class="large_chart" id="genreMap"></div>
-            </div>
-          <div id="colBubbleChart" class="col-md-4">
-            <div class="small_large_chart" id="genreBubbles"></div>
-          </div>
-        </div>
-        <div id="yearSlider" class="row range_slider">
-          <div class="col-md-12">
-            <input id="range_picker" class="range_slider"/>
-          </div>
-        </div>
-        <div class="row">
-          <div id="colLineChart" class="col-md-6">
-            <div class="chart" id="genreProductionRate"></div>
-          </div>
-          <div id="colBarChart" class="col-md-6">
-            <div class="chart" id="genreProductionMax"></div>
-          </div>
-        </div>
+          <!-- Sidebar -->
+          <div id="sidebar-wrapper">
+              <ul class="sidebar-nav">
+                  <li class="sidebar-brand">
+                      <a href="#">
+                          Select genres
+                      </a>
+                  </li>
+                  <li>
+                    <div class="checkboxWithLabel">
+                        <div class="checkboxLabel">
+                          <input type="checkbox" name="Genre" value="Bike">
+                          <text class="genreCheckboxText"> Comedy</text>
+                        </div>
+                        <div id="genreCircle" class="checkBoxImg"></div>
+                    </div>
+
+                  </li>
+                  <li>
+                      <a href="#">Shortcuts</a>
+                  </li>
+                  <li>
+                      <a href="#">Overview</a>
+                  </li>
+                  <li>
+                      <a href="#">Events</a>
+                  </li>
+                  <li>
+                      <a href="#">About</a>
+                  </li>
+                  <li>
+                      <a href="#">Services</a>
+                  </li>
+                  <li>
+                      <a href="#">Contact</a>
+                  </li>
+              </ul>
+          </div> <!-- wrapper sidebar -->
+
+          <div id="page-content-wrapper">
+            <div id="container-fluid">
+              <!-- --------------------------------------------- Navigator --------------------------------------------- -->
+              <nav id="menubar" class="navbar navbar-inverse">
+                <div class="container-fluid">
+                  <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html">IMDb Data Visualisation</a>
+                  </div>
+                  <ul class="nav navbar-nav">
+                    <li class="active"><a href="genres.html">Genres</a></li>
+                    <li><a href="actors.html">Actors</a></li>
+                    <li><a href="series.html">Series</a></li>
+                    <li><a href="flows.html">Flows</a></li>
+                    <li><a href="#menu-toggle" id="menu-toggle" class="special-nav-option">[ Filter genres ]</a></li>
+                  </ul>
+                </div>
+              </nav>
+
+              <div class="row large_row">
+                  <div id="colGenreMap" class="col-md-8">
+                      <div class="large_chart" id="genreMap"></div>
+                  </div>
+                <div id="colBubbleChart" class="col-md-4">
+                  <div class="small_large_chart" id="genreBubbles"></div>
+                </div>
+              </div>
+              <div id="yearSlider" class="row range_slider">
+                <div class="col-md-12">
+                  <input id="range_picker" class="range_slider"/>
+                </div>
+              </div>
+              <div class="row">
+                <div id="colLineChart" class="col-md-6">
+                  <div class="chart" id="genreProductionRate"></div>
+                </div>
+                <div id="colBarChart" class="col-md-6">
+                  <div class="chart" id="genreProductionMax"></div>
+                </div>
+              </div>
+            </div> <!-- End container fluid content -->
+        </div> <!-- End wrapper page content -->
+      </div> <!-- End wrapper div -->
 
         <script>
+          $("#menu-toggle").click(function(e) {
+              e.preventDefault();
+              $("#wrapper").toggleClass("toggled");
+          });
           initialiseCharts("range_picker", "genreProductionRate", "genreProductionMax", "genreMap", "genreBubbles");
         </script>
     </body>
