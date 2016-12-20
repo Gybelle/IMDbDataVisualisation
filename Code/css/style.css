@@ -203,7 +203,7 @@ body {
 
 .sidebar-nav li {
     text-indent: 20px;
-    line-height: 40px;
+    line-height: 21px;
 }
 
 .sidebar-nav li a {
@@ -226,7 +226,7 @@ body {
 .sidebar-nav > .sidebar-brand {
     height: 65px;
     font-size: 18px;
-    line-height: 60px;
+    line-height: 50px;
 }
 
 .sidebar-nav > .sidebar-brand a {
@@ -242,15 +242,6 @@ body {
   color: #999999;
 }
 
-/*
-#genreCircle {
-      width: 15px;
-      height: 15px;
-      -webkit-border-radius: 15px;
-      -moz-border-radius: 15px;
-      border-radius: 15px;
-    }*/
-
 .checkboxWithLabel {        /* parent */
   display: flex;
 }
@@ -261,7 +252,7 @@ body {
 }
 
 .checkBoxImg { /* child 2 */
-  margin-top: 12px;
+  margin-top: 3px;
   width: 15px;
   height: 15px;
   -webkit-border-radius: 15px;
