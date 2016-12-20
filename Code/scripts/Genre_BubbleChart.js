@@ -35,8 +35,6 @@ function genreBubbles(divID, w, h, inputdata) {
       .style("fill", function(d) {return colors[d.Genre];});
 
 
-
-
   // Format the text within each bubble
     bubbles.append("text")
             .attr("x", function(d){ return d.x; })
