@@ -47,10 +47,12 @@ def processActors(inputFile, csvWriter, endOfHeader, isMale):
             # Movie
             movie = correctTitle(line)
             if movie in moviesList:
-                movieID, isMovie = moviesList[movie]
-                csvWriter.writerow([actorID, movieID, isMovie, role])
                 if actorName not in actorsList:
                     actorsList[actorName] = (actorID, actorFirstName, actorLastName, isMale)
+                elif actorName in actorsList:
+                    actorID = actorsList[actorName][0]
+                movieID, isMovie = moviesList[movie]
+                csvWriter.writerow([actorID, movieID, isMovie, role])
             else:
                 ignored += 1
             entries += 1
