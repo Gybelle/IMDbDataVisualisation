@@ -65,7 +65,7 @@ function createCharts() {
 function updateView(beginYear, endYear, genreFilter, countryFilter) {
     //console.log("Updating to " + beginYear.getFullYear() + "-" + endYear.getFullYear());
 
-    if(genreFilter.length == 0){
+    if(genreFilter != null && genreFilter.length == 0){
       genreFilter = null;
     }
 
