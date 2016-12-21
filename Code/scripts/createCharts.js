@@ -17,7 +17,7 @@ heightLargeRow = 0;
 
 /*
  * HOW TO USE:
- * 
+ *
  * Call initialiseCharts() to initialise.
  * Afterwards, use update(beginYear, endYear, genreFilter, countryFilter) to recalculate the charts.
  */
@@ -64,6 +64,10 @@ function createCharts() {
 
 function updateView(beginYear, endYear, genreFilter, countryFilter) {
     //console.log("Updating to " + beginYear.getFullYear() + "-" + endYear.getFullYear());
+
+    if(genreFilter.length == 0){
+      genreFilter = null;
+    }
 
     filterData(beginYear, endYear, genreFilter, countryFilter);
     setChartLayout();

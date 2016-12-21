@@ -1,4 +1,6 @@
 minVal = 0, maxVal = 0, fromVal = 0, toVal = 0;
+var startDate;
+var endDate;
 
 function createRangePicker(divID, yearMin, yearMax) {
     //Set Ranges
@@ -6,6 +8,9 @@ function createRangePicker(divID, yearMin, yearMax) {
     maxVal = yearMax.getFullYear();
     fromVal = minVal + 50;
     toVal = maxVal - 50;
+    startDate = parseDate(fromVal.toString());
+    endDate = parseDate(toVal.toString());
+
 
     //Create Slider
     $(divID).ionRangeSlider({
