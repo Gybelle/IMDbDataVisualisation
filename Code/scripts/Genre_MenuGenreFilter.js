@@ -7,6 +7,8 @@ function setGenreFilterMenu(){
       $("#wrapper").toggleClass("toggled");
   });
 
+  $("#allCheckbox").prop('checked', true);
+
   //Functionality for genre checkboxes
   $(".checkBoxImg").each(function(i, obj) {
     checkboxInput = $(obj).prev().find("input")[0];
@@ -67,7 +69,7 @@ function setAllGenresChecked(){
     $(checkboxInput).prop('checked', true);
     selectedGenre = $(checkboxInput).val();
     var index = genreFilter.indexOf(selectedGenre);
-    if (index = -1){
+    if (index == -1){
       genreFilter.push(selectedGenre);
     }
   });

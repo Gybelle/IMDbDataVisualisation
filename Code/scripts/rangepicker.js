@@ -24,11 +24,10 @@ function createRangePicker(divID, yearMin, yearMax) {
         prettify_enabled: false,
         grid_snap: false,
         onFinish: function (data) {
-            //genreFilter = ["Comedy", "Action", "Animation", "Fantasy", "Western"]; // null
-            genreFilter = null;
             countryFilter = null;
             startDate = parseDate(data.from.toString());
             endDate = parseDate(data.to.toString());
+            console.log(genreFilter);
             updateView(startDate, endDate, genreFilter, countryFilter);
         }
     });
