@@ -5,24 +5,52 @@
 
         <link href="plugins/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">   <!-- Bootstrap -->
         <link rel="stylesheet" type="text/css" href="css/style.css">
+
+        <script src="https://d3js.org/d3.v3.min.js"></script>
+        <script src="https://d3js.org/d3-queue.v3.min.js"></script>
+        <link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet'/>
+        <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
+        <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+        <script src="plugins/leaflet-0.7.2/leaflet.ajax.min.js"></script>
+        <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-pip/v0.0.2/leaflet-pip.js'></script>
+        <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.js'></script>
+        <script src="plugins/GeoSearch/src/js/l.control.geosearch.js"></script>
+        <script src="plugins/GeoSearch/src/js/l.geosearch.provider.google.js"></script>
+        <script type="text/javascript" src="scripts/ActorsMap.js"></script>
+        <style>
+            #actorsMap {
+                width: 1000px;
+                height: 600px;
+            }
+        </style>
     </head>
 
     <body>
         <!----------------------------------------------- Navigator ----------------------------------------------->
         <nav class="navbar navbar-inverse">
-          <div class="container-fluid">
-            <div class="navbar-header">
-              <a class="navbar-brand" href="index.html">IMDb Data Visualisation</a>
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html">IMDb Data Visualisation</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="genres.html">Genres</a></li>
+                    <li class="active"><a href="actors.html">Actors</a></li>
+                    <li><a href="series.html">Series</a></li>
+                    <li><a href="flows.html">Flows</a></li>
+                </ul>
             </div>
-            <ul class="nav navbar-nav">
-              <li><a href="genres.html">Genres</a></li>
-              <li class="active"><a href="actors.html">Actors</a></li>
-              <li><a href="series.html">Series</a></li>
-              <li><a href="flows.html">Flows</a></li>
-            </ul>
-          </div>
         </nav>
 
+        <div class="row large_row">
+            <div id="colGenreMap" class="col-md-8">
+                <div class="large_chart" id="actorsMap"></div>
+            </div>
+        </div>
+
+        <script>
+            var map = createActorsMap("actorsMap");
+            map_setActor(map, "Geoffrey Rush");
+        </script>
     </body>
 
 </html>
