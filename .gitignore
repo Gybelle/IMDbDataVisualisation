@@ -21,3 +21,12 @@ Preprocessing/__pycache__/*
 Code/data/actors/*
 Code/data/actorsInMovies/*
 Code/data/movies/*
+Data/moviesBudget.csv
+
+Data/moviesBusinessData.csv
+
+Data/moviesFilmDays.csv
+
+Data/moviesGross.csv
+
+Data/moviesRuntimes.csv

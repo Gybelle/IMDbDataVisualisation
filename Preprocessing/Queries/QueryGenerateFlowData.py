@@ -19,29 +19,33 @@ rangeLimitBudget = RangeLimits(-1, -1)
 rangeLimitGross = RangeLimits(-1, -1)
 rangeLimitScore = RangeLimits(0, 10)
 
-Ranges = recordclass('Ranges', 'r1 r2 r3 r4 r5 r6 r7 r8 r9 r10 r11')
-rangeScore = Ranges(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-rangeRuntime = Ranges(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-rangeFilmingDays = Ranges(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-rangeBudget = Ranges(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-rangeGross = Ranges(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+Ranges11 = recordclass('Ranges11', 'r1 r2 r3 r4 r5 r6 r7 r8 r9 r10 r11')
+Ranges14 = recordclass('Ranges14', 'r1 r2 r3 r4 r5 r6 r7 r8 r9 r10 r11 r12 r13 r14')
+Ranges15 = recordclass('Ranges15', 'r1 r2 r3 r4 r5 r6 r7 r8 r9 r10 r11 r12 r13 r14 r15')
+Ranges16 = recordclass('Ranges16', 'r1 r2 r3 r4 r5 r6 r7 r8 r9 r10 r11 r12 r13 r14 r15 r16')
+rangeScore = Ranges11(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+rangeRuntime = Ranges14(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+rangeFilmingDays = Ranges15(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+rangeBudget = Ranges14(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+rangeGross = Ranges16(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
 RangeNames = recordclass('RangeNames', 't1 t2 t3 t4 t5 t6 t7 t8 t9 t10 t11')
-rangeNamesScore = RangeNames("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10")
-rangeNamesRuntime = RangeNames("", "", "", "", "", "", "", "", "", "", "")
-rangeNamesFilmingDays = RangeNames("", "", "", "", "", "", "", "", "", "", "")
-rangeNamesBudget = RangeNames("", "", "", "", "", "", "", "", "", "", "")
-rangeNamesGross = RangeNames("", "", "", "", "", "", "", "", "", "", "")
+rangeNamesScore = Ranges11("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10")
+rangeNamesRuntime = Ranges14("", "", "", "", "", "", "", "", "", "", "", "", "", "")
+rangeNamesFilmingDays = Ranges15("", "", "", "", "", "", "", "", "", "", "", "", "", "", "")
+rangeNamesBudget = Ranges14("", "", "", "", "", "", "", "", "", "", "", "", "", "")
+rangeNamesGross = Ranges16("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "")
 
 
 #######################################################################################################################
 #                    PART ONE: PROCESSING MOVIES.CSV AND CALCULATING RANGES MIN AND MAX                               #
 #######################################################################################################################
-def process(file):
+def process(file, outputFile):
     header = file.readline()
+    outputFile.write("id;title;gross\n")
 
     for line in file:
-        movieRecord = processLine(line)
+        movieRecord = processLine(line, outputFile)
         updateMinMax(movieRecord)
         addToMovieList(movieRecord)
 
@@ -58,12 +62,13 @@ def fixRanges():
     if rangeLimitGross.min < 0:
         rangeLimitGross.min = 1
 
-def processLine(line):
+def processLine(line, outputFile):
     # Get data
     items = line.strip("\r\n").split(";")
     id = items[0]
     title = items[1]
     duration = processDuration(items[12])
+
     filmingDays = items[7]
     budget = items[5]
     gross = items[6]
@@ -97,6 +102,7 @@ def processLine(line):
     if gross:
         try:
             gross = int(gross)
+            outputFile.write("%s;%s;%d\n" % (id, title, gross))
         except:
             print(line)
     else:
@@ -220,17 +226,159 @@ def printMessage_ProcessingEnded():
 #######################################################################################################################
 #                    PART TWO: CREATING BUCKETS FOR EACH RANGE TO DISTRIBUTE THE DATA IN                              #
 #######################################################################################################################
-def calculateRanges(rangeCount):
-    calculateRangesFor(rangeRuntime, rangeCount, rangeLimitRuntime.max)
-    calculateRangesFor(rangeFilmingDays, rangeCount, rangeLimitFilmingDays.max)
-    calculateRangesFor(rangeBudget, rangeCount, rangeLimitBudget.max)
-    calculateRangesFor(rangeGross, rangeCount, rangeLimitGross.max)
-    printMessage_CalculatingRangesEnded()
+def calculateRanges():
+    calculateRunTimeRanges()
+    generateRunTimeNames()
 
-    generateRangeNames()
+    calculateFilmingDaysRanges()
+    generateFilmingDaysNames()
+
+    calculateBudgetRanges()
+    generateBudgetNames()
+
+    calculateGrossRanges()
+    generateGrossNames()
+
+    #checkRanges()
+
+    printMessage_CalculatingRangesEnded()
     printMessage_GeneratingNamesRangesEnded()
 
-def calculateRangesFor(ranges, count, max):
+def calculateRunTimeRanges():
+    rangeRuntime.r1 = 5
+    rangeRuntime.r2 = 15
+    rangeRuntime.r3 = 30
+    rangeRuntime.r4 = 45
+    rangeRuntime.r5 = 60
+    rangeRuntime.r6 = 75
+    rangeRuntime.r7 = 90
+    rangeRuntime.r8 = 105
+    rangeRuntime.r9 = 120
+    rangeRuntime.r10 = 135
+    rangeRuntime.r11 = 150
+    rangeRuntime.r12 = 180
+    rangeRuntime.r13 = 240
+    rangeRuntime.r14 = rangeLimitRuntime.max + 1
+
+def generateRunTimeNames():
+    rangeNamesRuntime.r1 = "< 5min"
+    rangeNamesRuntime.r2 = "[5min - 15min["
+    rangeNamesRuntime.r3 = "[15min - 30min["
+    rangeNamesRuntime.r4 = "[30min - 45min["
+    rangeNamesRuntime.r5 = "[45min - 1h["
+    rangeNamesRuntime.r6 = "[1h - 1h15["
+    rangeNamesRuntime.r7 = "[1h15 - 1h30["
+    rangeNamesRuntime.r8 = "[1h30 - 1h45["
+    rangeNamesRuntime.r9 = "[1h45 - 2h["
+    rangeNamesRuntime.r10 = "[2h - 2h15["
+    rangeNamesRuntime.r11 = "[2h15 - 2h30["
+    rangeNamesRuntime.r12 = "[2h30 - 3h["
+    rangeNamesRuntime.r13 = "[3h - 4h["
+    rangeNamesRuntime.r14 = ">= 4h"
+
+def calculateFilmingDaysRanges():
+    rangeFilmingDays.r1 = 5
+    rangeFilmingDays.r2 = 15
+    rangeFilmingDays.r3 = 30
+    rangeFilmingDays.r4 = 45
+    rangeFilmingDays.r5 = 60
+    rangeFilmingDays.r6 = 75
+    rangeFilmingDays.r7 = 90
+    rangeFilmingDays.r8 = 105
+    rangeFilmingDays.r9 = 120
+    rangeFilmingDays.r10 = 135
+    rangeFilmingDays.r11 = 150
+    rangeFilmingDays.r12 = 165
+    rangeFilmingDays.r13 = 180
+    rangeFilmingDays.r14 = 195
+    rangeFilmingDays.r15 = rangeLimitFilmingDays.max + 1
+
+def generateFilmingDaysNames():
+    rangeNamesFilmingDays.r1 = "< 5"
+    rangeNamesFilmingDays.r2 = "[5-15["
+    rangeNamesFilmingDays.r3 = "[15-30["
+    rangeNamesFilmingDays.r4 = "[30-45["
+    rangeNamesFilmingDays.r5 = "[45-60["
+    rangeNamesFilmingDays.r6 = "[60-75["
+    rangeNamesFilmingDays.r7 = "[75-90["
+    rangeNamesFilmingDays.r8 = "[90-105["
+    rangeNamesFilmingDays.r9 = "[105-120["
+    rangeNamesFilmingDays.r10 = "[120-135["
+    rangeNamesFilmingDays.r11 = "[135-150["
+    rangeNamesFilmingDays.r12 = "[150-165["
+    rangeNamesFilmingDays.r13 = "[165-180["
+    rangeNamesFilmingDays.r14 = "[180-190["
+    rangeNamesFilmingDays.r15 = ">= 190"
+
+def calculateBudgetRanges():
+    rangeBudget.r1 = 50
+    rangeBudget.r2 = 100
+    rangeBudget.r3 = 500
+    rangeBudget.r4 = 1000
+    rangeBudget.r5 = 5000
+    rangeBudget.r6 = 10000
+    rangeBudget.r7 = 50000
+    rangeBudget.r8 = 100000
+    rangeBudget.r9 = 500000
+    rangeBudget.r10 = 1000000
+    rangeBudget.r11 = 5000000
+    rangeBudget.r12 = 10000000
+    rangeBudget.r13 = 50000000
+    rangeBudget.r14 = rangeLimitBudget.max + 1
+
+def generateBudgetNames():
+    rangeNamesBudget.r1 = "< 50"
+    rangeNamesBudget.r2 = "[50-100["
+    rangeNamesBudget.r3 = "[100-500["
+    rangeNamesBudget.r4 = "[500-1000["
+    rangeNamesBudget.r5 = "[1,000-5,000["
+    rangeNamesBudget.r6 = "[5,000-10,000["
+    rangeNamesBudget.r7 = "[10,000-50,000["
+    rangeNamesBudget.r8 = "[50,000-100,000["
+    rangeNamesBudget.r9 = "[100,000-500,000["
+    rangeNamesBudget.r10 = "[500,000-1,000,000["
+    rangeNamesBudget.r11 = "[1,000,000-5,000,000["
+    rangeNamesBudget.r12 = "[5,000,000-10,000,000["
+    rangeNamesBudget.r13 = "[10,000,000-50,000,000["
+    rangeNamesBudget.r14 = ">= 50,000,000"
+
+def calculateGrossRanges():
+    rangeGross.r1 = 50
+    rangeGross.r2 = 100
+    rangeGross.r3 = 500
+    rangeGross.r4 = 1000
+    rangeGross.r5 = 5000
+    rangeGross.r6 = 10000
+    rangeGross.r7 = 50000
+    rangeGross.r8 = 100000
+    rangeGross.r9 = 500000
+    rangeGross.r10 = 1000000
+    rangeGross.r11 = 5000000
+    rangeGross.r12 = 10000000
+    rangeGross.r13 = 50000000
+    rangeGross.r14 = 100000000
+    rangeGross.r15 = 500000000
+    rangeGross.r16 = rangeLimitGross.max + 1
+
+def generateGrossNames():
+    rangeNamesGross.r1 = "< 50"
+    rangeNamesGross.r2 = "[50-100["
+    rangeNamesGross.r3 = "[100-500["
+    rangeNamesGross.r4 = "[500-1,000["
+    rangeNamesGross.r5 = "[1,000-5,000["
+    rangeNamesGross.r6 = "[5,000-10,000["
+    rangeNamesGross.r7 = "[10,000-50,000["
+    rangeNamesGross.r8 = "[50,000-100,000["
+    rangeNamesGross.r9 = "[100,000-500,000["
+    rangeNamesGross.r10 = "[500,000-1,000,000["
+    rangeNamesGross.r11 = "[1,000,000-5,000,000["
+    rangeNamesGross.r12 = "[5,000,000-10,000,000["
+    rangeNamesGross.r13 = "[10,000,000-50,000,000["
+    rangeNamesGross.r14 = "[50,000,000-100,000,000["
+    rangeNamesGross.r15 = "[100,000,000-500,000,000["
+    rangeNamesGross.r16 = ">= 500,000,000"
+
+def calculateRangesFor(ranges, max):
     step = max/11
     if step < 1.0:
         stepSize = 1
@@ -271,6 +419,12 @@ def generateNamesForRange(ranges, rangeNames):
 def numberToString(number):
     return '{0:,}'.format(number)
 
+def checkRanges():
+    checkRange(rangeRuntime, rangeNamesRuntime, 2)
+    checkRange(rangeFilmingDays, rangeNamesFilmingDays, 3)
+    checkRange(rangeBudget, rangeNamesBudget, 4)
+    checkRange(rangeGross, rangeNamesGross, 5)
+
 def printMessage_CalculatingRangesEnded():
     print("===========================================")
     print("CALCULATING RANGES FINISHED")
@@ -279,6 +433,26 @@ def printMessage_CalculatingRangesEnded():
     print("Budget: %s" % rangeBudget)
     print("Gross: %s" % rangeGross)
     print("===========================================")
+
+def checkRange(ranges, rangeNames, indexRecord):
+    runtimeDistribution = {}
+
+    for record in movieList:
+        value = record[indexRecord]
+        if value:
+            #print(value)
+            rangeFound = False
+            index = -1
+            while not rangeFound:
+                index += 1
+                if value < ranges[index]:
+                    #print("%d, %d" % (value, ranges[index]))
+                    rangeFound = True
+                    if rangeNames[index] in runtimeDistribution:
+                        count = runtimeDistribution[rangeNames[index]] + 1
+                        runtimeDistribution[rangeNames[index]] = count
+                    else:
+                        runtimeDistribution[rangeNames[index]] = 1
 
 def printMessage_GeneratingNamesRangesEnded():
     print("===========================================")
@@ -295,16 +469,22 @@ def printMessage_GeneratingNamesRangesEnded():
 #######################################################################################################################
 
 
+
+
+
 #######################################################################################################################
 #                                               MAIN SCRIPT                                                           #
 #######################################################################################################################
 
 
 movieFile = open("../../Data/movies.csv", "r", encoding="utf8", errors="ignore")
-process(movieFile)
+runtimeDataFile = open("../../Data/moviesGross.csv", "w", encoding="utf8", errors="ignore")
+process(movieFile, runtimeDataFile)
 movieFile.close()
+runtimeDataFile.close()
 
-calculateRanges(len(rangeRuntime))
+calculateRanges()
+
 
 
 
