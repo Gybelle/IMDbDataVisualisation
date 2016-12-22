@@ -11,6 +11,7 @@ import math
 import re
 
 movieList = []      # (id, title, runtime, filmingDays, budget, gross, rating)
+flowDict = {}       # (t1, t2) , count
 
 RangeLimits = recordclass('RangeLimits', 'min max')
 rangeLimitRuntime = RangeLimits(-1, -1)
@@ -467,7 +468,22 @@ def printMessage_GeneratingNamesRangesEnded():
 #######################################################################################################################
 #                            PART THREE: DISTRIBUTING DATA ACROSS THE RANGES                                         #
 #######################################################################################################################
+def distributeDataInRanges():
+    initializeDictionary()
+    #TODO write this further
 
+def initializeDictionary():
+    #Pairs: [Runtime, FilmingDays]  [FilmingDays, Budget]   [Budget, Revenue]   [Revenue, Score]
+    createDictPairs(rangeNamesRuntime, rangeNamesFilmingDays)
+    createDictPairs(rangeNamesFilmingDays, rangeNamesBudget)
+    createDictPairs(rangeNamesBudget, rangeNamesGross)
+    createDictPairs(rangeNamesGross, rangeNamesScore)
+
+def createDictPairs(range1, range2):
+    for x in range1:
+        for y in range2:
+            pair = (x, y)
+            flowDict[pair] = 0
 
 
 
@@ -484,7 +500,7 @@ movieFile.close()
 runtimeDataFile.close()
 
 calculateRanges()
-
+distributeDataInRanges()
 
 
 
