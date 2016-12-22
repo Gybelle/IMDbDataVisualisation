@@ -10,12 +10,13 @@ from datetime import datetime
 
 actorsList = {}
 moviesList = {}
+actorID = -1
 
 def processActors(inputFile, csvWriter, endOfHeader, isMale):
     skipHeader(inputFile, endOfHeader, 3)
     entries = 0
     ignored = 0
-    actorID = -1
+    global actorID
     for line in inputFile:
         line = line.rstrip('\n')
         if line is "": # end of an actor's entry
@@ -47,12 +48,13 @@ def processActors(inputFile, csvWriter, endOfHeader, isMale):
             # Movie
             movie = correctTitle(line)
             if movie in moviesList:
+                updatedID = actorID
                 if actorName not in actorsList:
-                    actorsList[actorName] = (actorID, actorFirstName, actorLastName, isMale)
+                    actorsList[actorName] = (updatedID, actorFirstName, actorLastName, isMale)
                 elif actorName in actorsList:
-                    actorID = actorsList[actorName][0]
+                    updatedID = actorsList[actorName][0]
                 movieID, isMovie = moviesList[movie]
-                csvWriter.writerow([actorID, movieID, isMovie, role])
+                csvWriter.writerow([updatedID, movieID, isMovie, role])
             else:
                 ignored += 1
             entries += 1

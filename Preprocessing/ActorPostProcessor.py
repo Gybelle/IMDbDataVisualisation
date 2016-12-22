@@ -36,7 +36,7 @@ def readActorsFromFile(file):
 
 def writeActorsToFiles():
     for letter in actorsList:
-        outputFile = open("Output/actors_" + letter + ".csv", "w", newline="\n", encoding="utf-8")
+        outputFile = open("Output/actors/actors_" + letter + ".csv", "w", newline="\n", encoding="utf-8")
         csvWriter = csv.writer(outputFile, delimiter=';', quotechar=';', quoting=csv.QUOTE_MINIMAL)
         csvWriter.writerow(["ActorID", "Name", "IsMale", "BirthYear", "BirthLocation", "DeathYear", "DeathLocation"])
 
@@ -61,9 +61,11 @@ def readMoviesFromFile(file):
 
 def writeMoviesToFiles():
     for letter in moviesList:
-        outputFile= open("Output/movies_" + letter + ".csv", "w", newline="\n", encoding="utf-8")
+        outputFile = open("Output/movies/movies_" + letter + ".csv", "w", newline="\n", encoding="utf-8")
         csvWriter = csv.writer(outputFile, delimiter=';', quotechar=';', quoting=csv.QUOTE_MINIMAL)
-        csvWriter.writerow(["ID", "Title", "Year", "EndYear", "Genre", "Budget", "Gross", "FilmingDays", "Language", "Locations", "Countries", "Rating", "Duration"])
+        csvWriter.writerow(
+            ["ID", "Title", "Year", "EndYear", "Genre", "Budget", "Gross", "FilmingDays", "Language", "Locations",
+             "Countries", "Rating", "Duration"])
 
         for movie in moviesList[letter]:
             csvWriter.writerow(movie)
@@ -74,6 +76,7 @@ def replaceIDs():
     for letter in actorsList:
         for actor in actorsList[letter]:
             actorIDs[actor[0]] = letter
+
     actorsList.clear()
     for letter in moviesList:
         for movie in moviesList[letter]:
@@ -86,12 +89,12 @@ def createNewIDMapping():
     line = inputFile.readline()
     for line in inputFile:
         items = line.rstrip('\r\n').split(";")
-        if items[2] == "True": # is a movie
+        if items[2] == "True":  # is a movie
             actorID = items[0]
             movieID = items[1]
             if actorID in actorIDs and movieID in movieIDs:
-                actorBucket = int(int(actorID)/100000)
-                movieBucket = int(int(movieID)/ 50000)
+                actorBucket = int(int(actorID) / 100000)
+                movieBucket = int(int(movieID) / 50000)
                 actorID = actorID + actorIDs[actorID]
                 movieID = movieID + movieIDs[movieID]
                 if actorBucket not in actorBuckets:
@@ -104,20 +107,19 @@ def createNewIDMapping():
     print("Writing mapping")
     inputFile.close()
     for actorBucket in actorBuckets:
-        outputFile= open("Output/actorMapping_" + str(actorBucket) + ".csv", "w", newline="\n", encoding="utf-8")
+        outputFile = open("Output/actorsInMovies/actorMapping_" + str(actorBucket) + ".csv", "w", newline="\n", encoding="utf-8")
         csvWriter = csv.writer(outputFile, delimiter=';', quotechar=';', quoting=csv.QUOTE_MINIMAL)
         csvWriter.writerow(["ActorID", "MovieID", "Role"])
         for item in actorBuckets[actorBucket]:
             csvWriter.writerow([item[0], item[1], item[2]])
         outputFile.close()
     for movieBucket in movieBuckets:
-        outputFile= open("Output/movieMapping_" + str(movieBucket) + ".csv", "w", newline="\n", encoding="utf-8")
+        outputFile = open("Output/actorsInMovies/movieMapping_" + str(movieBucket) + ".csv", "w", newline="\n", encoding="utf-8")
         csvWriter = csv.writer(outputFile, delimiter=';', quotechar=';', quoting=csv.QUOTE_MINIMAL)
         csvWriter.writerow(["MovieID", "ActorID", "Role"])
         for item in movieBuckets[movieBucket]:
             csvWriter.writerow([item[1], item[0], item[2]])
         outputFile.close()
-
 
 
 inputFile = open("Output/actors.csv", "r", newline="\n", encoding="utf-8")
