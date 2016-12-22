@@ -5,20 +5,41 @@ Author: Michelle Gybels
 '''
 
 import csv
+from recordclass import recordclass
 import math
 import re
 
-movieList = []      # (id, title, runtime, filmingDays, budget, revenue, score)
+movieList = []      # (id, title, runtime, filmingDays, budget, gross, rating)
+Range = recordclass('Range', 'min max')
+rangeRuntime = Range(-1, -1)
+rangeFilmingDays = Range(-1, -1)
+rangeBudget = Range(-1, -1)
+rangeGross = Range(-1, -1)
+rangeScore = Range(0, 10)
 
+#######################################################################################################################
+#                    PART ONE: PROCESSING MOVIES.CSV AND CALCULATING RANGES MIN AND MAX                               #
+#######################################################################################################################
 def process(file):
     header = file.readline()
+
     for line in file:
         movieRecord = processLine(line)
         updateMinMax(movieRecord)
         addToMovieList(movieRecord)
 
-    for elem in movieList:
-        print(elem)
+    fixRanges()
+    printMessage_ProcessingEnded()
+
+def fixRanges():
+    if rangeRuntime.min < 0:
+        rangeRuntime.min = 1
+    if rangeFilmingDays.min < 0:
+        rangeFilmingDays.min = 1
+    if rangeBudget.min < 0:
+        rangeBudget.min = 1
+    if rangeGross.min < 0:
+        rangeGross.min = 1
 
 def processLine(line):
     # Get data
@@ -146,9 +167,47 @@ def extractDecimalTime(durationString):
 def addToMovieList(record):
     movieList.append(record)
 
-def updateMinMax(record):
-    print("TODO: Write this.")
+def updateMinMax(record):           # (id, title, runtime, filmingDays, budget, gross, rating)
+    runtime = record[2]
+    filmingDays = record[3]
+    budget = record[4]
+    gross = record[5]
 
+    checkMinMax(rangeRuntime, runtime)
+    checkMinMax(rangeFilmingDays, filmingDays)
+    checkMinMax(rangeBudget, budget)
+    checkMinMax(rangeGross, gross)
+
+def checkMinMax(range, value):
+    min = range.min
+    max = range.max
+    if value:
+        if min == -1:
+            min = value
+        elif min > value:
+            min = value
+        if max < value:
+            max = value
+
+    range.min = min
+    range.max = max
+
+def printMessage_ProcessingEnded():
+    print("===========================================")
+    print("PROCESSING FILE FINISHED")
+    print("Runtime: %s" % rangeRuntime)
+    print("Filming days: %s" % rangeFilmingDays)
+    print("Budget: %s" % rangeBudget)
+    print("Gross: %s" % rangeGross)
+    print("===========================================")
+
+#######################################################################################################################
+#                    PART TWO: CREATING BUCKETS FOR EACH RANGE TO DISTRIBUTE THE DATA IN                              #
+#######################################################################################################################
+
+#######################################################################################################################
+#                            PART THREE: DISTRIBUTING DATA ACCROSS THE RANGES                                         #
+#######################################################################################################################
 
 
 movieFile = open("../../Data/movies.csv", "r", encoding="utf8", errors="ignore")
