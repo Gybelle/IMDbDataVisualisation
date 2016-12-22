@@ -36,7 +36,7 @@ function createActorsMap(divID) {
     return map;
 }
 
-function map_setActor(map, name) {
+function map_setActor(name) {
     var actor = null;
     if (name == "") {
         console.log("No name to find");
@@ -64,7 +64,7 @@ function map_setActor(map, name) {
             }
         });
         if (actor == null) {
-            console.log("Could not find " + name)
+            console.log("Could not find " + name);
             return;
         }
 
@@ -76,7 +76,7 @@ function map_setActor(map, name) {
 
         // Find birth location
         if (actor.birthLocation != "") {
-            addBirthLocationMarker(actor.birthLocation, actor.isMale);
+            addActorLocationMarker(actor.birthLocation, actor.isMale, "<b>Born in</b> " + actor.birthLocation);
         }
 
         // Find movies
@@ -162,14 +162,14 @@ function addMoviesToMap(movieMap) {
                 }
                 countryCode = findCountryCode(location);
                 if (countryCode && countries[countryCode]) {
-                    addMovieFilmingLocation(countries[countryCode], location, message, opacity);
+                    addMovieFilmingLocation(countries[countryCode], "<b>Filmed in " + location + "</b></br>" + message, opacity);
                 } else {
                     console.log("Could not find " + location);
                 }
             }
         });
 
-        // add movies to map
+        // add countries to map
         for (var country in countryMap) {
             var message = "";
             countryMap[country].forEach(function (movie) {
@@ -183,10 +183,102 @@ function addMoviesToMap(movieMap) {
             var success = false;
             while (!success && tries < 3000) {
                 ++tries;
-                success = addMovieLocationMarker(country, country, message);
+                success = addMovieLocationMarker(country, "<b>Produced in " + country + "</b></br>" + message);
             }
         }
     });
+}
+
+function map_setMovie(name) {
+    var movie = null;
+    if (name == "") {
+        console.log("No name to find");
+        return;
+    }
+    console.log("Finding movie " + name);
+    console.log("First letter " + name[0]);
+    var movieTitle = name.substring(0, name.indexOf("(")).trim();
+    var movieYear = name.substring(name.indexOf("(") + 1, name.indexOf(")"));
+    console.log(movieTitle + ": " + movieYear);
+
+    d3.dsv(';')("data/movies/movies_" + name[0] + ".csv", function (error, data) {
+        // Find movie
+        data.some(function (d) {
+            if (movieTitle == d.Title && movieYear == d.Year) {
+                console.log("Found " + d.Title);
+                movie = {
+                    id: d.ID,
+                    title: d.Title,
+                    year: d.Year,
+                    locations: d.Locations,
+                    countries: d.Countries
+                };
+                return true;
+            }
+        });
+        if (movie == null) {
+            console.log("Could not find " + name);
+            return;
+        }
+        console.log(movie);
+
+        if (movie.locations != "") {
+            var locationList = {};
+            movie.locations.split("*").forEach(function (location) {
+                location = getCountry(location);
+                var countryCode = findCountryCode(location);
+                if (!locationList[countryCode]) {
+                    locationList[countryCode] = location;
+                }
+            });
+            d3.json("data/countries.geo.json", function (error, geojson) { // open file with world data
+                countries = {};
+                // Read geojson countries
+                for (var r = 0; r < geojson.features.length; r++) { // for each country in geojson
+                    var countryData = geojson.features[r];
+                    var countryName = countryData.properties.name;
+                    var countryCode = findCountryCode(countryName);
+                    countries[countryCode] = countryData;
+                }
+                for (var countryCode in locationList) {
+                    if (countries[countryCode]) {
+                        addMovieFilmingLocation(countries[countryCode], "<b>Filmed in </b>" + locationList[countryCode], 0.7);
+                    } else {
+                        console.log("Could not find " + locationList[countryCode]);
+                    }
+                }
+            });
+        }
+
+        if (movie.countries != "") {
+            movie.countries.split("*").forEach(function (country) {
+                addMovieLocationMarker(country, "<b>Produced in </b>" + country);
+            });
+        }
+
+        // Find actors
+        var actorMap = {};
+        idBucket = Math.floor(movie.id / 50000); // id = 3524657P
+        console.log("Bucket: " + idBucket);
+
+        d3.dsv(';')("data/actorsInMovies/movieMapping_" + idBucket + ".csv", function (error, data) {
+            data.forEach(function (d) {
+                if (movie.id == d.MovieID.substring(0, d.MovieID.length - 1)) {// && Boolean(d.IsMovie)) {
+                    if (d.Role == "Jack Sparrow" || d.Role == "Barbossa") {
+                        console.log(d);
+                    }
+                    var actorLetter = d.ActorID.substring(d.ActorID.length - 1);
+                    if (!actorMap[actorLetter]) {
+                        actorMap[actorLetter] = {};
+                    }
+                    actorMap[d.ActorID.substring(d.ActorID.length - 1)][d.ActorID.substring(0, d.ActorID.length - 1)] = {role: d.Role};
+                }
+            });
+            //addMoviesToMap(actorMap);
+            console.log(actorMap);
+        });
+    });
+
 }
 
 function nameMatches(name1, name2) {
@@ -206,7 +298,7 @@ function nameMatches(name1, name2) {
 //    return match;
 }
 
-function addBirthLocationMarker(location, isMale) {
+function addActorLocationMarker(location, isMale, message) {
     try {
         var icon = null;
         if (isMale) {
@@ -217,7 +309,7 @@ function addBirthLocationMarker(location, isMale) {
         }
         geocodeDecoder.GetLocations(location, function (data) {
             var marker = L.marker([data[0].Y, data[0].X], {icon: icon}).addTo(map);
-            marker.bindPopup("<b>Born in</b> " + location);
+            marker.bindPopup(message);
             marker.on('mouseover', function (e) {
                 this.openPopup();
             });
@@ -230,14 +322,13 @@ function addBirthLocationMarker(location, isMale) {
     }
 }
 
-function addMovieLocationMarker(location, locationName, message) {
+function addMovieLocationMarker(location, message) {
     try {
         geocodeDecoder.GetLocations(location, function (data) {
             var marker = L.marker([data[0].Y, data[0].X]).addTo(map);
-            //marker.bindPopup("<b>" + locationName + "</b></br>" + message);
             var popup = L.popup({
                 maxHeight: 250
-            }).setContent("<b>Produced in " + locationName + "</b></br>" + message);
+            }).setContent(message);
             marker.bindPopup(popup);
             marker.on('mouseover', function (e) {
                 this.openPopup();
@@ -250,7 +341,7 @@ function addMovieLocationMarker(location, locationName, message) {
     }
 }
 
-function addMovieFilmingLocation(countryData, locationName, message, opacity) {
+function addMovieFilmingLocation(countryData, message, opacity) {
     L.geoJson(countryData, {
         style: function (feature) {
             return {
@@ -264,7 +355,7 @@ function addMovieFilmingLocation(countryData, locationName, message, opacity) {
         onEachFeature: function (feature, layer) {
             var popup = L.popup({
                 maxHeight: 250
-            }).setContent("<b>Filmed in " + locationName + "</b></br>" + message);
+            }).setContent(message);
             layer.bindPopup(popup);
         }
     }).addTo(map);

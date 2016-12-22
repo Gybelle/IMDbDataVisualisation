@@ -135,6 +135,7 @@ var countryCodes = {
     "New Zealand": "NZL",
     "Oman": "OMN",
     "Pakistan": "PAK",
+    "Republic of Panama": "PAN",
     "Panama": "PAN",
     "Peru": "PER",
     "Philippines": "PHL",
