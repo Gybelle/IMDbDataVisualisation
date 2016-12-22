@@ -7,9 +7,19 @@ runDataProcessors = False
 runQueries = True
 
 if runDataProcessors:
-    pass
+    import MovieProcessor
+    import GenreProcessor
+    import ActorProcessor
+    import BusinessProcessor
+    import KeywordProcessor
+    import LanguageProcessor
+    import LocationCountryProcessor
+    import RatingProcessor
+    import RunningTimesProcessor
+
+    import ActorPostProcessor
 
 if runQueries:
-    pass
+    import QueryGenreYearCountry
 
 print("PROCESSING DONE!")
