@@ -79,6 +79,8 @@ function map_setActor(name) {
             addActorLocationMarker(actor.birthLocation, actor.isMale, "<b>Born in</b> " + actor.birthLocation);
         }
 
+        setBiographyWidgetActor(actor);
+
         // Find movies
         var movieMap = {};
         movie = false;
@@ -104,6 +106,7 @@ function map_setActor(name) {
 function addMoviesToMap(movieMap) {
     var countryMap = {};
     var locationMap = {};
+    var yearMap = {};
     var q = d3.queue();
     for (var letter in movieMap) {
         q.defer(d3.dsv(';'), "data/movies/movies_" + letter + ".csv");
@@ -113,6 +116,10 @@ function addMoviesToMap(movieMap) {
         files.forEach(function (file) {
             file.forEach(function (movie) {
                 if (movieMap[movie.Title[0]] && movieMap[movie.Title[0]][movie.ID]) {
+                    if (!yearMap[movie.Year]) {
+                        yearMap[movie.Year ] = 0;
+                    }
+                    yearMap[movie.Year]++;
                     if (movie.Countries != "") {
                         movie.Countries.split("*").forEach(function (country) {
                             if (!countryMap[country]) {
@@ -133,12 +140,11 @@ function addMoviesToMap(movieMap) {
                 }
             });
         });
+        setBiographyWidgetMovieMap(yearMap);
+
         // add locations to map
-        console.log(locationMap);
         var locationMinMax = getMovieCountRange(locationMap);
-        console.log(locationMinMax[0] + " tot " + locationMinMax[1]);
         var minMaxStep = (locationMinMax[1] - locationMinMax[0]) / 5;
-        console.log(minMaxStep);
         d3.json("data/countries.geo.json", function (error, geojson) { // open file with world data
             countries = {};
             // Read geojson countries
@@ -148,7 +154,6 @@ function addMoviesToMap(movieMap) {
                 var countryCode = findCountryCode(countryName);
                 countries[countryCode] = countryData;
             }
-            console.log(countries);
             for (var location in locationMap) {
                 var message = "";
                 var num = Object.keys(locationMap[location]).length;
@@ -272,7 +277,6 @@ function map_setMovie(name) {
                 }
             });
             addActorsToMap(actorMap);
-            //console.log(actorMap);
         });
     });
 

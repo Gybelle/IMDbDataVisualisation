@@ -66,6 +66,7 @@ var countryCodes = {
     "Gabon": "GAB",
     "United Kingdom": "GBR",
     "UK": "GBR",
+    "Isle of Man": "GBR",
     "Georgia": "GEO",
     "Ghana": "GHA",
     "Guinea": "GIN",

@@ -311,3 +311,20 @@ body {
 .link:hover {
   stroke-opacity: .5;
 }
+
+/* -------------------------------- Biography -------------------------------- */
+.lifetimeImg {
+    margin: 20px;
+    height: 85px;
+    width: 85px;
+}
+
+.lifetimeLabel {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.lifetimeWrapper {
+    margin: auto;
+    display: inline-block;
+}
