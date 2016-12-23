@@ -555,10 +555,24 @@ def writeDictToFile():
         file.write("{\"source\":\"%s\",\"target\":\"%s\",\"value\":\"%d\"},\n" % (element[0], element[1], flowDict[element]))
     file.write("] , \n")
 
+    writeNodesToFile(file)
+
+    file.close()
+
+def writeNodesToFile(file):
     file.write("\"nodes\": [\n")
-    for element in flowDict:
-        file.write("{\"name\":\"%s\"},\n{\"name\":\"%s\"},\n" % (element[0], element[1]))
+    writeNodes(file, rangeNamesRuntime)
+    writeNodes(file, rangeNamesFilmingDays)
+    writeNodes(file, rangeNamesBudget)
+    writeNodes(file, rangeNamesGross)
+    writeNodes(file, rangeNamesScore)
     file.write("] } \n")
+
+def writeNodes(file, rangeNames):
+    for range in rangeNames:
+        file.write("{\"name\":\"%s\"},\n" % range)
+
+
 #######################################################################################################################
 #                                               MAIN SCRIPT                                                           #
 #######################################################################################################################

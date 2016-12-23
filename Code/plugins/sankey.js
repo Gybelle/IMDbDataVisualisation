@@ -6,6 +6,13 @@ d3.sankey = function() {
       nodes = [],
       links = [];
 
+  sankey.spread = function(_) {
+		if (!arguments.length) { return this.features.spread; }
+		this.features.spread = _;
+		if (this.data) { this.draw(this.data); }
+		return this;
+	};
+
   sankey.nodeWidth = function(_) {
     if (!arguments.length) return nodeWidth;
     nodeWidth = +_;
