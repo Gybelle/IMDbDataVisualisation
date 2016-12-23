@@ -549,11 +549,16 @@ def updateDictCount(pairList):
         flowDict[pair] = count
 
 def writeDictToFile():
-    file = open("../../Data/flowData.csv", "w", encoding="utf8", errors="ignore")
-    file.write("range1;range2;count\n")
+    file = open("../../Data/flowData.json", "w", encoding="utf8", errors="ignore")
+    file.write("{\n\"links\": [\n")
     for element in flowDict:
-        file.write("%s;%s;%d\n" % (element[0], element[1], flowDict[element]))
+        file.write("{\"source\":\"%s\",\"target\":\"%s\",\"value\":\"%d\"},\n" % (element[0], element[1], flowDict[element]))
+    file.write("] , \n")
 
+    file.write("\"nodes\": [\n")
+    for element in flowDict:
+        file.write("{\"name\":\"%s\"},\n{\"name\":\"%s\"},\n" % (element[0], element[1]))
+    file.write("] } \n")
 #######################################################################################################################
 #                                               MAIN SCRIPT                                                           #
 #######################################################################################################################

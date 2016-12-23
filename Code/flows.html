@@ -5,6 +5,12 @@
 
         <link href="plugins/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">   <!-- Bootstrap -->
         <link rel="stylesheet" type="text/css" href="css/style.css">
+
+        <!-- Scripts -->
+        <script src="http://d3js.org/d3.v3.js"></script>
+        <script src="plugins/sankey.js"></script>
+        <script type="text/javascript" src="scripts/flows_sankey.js"></script>
+
     </head>
 
     <body>
@@ -25,12 +31,18 @@
 
         <div class="row">
           <div id="colLineChart" class="col-md-10">
-            <div class="chart" id="flowChart">chart</div>
+            <div class="chart" id="flowChart">
+              <p id="sankeyChart">
+            </div>
           </div>
           <div id="colBarChart" class="col-md-2">
             <div class="search" id="flowChartSearch">search</div>
           </div>
         </div>
+
+        <script>
+          createSankeyChart()
+        </script>
 
     </body>
 

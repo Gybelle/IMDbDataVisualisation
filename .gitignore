@@ -33,3 +33,5 @@ Data/moviesRuntimes.csv
 .idea/inspectionProfiles/profiles_settings.xml
 
 Data/flowData.csv
+
+Data/flowData.json
