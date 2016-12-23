@@ -264,9 +264,6 @@ function map_setMovie(name) {
         d3.dsv(';')("data/actorsInMovies/movieMapping_" + idBucket + ".csv", function (error, data) {
             data.forEach(function (d) {
                 if (movie.id == d.MovieID.substring(0, d.MovieID.length - 1)) {// && Boolean(d.IsMovie)) {
-                    if (d.Role == "Jack Sparrow" || d.Role == "Barbossa") {
-                        console.log(d);
-                    }
                     var actorLetter = d.ActorID.substring(d.ActorID.length - 1);
                     if (!actorMap[actorLetter]) {
                         actorMap[actorLetter] = {};
@@ -274,11 +271,39 @@ function map_setMovie(name) {
                     actorMap[d.ActorID.substring(d.ActorID.length - 1)][d.ActorID.substring(0, d.ActorID.length - 1)] = {role: d.Role};
                 }
             });
-            //addMoviesToMap(actorMap);
-            console.log(actorMap);
+            addActorsToMap(actorMap);
+            //console.log(actorMap);
         });
     });
 
+}
+
+function addActorsToMap(actorMap) {
+    var countryList = [];
+    var q = d3.queue();
+    for (var letter in actorMap) {
+        q.defer(d3.dsv(';'), "data/actors/actors_" + letter + ".csv");
+    }
+    q.awaitAll(function (error, files) {
+        files.forEach(function (file) {
+            file.forEach(function (actor) {
+                if (actorMap[actor.Name[0]] && actorMap[actor.Name[0]][actor.ActorID]) {
+                    if (actor.BirthLocation != "") {
+                        countryList.push({name: actor.Name, isMale: (actor.IsMale == "True"), location: actor.BirthLocation, role: actorMap[actor.Name[0]][actor.ActorID].role});
+                    }
+                }
+            });
+        });
+        countryList.forEach(function (actor) {
+            var message = "<b><font color='#FF183C'>" + actor.name + "</font>: " + actor.role + "</b></br>Born in " + actor.location;
+            var tries = 0;
+            var success = false;
+            while (!success && tries < 5000) {
+                ++tries;
+                success = addActorLocationMarker(actor.location, actor.isMale, message);
+            }
+        });
+    });
 }
 
 function nameMatches(name1, name2) {
