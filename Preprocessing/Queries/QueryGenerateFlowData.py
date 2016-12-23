@@ -31,7 +31,7 @@ rangeBudget = Ranges14(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 rangeGross = Ranges16(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
 RangeNames = recordclass('RangeNames', 't1 t2 t3 t4 t5 t6 t7 t8 t9 t10 t11')
-rangeNamesScore = Ranges11("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10")
+rangeNamesScore = Ranges11("S: 0", "S: 1", "S: 2", "S: 3", "S: 4", "S: 5", "S: 6", "S: 7", "S: 8", "S: 9", "S: 10")
 rangeNamesRuntime = Ranges14("", "", "", "", "", "", "", "", "", "", "", "", "", "")
 rangeNamesFilmingDays = Ranges15("", "", "", "", "", "", "", "", "", "", "", "", "", "", "")
 rangeNamesBudget = Ranges14("", "", "", "", "", "", "", "", "", "", "", "", "", "")
@@ -262,20 +262,20 @@ def calculateRunTimeRanges():
     rangeRuntime.r14 = rangeLimitRuntime.max + 1
 
 def generateRunTimeNames():
-    rangeNamesRuntime.r1 = "< 5min"
-    rangeNamesRuntime.r2 = "[5min - 15min["
-    rangeNamesRuntime.r3 = "[15min - 30min["
-    rangeNamesRuntime.r4 = "[30min - 45min["
-    rangeNamesRuntime.r5 = "[45min - 1h["
-    rangeNamesRuntime.r6 = "[1h - 1h15["
-    rangeNamesRuntime.r7 = "[1h15 - 1h30["
-    rangeNamesRuntime.r8 = "[1h30 - 1h45["
-    rangeNamesRuntime.r9 = "[1h45 - 2h["
-    rangeNamesRuntime.r10 = "[2h - 2h15["
-    rangeNamesRuntime.r11 = "[2h15 - 2h30["
-    rangeNamesRuntime.r12 = "[2h30 - 3h["
-    rangeNamesRuntime.r13 = "[3h - 4h["
-    rangeNamesRuntime.r14 = ">= 4h"
+    rangeNamesRuntime.r1 = "R: < 5min"
+    rangeNamesRuntime.r2 = "R: [5min - 15min["
+    rangeNamesRuntime.r3 = "R: [15min - 30min["
+    rangeNamesRuntime.r4 = "R: [30min - 45min["
+    rangeNamesRuntime.r5 = "R: [45min - 1h["
+    rangeNamesRuntime.r6 = "R: [1h - 1h15["
+    rangeNamesRuntime.r7 = "R: [1h15 - 1h30["
+    rangeNamesRuntime.r8 = "R: [1h30 - 1h45["
+    rangeNamesRuntime.r9 = "R: [1h45 - 2h["
+    rangeNamesRuntime.r10 = "R: [2h - 2h15["
+    rangeNamesRuntime.r11 = "R: [2h15 - 2h30["
+    rangeNamesRuntime.r12 = "R: [2h30 - 3h["
+    rangeNamesRuntime.r13 = "R: [3h - 4h["
+    rangeNamesRuntime.r14 = "R: >= 4h"
 
 def calculateFilmingDaysRanges():
     rangeFilmingDays.r1 = 5
@@ -295,21 +295,21 @@ def calculateFilmingDaysRanges():
     rangeFilmingDays.r15 = rangeLimitFilmingDays.max + 1
 
 def generateFilmingDaysNames():
-    rangeNamesFilmingDays.r1 = "< 5"
-    rangeNamesFilmingDays.r2 = "[5-15["
-    rangeNamesFilmingDays.r3 = "[15-30["
-    rangeNamesFilmingDays.r4 = "[30-45["
-    rangeNamesFilmingDays.r5 = "[45-60["
-    rangeNamesFilmingDays.r6 = "[60-75["
-    rangeNamesFilmingDays.r7 = "[75-90["
-    rangeNamesFilmingDays.r8 = "[90-105["
-    rangeNamesFilmingDays.r9 = "[105-120["
-    rangeNamesFilmingDays.r10 = "[120-135["
-    rangeNamesFilmingDays.r11 = "[135-150["
-    rangeNamesFilmingDays.r12 = "[150-165["
-    rangeNamesFilmingDays.r13 = "[165-180["
-    rangeNamesFilmingDays.r14 = "[180-190["
-    rangeNamesFilmingDays.r15 = ">= 190"
+    rangeNamesFilmingDays.r1 = "F: < 5"
+    rangeNamesFilmingDays.r2 = "F: [5-15["
+    rangeNamesFilmingDays.r3 = "F: [15-30["
+    rangeNamesFilmingDays.r4 = "F: [30-45["
+    rangeNamesFilmingDays.r5 = "F: [45-60["
+    rangeNamesFilmingDays.r6 = "F: [60-75["
+    rangeNamesFilmingDays.r7 = "F: [75-90["
+    rangeNamesFilmingDays.r8 = "F: [90-105["
+    rangeNamesFilmingDays.r9 = "F: [105-120["
+    rangeNamesFilmingDays.r10 = "F: [120-135["
+    rangeNamesFilmingDays.r11 = "F: [135-150["
+    rangeNamesFilmingDays.r12 = "F: [150-165["
+    rangeNamesFilmingDays.r13 = "F: [165-180["
+    rangeNamesFilmingDays.r14 = "F: [180-190["
+    rangeNamesFilmingDays.r15 = "F: >= 190"
 
 def calculateBudgetRanges():
     rangeBudget.r1 = 50
@@ -328,20 +328,20 @@ def calculateBudgetRanges():
     rangeBudget.r14 = rangeLimitBudget.max + 1
 
 def generateBudgetNames():
-    rangeNamesBudget.r1 = "< 50"
-    rangeNamesBudget.r2 = "[50-100["
-    rangeNamesBudget.r3 = "[100-500["
-    rangeNamesBudget.r4 = "[500-1000["
-    rangeNamesBudget.r5 = "[1,000-5,000["
-    rangeNamesBudget.r6 = "[5,000-10,000["
-    rangeNamesBudget.r7 = "[10,000-50,000["
-    rangeNamesBudget.r8 = "[50,000-100,000["
-    rangeNamesBudget.r9 = "[100,000-500,000["
-    rangeNamesBudget.r10 = "[500,000-1,000,000["
-    rangeNamesBudget.r11 = "[1,000,000-5,000,000["
-    rangeNamesBudget.r12 = "[5,000,000-10,000,000["
-    rangeNamesBudget.r13 = "[10,000,000-50,000,000["
-    rangeNamesBudget.r14 = ">= 50,000,000"
+    rangeNamesBudget.r1 = "B: < 50"
+    rangeNamesBudget.r2 = "B: [50-100["
+    rangeNamesBudget.r3 = "B: [100-500["
+    rangeNamesBudget.r4 = "B: [500-1000["
+    rangeNamesBudget.r5 = "B: [1,000-5,000["
+    rangeNamesBudget.r6 = "B: [5,000-10,000["
+    rangeNamesBudget.r7 = "B: [10,000-50,000["
+    rangeNamesBudget.r8 = "B: [50,000-100,000["
+    rangeNamesBudget.r9 = "B: [100,000-500,000["
+    rangeNamesBudget.r10 = "B: [500,000-1,000,000["
+    rangeNamesBudget.r11 = "B: [1,000,000-5,000,000["
+    rangeNamesBudget.r12 = "B: [5,000,000-10,000,000["
+    rangeNamesBudget.r13 = "B: [10,000,000-50,000,000["
+    rangeNamesBudget.r14 = "B: >= 50,000,000"
 
 def calculateGrossRanges():
     rangeGross.r1 = 50
@@ -362,22 +362,22 @@ def calculateGrossRanges():
     rangeGross.r16 = rangeLimitGross.max + 1
 
 def generateGrossNames():
-    rangeNamesGross.r1 = "< 50"
-    rangeNamesGross.r2 = "[50-100["
-    rangeNamesGross.r3 = "[100-500["
-    rangeNamesGross.r4 = "[500-1,000["
-    rangeNamesGross.r5 = "[1,000-5,000["
-    rangeNamesGross.r6 = "[5,000-10,000["
-    rangeNamesGross.r7 = "[10,000-50,000["
-    rangeNamesGross.r8 = "[50,000-100,000["
-    rangeNamesGross.r9 = "[100,000-500,000["
-    rangeNamesGross.r10 = "[500,000-1,000,000["
-    rangeNamesGross.r11 = "[1,000,000-5,000,000["
-    rangeNamesGross.r12 = "[5,000,000-10,000,000["
-    rangeNamesGross.r13 = "[10,000,000-50,000,000["
-    rangeNamesGross.r14 = "[50,000,000-100,000,000["
-    rangeNamesGross.r15 = "[100,000,000-500,000,000["
-    rangeNamesGross.r16 = ">= 500,000,000"
+    rangeNamesGross.r1 = "G: < 50"
+    rangeNamesGross.r2 = "G: [50-100["
+    rangeNamesGross.r3 = "G: [100-500["
+    rangeNamesGross.r4 = "G: [500-1,000["
+    rangeNamesGross.r5 = "G: [1,000-5,000["
+    rangeNamesGross.r6 = "G: [5,000-10,000["
+    rangeNamesGross.r7 = "G: [10,000-50,000["
+    rangeNamesGross.r8 = "G: [50,000-100,000["
+    rangeNamesGross.r9 = "G: [100,000-500,000["
+    rangeNamesGross.r10 = "G: [500,000-1,000,000["
+    rangeNamesGross.r11 = "G: [1,000,000-5,000,000["
+    rangeNamesGross.r12 = "G: [5,000,000-10,000,000["
+    rangeNamesGross.r13 = "G: [10,000,000-50,000,000["
+    rangeNamesGross.r14 = "G: [50,000,000-100,000,000["
+    rangeNamesGross.r15 = "G: [100,000,000-500,000,000["
+    rangeNamesGross.r16 = "G: >= 500,000,000"
 
 def calculateRangesFor(ranges, max):
     step = max/11
@@ -470,23 +470,89 @@ def printMessage_GeneratingNamesRangesEnded():
 #######################################################################################################################
 def distributeDataInRanges():
     initializeDictionary()
+    updateDictionary()
+    writeDictToFile()
     #TODO write this further
 
 def initializeDictionary():
     #Pairs: [Runtime, FilmingDays]  [FilmingDays, Budget]   [Budget, Revenue]   [Revenue, Score]
-    createDictPairs(rangeNamesRuntime, rangeNamesFilmingDays)
-    createDictPairs(rangeNamesFilmingDays, rangeNamesBudget)
-    createDictPairs(rangeNamesBudget, rangeNamesGross)
-    createDictPairs(rangeNamesGross, rangeNamesScore)
+    initializeDictPairs(rangeNamesRuntime, rangeNamesFilmingDays)
+    initializeDictPairs(rangeNamesFilmingDays, rangeNamesBudget)
+    initializeDictPairs(rangeNamesBudget, rangeNamesGross)
+    initializeDictPairs(rangeNamesGross, rangeNamesScore)
 
-def createDictPairs(range1, range2):
+def initializeDictPairs(range1, range2):
     for x in range1:
         for y in range2:
             pair = (x, y)
             flowDict[pair] = 0
 
+def updateDictionary():
+    for record in movieList:
+        runtimeValue = record[2]
+        filmingDaysValue = record[3]
+        budgetValue = record[4]
+        grossValue = record[5]
+        ratingValue = record[6]
 
+        pairList = []
 
+        if(runtimeValue != None and filmingDaysValue != None):
+            rangeInfo1 = (rangeRuntime, rangeNamesRuntime, runtimeValue)
+            rangeInfo2 = (rangeFilmingDays, rangeNamesFilmingDays, filmingDaysValue)
+            pairList.append(createDictPair(rangeInfo1, rangeInfo2))
+
+        if(filmingDaysValue != None and budgetValue != None):
+            rangeInfo1 = (rangeFilmingDays, rangeNamesFilmingDays, filmingDaysValue)
+            rangeInfo2 = (rangeBudget, rangeNamesBudget, budgetValue)
+            pairList.append(createDictPair(rangeInfo1, rangeInfo2))
+
+        if (budgetValue != None and grossValue != None):
+            rangeInfo1 = (rangeBudget, rangeNamesBudget, budgetValue)
+            rangeInfo2 = (rangeGross, rangeNamesGross, grossValue)
+            pairList.append(createDictPair(rangeInfo1, rangeInfo2))
+
+        if (grossValue != None and ratingValue != None):
+            rangeInfo1 = (rangeGross, rangeNamesGross, grossValue)
+            rangeInfo2 = (rangeScore, rangeNamesScore, ratingValue)
+            pairList.append(createDictPair(rangeInfo1, rangeInfo2))
+
+        updateDictCount(pairList)
+
+def createDictPair(rangeInfo1, rangeInfo2):
+    rangeValue1 = getRange(rangeInfo1)
+    rangeValue2 = getRange(rangeInfo2)
+
+    if rangeValue1 == None or rangeValue1 == None:
+        print("Not Found!")
+        print(rangeInfo1)
+        print(rangeInfo2)
+
+    return (rangeValue1, rangeValue2)
+
+def getRange(rangeInfo):
+    (ranges, rangeNames, value) = rangeInfo
+
+    rangeFound = False
+    index = -1
+    while not rangeFound:
+        index += 1
+        if value < ranges[index]:
+            rangeFound = True
+            return rangeNames[index]
+
+    return None
+
+def updateDictCount(pairList):
+    for pair in pairList:
+        count = flowDict[pair] + 1
+        flowDict[pair] = count
+
+def writeDictToFile():
+    file = open("../../Data/flowData.csv", "w", encoding="utf8", errors="ignore")
+    file.write("range1;range2;count\n")
+    for element in flowDict:
+        file.write("%s;%s;%d\n" % (element[0], element[1], flowDict[element]))
 
 #######################################################################################################################
 #                                               MAIN SCRIPT                                                           #
