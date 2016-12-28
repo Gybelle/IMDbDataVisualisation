@@ -44,7 +44,6 @@ function map_setActor(name) {
     }
 
     console.log("Finding actor");
-    console.log("First letter " + name[0]);
 
     d3.dsv(';')("data/actors/actors_" + name[0] + ".csv", function (error, data) {
         // Find actor
@@ -85,7 +84,6 @@ function map_setActor(name) {
         var movieMap = {};
         movie = false;
         idBucket = Math.floor(actor.id / 100000);
-        console.log("Bucket: " + idBucket);
 
         d3.dsv(';')("data/actorsInMovies/actorMapping_" + idBucket + ".csv", function (error, data) {
             data.forEach(function (d) {
@@ -99,7 +97,7 @@ function map_setActor(name) {
             });
             addMoviesToMap(movieMap)
         });
-        console.log(actor);
+        //console.log(actor);
     });
 }
 
@@ -169,7 +167,7 @@ function addMoviesToMap(movieMap) {
                 if (countryCode && countries[countryCode]) {
                     addMovieFilmingLocation(countries[countryCode], "<b>Filmed in " + location + "</b></br>" + message, opacity);
                 } else {
-                    console.log("Could not find " + location);
+                    //console.log("Could not find " + location);
                 }
             }
         });
@@ -201,10 +199,9 @@ function map_setMovie(name) {
         return;
     }
     console.log("Finding movie " + name);
-    console.log("First letter " + name[0]);
     var movieTitle = name.substring(0, name.indexOf("(")).trim();
     var movieYear = name.substring(name.indexOf("(") + 1, name.indexOf(")"));
-    console.log(movieTitle + ": " + movieYear);
+    //console.log(movieTitle + ": " + movieYear);
 
     d3.dsv(';')("data/movies/movies_" + name[0] + ".csv", function (error, data) {
         // Find movie
@@ -225,7 +222,7 @@ function map_setMovie(name) {
             console.log("Could not find " + name);
             return;
         }
-        console.log(movie);
+        //console.log(movie);
 
         if (movie.locations != "") {
             var locationList = {};
@@ -423,52 +420,4 @@ function getCountry(location) {
         return location;
     }
     return location.substring(location.lastIndexOf(",") + 1).trim();
-}
-
-function groupDataMap(data) {
-    // Find max per country
-    var groupedData = d3.nest()
-            .key(function (d) {
-                return d.Country;
-            })
-            .key(function (d) {
-                return d.Genre;
-            })
-            .rollup(function (d) {
-                return {
-                    Count: d3.sum(d, function (g) {
-                        return +g.Count;
-                    })};
-            })
-            .entries(data);
-
-    var result = [];
-    groupedData.forEach(function (d) { // for each country
-        var max = 0;
-        var genre = null;
-        d.values.forEach(function (g) {
-            if (g.values.Count > max) {
-                max = g.values.Count;
-                genre = g.key;
-            }
-        });
-        result.push({
-            country: findCountryCode(d.key),
-            genre: genre
-        });
-    });
-    return result;
-}
-
-function findGenreOfCountry(countryCode, data) {
-    if (countryCode == null) {
-        return null;
-    }
-    genreFound = null;
-    data.forEach(function (d) {
-        if (d.country == countryCode) {
-            genreFound = d.genre;
-        }
-    });
-    return genreFound;
 }

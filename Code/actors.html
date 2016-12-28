@@ -9,6 +9,7 @@
         <link rel="stylesheet" type="text/css" href="css/style.css">
 
         <!-- Scripts -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://d3js.org/d3.v3.min.js"></script>
         <script src="https://d3js.org/d3-queue.v3.min.js"></script>
         <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
@@ -58,25 +59,36 @@
                 </div>
                 <div class="row">
                     <div id="colBio" class="col-md-2">
-                        <div class="chart" id="bio"></div>
+                        <div id="bio">
+                            <h3 id="bio_name"></h3>
+                            <h4 id="bio_birthLocation"></h4>
+                            <h4 id="bio_birthDeathYear"></h4>
+                        </div>
                     </div>
                     <div id="colLifetime" class="col-md-6">
                         <div class="chart" id="lifetime">
                             <div class="lifetimeWrapper">
-                                <img class="lifetimeImg" id="lifetimeImg1" src="img/AgeIcons/m_age1_col0.png" alt="Age 0-10">
-                                <p class="lifetimeLabel">0-10</p>
+                                <img class="lifetimeImg" id="lifetimeImg1" src="img/AgeIcons/m_age1_col0.png" alt="Age 0-10"/>
+                                <div class="lifetimeLabel">0-10</div>
                             </div>
                             <div class="lifetimeWrapper">
-                                <img class="lifetimeImg" id="lifetimeImg2" src="img/AgeIcons/m_age2_col0.png" alt="Age 11-25">
-                                <p class="lifetimeLabel">11-25</p>
+                                <img class="lifetimeImg" id="lifetimeImg2" src="img/AgeIcons/m_age2_col0.png" alt="Age 11-25"/>
+                                <div class="lifetimeLabel">11-25</div>
                             </div>
                             <div class="lifetimeWrapper">
-                                <img class="lifetimeImg" id="lifetimeImg3" src="img/AgeIcons/m_age3_col0.png" alt="Age 26-50">
-                                <p class="lifetimeLabel">26-50</p>
+                                <img class="lifetimeImg" id="lifetimeImg3" src="img/AgeIcons/m_age3_col0.png" alt="Age 26-50"/>
+                                <div class="lifetimeLabel">26-50</div>
                             </div>
                             <div class="lifetimeWrapper">
-                                <img class="lifetimeImg" id="lifetimeImg4" src="img/AgeIcons/m_age4_col0.png" alt="Age 51+">
-                                <p class="lifetimeLabel">50+</p>
+                                <img class="lifetimeImg" id="lifetimeImg4" src="img/AgeIcons/m_age4_col0.png" alt="Age 51+"/>
+                                <div class="lifetimeLabel">50+</div>
+                            </div>
+                            <div class="lifetimeWrapperLegend">
+                                <img class="lifetimeLegend" id="lifetimeLegend" src="img/AgeIcons/m_legend.png" alt="Legend"/>
+                                <div class="legendText">
+                                    <div class="lifetimeLegendLabel legendLabelTop" id="lifetimeLegendLabelTop">25 movies</div>
+                                    <div class="lifetimeLegendLabel legendLabelBottom">0 movies</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -87,9 +99,27 @@
             </div> <!-- End container fluid content -->
         </div> <!-- End wrapper page content -->
         <script>
-            setBiographyWidgetActor(null)
+            function setLayout() {
+                //Set width of charts
+                //bar- and linechart:
+                heightSmallRow = document.getElementById("lifetime").offsetHeight;
+                widthSmallChart = document.getElementById("colLifetime").offsetWidth;
+                $(".chart").css('width', widthSmallChart);
+                //bubblechart:
+                heightNavbar = document.getElementById("menubar").offsetHeight;
+                heightLargeRow = $(document).height() - heightNavbar - heightSmallRow;
+                widthSmallLargeChart = document.getElementById("colLanguageChart").offsetWidth;
+                $(".small_large_chart").css('width', widthSmallLargeChart);
+                // mapchart
+                widthLargeChart = document.getElementById("colActorMap").offsetWidth;
+                $(".large_chart").css('width', widthLargeChart);
+                $(".large_chart").css('height', heightLargeRow);
+            }
+            setLayout();
+
+            setBiographyWidgetActor(null);
             var map = createActorsMap("actorsMap");
-            map_setActor("Johnny Depp");
+            map_setActor("Geoffrey Rush");
             //map_setMovie("Pirates of the Caribbean: The Curse of the Black Pearl (2003)");
         </script>
     </body>

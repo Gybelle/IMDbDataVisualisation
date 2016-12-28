@@ -1,41 +1,41 @@
 /* -------------------------------- Basics -------------------------------- */
 body {
-  padding: 0px;
-  height: 100%;
-  margin: 0;
-  position: relative;
-  /*background-color: #FBF8EF;*/
-  /*background-color: #FFDBCE;*/
+    padding: 0px;
+    height: 100%;
+    margin: 0;
+    position: relative;
+    /*background-color: #FBF8EF;*/
+    /*background-color: #FFDBCE;*/
 }
 
 /* -------------------------------- Navigator (overwrite Bootstrap) -------------------------------- */
 .navbar-nav > li > a, .navbar-brand {
-  padding-top:5px !important;
-  padding-bottom:0 !important;
-  height: 30px;
+    padding-top:5px !important;
+    padding-bottom:0 !important;
+    height: 30px;
 }
 .navbar {
-  min-height:30px !important;
-  margin-bottom: 0px;
+    min-height:30px !important;
+    margin-bottom: 0px;
 }
 
 #menu-toggle {
-  color: #DA70D6;
-  /* font-style: italic; */
-  font-style: normal;
+    color: #DA70D6;
+    /* font-style: italic; */
+    font-style: normal;
 }
 
 
 /* -------------------------------- Slider -------------------------------- */
 .range_slider{
-  padding-top: 15px;
-  padding-bottom: 15px;
-  padding-left: 12px;
-  padding-right: 12px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 12px;
+    padding-right: 12px;
 }
 
 /* -------------------------------- Row 3: Multiline (linechart) and barchart -------------------------------- */
-                              /* Based on: http://bl.ocks.org/asielen/44ffca2877d0132572cb */
+/* Based on: http://bl.ocks.org/asielen/44ffca2877d0132572cb */
 
 .chart {
     height: 200px;
@@ -137,12 +137,12 @@ body {
 }
 
 .bubble{
-  display: inline-block;
+    display: inline-block;
 }
 
 #bubbleList {
-  width: 200px;
-  height: 300px;
+    width: 200px;
+    height: 300px;
 }
 
 
@@ -239,26 +239,26 @@ body {
 }
 
 .genreCheckboxText {
-  color: #999999;
+    color: #999999;
 }
 
 .checkboxWithLabel {        /* parent */
-  display: flex;
+    display: flex;
 }
 
 .checkboxLabel { /* child 1 */
-  flex: 1;
+    flex: 1;
 
 }
 
 .checkBoxImg { /* child 2 */
-  margin-top: 3px;
-  width: 15px;
-  height: 15px;
-  -webkit-border-radius: 15px;
-  -moz-border-radius: 15px;
-  border-radius: 15px;
-  background: lightgreen;
+    margin-top: 3px;
+    width: 15px;
+    height: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    background: lightgreen;
 }
 
 @media(min-width:768px) {
@@ -290,26 +290,26 @@ body {
 }
 
 /* --------------------------- Sankey diagram --------------------------- */
-                              /* Based on: http://bl.ocks.org/d3noob/5015397 */
+/* Based on: http://bl.ocks.org/d3noob/5015397 */
 .node rect {
-  cursor: move;
-  fill-opacity: .9;
-  shape-rendering: crispEdges;
+    cursor: move;
+    fill-opacity: .9;
+    shape-rendering: crispEdges;
 }
 
 .node text {
-  pointer-events: none;
-  text-shadow: 0 1px 0 #fff;
+    pointer-events: none;
+    text-shadow: 0 1px 0 #fff;
 }
 
 .link {
-  fill: none;
-  stroke: #000;
-  stroke-opacity: .2;
+    fill: none;
+    stroke: #000;
+    stroke-opacity: .2;
 }
 
 .link:hover {
-  stroke-opacity: .5;
+    stroke-opacity: .5;
 }
 
 /* -------------------------------- Biography -------------------------------- */
@@ -319,12 +319,52 @@ body {
     width: 85px;
 }
 
+.lifetimeLegend {
+    margin: 20px;
+    height: 130px;
+    width: 30px;
+}
+
 .lifetimeLabel {
+    font-size: 16px;
     margin: 0 auto;
     text-align: center;
 }
 
+.lifetimeLegendLabel {
+    font-size: 16px;
+    margin: 0 auto;
+    text-align: left;
+}
+.legendLabelTop {
+    margin-top: 20px;
+}
+.legendLabelBottom {
+    vertical-align: bottom;
+    top: 65%;
+    position: absolute;
+}
+
 .lifetimeWrapper {
     margin: auto;
+    display: inline-block;
+}
+
+.lifetimeWrapperLegend {
+    vertical-align: top;
+    display: inline-block;
+}
+
+#bio {
+    height: 200px;
+    width: 300px;
+    background-color: #FAF7F7;
+    padding: 20px;
+    color: black;
+    word-wrap: break-word;
+}
+
+.lifetimeWrapperLegend > .legendText {
+    float: right;
     display: inline-block;
 }
