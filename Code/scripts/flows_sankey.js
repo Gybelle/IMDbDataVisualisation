@@ -1,10 +1,13 @@
 function createSankeyChart(){
   // Based on http://bl.ocks.org/d3noob/5015397
+  var parentW = $("#sankeyChart").width();
+  var parentH = 740;
+  console.log(parentW);
   var units = "Widgets";
 
   var margin = {top: 10, right: 10, bottom: 10, left: 10},
-      width = 1200 - margin.left - margin.right,
-      height = 740 - margin.top - margin.bottom;
+      width = parentW - margin.left - margin.right,
+      height = parentH - margin.top - margin.bottom;
 
   var formatNumber = d3.format(",.0f"),    // zero decimal places
       format = function(d) { return formatNumber(d) + " " + units; },
