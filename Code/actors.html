@@ -23,6 +23,8 @@
         <script src="data/countryCodes.js"></script>
         <script type="text/javascript" src="scripts/Actor_Biography.js"></script>
         <script type="text/javascript" src="scripts/Actor_Map.js"></script>
+        <script type="text/javascript" src="scripts/Actor_PieChart.js"></script>
+        <script type="text/javascript" src="Testing/scripts/DonutChartExmp.js"></script>
     </head>
 
     <body>
@@ -87,7 +89,9 @@
                         </div>
                     </div>
                     <div id="colLanguageChart" class="col-md-4">
-                        <div class="chart" id="languageChart"></div>
+                        <div class="chart" id="languageChart">
+                            <span id="languageInfo"></span>
+                        </div>
                     </div>
                 </div>
             </div> <!-- End container fluid content -->
@@ -98,7 +102,7 @@
                 //bar- and linechart:
                 heightSmallRow = document.getElementById("lifetime").offsetHeight;
                 widthSmallChart = document.getElementById("colLifetime").offsetWidth;
-                $(".chart").css('width', widthSmallChart);
+                $("#lifetime").css('width', widthSmallChart);
                 //bubblechart:
                 heightNavbar = document.getElementById("menubar").offsetHeight;
                 heightLargeRow = $(document).height() - heightNavbar - heightSmallRow;
@@ -108,8 +112,11 @@
                 widthLargeChart = document.getElementById("colActorMap").offsetWidth;
                 $(".large_chart").css('width', widthLargeChart);
                 $(".large_chart").css('height', heightLargeRow);
+                $("#languageInfo").css('top', heightSmallRow - 25);
             }
             setLayout();
+
+            createActorPieChart("#languageChart", null);
 
             setBiographyWidgetActor(null);
             var map = createActorsMap("actorsMap");

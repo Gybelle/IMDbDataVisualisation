@@ -373,3 +373,9 @@ body {
     float: right;
     display: inline-block;
 }
+
+#languageInfo  {
+    z-index: 10;
+    position: absolute;
+    top: 150px;
+}
