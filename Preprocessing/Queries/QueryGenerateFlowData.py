@@ -25,14 +25,15 @@ rangeLimitGross = RangeLimits(-1, -1)
 rangeLimitScore = RangeLimits(0, 10)
 
 Ranges4 = recordclass('Ranges4', 'r1 r2 r3 r4')
-Ranges8 = recordclass('Ranges11', 'r1 r2 r3 r4 r5 r6 r7 r8')
+Ranges7 = recordclass('Ranges7', 'r1 r2 r3 r4 r5 r6 r7')
+Ranges8 = recordclass('Ranges8', 'r1 r2 r3 r4 r5 r6 r7 r8')
 Ranges11 = recordclass('Ranges11', 'r1 r2 r3 r4 r5 r6 r7 r8 r9 r10 r11')
 Ranges14 = recordclass('Ranges14', 'r1 r2 r3 r4 r5 r6 r7 r8 r9 r10 r11 r12 r13 r14')
 Ranges15 = recordclass('Ranges15', 'r1 r2 r3 r4 r5 r6 r7 r8 r9 r10 r11 r12 r13 r14 r15')
 
 rangeScore = Ranges11(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 rangeScoreClasses = Ranges4(0, 0, 0, 0)
-rangeRuntime = Ranges14(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+rangeRuntime = Ranges7(0, 0, 0, 0, 0, 0, 0)
 rangeFilmingDays = Ranges8(0, 0, 0, 0, 0, 0, 0, 0)
 rangeBudget = Ranges11(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 rangeGross = Ranges4(0, 0, 0, 0)
@@ -40,7 +41,7 @@ rangeGross = Ranges4(0, 0, 0, 0)
 RangeNames = recordclass('RangeNames', 't1 t2 t3 t4 t5 t6 t7 t8 t9 t10 t11')
 rangeNamesScore = Ranges11("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10")
 rangeNamesScoreClasses = Ranges4("", "", "", "")
-rangeNamesRuntime = Ranges14("", "", "", "", "", "", "", "", "", "", "", "", "", "")
+rangeNamesRuntime = Ranges7("", "", "", "", "", "", "")
 rangeNamesFilmingDays = Ranges8("", "", "", "", "", "", "", "")
 rangeNamesBudget = Ranges11("", "", "", "", "", "", "", "", "", "", "")
 rangeNamesGross = Ranges4("", "", "", "")
@@ -258,36 +259,22 @@ def calculateRanges():
     printMessage_GeneratingNamesRangesEnded()
 
 def calculateRunTimeRanges():
-    rangeRuntime.r1 = 5
-    rangeRuntime.r2 = 15
-    rangeRuntime.r3 = 30
-    rangeRuntime.r4 = 45
-    rangeRuntime.r5 = 60
-    rangeRuntime.r6 = 75
-    rangeRuntime.r7 = 90
-    rangeRuntime.r8 = 105
-    rangeRuntime.r9 = 120
-    rangeRuntime.r10 = 135
-    rangeRuntime.r11 = 150
-    rangeRuntime.r12 = 180
-    rangeRuntime.r13 = 240
-    rangeRuntime.r14 = rangeLimitRuntime.max + 1
+    rangeRuntime.r1 = 15 + 1
+    rangeRuntime.r2 = 30 + 1
+    rangeRuntime.r3 = 60 + 1
+    rangeRuntime.r4 = 90 + 1
+    rangeRuntime.r5 = 120 + 1
+    rangeRuntime.r6 = 180 + 1
+    rangeRuntime.r7 = rangeLimitRuntime.max + 1
 
 def generateRunTimeNames():
-    rangeNamesRuntime.r1 = "< 5min"
-    rangeNamesRuntime.r2 = "[5min - 15min["
-    rangeNamesRuntime.r3 = "[15min - 30min["
-    rangeNamesRuntime.r4 = "[30min - 45min["
-    rangeNamesRuntime.r5 = "[45min - 1h["
-    rangeNamesRuntime.r6 = "[1h - 1h15["
-    rangeNamesRuntime.r7 = "[1h15 - 1h30["
-    rangeNamesRuntime.r8 = "[1h30 - 1h45["
-    rangeNamesRuntime.r9 = "[1h45 - 2h["
-    rangeNamesRuntime.r10 = "[2h - 2h15["
-    rangeNamesRuntime.r11 = "[2h15 - 2h30["
-    rangeNamesRuntime.r12 = "[2h30 - 3h["
-    rangeNamesRuntime.r13 = "[3h - 4h["
-    rangeNamesRuntime.r14 = ">= 4h"
+    rangeNamesRuntime.r1 = "Less then 15 minutes"
+    rangeNamesRuntime.r2 = "30 minutes"
+    rangeNamesRuntime.r3 = "1 hour"
+    rangeNamesRuntime.r4 = "1.5 hours"
+    rangeNamesRuntime.r5 = "2 hours"
+    rangeNamesRuntime.r6 = "3 hours"
+    rangeNamesRuntime.r7 = "More then 3 hours"
 
 def calculateFilmingDaysRanges():
     rangeFilmingDays.r1 = 7
