@@ -1,0 +1,2909 @@
+ActorID;MovieOrSeriesID;IsMovie;Role
+14400;828434;False;Robert Baratheon
+14400;828443;False;Robert Baratheon
+14400;828453;False;Robert Baratheon
+14400;828471;False;Robert Baratheon
+14400;828485;False;Robert Baratheon
+14400;828492;False;Robert Baratheon
+26508;828469;False;Malko
+26508;828487;False;Malko
+39787;828485;False;Illyrio Mopatis
+39787;828492;False;Illyrio Mopatis
+40571;828420;False;Theon Greyjoy
+40571;828434;False;Theon Greyjoy
+40571;828435;False;Theon Greyjoy
+40571;828436;False;Theon Greyjoy
+40571;828437;False;Theon Greyjoy
+40571;828438;False;Theon Greyjoy
+40571;828441;False;Theon Greyjoy
+40571;828443;False;Theon Greyjoy
+40571;828444;False;Theon Greyjoy
+40571;828445;False;Theon Greyjoy
+40571;828448;False;Theon Greyjoy
+40571;828449;False;Theon Greyjoy
+40571;828450;False;Theon Greyjoy
+40571;828451;False;Theon Greyjoy
+40571;828454;False;Theon Greyjoy
+40571;828456;False;Theon Greyjoy
+40571;828462;False;Theon Greyjoy
+40571;828463;False;Theon Greyjoy
+40571;828465;False;Theon Greyjoy
+40571;828467;False;Theon Greyjoy
+40571;828468;False;Theon Greyjoy
+40571;828469;False;Theon Greyjoy
+40571;828471;False;Theon Greyjoy
+40571;828472;False;Theon Greyjoy
+40571;828473;False;Theon Greyjoy
+40571;828474;False;Theon Greyjoy
+40571;828475;False;Theon Greyjoy
+40571;828476;False;Theon Greyjoy
+40571;828477;False;Theon Greyjoy
+40571;828478;False;Theon Greyjoy
+40571;828479;False;Theon Greyjoy
+40571;828481;False;Theon Greyjoy
+40571;828484;False;Theon Greyjoy
+40571;828485;False;Theon Greyjoy
+40571;828487;False;Theon Greyjoy
+40571;828489;False;Theon Greyjoy
+40571;828490;False;Theon Greyjoy
+40571;828491;False;Theon Greyjoy
+40571;828492;False;Theon Greyjoy
+47553;828437;False;Pypar
+47553;828442;False;Pypar
+47553;828443;False;Pypar
+47553;828445;False;Pypar
+47553;828453;False;Pypar
+47553;828454;False;Pypar
+47553;828455;False;Pypar
+47553;828459;False;Pypar
+47553;828464;False;Pypar
+47553;828474;False;Pypar
+47553;828478;False;Pypar
+47553;828483;False;Pypar
+59179;828469;False;Derek
+59232;828438;False;Grey Worm
+59232;828441;False;Grey Worm
+59232;828442;False;Grey Worm
+59232;828446;False;Grey Worm
+59232;828450;False;Grey Worm
+59232;828451;False;Grey Worm
+59232;828452;False;Grey Worm
+59232;828454;False;Grey Worm
+59232;828456;False;Grey Worm
+59232;828457;False;Grey Worm
+59232;828458;False;Grey Worm
+59232;828459;False;Grey Worm
+59232;828460;False;Grey Worm
+59232;828461;False;Grey Worm
+59232;828462;False;Grey Worm
+59232;828464;False;Grey Worm
+59232;828467;False;Grey Worm
+59232;828470;False;Grey Worm
+59232;828472;False;Grey Worm
+59232;828474;False;Grey Worm
+59232;828480;False;Grey Worm
+59232;828482;False;Grey Worm
+59232;828484;False;Grey Worm
+59232;828486;False;Grey Worm
+61356;828440;False;Mummer #4
+61356;828467;False;Mummer #4
+68538;828435;False;Xaro Xhoan Daxos
+68538;828447;False;Xaro Xhoan Daxos
+68538;828468;False;Xaro Xhoan Daxos
+68538;828477;False;Xaro Xhoan Daxos
+68538;828489;False;Xaro Xhoan Daxos
+69711;828434;False;Renly Baratheon
+69711;828443;False;Renly Baratheon
+69711;828447;False;Renly Baratheon
+69711;828453;False;Renly Baratheon
+69711;828468;False;Renly Baratheon
+69711;828485;False;Renly Baratheon
+69711;828491;False;Renly Baratheon
+74228;828473;False;King Robb Stark Dwarf
+75687;828440;False;Young Ned
+75687;828458;False;Young Ned
+75687;828484;False;Young Ned
+77724;828491;False;Tyrell Soldier
+78696;828472;False;Goatherd
+83135;828468;False;Qhorin Halfhand
+83135;828477;False;Qhorin Halfhand
+83135;828479;False;Qhorin Halfhand
+83135;828489;False;Qhorin Halfhand
+89592;828420;False;Euron Greyjoy
+89592;828450;False;Euron Greyjoy
+89592;828467;False;Euron Greyjoy
+90054;828451;False;Great Master #2
+91425;828470;False;Son of the Harpy
+91689;828440;False;Mace Tyrell
+91689;828446;False;Mace Tyrell
+91689;828449;False;Mace Tyrell
+91689;828457;False;Mace Tyrell
+91689;828458;False;Mace Tyrell
+91689;828461;False;Mace Tyrell
+91689;828466;False;Mace Tyrell
+91689;828470;False;Mace Tyrell
+91689;828472;False;Mace Tyrell
+91689;828473;False;Mace Tyrell
+91689;828474;False;Mace Tyrell
+91689;828482;False;Mace Tyrell
+91689;828484;False;Mace Tyrell
+96074;828439;False;Baratheon Archer
+106628;828481;False;Maester Caleotte
+109122;828469;False;Tyrell Guard
+113534;828448;False;Loboda
+123596;828435;False;Farlen
+123596;828477;False;Farlen
+125508;828473;False;Noble Man
+129494;828451;False;Great Master #7
+132049;828488;False;Orphan Kid
+137376;828436;False;Rast
+137376;828437;False;Rast
+137376;828443;False;Rast
+137376;828444;False;Rast
+137376;828446;False;Rast
+137376;828453;False;Rast
+137376;828459;False;Rast
+137376;828471;False;Rast
+137376;828478;False;Rast
+137376;828488;False;Rast
+137376;828490;False;Rast
+138426;828471;False;Baratheon Guard
+142854;828436;False;Greizhen mo Ullhor
+142854;828490;False;Greizhen mo Ullhor
+142952;828440;False;Mummer #2
+142952;828467;False;Mummer #2
+131127;828466;False;Strong Fighter
+141517;828434;False;Eddard 'Ned' Stark
+141517;828437;False;Eddard 'Ned' Stark
+141517;828443;False;Eddard 'Ned' Stark
+141517;828444;False;Eddard 'Ned' Stark
+141517;828445;False;Eddard 'Ned' Stark
+141517;828453;False;Eddard 'Ned' Stark
+141517;828471;False;Eddard 'Ned' Stark
+141517;828478;False;Eddard 'Ned' Stark
+141517;828485;False;Eddard 'Ned' Stark
+141517;828492;False;Eddard 'Ned' Stark
+141634;828462;False;The Bear
+142619;828442;False;Meryn Trant
+142619;828445;False;Meryn Trant
+142619;828447;False;Meryn Trant
+142619;828449;False;Meryn Trant
+142619;828456;False;Meryn Trant
+142619;828460;False;Meryn Trant
+142619;828461;False;Meryn Trant
+142619;828466;False;Meryn Trant
+142619;828470;False;Meryn Trant
+142619;828472;False;Meryn Trant
+142619;828473;False;Meryn Trant
+142619;828476;False;Meryn Trant
+142619;828477;False;Meryn Trant
+142619;828478;False;Meryn Trant
+142619;828482;False;Meryn Trant
+142619;828486;False;Meryn Trant
+142619;828488;False;Meryn Trant
+146385;828455;False;Rorge
+146385;828475;False;Rorge
+146385;828479;False;Rorge
+146385;828491;False;Rorge
+148786;828469;False;Fighter
+163376;828442;False;High Septon
+163376;828446;False;High Septon
+163376;828449;False;High Septon
+163376;828460;False;High Septon
+163376;828473;False;High Septon
+163376;828482;False;High Septon
+166452;828434;False;Mord
+166452;828485;False;Mord
+184316;828473;False;Musician #1
+184410;828438;False;Northman Rider
+188165;828450;False;Gregor Clegane
+188165;828455;False;Gregor Clegane
+188165;828456;False;Gregor Clegane
+188165;828457;False;Gregor Clegane
+188165;828458;False;Gregor Clegane
+188165;828463;False;Gregor Clegane
+188165;828464;False;Gregor Clegane
+188165;828474;False;Gregor Clegane
+188165;828481;False;Gregor Clegane
+188165;828484;False;Gregor Clegane
+191591;828448;False;Wildling
+191591;828464;False;Wildling
+191591;828483;False;Wildling
+193974;828435;False;Spice King
+193974;828447;False;Spice King
+193974;828477;False;Spice King
+194024;828452;False;Karstark Lookout
+195521;828438;False;Wildling
+195521;828442;False;Mole's Town Brothel Patron
+195521;828449;False;Baratheon Soldier
+195521;828456;False;Baratheon Soldier
+195521;828464;False;Baratheon Soldier
+195521;828466;False;Baratheon Soldier
+195521;828469;False;Baratheon Soldier
+195521;828480;False;Frey Guard
+195521;828482;False;Baratheon Soldier
+198493;828445;False;Rickard Karstark
+198548;828484;False;Wyman Manderly
+216426;828468;False;Malakho
+222120;828466;False;Pit Announcer
+225811;828448;False;Wildling
+228708;828472;False;Bolton Guard
+218484;828480;False;Wendel Manderly
+219185;828437;False;Walder Frey
+219185;828440;False;Walder Frey
+219185;828454;False;Walder Frey
+219185;828480;False;Walder Frey
+219185;828484;False;Walder Frey
+219378;828420;False;Samwell Tarly
+219378;828436;False;Samwell Tarly
+219378;828437;False;Samwell Tarly
+219378;828440;False;Samwell Tarly
+219378;828442;False;Samwell Tarly
+219378;828443;False;Samwell Tarly
+219378;828444;False;Samwell Tarly
+219378;828445;False;Samwell Tarly
+219378;828448;False;Samwell Tarly
+219378;828449;False;Samwell Tarly
+219378;828451;False;Samwell Tarly
+219378;828454;False;Samwell Tarly
+219378;828455;False;Samwell Tarly
+219378;828456;False;Samwell Tarly
+219378;828458;False;Samwell Tarly
+219378;828459;False;Samwell Tarly
+219378;828460;False;Samwell Tarly
+219378;828461;False;Samwell Tarly
+219378;828464;False;Samwell Tarly
+219378;828465;False;Samwell Tarly
+219378;828466;False;Samwell Tarly
+219378;828468;False;Samwell Tarly
+219378;828469;False;Samwell Tarly
+219378;828470;False;Samwell Tarly
+219378;828474;False;Samwell Tarly
+219378;828475;False;Samwell Tarly
+219378;828476;False;Samwell Tarly
+219378;828478;False;Samwell Tarly
+219378;828479;False;Samwell Tarly
+219378;828480;False;Samwell Tarly
+219378;828482;False;Samwell Tarly
+219378;828483;False;Samwell Tarly
+219378;828484;False;Samwell Tarly
+219378;828486;False;Samwell Tarly
+219378;828488;False;Samwell Tarly
+219378;828489;False;Samwell Tarly
+219378;828490;False;Samwell Tarly
+219378;828491;False;Samwell Tarly
+221414;828448;False;The Night King
+221414;828459;False;The Night King
+236028;828420;False;
+236894;828461;False;
+237283;828436;False;Jojen Reed
+237283;828444;False;Jojen Reed
+237283;828446;False;Jojen Reed
+237283;828454;False;Jojen Reed
+237283;828459;False;Jojen Reed
+237283;828462;False;Jojen Reed
+237283;828464;False;Jojen Reed
+237283;828465;False;Jojen Reed
+237283;828473;False;Jojen Reed
+237283;828480;False;Jojen Reed
+238842;828465;False;Lothar Frey
+238842;828480;False;Lothar Frey
+247576;828482;False;Sparring Boy
+249671;828463;False;Ironborn at Brothel/Tully Guard
+249671;828467;False;Ironborn
+249671;828480;False;Frey Guardsman
+252844;828481;False;Bolton Officer
+230651;828480;False;Old Man
+233101;828473;False;Tyrell Wedding Guest
+233101;828487;False;Faith Militant
+240400;828478;False;Stark Guard
+240657;828490;False;Riverrun Nobleman
+243465;828479;False;Lannister Torturer
+244642;828469;False;Brant
+244871;828489;False;Septon
+248771;828435;False;Jacks
+248771;828477;False;Jacks
+254684;828440;False;Clarenzo
+254684;828457;False;Clarenzo
+254684;828467;False;Clarenzo
+254883;828475;False;Goldcloak
+254883;828491;False;Goldcloak
+254466;828438;False;Bolton Soldier
+254466;828449;False;Lannister Lord
+254466;828482;False;Lannister Lord
+259494;828450;False;Merchant in Tavern
+259494;828482;False;Vale Lord
+262083;828449;False;Brothel Guard
+264735;828437;False;Stevron Frey
+271436;828437;False;Janos Slynt
+271436;828442;False;Janos Slynt
+271436;828443;False;Janos Slynt
+271436;828449;False;Janos Slynt
+271436;828455;False;Janos Slynt
+271436;828459;False;Janos Slynt
+271436;828464;False;Janos Slynt
+271436;828470;False;Janos Slynt
+271436;828475;False;Janos Slynt
+271436;828476;False;Janos Slynt
+271436;828478;False;Janos Slynt
+271436;828482;False;Janos Slynt
+271436;828483;False;Janos Slynt
+271436;828486;False;Janos Slynt
+276447;828450;False;Loyal Night's Watchman #1
+276447;828481;False;Loyal Night's Watchman #1
+277858;828444;False;King's Landing Tailor
+286290;828489;False;Wight
+294083;828457;False;Gatins
+294083;828463;False;Gatins
+294384;828480;False;Drummer
+298989;828440;False;Tommen Baratheon
+298989;828441;False;Tommen Baratheon
+298989;828442;False;Tommen Baratheon
+298989;828446;False;Tommen Baratheon
+298989;828449;False;Tommen Baratheon
+298989;828450;False;Tommen Baratheon
+298989;828452;False;Martyn Lannister
+298989;828457;False;Tommen Baratheon
+298989;828458;False;Tommen Baratheon
+298989;828459;False;Tommen Baratheon
+298989;828461;False;Tommen Baratheon
+298989;828469;False;Tommen Baratheon
+298989;828472;False;Tommen Baratheon
+298989;828473;False;Tommen Baratheon
+298989;828482;False;Tommen Baratheon
+298989;828484;False;Tommen Baratheon
+298989;828487;False;Tommen Baratheon
+298989;828490;False;Martyn Lannister
+326424;828438;False;Yezzan zo Qaggaz
+326424;828441;False;Yezzan zo Qaggaz
+326424;828448;False;Yezzan zo Qaggaz
+326424;828469;False;Yezzan zo Qaggaz
+326817;828476;False;Tourney Herald
+328955;828483;False;Cooper
+333782;828441;False;Khal Rhalko
+336147;828456;False;Woodcutter
+339515;828435;False;Drennan
+339515;828477;False;Drennan
+343102;828473;False;Dragonstone waiter
+343133;828451;False;Great Master #1
+346820;828435;False;Kovarro
+346820;828447;False;Kovarro
+346820;828468;False;Kovarro
+346820;828475;False;Kovarro
+346820;828476;False;Kovarro
+346820;828477;False;Kovarro
+346820;828479;False;Kovarro
+346820;828489;False;Kovarro
+347925;828450;False;Wyllis
+347925;828467;False;Wyllis
+347710;828477;False;Lannister Captain
+347710;828479;False;Lannister Captain
+347717;828449;False;Bowen Marsh
+347717;828450;False;Bowen Marsh
+347717;828451;False;Bowen Marsh
+347717;828456;False;Bowen Marsh
+347717;828458;False;Bowen Marsh
+347717;828466;False;Bowen Marsh
+347717;828469;False;Bowen Marsh
+347717;828470;False;Bowen Marsh
+347717;828481;False;Bowen Marsh
+347717;828482;False;Bowen Marsh
+347912;828445;False;Lord Galbart Glover
+347912;828478;False;Lord Galbart Glover
+355457;828473;False;King Balon Greyjoy Dwarf
+366051;828436;False;Jeor Mormont
+366051;828437;False;Jeor Mormont
+366051;828444;False;Jeor Mormont
+366051;828445;False;Jeor Mormont
+366051;828453;False;Jeor Mormont
+366051;828468;False;Jeor Mormont
+366051;828476;False;Jeor Mormont
+366051;828478;False;Jeor Mormont
+366051;828488;False;Jeor Mormont
+366051;828490;False;Jeor Mormont
+366051;828491;False;Jeor Mormont
+367659;828420;False;Jaime Lannister
+367659;828435;False;Jaime Lannister
+367659;828436;False;Jaime Lannister
+367659;828437;False;Jaime Lannister
+367659;828440;False;Jaime Lannister
+367659;828441;False;Jaime Lannister
+367659;828442;False;Jaime Lannister
+367659;828443;False;Jaime Lannister
+367659;828444;False;Jaime Lannister
+367659;828445;False;Jaime Lannister
+367659;828446;False;Jaime Lannister
+367659;828450;False;Jaime Lannister
+367659;828452;False;Jaime Lannister
+367659;828453;False;Jaime Lannister
+367659;828454;False;Jaime Lannister
+367659;828455;False;Jaime Lannister
+367659;828456;False;Jaime Lannister
+367659;828457;False;Jaime Lannister
+367659;828458;False;Jaime Lannister
+367659;828459;False;Jaime Lannister
+367659;828461;False;Jaime Lannister
+367659;828462;False;Jaime Lannister
+367659;828463;False;Jaime Lannister
+367659;828464;False;Jaime Lannister
+367659;828465;False;Jaime Lannister
+367659;828466;False;Jaime Lannister
+367659;828469;False;Jaime Lannister
+367659;828470;False;Jaime Lannister
+367659;828471;False;Jaime Lannister
+367659;828472;False;Jaime Lannister
+367659;828473;False;Jaime Lannister
+367659;828474;False;Jaime Lannister
+367659;828476;False;Jaime Lannister
+367659;828479;False;Jaime Lannister
+367659;828481;False;Jaime Lannister
+367659;828482;False;Jaime Lannister
+367659;828484;False;Jaime Lannister
+367659;828485;False;Jaime Lannister
+367659;828486;False;Jaime Lannister
+367659;828487;False;Jaime Lannister
+367659;828489;False;Jaime Lannister
+367659;828490;False;Jaime Lannister
+367659;828492;False;Jaime Lannister
+381092;828456;False;King's Landing Drunkard
+381461;828450;False;Young Ned Stark
+381461;828467;False;Young Ned Stark
+381755;828436;False;Eddison Tollett
+381755;828441;False;Eddison Tollett
+381755;828442;False;Eddison Tollett
+381755;828444;False;Eddison Tollett
+381755;828446;False;Eddison Tollett
+381755;828448;False;Eddison Tollett
+381755;828449;False;Eddison Tollett
+381755;828450;False;Eddison Tollett
+381755;828451;False;Eddison Tollett
+381755;828455;False;Eddison Tollett
+381755;828458;False;Eddison Tollett
+381755;828459;False;Eddison Tollett
+381755;828461;False;Eddison Tollett
+381755;828464;False;Eddison Tollett
+381755;828466;False;Eddison Tollett
+381755;828467;False;Eddison Tollett
+381755;828468;False;Eddison Tollett
+381755;828469;False;Eddison Tollett
+381755;828470;False;Eddison Tollett
+381755;828474;False;Eddison Tollett
+381755;828475;False;Eddison Tollett
+381755;828476;False;Eddison Tollett
+381755;828479;False;Eddison Tollett
+381755;828481;False;Eddison Tollett
+381755;828482;False;Eddison Tollett
+381755;828483;False;Eddison Tollett
+381755;828488;False;Eddison Tollett
+381755;828489;False;Eddison Tollett
+381755;828490;False;Eddison Tollett
+382274;828444;False;Orell
+382274;828452;False;Orell
+382274;828462;False;Orell
+382274;828465;False;Orell
+382274;828480;False;Orell
+382274;828490;False;Orell
+384232;828435;False;Quent
+384232;828477;False;Quent
+389581;828434;False;Eon Hunter
+390269;828478;False;Red Keep Stableboy
+391789;828439;False;Baratheon Officer
+391807;828420;False;Davos Seaworth
+391807;828438;False;Davos Seaworth
+391807;828439;False;Davos Seaworth
+391807;828441;False;Davos Seaworth
+391807;828442;False;Davos Seaworth
+391807;828447;False;Davos Seaworth
+391807;828449;False;Davos Seaworth
+391807;828450;False;Davos Seaworth
+391807;828451;False;Davos Seaworth
+391807;828452;False;Davos Seaworth
+391807;828454;False;Davos Seaworth
+391807;828456;False;Davos Seaworth
+391807;828458;False;Davos Seaworth
+391807;828460;False;Davos Seaworth
+391807;828463;False;Davos Seaworth
+391807;828464;False;Davos Seaworth
+391807;828466;False;Davos Seaworth
+391807;828467;False;Davos Seaworth
+391807;828468;False;Davos Seaworth
+391807;828469;False;Davos Seaworth
+391807;828470;False;Davos Seaworth
+391807;828472;False;Davos Seaworth
+391807;828473;False;Davos Seaworth
+391807;828475;False;Davos Seaworth
+391807;828476;False;Davos Seaworth
+391807;828479;False;Davos Seaworth
+391807;828481;False;Davos Seaworth
+391807;828482;False;Davos Seaworth
+391807;828484;False;Davos Seaworth
+391807;828488;False;Davos Seaworth
+394868;828434;False;Joss
+399981;828467;False;Ironborn #1
+404129;828448;False;Wildling
+408531;828435;False;Tywin Lannister
+408531;828436;False;Tywin Lannister
+408531;828437;False;Tywin Lannister
+408531;828439;False;Tywin Lannister
+408531;828442;False;Tywin Lannister
+408531;828445;False;Tywin Lannister
+408531;828446;False;Tywin Lannister
+408531;828447;False;Tywin Lannister
+408531;828452;False;Tywin Lannister
+408531;828454;False;Tywin Lannister
+408531;828460;False;Tywin Lannister
+408531;828462;False;Tywin Lannister
+408531;828464;False;Tywin Lannister
+408531;828465;False;Tywin Lannister
+408531;828468;False;Tywin Lannister
+408531;828472;False;Tywin Lannister
+408531;828473;False;Tywin Lannister
+408531;828474;False;Tywin Lannister
+408531;828477;False;Tywin Lannister
+408531;828478;False;Tywin Lannister
+408531;828479;False;Tywin Lannister
+408531;828482;False;Tywin Lannister
+408531;828486;False;Tywin Lannister
+408531;828488;False;Tywin Lannister
+408531;828489;False;Tywin Lannister
+408531;828490;False;Tywin Lannister
+419987;828457;False;Morgan
+419987;828463;False;Morgan
+420148;828435;False;Alton Lannister
+420148;828475;False;Alton Lannister
+420148;828476;False;Alton Lannister
+420610;828464;False;Fennesz
+425402;828470;False;Street Tough #2
+418021;828469;False;Fighter
+427435;828472;False;
+430973;828435;False;Winterfell Shepherd
+430973;828468;False;Winterfell Shepherd
+435875;828471;False;Lannister Guardsman
+442031;828436;False;Gendry
+442031;828443;False;Gendry
+442031;828444;False;Gendry
+442031;828445;False;Gendry
+442031;828447;False;Gendry
+442031;828452;False;Gendry
+442031;828454;False;Gendry
+442031;828460;False;Gendry
+442031;828462;False;Gendry
+442031;828465;False;Gendry
+442031;828468;False;Gendry
+442031;828475;False;Gendry
+442031;828476;False;Gendry
+442031;828479;False;Gendry
+442031;828489;False;Gendry
+442031;828490;False;Gendry
+442031;828491;False;Gendry
+458846;828492;False;Winterfell Beekeeper
+462394;828439;False;Stannis Baratheon
+462394;828442;False;Stannis Baratheon
+462394;828447;False;Stannis Baratheon
+462394;828449;False;Stannis Baratheon
+462394;828451;False;Stannis Baratheon
+462394;828452;False;Stannis Baratheon
+462394;828454;False;Stannis Baratheon
+462394;828456;False;Stannis Baratheon
+462394;828460;False;Stannis Baratheon
+462394;828461;False;Stannis Baratheon
+462394;828464;False;Stannis Baratheon
+462394;828466;False;Stannis Baratheon
+462394;828468;False;Stannis Baratheon
+462394;828469;False;Stannis Baratheon
+462394;828470;False;Stannis Baratheon
+462394;828472;False;Stannis Baratheon
+462394;828473;False;Stannis Baratheon
+462394;828475;False;Stannis Baratheon
+462394;828476;False;Stannis Baratheon
+462394;828479;False;Stannis Baratheon
+462394;828482;False;Stannis Baratheon
+462394;828488;False;Stannis Baratheon
+462394;828489;False;Stannis Baratheon
+462394;828490;False;Stannis Baratheon
+463956;828478;False;Mago
+465092;828420;False;Tyrion Lannister
+465092;828434;False;Tyrion Lannister
+465092;828435;False;Tyrion Lannister
+465092;828436;False;Tyrion Lannister
+465092;828437;False;Tyrion Lannister
+465092;828438;False;Tyrion Lannister
+465092;828439;False;Tyrion Lannister
+465092;828441;False;Tyrion Lannister
+465092;828442;False;Tyrion Lannister
+465092;828443;False;Tyrion Lannister
+465092;828444;False;Tyrion Lannister
+465092;828445;False;Tyrion Lannister
+465092;828447;False;Tyrion Lannister
+465092;828448;False;Tyrion Lannister
+465092;828449;False;Tyrion Lannister
+465092;828450;False;Tyrion Lannister
+465092;828451;False;Tyrion Lannister
+465092;828452;False;Tyrion Lannister
+465092;828453;False;Tyrion Lannister
+465092;828454;False;Tyrion Lannister
+465092;828455;False;Tyrion Lannister
+465092;828456;False;Tyrion Lannister
+465092;828457;False;Tyrion Lannister
+465092;828458;False;Tyrion Lannister
+465092;828459;False;Tyrion Lannister
+465092;828460;False;Tyrion Lannister
+465092;828461;False;Tyrion Lannister
+465092;828462;False;Tyrion Lannister
+465092;828464;False;Tyrion Lannister
+465092;828465;False;Tyrion Lannister
+465092;828466;False;Tyrion Lannister
+465092;828467;False;Tyrion Lannister
+465092;828468;False;Tyrion Lannister
+465092;828469;False;Tyrion Lannister
+465092;828470;False;Tyrion Lannister
+465092;828471;False;Tyrion Lannister
+465092;828472;False;Tyrion Lannister
+465092;828473;False;Tyrion Lannister
+465092;828474;False;Tyrion Lannister
+465092;828475;False;Tyrion Lannister
+465092;828476;False;Tyrion Lannister
+465092;828477;False;Tyrion Lannister
+465092;828478;False;Tyrion Lannister
+465092;828479;False;Tyrion Lannister
+465092;828481;False;Tyrion Lannister
+465092;828482;False;Tyrion Lannister
+465092;828484;False;Tyrion Lannister
+465092;828485;False;Tyrion Lannister
+465092;828486;False;Tyrion Lannister
+465092;828487;False;Tyrion Lannister
+465092;828488;False;Tyrion Lannister
+465092;828489;False;Tyrion Lannister
+465092;828490;False;Tyrion Lannister
+465092;828491;False;Tyrion Lannister
+465092;828492;False;Tyrion Lannister
+473075;828479;False;Rattleshirt
+473075;828488;False;Rattleshirt
+473075;828489;False;Rattleshirt
+473322;828442;False;Meereen Slave Master
+473322;828480;False;Frey Wedding Guest
+476705;828434;False;Stiv
+476730;828434;False;Rodrik Cassel
+476730;828437;False;Rodrik Cassel
+476730;828443;False;Rodrik Cassel
+476730;828445;False;Rodrik Cassel
+476730;828453;False;Rodrik Cassel
+476730;828468;False;Rodrik Cassel
+476730;828471;False;Rodrik Cassel
+476730;828476;False;Rodrik Cassel
+476730;828477;False;Rodrik Cassel
+476730;828478;False;Rodrik Cassel
+476730;828485;False;Rodrik Cassel
+476730;828491;False;Rodrik Cassel
+476730;828492;False;Rodrik Cassel
+480191;828442;False;Great Master #1
+480191;828459;False;Great Master #1
+480489;828439;False;Mandon Moore
+481372;828436;False;Beric Dondarrion
+481372;828452;False;Beric Dondarrion
+481372;828457;False;Beric Dondarrion
+481372;828462;False;Beric Dondarrion
+481372;828465;False;Beric Dondarrion
+483001;828439;False;Hallyne
+483001;828468;False;Hallyne
+483281;828474;False;Vance Corbray
+488938;828490;False;Tortured Slave
+491731;828454;False;Desmond Crakehall
+494351;828457;False;Kings Landing Nobelman
+494351;828466;False;Brothel Patron #5
+501339;828479;False;Stark Messenger
+503009;828486;False;Tommy
+503009;828492;False;Tommy
+509181;828473;False;Musician #2
+429563;828438;False;Stark Soldier
+435980;828438;False;Umber Soldier
+435980;828483;False;Thenn Warrior
+435980;828487;False;Slaver
+436028;828450;False;King's Landing Boaster
+444488;828440;False;Camello
+444488;828467;False;Camello
+445003;828450;False;Young Benjen Stark
+445003;828467;False;Young Benjen Stark
+446592;828449;False;Sellsword #2
+447552;828489;False;Rhaego
+447762;828434;False;Marillion
+447762;828443;False;Marillion
+447762;828445;False;Marillion
+447762;828485;False;Marillion
+473403;828458;False;Gerold Hightower
+475182;828434;False;Robin Arryn
+475182;828441;False;Robin Arryn
+475182;828446;False;Robin Arryn
+475182;828455;False;Robin Arryn
+475182;828474;False;Robin Arryn
+475182;828478;False;Robin Arryn
+475182;828482;False;Robin Arryn
+475182;828485;False;Robin Arryn
+481692;828463;False;Lannister Army Member
+485635;828440;False;Randyll Tarly
+486271;828470;False;Street Tough #1
+486747;828441;False;Loyal Night's Watchman #2
+486747;828450;False;Loyal Night's Watchman #2
+486747;828481;False;Loyal Night's Watchman #2
+487583;828450;False;Aeron Greyjoy
+487583;828467;False;Aeron Greyjoy
+492357;828456;False;Baratheon Soldier #1
+506493;828483;False;Mag the Mighty
+512538;828463;False;Glover General
+512538;828484;False;Glover General
+513275;828468;False;Reginald Lannister
+513287;828461;False;
+515985;828435;False;Karstark Soldier #1
+516728;828491;False;Gerald
+520903;828420;False;Bronn
+520903;828434;False;Bronn
+520903;828437;False;Bronn
+520903;828439;False;Bronn
+520903;828443;False;Bronn
+520903;828445;False;Bronn
+520903;828447;False;Bronn
+520903;828455;False;Bronn
+520903;828456;False;Bronn
+520903;828457;False;Bronn
+520903;828459;False;Bronn
+520903;828460;False;Bronn
+520903;828461;False;Bronn
+520903;828462;False;Bronn
+520903;828463;False;Bronn
+520903;828466;False;Bronn
+520903;828468;False;Bronn
+520903;828469;False;Bronn
+520903;828470;False;Bronn
+520903;828473;False;Bronn
+520903;828475;False;Bronn
+520903;828476;False;Bronn
+520903;828478;False;Bronn
+520903;828479;False;Bronn
+520903;828484;False;Bronn
+520903;828485;False;Bronn
+520903;828486;False;Bronn
+520903;828487;False;Bronn
+520903;828488;False;Bronn
+520903;828490;False;Bronn
+520903;828491;False;Bronn
+521220;828450;False;Night's Watchman #2
+521220;828481;False;Night's Watchman #2
+525653;828476;False;Maester Cressen
+529839;828442;False;Othell Yarwyck
+529839;828449;False;Othell Yarwyck
+529839;828450;False;Othell Yarwyck
+529839;828451;False;Othell Yarwyck
+529839;828455;False;Othell Yarwyck
+529839;828456;False;Othell Yarwyck
+529839;828458;False;Othell Yarwyck
+529839;828466;False;Othell Yarwyck
+529839;828469;False;Othell Yarwyck
+529839;828470;False;Othell Yarwyck
+529839;828478;False;Othell Yarwyck
+529839;828481;False;Othell Yarwyck
+529839;828486;False;Othell Yarwyck
+529910;828459;False;
+529910;828461;False;
+530123;828467;False;Rickard Stark
+533797;828474;False;Ralf Kenning
+539113;828459;False;
+546351;828442;False;Hizdahr zo Loraq
+546351;828451;False;Hizdahr zo Loraq
+546351;828461;False;Hizdahr zo Loraq
+546351;828466;False;Hizdahr zo Loraq
+546351;828469;False;Hizdahr zo Loraq
+546351;828470;False;Hizdahr zo Loraq
+546351;828472;False;Hizdahr zo Loraq
+546351;828482;False;Hizdahr zo Loraq
+545974;828476;False;Lord Portan
+547037;828467;False;The Night King
+548719;828447;False;Rennick
+550044;828434;False;Rakharo
+550044;828437;False;Rakharo
+550044;828445;False;Rakharo
+550044;828453;False;Rakharo
+550044;828476;False;Rakharo
+550044;828478;False;Rakharo
+555851;828457;False;Lannister Soldier
+555894;828478;False;Lannister Scout
+557258;828447;False;Tortured Prisoner
+567579;828449;False;Despondent Man
+569052;828438;False;Northman Archer
+572960;828466;False;Tycho Nestoris
+572960;828472;False;Tycho Nestoris
+573144;828442;False;Thenn Warg
+573144;828483;False;Thenn Warg
+573144;828486;False;Thenn Warg
+578368;828437;False;Kevan Lannister
+578368;828440;False;Kevan Lannister
+578368;828441;False;Kevan Lannister
+578368;828445;False;Kevan Lannister
+578368;828456;False;Kevan Lannister
+578368;828457;False;Kevan Lannister
+578368;828458;False;Kevan Lannister
+578368;828470;False;Kevan Lannister
+578368;828478;False;Kevan Lannister
+578368;828479;False;Kevan Lannister
+578368;828482;False;Kevan Lannister
+578368;828484;False;Kevan Lannister
+582103;828438;False;Razdal mo Eraz
+582103;828441;False;Razdal mo Eraz
+582103;828462;False;Razdal mo Eraz
+585219;828452;False;Willem Lannister
+585219;828490;False;Willem Lannister
+587545;828482;False;Strong Sam Stone
+588439;828440;False;Bobono
+588439;828457;False;Bobono
+588439;828467;False;Bobono
+588825;828420;False;Petyr 'Littlefinger' Baelish
+588825;828434;False;Petyr 'Littlefinger' Baelish
+588825;828437;False;Petyr 'Littlefinger' Baelish
+588825;828438;False;Petyr 'Littlefinger' Baelish
+588825;828441;False;Petyr 'Littlefinger' Baelish
+588825;828442;False;Petyr 'Littlefinger' Baelish
+588825;828443;False;Petyr 'Littlefinger' Baelish
+588825;828445;False;Petyr 'Littlefinger' Baelish
+588825;828446;False;Petyr 'Littlefinger' Baelish
+588825;828447;False;Petyr 'Littlefinger' Baelish
+588825;828449;False;Petyr 'Littlefinger' Baelish
+588825;828452;False;Petyr 'Littlefinger' Baelish
+588825;828453;False;Petyr 'Littlefinger' Baelish
+588825;828455;False;Petyr 'Littlefinger' Baelish
+588825;828459;False;Petyr 'Littlefinger' Baelish
+588825;828461;False;Petyr 'Littlefinger' Baelish
+588825;828465;False;Petyr 'Littlefinger' Baelish
+588825;828467;False;Petyr 'Littlefinger' Baelish
+588825;828468;False;Petyr 'Littlefinger' Baelish
+588825;828469;False;Petyr 'Littlefinger' Baelish
+588825;828470;False;Petyr 'Littlefinger' Baelish
+588825;828474;False;Petyr 'Littlefinger' Baelish
+588825;828475;False;Petyr 'Littlefinger' Baelish
+588825;828476;False;Petyr 'Littlefinger' Baelish
+588825;828477;False;Petyr 'Littlefinger' Baelish
+588825;828478;False;Petyr 'Littlefinger' Baelish
+588825;828482;False;Petyr 'Littlefinger' Baelish
+588825;828484;False;Petyr 'Littlefinger' Baelish
+588825;828485;False;Petyr 'Littlefinger' Baelish
+588825;828487;False;Petyr 'Littlefinger' Baelish
+588825;828488;False;Petyr 'Littlefinger' Baelish
+588825;828489;False;Petyr 'Littlefinger' Baelish
+588825;828490;False;Petyr 'Littlefinger' Baelish
+588825;828491;False;Petyr 'Littlefinger' Baelish
+597182;828434;False;Joffrey Baratheon
+597182;828436;False;Joffrey Baratheon
+597182;828437;False;Joffrey Baratheon
+597182;828439;False;Joffrey Baratheon
+597182;828442;False;Joffrey Baratheon
+597182;828443;False;Joffrey Baratheon
+597182;828444;False;Joffrey Baratheon
+597182;828445;False;Joffrey Baratheon
+597182;828447;False;Joffrey Baratheon
+597182;828453;False;Joffrey Baratheon
+597182;828454;False;Joffrey Baratheon
+597182;828460;False;Joffrey Baratheon
+597182;828462;False;Joffrey Baratheon
+597182;828465;False;Joffrey Baratheon
+597182;828471;False;Joffrey Baratheon
+597182;828473;False;Joffrey Baratheon
+597182;828476;False;Joffrey Baratheon
+597182;828477;False;Joffrey Baratheon
+597182;828478;False;Joffrey Baratheon
+597182;828479;False;Joffrey Baratheon
+597182;828485;False;Joffrey Baratheon
+597182;828486;False;Joffrey Baratheon
+597182;828488;False;Joffrey Baratheon
+597182;828489;False;Joffrey Baratheon
+597182;828492;False;Joffrey Baratheon
+597357;828420;False;Jorah Mormont
+597357;828434;False;Jorah Mormont
+597357;828435;False;Jorah Mormont
+597357;828436;False;Jorah Mormont
+597357;828437;False;Jorah Mormont
+597357;828441;False;Jorah Mormont
+597357;828442;False;Jorah Mormont
+597357;828443;False;Jorah Mormont
+597357;828445;False;Jorah Mormont
+597357;828446;False;Jorah Mormont
+597357;828447;False;Jorah Mormont
+597357;828448;False;Jorah Mormont
+597357;828449;False;Jorah Mormont
+597357;828451;False;Jorah Mormont
+597357;828452;False;Jorah Mormont
+597357;828453;False;Jorah Mormont
+597357;828454;False;Jorah Mormont
+597357;828455;False;Jorah Mormont
+597357;828456;False;Jorah Mormont
+597357;828459;False;Jorah Mormont
+597357;828460;False;Jorah Mormont
+597357;828461;False;Jorah Mormont
+597357;828462;False;Jorah Mormont
+597357;828466;False;Jorah Mormont
+597357;828467;False;Jorah Mormont
+597357;828468;False;Jorah Mormont
+597357;828469;False;Jorah Mormont
+597357;828471;False;Jorah Mormont
+597357;828472;False;Jorah Mormont
+597357;828474;False;Jorah Mormont
+597357;828475;False;Jorah Mormont
+597357;828476;False;Jorah Mormont
+597357;828478;False;Jorah Mormont
+597357;828479;False;Jorah Mormont
+597357;828480;False;Jorah Mormont
+597357;828481;False;Jorah Mormont
+597357;828486;False;Jorah Mormont
+597357;828487;False;Jorah Mormont
+597357;828488;False;Jorah Mormont
+597357;828489;False;Jorah Mormont
+597357;828490;False;Jorah Mormont
+597357;828492;False;Jorah Mormont
+598775;828434;False;Grand Maester Pycelle
+598775;828437;False;Grand Maester Pycelle
+598775;828439;False;Grand Maester Pycelle
+598775;828441;False;Grand Maester Pycelle
+598775;828442;False;Grand Maester Pycelle
+598775;828443;False;Grand Maester Pycelle
+598775;828445;False;Grand Maester Pycelle
+598775;828446;False;Grand Maester Pycelle
+598775;828449;False;Grand Maester Pycelle
+598775;828453;False;Grand Maester Pycelle
+598775;828454;False;Grand Maester Pycelle
+598775;828456;False;Grand Maester Pycelle
+598775;828457;False;Grand Maester Pycelle
+598775;828458;False;Grand Maester Pycelle
+598775;828460;False;Grand Maester Pycelle
+598775;828461;False;Grand Maester Pycelle
+598775;828464;False;Grand Maester Pycelle
+598775;828470;False;Grand Maester Pycelle
+598775;828472;False;Grand Maester Pycelle
+598775;828473;False;Grand Maester Pycelle
+598775;828474;False;Grand Maester Pycelle
+598775;828475;False;Grand Maester Pycelle
+598775;828476;False;Grand Maester Pycelle
+598775;828478;False;Grand Maester Pycelle
+598775;828482;False;Grand Maester Pycelle
+598775;828484;False;Grand Maester Pycelle
+598775;828485;False;Grand Maester Pycelle
+598775;828489;False;Grand Maester Pycelle
+598775;828490;False;Grand Maester Pycelle
+598775;828491;False;Grand Maester Pycelle
+614743;828459;False;Valyrian Slave
+618723;828436;False;Karl Tanner
+618723;828446;False;Karl Tanner
+618723;828459;False;Karl Tanner
+618723;828490;False;Karl Tanner
+625927;828456;False;King's Landing Flasher #1
+628989;828440;False;Izembaro
+628989;828457;False;Izembaro
+628989;828467;False;Izembaro
+633155;828437;False;King's Landing Urchin
+640159;828439;False;Captain of the Archers
+643220;828473;False;King Joffrey Baratheon Dwarf
+659062;828470;False;Dwarf Hunter #1
+668554;828441;False;Khal Brozho
+669226;828480;False;Septon
+676212;828443;False;Hugh of the Vale
+676212;828485;False;Hugh of the Vale
+675714;828474;False;Adrack Humble
+683884;828435;False;Pyat Pree
+683884;828447;False;Pyat Pree
+683884;828468;False;Pyat Pree
+683884;828489;False;Pyat Pree
+691185;828420;False;Jon Snow
+691185;828435;False;Jon Snow
+691185;828437;False;Jon Snow
+691185;828438;False;Jon Snow
+691185;828441;False;Jon Snow
+691185;828442;False;Jon Snow
+691185;828443;False;Jon Snow
+691185;828444;False;Jon Snow
+691185;828445;False;Jon Snow
+691185;828446;False;Jon Snow
+691185;828448;False;Jon Snow
+691185;828449;False;Jon Snow
+691185;828450;False;Jon Snow
+691185;828451;False;Jon Snow
+691185;828452;False;Jon Snow
+691185;828453;False;Jon Snow
+691185;828454;False;Jon Snow
+691185;828455;False;Jon Snow
+691185;828456;False;Jon Snow
+691185;828458;False;Jon Snow
+691185;828459;False;Jon Snow
+691185;828461;False;Jon Snow
+691185;828462;False;Jon Snow
+691185;828463;False;Jon Snow
+691185;828464;False;Jon Snow
+691185;828465;False;Jon Snow
+691185;828466;False;Jon Snow
+691185;828467;False;Jon Snow
+691185;828468;False;Jon Snow
+691185;828469;False;Jon Snow
+691185;828470;False;Jon Snow
+691185;828471;False;Jon Snow
+691185;828474;False;Jon Snow
+691185;828475;False;Jon Snow
+691185;828476;False;Jon Snow
+691185;828477;False;Jon Snow
+691185;828478;False;Jon Snow
+691185;828479;False;Jon Snow
+691185;828480;False;Jon Snow
+691185;828481;False;Jon Snow
+691185;828482;False;Jon Snow
+691185;828483;False;Jon Snow
+691185;828484;False;Jon Snow
+691185;828486;False;Jon Snow
+691185;828488;False;Jon Snow
+691185;828489;False;Jon Snow
+691185;828490;False;Jon Snow
+691185;828491;False;Jon Snow
+691185;828492;False;Jon Snow
+703667;828454;False;Yunkai'i Slave #4
+705182;828441;False;Khal Forzho
+709700;828444;False;Hot Pie
+709700;828445;False;Hot Pie
+709700;828447;False;Hot Pie
+709700;828455;False;Hot Pie
+709700;828468;False;Hot Pie
+709700;828475;False;Hot Pie
+709700;828476;False;Hot Pie
+709700;828479;False;Hot Pie
+709700;828489;False;Hot Pie
+709700;828490;False;Hot Pie
+709700;828491;False;Hot Pie
+712576;828450;False;Night's Watchman #1
+712576;828481;False;Night's Watchman #1
+666545;828467;False;Night's Watchman #2
+667156;828481;False;Bolton Soldier
+667854;828441;False;Kesh
+670203;828484;False;Tommen's Manservant
+676027;828470;False;Faceless Man
+681737;828473;False;Wedding Guest
+689671;828482;False;Maester Helliweg
+691124;828466;False;Young Braavosi
+694433;828436;False;Kraznys mo Nakloz
+694433;828488;False;Kraznys mo Nakloz
+694433;828490;False;Kraznys mo Nakloz
+695206;828420;False;Lord Varys
+695206;828436;False;Lord Varys
+695206;828437;False;Lord Varys
+695206;828439;False;Lord Varys
+695206;828441;False;Lord Varys
+695206;828442;False;Lord Varys
+695206;828443;False;Lord Varys
+695206;828445;False;Lord Varys
+695206;828446;False;Lord Varys
+695206;828449;False;Lord Varys
+695206;828450;False;Lord Varys
+695206;828453;False;Lord Varys
+695206;828454;False;Lord Varys
+695206;828456;False;Lord Varys
+695206;828457;False;Lord Varys
+695206;828458;False;Lord Varys
+695206;828460;False;Lord Varys
+695206;828464;False;Lord Varys
+695206;828465;False;Lord Varys
+695206;828467;False;Lord Varys
+695206;828470;False;Lord Varys
+695206;828472;False;Lord Varys
+695206;828473;False;Lord Varys
+695206;828474;False;Lord Varys
+695206;828475;False;Lord Varys
+695206;828476;False;Lord Varys
+695206;828478;False;Lord Varys
+695206;828479;False;Lord Varys
+695206;828481;False;Lord Varys
+695206;828482;False;Lord Varys
+695206;828484;False;Lord Varys
+695206;828485;False;Lord Varys
+695206;828489;False;Lord Varys
+695206;828490;False;Lord Varys
+695206;828491;False;Lord Varys
+697713;828440;False;Musician #1
+697713;828457;False;Musician #1
+697713;828467;False;Musician #1
+697715;828440;False;Musician #3
+697715;828457;False;Musician #3
+697715;828467;False;Musician #3
+698682;828448;False;Wildling
+698686;828444;False;Mance Rayder
+698686;828464;False;Mance Rayder
+698686;828482;False;Mance Rayder
+698686;828488;False;Mance Rayder
+698686;828490;False;Mance Rayder
+702346;828420;False;Tormund Giantsbane
+702346;828438;False;Tormund Giantsbane
+702346;828441;False;Tormund Giantsbane
+702346;828442;False;Tormund Giantsbane
+702346;828444;False;Tormund Giantsbane
+702346;828448;False;Tormund Giantsbane
+702346;828450;False;Tormund Giantsbane
+702346;828451;False;Tormund Giantsbane
+702346;828452;False;Tormund Giantsbane
+702346;828458;False;Tormund Giantsbane
+702346;828462;False;Tormund Giantsbane
+702346;828463;False;Tormund Giantsbane
+702346;828464;False;Tormund Giantsbane
+702346;828465;False;Tormund Giantsbane
+702346;828466;False;Tormund Giantsbane
+702346;828467;False;Tormund Giantsbane
+702346;828469;False;Tormund Giantsbane
+702346;828474;False;Tormund Giantsbane
+702346;828480;False;Tormund Giantsbane
+702346;828482;False;Tormund Giantsbane
+702346;828483;False;Tormund Giantsbane
+702346;828484;False;Tormund Giantsbane
+702346;828486;False;Tormund Giantsbane
+702346;828488;False;Tormund Giantsbane
+702346;828490;False;Tormund Giantsbane
+709083;828445;False;Addam Marbrand
+711234;828473;False;Musician #3
+713556;828441;False;Night's Watchman
+713556;828467;False;Night's Watchman #1
+716960;828442;False;Great Master #2
+716962;828463;False;Westerosi Trader
+716428;828471;False;Mycah
+717682;828472;False;Ironborn in Skiff
+721802;828488;False;Unsullied
+730697;828438;False;Daario Naharis
+730697;828440;False;Daario Naharis
+730697;828441;False;Daario Naharis
+730697;828442;False;Daario Naharis
+730697;828446;False;Daario Naharis
+730697;828451;False;Daario Naharis
+730697;828455;False;Daario Naharis
+730697;828456;False;Daario Naharis
+730697;828459;False;Daario Naharis
+730697;828461;False;Daario Naharis
+730697;828466;False;Daario Naharis
+730697;828467;False;Daario Naharis
+730697;828469;False;Daario Naharis
+730697;828470;False;Daario Naharis
+730697;828481;False;Daario Naharis
+730697;828482;False;Daario Naharis
+730697;828484;False;Daario Naharis
+730697;828486;False;Daario Naharis
+739912;828484;False;Citadel Maester
+751238;828435;False;Dagmer Cleftjaw
+751238;828468;False;Dagmer Cleftjaw
+751238;828477;False;Dagmer Cleftjaw
+751238;828479;False;Dagmer Cleftjaw
+751238;828489;False;Dagmer Cleftjaw
+755776;828439;False;Lannister Archer
+755778;828439;False;Lannister Archer
+755778;828472;False;Kingslanding Nobleman
+755778;828480;False;Frey Wedding Guest
+765387;828438;False;Belicho Paenymion
+765387;828441;False;Belicho Paenymion
+766122;828459;False;Unsullied
+770962;828438;False;Smalljon Umber
+770962;828458;False;Smalljon Umber
+775050;828482;False;White Rat
+778779;828466;False;Pit Fighter
+784034;828455;False;Prisoner
+797602;828461;False;
+802855;828437;False;Ilyn Payne
+802855;828439;False;Ilyn Payne
+802855;828445;False;Ilyn Payne
+802855;828471;False;Ilyn Payne
+803679;828466;False;Lannister Guard #3
+807693;828434;False;Loras Tyrell
+807693;828439;False;Loras Tyrell
+807693;828441;False;Loras Tyrell
+807693;828444;False;Loras Tyrell
+807693;828446;False;Loras Tyrell
+807693;828447;False;Loras Tyrell
+807693;828449;False;Loras Tyrell
+807693;828452;False;Loras Tyrell
+807693;828460;False;Loras Tyrell
+807693;828461;False;Loras Tyrell
+807693;828465;False;Loras Tyrell
+807693;828468;False;Loras Tyrell
+807693;828472;False;Loras Tyrell
+807693;828473;False;Loras Tyrell
+807693;828482;False;Loras Tyrell
+807693;828484;False;Loras Tyrell
+807693;828485;False;Loras Tyrell
+807693;828487;False;Loras Tyrell
+807693;828488;False;Loras Tyrell
+807693;828489;False;Loras Tyrell
+807693;828491;False;Loras Tyrell
+809583;828437;False;Shagga
+809583;828478;False;Shagga
+809988;828448;False;Braavosi Captain
+813169;828455;False;Biter
+813169;828475;False;Biter
+813169;828479;False;Biter
+813169;828491;False;Biter
+813899;828466;False;Wilding Gladiator
+816177;828451;False;Great Master #4
+819873;828477;False;King's Landing Rioter #2
+819874;828435;False;Silk King
+819874;828447;False;Silk King
+819874;828468;False;Silk King
+821604;828457;False;Lem Lemoncloak
+821604;828463;False;Lem Lemoncloak
+848457;828436;False;Thoros of Myr
+848457;828444;False;Thoros of Myr
+848457;828452;False;Thoros of Myr
+848457;828457;False;Thoros of Myr
+848457;828462;False;Thoros of Myr
+848457;828465;False;Thoros of Myr
+848457;828490;False;Thoros of Myr
+849461;828435;False;Black Lorren
+849461;828468;False;Black Lorren
+849461;828477;False;Black Lorren
+849461;828489;False;Black Lorren
+849608;828447;False;Weasel
+849829;828451;False;Winter Town Man
+849866;828492;False;Gared
+850182;828436;False;Brotherhood Member
+850182;828444;False;Brotherhood Member
+850182;828452;False;Brotherhood Member
+850182;828457;False;Brotherhood Member
+850182;828465;False;Brotherhood Member
+850182;828490;False;Brotherhood Member
+851692;828443;False;Kurleket
+851692;828485;False;Kurleket
+852010;828463;False;Ironborn at Brothel
+853796;828447;False;Polliver
+853796;828486;False;Polliver
+853796;828491;False;Polliver
+855054;828448;False;Wildling
+855443;828456;False;King's Landing Flasher #2
+856915;828438;False;Karstark Lead Archer
+857211;828453;False;Goldcloak #2
+859758;828480;False;Frey Guard
+860696;828470;False;Eyrie Guard
+861892;828464;False;Goatherd
+863509;828451;False;Great Master #6
+863788;828458;False;Little Bird #7
+863788;828484;False;Little Bird #7
+868512;828441;False;Khal Qorro
+868816;828441;False;Dothraki Bloodrider #2
+868816;828458;False;Dothraki Bloodrider #2
+868816;828481;False;Dothraki Bloodrider #2
+874932;828491;False;Colen of Greenpools
+874945;828460;False;Mero
+879953;828463;False;Ironborn Abusing a Volantene Whore
+882995;828482;False;Night's Watch Recruit
+899562;828442;False;Styr
+899562;828474;False;Styr
+899562;828483;False;Styr
+899562;828486;False;Styr
+918285;828440;False;Musician #5
+918285;828457;False;Musician #5
+918285;828467;False;Musician #5
+927950;828466;False;Lannister Guard #2
+938364;828435;False;Karstark Soldier #2
+942162;828450;False;Lannister Captain
+942319;828473;False;King Stannis Baratheon Dwarf
+945123;828437;False;Night's Watchman
+948869;828474;False;Kegs
+972419;828450;False;Young Rodrik Cassel
+972419;828467;False;Young Rodrik Cassel
+974142;828467;False;Ironborn #3
+980968;828441;False;Iggo
+984725;828440;False;Musician #4
+984725;828457;False;Musician #4
+984725;828467;False;Musician #4
+991799;828467;False;Zanrush
+991799;828481;False;Zanrush
+994037;828448;False;Qyburn
+994037;828449;False;Qyburn
+994037;828452;False;Qyburn
+994037;828454;False;Qyburn
+994037;828456;False;Qyburn
+994037;828457;False;Qyburn
+994037;828458;False;Qyburn
+994037;828461;False;Qyburn
+994037;828462;False;Qyburn
+994037;828464;False;Qyburn
+994037;828470;False;Qyburn
+994037;828484;False;Qyburn
+994037;828486;False;Qyburn
+994037;828488;False;Qyburn
+991926;828454;False;Frey Soldier #2
+992922;828490;False;Bolton Soldier
+1007152;828434;False;Viserys Targaryen
+1007152;828443;False;Viserys Targaryen
+1007152;828453;False;Viserys Targaryen
+1007152;828471;False;Viserys Targaryen
+1007152;828492;False;Viserys Targaryen
+1008081;828448;False;White Walker
+1010769;828439;False;Matthos Seaworth
+1010769;828475;False;Matthos Seaworth
+1010769;828476;False;Matthos Seaworth
+1010769;828479;False;Matthos Seaworth
+1018747;828470;False;Mallister Supporter
+1023265;828457;False;Steve
+1026334;828476;False;Young Nobleman
+1038116;828442;False;Farmer Hamlet
+1049156;828447;False;Lannister Guard
+1050974;828448;False;Thin Man
+1050974;828466;False;Thin Man
+1052258;828434;False;Robb Stark
+1052258;828435;False;Robb Stark
+1052258;828437;False;Robb Stark
+1052258;828443;False;Robb Stark
+1052258;828444;False;Robb Stark
+1052258;828445;False;Robb Stark
+1052258;828447;False;Robb Stark
+1052258;828452;False;Robb Stark
+1052258;828453;False;Robb Stark
+1052258;828462;False;Robb Stark
+1052258;828465;False;Robb Stark
+1052258;828471;False;Robb Stark
+1052258;828476;False;Robb Stark
+1052258;828477;False;Robb Stark
+1052258;828478;False;Robb Stark
+1052258;828479;False;Robb Stark
+1052258;828480;False;Robb Stark
+1052258;828488;False;Robb Stark
+1052258;828489;False;Robb Stark
+1052258;828490;False;Robb Stark
+1052258;828492;False;Robb Stark
+1055610;828437;False;Yoren
+1055610;828443;False;Yoren
+1055610;828445;False;Yoren
+1055610;828453;False;Yoren
+1055610;828475;False;Yoren
+1055610;828485;False;Yoren
+1055610;828491;False;Yoren
+1055640;828458;False;Little Bird #4
+1055640;828484;False;Little Bird #4
+1059312;828439;False;Imry Florent
+1064136;828450;False;Balon Greyjoy
+1064136;828454;False;Balon Greyjoy
+1064136;828475;False;Balon Greyjoy
+1064136;828491;False;Balon Greyjoy
+1078033;828437;False;Greatjon Umber
+1078033;828445;False;Greatjon Umber
+1078033;828478;False;Greatjon Umber
+1075751;828441;False;Night's Watch
+1075751;828448;False;Nights Watch
+1075751;828449;False;Night's Watch
+1075751;828450;False;Night's Watch
+1075751;828451;False;Night's Watch
+1075751;828458;False;Night's Watch
+1075751;828461;False;Nights Watch
+1075751;828467;False;Night's Watch
+1075751;828481;False;Night's Watch
+1079572;828483;False;Night's Watch Archer
+1081457;828448;False;Wight
+1084688;828486;False;Morgan's Friend
+1082024;828440;False;Benjen Stark
+1082024;828453;False;Benjen Stark
+1082024;828471;False;Benjen Stark
+1082024;828484;False;Benjen Stark
+1082024;828492;False;Benjen Stark
+1077604;828449;False;Sellsword #1
+1077708;828448;False;Dim Dalba
+1077708;828463;False;Dim Dalba
+1078701;828437;False;Leo Lefford
+1078701;828445;False;Leo Lefford
+1079739;828420;False;Sandor 'The Hound' Clegane
+1079739;828435;False;Sandor 'The Hound' Clegane
+1079739;828436;False;Sandor 'The Hound' Clegane
+1079739;828437;False;Sandor 'The Hound' Clegane
+1079739;828439;False;Sandor 'The Hound' Clegane
+1079739;828442;False;Sandor 'The Hound' Clegane
+1079739;828443;False;Sandor 'The Hound' Clegane
+1079739;828444;False;Sandor 'The Hound' Clegane
+1079739;828445;False;Sandor 'The Hound' Clegane
+1079739;828446;False;Sandor 'The Hound' Clegane
+1079739;828447;False;Sandor 'The Hound' Clegane
+1079739;828452;False;Sandor 'The Hound' Clegane
+1079739;828454;False;Sandor 'The Hound' Clegane
+1079739;828455;False;Sandor 'The Hound' Clegane
+1079739;828457;False;Sandor 'The Hound' Clegane
+1079739;828460;False;Sandor 'The Hound' Clegane
+1079739;828462;False;Sandor 'The Hound' Clegane
+1079739;828463;False;Sandor 'The Hound' Clegane
+1079739;828464;False;Sandor 'The Hound' Clegane
+1079739;828471;False;Sandor 'The Hound' Clegane
+1079739;828474;False;Sandor 'The Hound' Clegane
+1079739;828476;False;Sandor 'The Hound' Clegane
+1079739;828477;False;Sandor 'The Hound' Clegane
+1079739;828478;False;Sandor 'The Hound' Clegane
+1079739;828480;False;Sandor 'The Hound' Clegane
+1079739;828485;False;Sandor 'The Hound' Clegane
+1079739;828486;False;Sandor 'The Hound' Clegane
+1079739;828490;False;Sandor 'The Hound' Clegane
+1079739;828492;False;Sandor 'The Hound' Clegane
+1081131;828437;False;Ryger Rivers
+1081704;828466;False;Stannis Soldier
+1083351;828456;False;Gordy
+1083613;828434;False;Vardis Egen
+1083613;828485;False;Vardis Egen
+1085990;828440;False;Wight
+1085990;828463;False;Glover Troop 2016
+1085990;828467;False;Wight
+1085990;828484;False;Glover Troop 2016
+1086881;828474;False;Black Jack Bulwer
+1088260;828466;False;Sailor
+1088924;828435;False;Roose Bolton
+1088924;828444;False;Roose Bolton
+1088924;828447;False;Roose Bolton
+1088924;828448;False;Roose Bolton
+1088924;828449;False;Roose Bolton
+1088924;828450;False;Roose Bolton
+1088924;828451;False;Roose Bolton
+1088924;828452;False;Roose Bolton
+1088924;828454;False;Roose Bolton
+1088924;828462;False;Roose Bolton
+1088924;828465;False;Roose Bolton
+1088924;828473;False;Roose Bolton
+1088924;828474;False;Roose Bolton
+1088924;828477;False;Roose Bolton
+1088924;828479;False;Roose Bolton
+1088924;828480;False;Roose Bolton
+1088924;828481;False;Roose Bolton
+1088924;828487;False;Roose Bolton
+1088924;828488;False;Roose Bolton
+1088927;828435;False;Torrhen Karstark
+1088943;828434;False;Barristan Selmy
+1088943;828436;False;Barristan Selmy
+1088943;828442;False;Barristan Selmy
+1088943;828443;False;Barristan Selmy
+1088943;828446;False;Barristan Selmy
+1088943;828451;False;Barristan Selmy
+1088943;828452;False;Barristan Selmy
+1088943;828453;False;Barristan Selmy
+1088943;828454;False;Barristan Selmy
+1088943;828459;False;Barristan Selmy
+1088943;828460;False;Barristan Selmy
+1088943;828461;False;Barristan Selmy
+1088943;828462;False;Barristan Selmy
+1088943;828464;False;Barristan Selmy
+1088943;828470;False;Barristan Selmy
+1088943;828472;False;Barristan Selmy
+1088943;828474;False;Barristan Selmy
+1088943;828478;False;Barristan Selmy
+1088943;828480;False;Barristan Selmy
+1088943;828482;False;Barristan Selmy
+1088943;828485;False;Barristan Selmy
+1088943;828486;False;Barristan Selmy
+1088943;828488;False;Barristan Selmy
+1088943;828490;False;Barristan Selmy
+1091516;828436;False;Anguy
+1091516;828444;False;Anguy
+1091516;828452;False;Anguy
+1091516;828462;False;Anguy
+1091516;828465;False;Anguy
+1091516;828490;False;Anguy
+1092128;828455;False;Dying Man
+1092845;828480;False;Hog Farmer
+1094112;828473;False;Axell Florent
+1094693;828463;False;Robett Glover
+1094693;828484;False;Robett Glover
+1096041;828470;False;Dwarf Hunter #2
+1096287;828436;False;Night's Watch Officer
+1096287;828476;False;Night's Watch Officer
+1096287;828478;False;Night's Watch Officer
+1096287;828490;False;Night's Watch Officer
+1096287;828491;False;Night's Watch Officer
+1096702;828443;False;Willis Wode
+1097330;828447;False;Amory Lorch
+1097330;828468;False;Amory Lorch
+1097330;828477;False;Amory Lorch
+1097330;828491;False;Amory Lorch
+1097998;828457;False;Riddell
+1099117;828456;False;Baratheon Soldier #2
+1099117;828466;False;Young Baratheon Soldier
+1100625;828479;False;Lannister Soldier
+1100666;828486;False;Ser Endrew Tarth
+1101804;828446;False;Night's Watch
+1101806;828436;False;Sorcerer
+1104885;828463;False;Brother Ray
+1112295;828454;False;Yunkai'i Slave #5
+1114052;828440;False;'That's Right' Man
+1119628;828440;False;Edmure Tully
+1119628;828452;False;Edmure Tully
+1119628;828457;False;Edmure Tully
+1119628;828462;False;Edmure Tully
+1119628;828463;False;Edmure Tully
+1119628;828465;False;Edmure Tully
+1119628;828480;False;Edmure Tully
+1119628;828490;False;Edmure Tully
+1120740;828437;False;King's Landing Baker
+1131981;828436;False;Steelshanks Walton
+1131981;828452;False;Steelshanks Walton
+1131981;828460;False;Steelshanks Walton
+1131981;828462;False;Steelshanks Walton
+1131981;828465;False;Steelshanks Walton
+1137055;828454;False;Fruit Vendor
+1137539;828472;False;First Mate
+1138675;828448;False;Wildling
+1138675;828458;False;Tully Soldier
+1156935;828441;False;Aggo
+1156935;828458;False;Aggo
+1156935;828481;False;Aggo
+1162156;828442;False;Night's Watchman
+1162877;828434;False;Khal Drogo
+1162877;828437;False;Khal Drogo
+1162877;828443;False;Khal Drogo
+1162877;828445;False;Khal Drogo
+1162877;828453;False;Khal Drogo
+1162877;828471;False;Khal Drogo
+1162877;828478;False;Khal Drogo
+1162877;828489;False;Khal Drogo
+1162877;828492;False;Khal Drogo
+1163295;828435;False;Stark Guard
+1171200;828476;False;Northern Lord
+1171550;828474;False;Mully
+1181055;828445;False;Stark Guard
+1185063;828447;False;The Tickler
+1185063;828468;False;The Tickler
+1191302;828466;False;Brusco
+1193864;828472;False;Salladhor Saan
+1193864;828475;False;Salladhor Saan
+1193864;828488;False;Salladhor Saan
+1197609;828459;False;White Walker
+1197609;828460;False;White Walker
+1197609;828489;False;White Walker
+1197905;828438;False;Captain of the Bolton Archers
+1203996;828470;False;Denys Mallister
+1205985;828463;False;Northman Rioter
+1211603;828441;False;Qhono
+1211603;828458;False;Qhono
+1211603;828481;False;Qhono
+1211643;828434;False;Hodor
+1211643;828435;False;Hodor
+1211643;828443;False;Hodor
+1211643;828444;False;Hodor
+1211643;828445;False;Hodor
+1211643;828446;False;Hodor
+1211643;828450;False;Hodor
+1211643;828454;False;Hodor
+1211643;828459;False;Hodor
+1211643;828462;False;Hodor
+1211643;828464;False;Hodor
+1211643;828465;False;Hodor
+1211643;828467;False;Hodor
+1211643;828468;False;Hodor
+1211643;828473;False;Hodor
+1211643;828476;False;Hodor
+1211643;828477;False;Hodor
+1211643;828478;False;Hodor
+1211643;828479;False;Hodor
+1211643;828480;False;Hodor
+1211643;828489;False;Hodor
+1211643;828491;False;Hodor
+1211643;828492;False;Hodor
+1215860;828442;False;Oznak zo Pahl
+1219667;828441;False;Khal Moro
+1219667;828458;False;Khal Moro
+1219667;828481;False;Khal Moro
+1224569;828458;False;Little Bird #3
+1224569;828484;False;Little Bird #3
+1225767;828490;False;Hoster Tully
+1242394;828459;False;Mossador
+1242394;828470;False;Mossador
+1242394;828482;False;Mossador
+1244347;828461;False;Faith Militant #1
+1219481;828445;False;Jonos Bracken
+1220903;828448;False;Todder
+1220903;828454;False;Todder
+1220917;828466;False;Lannister Guard #1
+1221005;828434;False;Night's Watch Deserter
+1221035;828442;False;Olly
+1221035;828448;False;Olly
+1221035;828449;False;Olly
+1221035;828450;False;Olly
+1221035;828451;False;Olly
+1221035;828455;False;Olly
+1221035;828456;False;Olly
+1221035;828458;False;Olly
+1221035;828459;False;Olly
+1221035;828461;False;Olly
+1221035;828464;False;Olly
+1221035;828466;False;Olly
+1221035;828469;False;Olly
+1221035;828470;False;Olly
+1221035;828481;False;Olly
+1221035;828482;False;Olly
+1221035;828483;False;Olly
+1221135;828467;False;Wight
+1221135;828480;False;Frey Wedding Guest
+1222341;828452;False;Bathhouse Boy
+1222939;828456;False;Simpson
+1223039;828454;False;Frey Soldier #1
+1223675;828448;False;Lord of Bones
+1223758;828489;False;Jaqen's Disguise
+1224145;828475;False;Lordsport Dockhand
+1225632;828456;False;Baratheon General
+1226205;828447;False;Wounded Lannister
+1226292;828440;False;Mummer #3
+1226292;828467;False;Mummer #3
+1226835;828478;False;Night's Watch Messenger
+1238910;828464;False;Ternesio Terys
+1238910;828470;False;Ternesio Terys
+1240614;828461;False;Faith Militant #2
+1245159;828456;False;Areo Hotah
+1245159;828466;False;Areo Hotah
+1245159;828469;False;Areo Hotah
+1245159;828470;False;Areo Hotah
+1245159;828481;False;Areo Hotah
+1245159;828487;False;Areo Hotah
+1254432;828492;False;Waymar Royce
+1256796;828454;False;Yunkai'i Slave #3
+1279700;828485;False;Goldcloak
+1283366;828435;False;Rickon Stark
+1283366;828438;False;Rickon Stark
+1283366;828444;False;Rickon Stark
+1283366;828445;False;Rickon Stark
+1283366;828458;False;Rickon Stark
+1283366;828462;False;Rickon Stark
+1283366;828465;False;Rickon Stark
+1283366;828468;False;Rickon Stark
+1283366;828477;False;Rickon Stark
+1283366;828478;False;Rickon Stark
+1283366;828479;False;Rickon Stark
+1283366;828480;False;Rickon Stark
+1283366;828489;False;Rickon Stark
+1283366;828492;False;Rickon Stark
+1287112;828442;False;Oberyn Martell
+1287112;828446;False;Oberyn Martell
+1287112;828455;False;Oberyn Martell
+1287112;828472;False;Oberyn Martell
+1287112;828473;False;Oberyn Martell
+1287112;828474;False;Oberyn Martell
+1287112;828486;False;Oberyn Martell
+1291868;828463;False;Wildling Rioter
+1294802;828453;False;Drunk Patron
+1299310;828439;False;Market Trader
+1299310;828447;False;Field Worker
+1299310;828456;False;Baratheon Soldier
+1299310;828459;False;Littlefinger's Crew
+1299310;828466;False;Baratheon Soldier
+1299310;828469;False;Volantis Fighter
+1299310;828472;False;Stannis Crew
+1299310;828476;False;Field Worker
+1312735;828451;False;Great Master #5
+1330190;828459;False;Elder Meereen Slave
+1336875;828461;False;Merchant Captain
+1346532;828440;False;Black Walder Rivers
+1346532;828457;False;Black Walder Rivers
+1346532;828463;False;Black Walder Rivers
+1346532;828465;False;Black Walder Rivers
+1346532;828480;False;Black Walder Rivers
+1346532;828484;False;Black Walder Rivers
+1359270;828439;False;Podrick Payne
+1359270;828441;False;Podrick Payne
+1359270;828442;False;Podrick Payne
+1359270;828446;False;Podrick Payne
+1359270;828449;False;Podrick Payne
+1359270;828450;False;Podrick Payne
+1359270;828451;False;Podrick Payne
+1359270;828452;False;Podrick Payne
+1359270;828454;False;Podrick Payne
+1359270;828455;False;Podrick Payne
+1359270;828456;False;Podrick Payne
+1359270;828457;False;Podrick Payne
+1359270;828459;False;Podrick Payne
+1359270;828460;False;Podrick Payne
+1359270;828464;False;Podrick Payne
+1359270;828467;False;Podrick Payne
+1359270;828469;False;Podrick Payne
+1359270;828470;False;Podrick Payne
+1359270;828473;False;Podrick Payne
+1359270;828475;False;Podrick Payne
+1359270;828479;False;Podrick Payne
+1359270;828481;False;Podrick Payne
+1359270;828482;False;Podrick Payne
+1359270;828486;False;Podrick Payne
+1359270;828488;False;Podrick Payne
+1359270;828489;False;Podrick Payne
+1359270;828490;False;Podrick Payne
+1364323;828488;False;Boat Commander
+1376756;828440;False;High Sparrow
+1376756;828441;False;High Sparrow
+1376756;828449;False;High Sparrow
+1376756;828450;False;High Sparrow
+1376756;828456;False;High Sparrow
+1376756;828458;False;High Sparrow
+1376756;828461;False;High Sparrow
+1376756;828463;False;High Sparrow
+1376756;828469;False;High Sparrow
+1376756;828481;False;High Sparrow
+1376756;828484;False;High Sparrow
+1376756;828487;False;High Sparrow
+1378715;828436;False;Craster
+1378715;828475;False;Craster
+1378715;828476;False;Craster
+1378715;828490;False;Craster
+1378715;828491;False;Craster
+1380891;828444;False;Riverlands Traveller
+1388246;828438;False;Mormont Soldier
+1388246;828464;False;Baratheon Soldier
+1388246;828466;False;Baratheon Soldier
+1388246;828469;False;Baratheon Soldier
+1388246;828474;False;Bolton Guard
+1388246;828482;False;Baratheon Soldier
+1388918;828436;False;Bolton Soldier
+1392277;828486;False;Lord Blackmont
+1392835;828454;False;Yunkai Citizen
+1405760;828471;False;Mikken
+1405760;828492;False;Mikken
+1409073;828444;False;Tyrell Servant
+1410279;828438;False;Harald Karstark
+1410279;828450;False;Harald Karstark
+1410279;828458;False;Harald Karstark
+1417807;828457;False;Tully Bannerman
+1423524;828475;False;Brothel Customer
+1423859;828485;False;Peasant
+1424588;828486;False;Morgan
+1424588;828489;False;Soldier Tom
+1428468;828467;False;Ironborn #2
+1428468;828471;False;Northern Bannerman
+1434116;828436;False;Ramsay Snow
+1434116;828438;False;Ramsay Bolton
+1434116;828441;False;Ramsay Bolton
+1434116;828444;False;Ramsay Snow
+1434116;828448;False;Ramsay Bolton
+1434116;828449;False;Ramsay Bolton
+1434116;828450;False;Ramsay Bolton
+1434116;828451;False;Ramsay Bolton
+1434116;828454;False;Ramsay Snow
+1434116;828456;False;Ramsay Bolton
+1434116;828458;False;Ramsay Bolton
+1434116;828462;False;Ramsay Snow
+1434116;828465;False;Ramsay Snow
+1434116;828469;False;Ramsay Bolton
+1434116;828472;False;Ramsay Snow
+1434116;828473;False;Ramsay Snow
+1434116;828474;False;Ramsay Snow
+1434116;828481;False;Ramsay Bolton
+1434116;828487;False;Ramsay Bolton
+1434116;828490;False;Ramsay Snow
+1448014;828440;False;Aerys Targaryen
+1457715;828458;False;Arthur Dayne
+1461389;828487;False;Joss
+1465624;828434;False;Knight of House Lynderly
+1466174;828471;False;Catspaw Assassin
+1466531;828464;False;Three-Eyed Raven
+1466531;828473;False;Three-Eyed Raven
+1475385;828463;False;Bear Island Maester
+1479704;828438;False;Karstark Soldier
+1486993;828483;False;Donnel Hill
+1500814;828452;False;Brynden 'Blackfish' Tully
+1500814;828457;False;Brynden 'Blackfish' Tully
+1500814;828462;False;Brynden 'Blackfish' Tully
+1500814;828463;False;Brynden 'Blackfish' Tully
+1500814;828465;False;Brynden 'Blackfish' Tully
+1500814;828480;False;Brynden 'Blackfish' Tully
+1500814;828490;False;Brynden 'Blackfish' Tully
+1504942;828491;False;Drowned Priest
+1505324;828443;False;Knight of House Frey
+1506038;828450;False;Maester Wolkan
+1506038;828481;False;Maester Wolkan
+1492173;828458;False;Arthur
+1492173;828484;False;Arthur
+1492601;828441;False;Dothraki Bloodrider #1
+1492601;828458;False;Dothraki Bloodrider #1
+1492601;828481;False;Dothraki Bloodrider #1
+1493202;828434;False;Qotho
+1493202;828437;False;Qotho
+1493202;828471;False;Qotho
+1493202;828478;False;Qotho
+1493202;828492;False;Qotho
+1497656;828453;False;Goldcloak #1
+1505431;828472;False;Goatherd's Son
+1544747;828434;False;Beric Dondarrion
+1547824;828478;False;Vayon Poole
+1549518;828456;False;Trystane Martell
+1549518;828466;False;Trystane Martell
+1549518;828470;False;Trystane Martell
+1549518;828481;False;Trystane Martell
+1549518;828487;False;Trystane Martell
+1565371;828489;False;Stark Soldier
+1566116;828440;False;Braavosi Theatre Sound Artist
+1566116;828467;False;Braavosi Theatre Sound Artist
+1574946;828435;False;Stark Guard
+1574946;828479;False;Stark Guard
+1576241;828444;False;Master Torturer
+1576241;828490;False;Master Torturer
+1578334;828442;False;Meereen Slave
+1588690;828456;False;Doran Martell
+1588690;828466;False;Doran Martell
+1588690;828470;False;Doran Martell
+1588690;828481;False;Doran Martell
+1588690;828487;False;Doran Martell
+1591374;828473;False;Wedding Band
+1594911;828451;False;Great Master #3
+1598154;828434;False;Lancel Lannister
+1598154;828439;False;Lancel Lannister
+1598154;828440;False;Lancel Lannister
+1598154;828443;False;Lancel Lannister
+1598154;828445;False;Lancel Lannister
+1598154;828447;False;Lancel Lannister
+1598154;828449;False;Lancel Lannister
+1598154;828453;False;Lancel Lannister
+1598154;828457;False;Lancel Lannister
+1598154;828461;False;Lancel Lannister
+1598154;828468;False;Lancel Lannister
+1598154;828469;False;Lancel Lannister
+1598154;828482;False;Lancel Lannister
+1598154;828484;False;Lancel Lannister
+1598154;828485;False;Lancel Lannister
+1598154;828487;False;Lancel Lannister
+1599768;828446;False;Donnel Waynwood
+1599768;828474;False;Donnel Waynwood
+1605240;828443;False;Jory Cassel
+1605240;828453;False;Jory Cassel
+1605240;828471;False;Jory Cassel
+1605240;828485;False;Jory Cassel
+1605240;828492;False;Jory Cassel
+1608665;828454;False;Daario Naharis
+1608665;828460;False;Daario Naharis
+1608665;828480;False;Daario Naharis
+1611604;828474;False;Little Bird
+1612648;828473;False;Wedding Guest
+1627461;828461;False;Second Son
+1649331;828435;False;Rickard Karstark
+1649331;828444;False;Rickard Karstark
+1649331;828452;False;Rickard Karstark
+1649331;828479;False;Rickard Karstark
+1649331;828488;False;Rickard Karstark
+1650991;828492;False;Jon Arryn
+1652150;828436;False;Grenn
+1652150;828437;False;Grenn
+1652150;828442;False;Grenn
+1652150;828443;False;Grenn
+1652150;828444;False;Grenn
+1652150;828445;False;Grenn
+1652150;828446;False;Grenn
+1652150;828453;False;Grenn
+1652150;828455;False;Grenn
+1652150;828459;False;Grenn
+1652150;828464;False;Grenn
+1652150;828468;False;Grenn
+1652150;828474;False;Grenn
+1652150;828475;False;Grenn
+1652150;828476;False;Grenn
+1652150;828478;False;Grenn
+1652150;828479;False;Grenn
+1652150;828483;False;Grenn
+1652150;828488;False;Grenn
+1652150;828489;False;Grenn
+1652150;828490;False;Grenn
+1664151;828453;False;Royal Steward
+1664151;828478;False;Royal Steward
+1664151;828485;False;Royal Steward
+1664982;828443;False;Gregor Clegane
+1664982;828485;False;Gregor Clegane
+1668441;828478;False;Lannister Messenger
+1671194;828441;False;Dothraki Man Having Sex
+1672050;828475;False;Male Prostitute
+1672050;828476;False;Male Prostitute
+1680451;828440;False;Dickon Tarly
+1682329;828441;False;Night's Watch Officer
+1682329;828442;False;Night's Watch Officer
+1682329;828448;False;Night's Watch Officer
+1682329;828449;False;Night's Watch Officer
+1682329;828451;False;Night's Watch Officer
+1682329;828454;False;Stark Bannerman
+1682329;828455;False;Night's Watch Officer
+1682329;828458;False;Night's Watch Officer
+1682329;828459;False;Night's Watch Officer
+1682329;828462;False;Bolton Guard
+1682329;828464;False;Night's Watch Officer
+1682329;828466;False;Night's Watch Officer
+1682329;828469;False;Night's Watch Officer
+1682329;828470;False;Night's Watch Officer
+1682329;828481;False;Night's Watch Officer
+1682329;828482;False;Night's Watch Officer
+1682329;828483;False;Night's Watch Officer
+1690884;828435;False;Maester Luwin
+1690884;828443;False;Maester Luwin
+1690884;828445;False;Maester Luwin
+1690884;828468;False;Maester Luwin
+1690884;828471;False;Maester Luwin
+1690884;828476;False;Maester Luwin
+1690884;828477;False;Maester Luwin
+1690884;828478;False;Maester Luwin
+1690884;828479;False;Maester Luwin
+1690884;828485;False;Maester Luwin
+1690884;828489;False;Maester Luwin
+1690884;828491;False;Maester Luwin
+1690884;828492;False;Maester Luwin
+1700113;828441;False;Ash
+1700739;828439;False;Singing Lannister Soldier
+1702167;828461;False;Foreign Merchant
+1658381;828438;False;Bolton General
+1667818;828436;False;Locke
+1667818;828444;False;Locke
+1667818;828446;False;Locke
+1667818;828452;False;Locke
+1667818;828459;False;Locke
+1667818;828462;False;Locke
+1667818;828473;False;Locke
+1667818;828490;False;Locke
+1669615;828442;False;Alliser Thorne
+1669615;828443;False;Alliser Thorne
+1669615;828449;False;Alliser Thorne
+1669615;828450;False;Alliser Thorne
+1669615;828451;False;Alliser Thorne
+1669615;828453;False;Alliser Thorne
+1669615;828455;False;Alliser Thorne
+1669615;828456;False;Alliser Thorne
+1669615;828458;False;Alliser Thorne
+1669615;828459;False;Alliser Thorne
+1669615;828466;False;Alliser Thorne
+1669615;828469;False;Alliser Thorne
+1669615;828470;False;Alliser Thorne
+1669615;828478;False;Alliser Thorne
+1669615;828481;False;Alliser Thorne
+1669615;828482;False;Alliser Thorne
+1669615;828483;False;Alliser Thorne
+1669615;828486;False;Alliser Thorne
+1693763;828460;False;Prendahl na Ghezn
+1701542;828445;False;Lannister Guard
+1710493;828440;False;Tyrell Bannerman
+1721096;828454;False;Yunkai'i Slave #1
+1721121;828442;False;Olyvar
+1721121;828449;False;Olyvar
+1721121;828452;False;Olyvar
+1721121;828461;False;Olyvar
+1721121;828482;False;Olyvar
+1721121;828486;False;Olyvar
+1721121;828487;False;Olyvar
+1721125;828468;False;Protestor
+1721607;828440;False;Lothar Frey
+1721607;828457;False;Lothar Frey
+1721607;828463;False;Lothar Frey
+1721607;828484;False;Lothar Frey
+1726341;828457;False;The Waif's Disguise
+1756687;828441;False;Yohn Royce
+1756687;828474;False;Yohn Royce
+1756687;828482;False;Yohn Royce
+1756687;828484;False;Yohn Royce
+1757618;828484;False;Cley Cerwyn
+1761707;828437;False;Maester Aemon
+1761707;828442;False;Maester Aemon
+1761707;828451;False;Maester Aemon
+1761707;828453;False;Maester Aemon
+1761707;828454;False;Maester Aemon
+1761707;828464;False;Maester Aemon
+1761707;828469;False;Maester Aemon
+1761707;828470;False;Maester Aemon
+1761707;828483;False;Maester Aemon
+1761707;828486;False;Maester Aemon
+1771596;828477;False;High Septon
+1784568;828461;False;Lead Dornish Guard
+1786374;828445;False;Lommy Greenhands
+1786374;828475;False;Lommy Greenhands
+1786374;828476;False;Lommy Greenhands
+1786374;828491;False;Lommy Greenhands
+1791035;828450;False;Three-Eyed Raven
+1791035;828458;False;Three-Eyed Raven
+1791035;828467;False;Three-Eyed Raven
+1801666;828457;False;Healtor Troop
+1802761;828446;False;Lannister General
+1802761;828472;False;Lannister General
+1802761;828473;False;Lannister General
+1804816;828442;False;Guymon
+1805788;828461;False;Lead Kingsguard
+1808129;828486;False;Innkeeper
+1813393;828484;False;Tommen's Attendant
+1817173;828451;False;Stone Man
+1822354;828439;False;Soldier
+1822354;828447;False;Soldier
+1822354;828480;False;Soldier
+1822354;828491;False;Soldier
+1822536;828442;False;Manservant
+1822536;828472;False;Manservant
+1823613;828439;False;Dontos Hollard
+1823613;828442;False;Dontos Hollard
+1823613;828447;False;Dontos Hollard
+1823613;828473;False;Dontos Hollard
+1823613;828476;False;Dontos Hollard
+1823613;828486;False;Dontos Hollard
+1823722;828435;False;King's Landing Rioter #1
+1823722;828477;False;King's Landing Rioter #1
+1825141;828492;False;Will
+1831033;828472;False;Nobel Man
+1841744;828439;False;Tommen Baratheon
+1841744;828443;False;Tommen Baratheon
+1841744;828471;False;Tommen Baratheon
+1841744;828476;False;Tommen Baratheon
+1841744;828477;False;Tommen Baratheon
+1841744;828485;False;Tommen Baratheon
+1841744;828491;False;Tommen Baratheon
+1841744;828492;False;Tommen Baratheon
+1841900;828473;False;King Renly Baratheon Dwarf
+1849641;828435;False;Gregor 'The Mountain' Clegane
+1849641;828438;False;Wun Wun
+1849641;828447;False;Gregor 'The Mountain' Clegane
+1849641;828448;False;Wun Wun
+1849641;828450;False;Wun Wun
+1849641;828463;False;Wun Wun
+1849641;828464;False;Dongo the Giant
+1849641;828466;False;Wun Wun
+1849641;828475;False;White Walker
+1849641;828479;False;Gregor 'The Mountain' Clegane
+1849641;828483;False;Dongo the Giant
+1849641;828488;False;Dongo the Giant
+1849641;828492;False;White Walker #1
+1853783;828443;False;Tobho Mott
+1853783;828476;False;Tobho Mott
+1854332;828492;False;White Walker #2
+1868651;828440;False;Baby Sam
+1870537;828435;False;Theon's Master of Hounds
+1870920;828440;False;Baby Sam
+1874193;828437;False;Timett
+1874193;828476;False;Timett
+1874193;828478;False;Timett
+1874193;828491;False;Timett
+1877417;828420;False;Jaqen H'ghar
+1877417;828440;False;Jaqen H'ghar
+1877417;828448;False;Jaqen H'ghar
+1877417;828449;False;Jaqen H'ghar
+1877417;828450;False;Jaqen H'ghar
+1877417;828456;False;Jaqen H'ghar
+1877417;828457;False;Jaqen H'ghar
+1877417;828458;False;Jaqen H'ghar
+1877417;828466;False;Jaqen H'ghar
+1877417;828467;False;Jaqen H'ghar
+1877417;828468;False;Jaqen H'ghar
+1877417;828470;False;Jaqen H'ghar
+1877417;828475;False;Jaqen H'ghar
+1877417;828477;False;Jaqen H'ghar
+1877417;828479;False;Jaqen H'ghar
+1877417;828487;False;Jaqen H'ghar
+1877417;828489;False;Jaqen H'ghar
+1877417;828491;False;Jaqen H'ghar
+1885632;828458;False;Howland Reed
+1890542;828420;False;Bran Stark
+1890542;828434;False;Bran Stark
+1890542;828435;False;Bran Stark
+1890542;828436;False;Bran Stark
+1890542;828440;False;Bran Stark
+1890542;828443;False;Bran Stark
+1890542;828444;False;Bran Stark
+1890542;828445;False;Bran Stark
+1890542;828446;False;Bran Stark
+1890542;828450;False;Bran Stark
+1890542;828453;False;Bran Stark
+1890542;828454;False;Bran Stark
+1890542;828458;False;Bran Stark
+1890542;828459;False;Bran Stark
+1890542;828462;False;Bran Stark
+1890542;828464;False;Bran Stark
+1890542;828465;False;Bran Stark
+1890542;828467;False;Bran Stark
+1890542;828468;False;Bran Stark
+1890542;828471;False;Bran Stark
+1890542;828473;False;Bran Stark
+1890542;828476;False;Bran Stark
+1890542;828477;False;Bran Stark
+1890542;828478;False;Bran Stark
+1890542;828479;False;Bran Stark
+1890542;828480;False;Bran Stark
+1890542;828484;False;Bran Stark
+1890542;828485;False;Bran Stark
+1890542;828489;False;Bran Stark
+1890542;828491;False;Bran Stark
+1890542;828492;False;Bran Stark
+1902455;828487;False;Slaver
+1903266;828461;False;Brothel Customer
+1903500;828492;False;King's Guard
+1905819;828434;False;Syrio Forel
+1905819;828453;False;Syrio Forel
+1905819;828478;False;Syrio Forel
+1913711;828488;False;Dothraki
+1938912;828440;False;Musician #2
+1938912;828457;False;Musician #2
+1938912;828467;False;Musician #2
+8886;828434;False;Irri
+8886;828437;False;Irri
+8886;828443;False;Irri
+8886;828445;False;Irri
+8886;828447;False;Irri
+8886;828453;False;Irri
+8886;828468;False;Irri
+8886;828471;False;Irri
+8886;828475;False;Irri
+8886;828476;False;Irri
+8886;828477;False;Irri
+8886;828478;False;Irri
+34282;828463;False;Volantene Whore #1
+34644;828450;False;Leaf
+34644;828458;False;Leaf
+34644;828467;False;Leaf
+35397;828464;False;Leaf
+36359;828481;False;Moro's Wife #1
+69188;828467;False;Braavosi Woman #1
+85527;828463;False;Volantene Whore
+86597;828481;False;Meereenese Homeless Mother
+100409;828442;False;King's Landing Whore
+100409;828449;False;The Warrior
+100409;828461;False;Whore #2
+138357;828478;False;Lady Maege
+138433;828484;False;Handmaid
+161265;828440;False;Talla Tarly
+161599;828449;False;The Stranger/The Mother of Dragons
+161599;828461;False;Whore #1
+161599;828472;False;Bathhouse Prostitute
+176288;828434;False;Ros
+176288;828436;False;Ros
+176288;828445;False;Ros
+176288;828447;False;Ros
+176288;828465;False;Ros
+176288;828475;False;Ros
+176288;828476;False;Ros
+176288;828479;False;Ros
+176288;828485;False;Ros
+176288;828488;False;Ros
+176288;828489;False;Ros
+176288;828490;False;Ros
+176288;828492;False;Ros
+189486;828462;False;Violet
+242326;828434;False;Septa Mordane
+242326;828443;False;Septa Mordane
+242326;828453;False;Septa Mordane
+242326;828478;False;Septa Mordane
+242326;828485;False;Septa Mordane
+242326;828492;False;Septa Mordane
+252336;828472;False;Waitress
+232388;828467;False;Kinvara
+241076;828440;False;Margaery Tyrell Mummer
+241076;828467;False;Margaery Tyrell Mummer
+248672;828470;False;Lollys Stokeworth
+276919;828420;False;Obara Sand
+276919;828456;False;Obara Sand
+276919;828461;False;Obara Sand
+276919;828466;False;Obara Sand
+276919;828469;False;Obara Sand
+276919;828481;False;Obara Sand
+276919;828484;False;Obara Sand
+276919;828487;False;Obara Sand
+298334;828435;False;Talisa Maegyr
+298334;828444;False;Talisa Stark
+298334;828447;False;Talisa Maegyr
+298334;828452;False;Talisa Stark
+298334;828462;False;Talisa Stark
+298334;828477;False;Talisa Maegyr
+298334;828479;False;Talisa Maegyr
+298334;828480;False;Talisa Stark
+298334;828488;False;Talisa Stark
+298334;828489;False;Talisa Maegyr
+298334;828490;False;Talisa Stark
+318919;828420;False;Brienne of Tarth
+318919;828435;False;Brienne of Tarth
+318919;828436;False;Brienne of Tarth
+318919;828441;False;Brienne of Tarth
+318919;828442;False;Brienne of Tarth
+318919;828444;False;Brienne of Tarth
+318919;828446;False;Brienne of Tarth
+318919;828447;False;Brienne of Tarth
+318919;828449;False;Brienne of Tarth
+318919;828450;False;Brienne of Tarth
+318919;828451;False;Brienne of Tarth
+318919;828452;False;Brienne of Tarth
+318919;828454;False;Brienne of Tarth
+318919;828455;False;Brienne of Tarth
+318919;828456;False;Brienne of Tarth
+318919;828457;False;Brienne of Tarth
+318919;828459;False;Brienne of Tarth
+318919;828462;False;Brienne of Tarth
+318919;828464;False;Brienne of Tarth
+318919;828465;False;Brienne of Tarth
+318919;828467;False;Brienne of Tarth
+318919;828468;False;Brienne of Tarth
+318919;828469;False;Brienne of Tarth
+318919;828470;False;Brienne of Tarth
+318919;828473;False;Brienne of Tarth
+318919;828477;False;Brienne of Tarth
+318919;828479;False;Brienne of Tarth
+318919;828481;False;Brienne of Tarth
+318919;828482;False;Brienne of Tarth
+318919;828486;False;Brienne of Tarth
+318919;828489;False;Brienne of Tarth
+318919;828490;False;Brienne of Tarth
+318919;828491;False;Brienne of Tarth
+319008;828463;False;Volantene Whore
+319546;828476;False;Mhaegen
+319546;828485;False;Mhaegen
+330809;828420;False;Daenerys Targaryen
+330809;828434;False;Daenerys Targaryen
+330809;828435;False;Daenerys Targaryen
+330809;828436;False;Daenerys Targaryen
+330809;828437;False;Daenerys Targaryen
+330809;828438;False;Daenerys Targaryen
+330809;828440;False;Daenerys Targaryen
+330809;828441;False;Daenerys Targaryen
+330809;828442;False;Daenerys Targaryen
+330809;828443;False;Daenerys Targaryen
+330809;828445;False;Daenerys Targaryen
+330809;828446;False;Daenerys Targaryen
+330809;828447;False;Daenerys Targaryen
+330809;828448;False;Daenerys Targaryen
+330809;828451;False;Daenerys Targaryen
+330809;828452;False;Daenerys Targaryen
+330809;828453;False;Daenerys Targaryen
+330809;828454;False;Daenerys Targaryen
+330809;828455;False;Daenerys Targaryen
+330809;828456;False;Daenerys Targaryen
+330809;828457;False;Daenerys Targaryen
+330809;828458;False;Daenerys Targaryen
+330809;828459;False;Daenerys Targaryen
+330809;828460;False;Daenerys Targaryen
+330809;828461;False;Daenerys Targaryen
+330809;828462;False;Daenerys Targaryen
+330809;828464;False;Daenerys Targaryen
+330809;828466;False;Daenerys Targaryen
+330809;828467;False;Daenerys Targaryen
+330809;828468;False;Daenerys Targaryen
+330809;828469;False;Daenerys Targaryen
+330809;828470;False;Daenerys Targaryen
+330809;828471;False;Daenerys Targaryen
+330809;828472;False;Daenerys Targaryen
+330809;828474;False;Daenerys Targaryen
+330809;828475;False;Daenerys Targaryen
+330809;828476;False;Daenerys Targaryen
+330809;828477;False;Daenerys Targaryen
+330809;828478;False;Daenerys Targaryen
+330809;828479;False;Daenerys Targaryen
+330809;828480;False;Daenerys Targaryen
+330809;828481;False;Daenerys Targaryen
+330809;828482;False;Daenerys Targaryen
+330809;828484;False;Daenerys Targaryen
+330809;828486;False;Daenerys Targaryen
+330809;828488;False;Daenerys Targaryen
+330809;828489;False;Daenerys Targaryen
+330809;828490;False;Daenerys Targaryen
+330809;828492;False;Daenerys Targaryen
+330870;828458;False;Little Bird #5
+330870;828484;False;Little Bird #5
+360495;828442;False;Mole's Town Madam
+360495;828474;False;Mole's Town Madam
+367298;828490;False;Craster's Wife
+376571;828480;False;Marianne Frey
+420865;828440;False;Lady Crane
+420865;828457;False;Lady Crane
+420865;828467;False;Lady Crane
+425192;828475;False;Captain's Daughter
+419548;828473;False;Tansy
+425354;828447;False;Daisy
+425354;828476;False;Daisy
+425354;828491;False;Daisy
+441123;828486;False;Innkeeper's Daughter
+452420;828453;False;King's Landing Whore
+452420;828485;False;King's Landing Whore
+458658;828434;False;Lysa Arryn
+458658;828446;False;Lysa Arryn
+458658;828455;False;Lysa Arryn
+458658;828478;False;Lysa Arryn
+458658;828485;False;Lysa Arryn
+462133;828474;False;Anya Waynwood
+481246;828436;False;Margaery Tyrell
+481246;828440;False;Margaery Tyrell
+481246;828441;False;Margaery Tyrell
+481246;828442;False;Margaery Tyrell
+481246;828444;False;Margaery Tyrell
+481246;828446;False;Margaery Tyrell
+481246;828447;False;Margaery Tyrell
+481246;828449;False;Margaery Tyrell
+481246;828452;False;Margaery Tyrell
+481246;828459;False;Margaery Tyrell
+481246;828460;False;Margaery Tyrell
+481246;828461;False;Margaery Tyrell
+481246;828462;False;Margaery Tyrell
+481246;828463;False;Margaery Tyrell
+481246;828468;False;Margaery Tyrell
+481246;828469;False;Margaery Tyrell
+481246;828472;False;Margaery Tyrell
+481246;828473;False;Margaery Tyrell
+481246;828481;False;Margaery Tyrell
+481246;828482;False;Margaery Tyrell
+481246;828484;False;Margaery Tyrell
+481246;828486;False;Margaery Tyrell
+481246;828487;False;Margaery Tyrell
+481246;828488;False;Margaery Tyrell
+481246;828489;False;Margaery Tyrell
+481246;828491;False;Margaery Tyrell
+486059;828480;False;Roslin Frey
+507268;828435;False;Handmaid
+507268;828465;False;Handmaid
+507268;828481;False;Handmaid
+507268;828484;False;Handmaid
+507268;828486;False;Handmaid
+450117;828420;False;Missandei
+450117;828436;False;Missandei
+450117;828438;False;Missandei
+450117;828441;False;Missandei
+450117;828442;False;Missandei
+450117;828446;False;Missandei
+450117;828448;False;Missandei
+450117;828450;False;Missandei
+450117;828451;False;Missandei
+450117;828452;False;Missandei
+450117;828454;False;Missandei
+450117;828456;False;Missandei
+450117;828457;False;Missandei
+450117;828458;False;Missandei
+450117;828459;False;Missandei
+450117;828460;False;Missandei
+450117;828461;False;Missandei
+450117;828462;False;Missandei
+450117;828464;False;Missandei
+450117;828466;False;Missandei
+450117;828467;False;Missandei
+450117;828470;False;Missandei
+450117;828472;False;Missandei
+450117;828474;False;Missandei
+450117;828480;False;Missandei
+450117;828482;False;Missandei
+450117;828484;False;Missandei
+450117;828486;False;Missandei
+450117;828488;False;Missandei
+450117;828490;False;Missandei
+469295;828441;False;Moro's Wife #2
+469295;828481;False;Moro's Wife #2
+475254;828434;False;Catelyn Stark
+475254;828435;False;Catelyn Stark
+475254;828436;False;Catelyn Stark
+475254;828437;False;Catelyn Stark
+475254;828443;False;Catelyn Stark
+475254;828444;False;Catelyn Stark
+475254;828445;False;Catelyn Stark
+475254;828447;False;Catelyn Stark
+475254;828452;False;Catelyn Stark
+475254;828453;False;Catelyn Stark
+475254;828462;False;Catelyn Stark
+475254;828465;False;Catelyn Stark
+475254;828468;False;Catelyn Stark
+475254;828471;False;Catelyn Stark
+475254;828476;False;Catelyn Stark
+475254;828477;False;Catelyn Stark
+475254;828478;False;Catelyn Stark
+475254;828479;False;Catelyn Stark
+475254;828480;False;Catelyn Stark
+475254;828485;False;Catelyn Stark
+475254;828488;False;Catelyn Stark
+475254;828489;False;Catelyn Stark
+475254;828490;False;Catelyn Stark
+475254;828491;False;Catelyn Stark
+475254;828492;False;Catelyn Stark
+477510;828441;False;High Priestess
+477510;828458;False;High Priestess
+493278;828441;False;Dothraki Widow #1
+493278;828458;False;Dothraki Widow #1
+512070;828451;False;Selyse Baratheon
+512070;828452;False;Selyse Baratheon
+512070;828455;False;Selyse Baratheon
+512070;828456;False;Selyse Baratheon
+512070;828461;False;Selyse Baratheon
+512070;828464;False;Selyse Baratheon
+512070;828466;False;Selyse Baratheon
+512070;828470;False;Selyse Baratheon
+512070;828473;False;Selyse Baratheon
+512070;828482;False;Selyse Baratheon
+536126;828484;False;Lyanna Stark
+538216;828450;False;Myrcella Baratheon
+538216;828456;False;Myrcella Baratheon
+538216;828466;False;Myrcella Baratheon
+538216;828469;False;Myrcella Baratheon
+538216;828470;False;Myrcella Baratheon
+538216;828487;False;Myrcella Baratheon
+540955;828448;False;Wight
+544564;828449;False;Red Priestess
+525073;828458;False;Little Bird #6
+525073;828484;False;Little Bird #6
+582981;828434;False;Dothraki Crone
+587391;828442;False;Marei
+587391;828461;False;Marei
+587391;828475;False;Marei
+587391;828476;False;Marei
+587391;828484;False;Marei
+587391;828486;False;Marei
+587391;828490;False;Marei
+587611;828486;False;Whore #1
+615933;828463;False;Volantene Whore #5
+616767;828456;False;Ghita
+616767;828487;False;Ghita
+632526;828440;False;Braavosi Theatre Server
+632526;828467;False;Braavosi Theatre Server
+662049;828480;False;Derwa Frey
+682158;828458;False;Frances
+682158;828484;False;Frances
+694024;828490;False;Genna
+695432;828442;False;Farmer's Daughter
+709979;828440;False;Lady Kitty Frey
+709987;828456;False;Septa Moelle
+711392;828420;False;Cersei Lannister
+711392;828434;False;Cersei Lannister
+711392;828435;False;Cersei Lannister
+711392;828436;False;Cersei Lannister
+711392;828437;False;Cersei Lannister
+711392;828439;False;Cersei Lannister
+711392;828440;False;Cersei Lannister
+711392;828441;False;Cersei Lannister
+711392;828442;False;Cersei Lannister
+711392;828443;False;Cersei Lannister
+711392;828444;False;Cersei Lannister
+711392;828445;False;Cersei Lannister
+711392;828446;False;Cersei Lannister
+711392;828448;False;Cersei Lannister
+711392;828449;False;Cersei Lannister
+711392;828450;False;Cersei Lannister
+711392;828452;False;Cersei Lannister
+711392;828453;False;Cersei Lannister
+711392;828454;False;Cersei Lannister
+711392;828455;False;Cersei Lannister
+711392;828456;False;Cersei Lannister
+711392;828457;False;Cersei Lannister
+711392;828458;False;Cersei Lannister
+711392;828459;False;Cersei Lannister
+711392;828460;False;Cersei Lannister
+711392;828461;False;Cersei Lannister
+711392;828463;False;Cersei Lannister
+711392;828464;False;Cersei Lannister
+711392;828465;False;Cersei Lannister
+711392;828468;False;Cersei Lannister
+711392;828469;False;Cersei Lannister
+711392;828470;False;Cersei Lannister
+711392;828471;False;Cersei Lannister
+711392;828472;False;Cersei Lannister
+711392;828473;False;Cersei Lannister
+711392;828474;False;Cersei Lannister
+711392;828475;False;Cersei Lannister
+711392;828476;False;Cersei Lannister
+711392;828477;False;Cersei Lannister
+711392;828478;False;Cersei Lannister
+711392;828479;False;Cersei Lannister
+711392;828481;False;Cersei Lannister
+711392;828482;False;Cersei Lannister
+711392;828484;False;Cersei Lannister
+711392;828485;False;Cersei Lannister
+711392;828486;False;Cersei Lannister
+711392;828487;False;Cersei Lannister
+711392;828488;False;Cersei Lannister
+711392;828489;False;Cersei Lannister
+711392;828490;False;Cersei Lannister
+711392;828491;False;Cersei Lannister
+711392;828492;False;Cersei Lannister
+673803;828480;False;Merry Frey
+675549;828420;False;Nymeria Sand
+675549;828456;False;Nymeria Sand
+675549;828461;False;Nymeria Sand
+675549;828466;False;Nymeria Sand
+675549;828469;False;Nymeria Sand
+675549;828481;False;Nymeria Sand
+675549;828484;False;Nymeria Sand
+675549;828487;False;Nymeria Sand
+686300;828464;False;Child of the Forest
+693679;828450;False;Young Lyanna Stark
+715824;828449;False;Myranda
+715824;828451;False;Myranda
+715824;828456;False;Myranda
+715824;828462;False;Myranda
+715824;828472;False;Myranda
+715824;828473;False;Myranda
+715824;828481;False;Myranda
+715824;828487;False;Myranda
+719903;828441;False;Dothraki Widow #2
+719903;828458;False;Dothraki Widow #2
+726608;828463;False;Volantene Whore #4
+743242;828442;False;Shireen Baratheon
+743242;828451;False;Shireen Baratheon
+743242;828452;False;Shireen Baratheon
+743242;828454;False;Shireen Baratheon
+743242;828461;False;Shireen Baratheon
+743242;828464;False;Shireen Baratheon
+743242;828466;False;Shireen Baratheon
+743242;828470;False;Shireen Baratheon
+743242;828473;False;Shireen Baratheon
+743242;828482;False;Shireen Baratheon
+763928;828463;False;The Waif's Disguise
+778934;828488;False;Margaery's Handmaiden
+784373;828463;False;Volantene Whore #3
+792467;828443;False;Old Nan
+792467;828453;False;Old Nan
+792523;828441;False;Ornela
+792523;828458;False;Ornela
+798749;828456;False;Brothel Child #2
+801818;828456;False;Septa Scolera
+822183;828454;False;Yunkai'i Slave #2
+846534;828476;False;Selyse Baratheon
+847201;828435;False;Shae
+847201;828437;False;Shae
+847201;828439;False;Shae
+847201;828444;False;Shae
+847201;828445;False;Shae
+847201;828454;False;Shae
+847201;828460;False;Shae
+847201;828462;False;Shae
+847201;828464;False;Shae
+847201;828465;False;Shae
+847201;828472;False;Shae
+847201;828473;False;Shae
+847201;828475;False;Shae
+847201;828476;False;Shae
+847201;828477;False;Shae
+847201;828479;False;Shae
+847201;828486;False;Shae
+847201;828488;False;Shae
+847201;828489;False;Shae
+847201;828491;False;Shae
+847497;828470;False;Inn Waitress
+849625;828443;False;Masha Heddle
+850722;828440;False;Meera Reed
+850722;828444;False;Meera Reed
+850722;828446;False;Meera Reed
+850722;828450;False;Meera Reed
+850722;828454;False;Meera Reed
+850722;828459;False;Meera Reed
+850722;828462;False;Meera Reed
+850722;828464;False;Meera Reed
+850722;828465;False;Meera Reed
+850722;828467;False;Meera Reed
+850722;828473;False;Meera Reed
+850722;828480;False;Meera Reed
+850722;828484;False;Meera Reed
+865849;828449;False;Clea
+888395;828439;False;Armeca
+888395;828475;False;Armeca
+888395;828476;False;Armeca
+911814;828466;False;Anara
+916196;828468;False;Qartheen Woman
+956878;828488;False;Mirelle
+959143;828420;False;Tyene Sand
+959143;828456;False;Tyene Sand
+959143;828461;False;Tyene Sand
+959143;828466;False;Tyene Sand
+959143;828469;False;Tyene Sand
+959143;828481;False;Tyene Sand
+959143;828484;False;Tyene Sand
+959143;828487;False;Tyene Sand
+963346;828473;False;Kayla
+963346;828490;False;Kayla
+978164;828476;False;Chella
+986497;828446;False;King's Landing Handmaiden
+986497;828472;False;King's Landing Handmaiden
+988352;828435;False;Ygritte
+988352;828442;False;Ygritte
+988352;828444;False;Ygritte
+988352;828452;False;Ygritte
+988352;828454;False;Ygritte
+988352;828462;False;Ygritte
+988352;828464;False;Ygritte
+988352;828465;False;Ygritte
+988352;828474;False;Ygritte
+988352;828477;False;Ygritte
+988352;828479;False;Ygritte
+988352;828480;False;Ygritte
+988352;828483;False;Ygritte
+988352;828486;False;Ygritte
+988352;828488;False;Ygritte
+988352;828489;False;Ygritte
+988352;828490;False;Ygritte
+988656;828459;False;Craster's Wife #3
+990684;828457;False;Red Priestess
+997944;828442;False;Olly's Mother
+1013836;828437;False;Joyeuse Erenford
+1013836;828480;False;Joyeuse Erenford
+1028398;828460;False;Yunkai'i Whore
+1037600;828473;False;Noble Lady
+1039162;828448;False;Johnna
+1039162;828466;False;Johnna
+1039300;828448;False;Willa
+1039300;828466;False;Willa
+1045867;828476;False;Selyse Baratheon
+1061393;828466;False;Whore
+1079388;828440;False;The Waif
+1079388;828448;False;The Waif
+1079388;828449;False;The Waif
+1079388;828450;False;The Waif
+1079388;828456;False;The Waif
+1079388;828457;False;The Waif
+1079388;828458;False;The Waif
+1079388;828463;False;The Waif
+1079388;828467;False;The Waif
+1079388;828481;False;The Waif
+1079388;828487;False;The Waif
+1077740;828482;False;Maggy
+1084466;828449;False;Old Woman
+1084466;828451;False;Old Woman
+1086092;828472;False;Bathhouse Prostitute
+1087667;828446;False;Sissy
+1087667;828459;False;Sissy
+1089443;828434;False;Doreah
+1089443;828437;False;Doreah
+1089443;828443;False;Doreah
+1089443;828447;False;Doreah
+1089443;828468;False;Doreah
+1089443;828471;False;Doreah
+1089443;828475;False;Doreah
+1089443;828476;False;Doreah
+1089443;828478;False;Doreah
+1089443;828489;False;Doreah
+1105108;828480;False;Freya Frey
+1162976;828446;False;Morag
+1162976;828459;False;Morag
+1170888;828466;False;Braavosi Madam
+1184117;828467;False;Braavosi Woman #2
+1192763;828447;False;Old Woman Prisoner
+1193899;828449;False;Beggar Woman
+1202003;828420;False;Gilly
+1202003;828436;False;Gilly
+1202003;828440;False;Gilly
+1202003;828442;False;Gilly
+1202003;828448;False;Gilly
+1202003;828451;False;Gilly
+1202003;828454;False;Gilly
+1202003;828456;False;Gilly
+1202003;828458;False;Gilly
+1202003;828460;False;Gilly
+1202003;828465;False;Gilly
+1202003;828469;False;Gilly
+1202003;828470;False;Gilly
+1202003;828474;False;Gilly
+1202003;828475;False;Gilly
+1202003;828476;False;Gilly
+1202003;828480;False;Gilly
+1202003;828482;False;Gilly
+1202003;828483;False;Gilly
+1202003;828484;False;Gilly
+1202003;828490;False;Gilly
+1202003;828491;False;Gilly
+1229816;828456;False;King's Landing Whore
+1255979;828466;False;Aya
+1282769;828420;False;
+1335485;828471;False;Jhiqui
+1362074;828440;False;Bianca
+1362074;828467;False;Bianca
+1365134;828435;False;Quaithe
+1365134;828468;False;Quaithe
+1375204;828452;False;Khaleesi Handmaiden #1
+1404356;828438;False;Lyanna Mormont
+1404356;828463;False;Lyanna Mormont
+1404356;828484;False;Lyanna Mormont
+1409828;828458;False;Vala
+1409828;828461;False;Vala
+1409828;828482;False;Vala
+1421264;828436;False;Tyrell Lady
+1438843;828443;False;Myrcella Baratheon
+1438843;828468;False;Myrcella Baratheon
+1438843;828471;False;Myrcella Baratheon
+1438843;828476;False;Myrcella Baratheon
+1438843;828477;False;Myrcella Baratheon
+1438843;828485;False;Myrcella Baratheon
+1438843;828491;False;Myrcella Baratheon
+1438843;828492;False;Myrcella Baratheon
+1443695;828436;False;Olenna Tyrell
+1443695;828440;False;Olenna Tyrell
+1443695;828441;False;Olenna Tyrell
+1443695;828442;False;Olenna Tyrell
+1443695;828444;False;Olenna Tyrell
+1443695;828452;False;Olenna Tyrell
+1443695;828458;False;Olenna Tyrell
+1443695;828459;False;Olenna Tyrell
+1443695;828460;False;Olenna Tyrell
+1443695;828463;False;Olenna Tyrell
+1443695;828465;False;Olenna Tyrell
+1443695;828469;False;Olenna Tyrell
+1443695;828473;False;Olenna Tyrell
+1443695;828484;False;Olenna Tyrell
+1443695;828486;False;Olenna Tyrell
+1443695;828487;False;Olenna Tyrell
+1455662;828446;False;Craster's Wife
+1455662;828459;False;Craster's Wife
+1455662;828479;False;Slave Girl Harrenhal
+1455663;828446;False;Craster's Wife
+1455663;828448;False;Wildling
+1455663;828459;False;Craster's Wife
+1477170;828463;False;Volantene Whore #2
+1502360;828449;False;The Crone
+1502360;828461;False;Whore #6
+1496827;828466;False;Brea
+1538779;828449;False;The Maiden
+1538779;828461;False;Whore #5
+1546916;828449;False;The Mother
+1546916;828461;False;Whore #4
+1555395;828477;False;King's Landing Rioter #3
+1590669;828486;False;Whore #2
+1617968;828463;False;Volantene Whore
+1625986;828448;False;Lhara
+1625986;828466;False;Lhara
+1625986;828472;False;Lhara
+1629784;828437;False;Mirri Maz Duur
+1629784;828445;False;Mirri Maz Duur
+1629784;828478;False;Mirri Maz Duur
+1641247;828440;False;Melessa Tarly
+1657515;828488;False;Warlock
+1658838;828482;False;Melara Hetherspoon
+1666087;828448;False;Wildling
+1666087;828466;False;Wildling
+1700555;828448;False;Karsi
+1669027;828434;False;Osha
+1669027;828435;False;Osha
+1669027;828441;False;Osha
+1669027;828444;False;Osha
+1669027;828445;False;Osha
+1669027;828458;False;Osha
+1669027;828462;False;Osha
+1669027;828465;False;Osha
+1669027;828468;False;Osha
+1669027;828476;False;Osha
+1669027;828477;False;Osha
+1669027;828478;False;Osha
+1669027;828479;False;Osha
+1669027;828480;False;Osha
+1669027;828489;False;Osha
+1692179;828450;False;Young Nan
+1692179;828467;False;Young Nan
+1721236;828420;False;Sansa Stark
+1721236;828434;False;Sansa Stark
+1721236;828435;False;Sansa Stark
+1721236;828436;False;Sansa Stark
+1721236;828437;False;Sansa Stark
+1721236;828438;False;Sansa Stark
+1721236;828439;False;Sansa Stark
+1721236;828441;False;Sansa Stark
+1721236;828442;False;Sansa Stark
+1721236;828443;False;Sansa Stark
+1721236;828444;False;Sansa Stark
+1721236;828445;False;Sansa Stark
+1721236;828446;False;Sansa Stark
+1721236;828447;False;Sansa Stark
+1721236;828448;False;Sansa Stark
+1721236;828449;False;Sansa Stark
+1721236;828450;False;Sansa Stark
+1721236;828451;False;Sansa Stark
+1721236;828452;False;Sansa Stark
+1721236;828453;False;Sansa Stark
+1721236;828454;False;Sansa Stark
+1721236;828455;False;Sansa Stark
+1721236;828456;False;Sansa Stark
+1721236;828459;False;Sansa Stark
+1721236;828460;False;Sansa Stark
+1721236;828461;False;Sansa Stark
+1721236;828462;False;Sansa Stark
+1721236;828463;False;Sansa Stark
+1721236;828465;False;Sansa Stark
+1721236;828467;False;Sansa Stark
+1721236;828469;False;Sansa Stark
+1721236;828470;False;Sansa Stark
+1721236;828471;False;Sansa Stark
+1721236;828473;False;Sansa Stark
+1721236;828474;False;Sansa Stark
+1721236;828476;False;Sansa Stark
+1721236;828477;False;Sansa Stark
+1721236;828478;False;Sansa Stark
+1721236;828481;False;Sansa Stark
+1721236;828482;False;Sansa Stark
+1721236;828484;False;Sansa Stark
+1721236;828485;False;Sansa Stark
+1721236;828486;False;Sansa Stark
+1721236;828487;False;Sansa Stark
+1721236;828488;False;Sansa Stark
+1721236;828489;False;Sansa Stark
+1721236;828491;False;Sansa Stark
+1721236;828492;False;Sansa Stark
+1727527;828456;False;Brothel Child #1
+1745664;828456;False;Cersei Body Double
+1749760;828420;False;Melisandre
+1749760;828438;False;Melisandre
+1749760;828441;False;Melisandre
+1749760;828447;False;Melisandre
+1749760;828450;False;Melisandre
+1749760;828451;False;Melisandre
+1749760;828454;False;Melisandre
+1749760;828455;False;Melisandre
+1749760;828456;False;Melisandre
+1749760;828458;False;Melisandre
+1749760;828460;False;Melisandre
+1749760;828461;False;Melisandre
+1749760;828462;False;Melisandre
+1749760;828464;False;Melisandre
+1749760;828465;False;Melisandre
+1749760;828466;False;Melisandre
+1749760;828467;False;Melisandre
+1749760;828469;False;Melisandre
+1749760;828473;False;Melisandre
+1749760;828475;False;Melisandre
+1749760;828476;False;Melisandre
+1749760;828481;False;Melisandre
+1749760;828482;False;Melisandre
+1749760;828484;False;Melisandre
+1749760;828488;False;Melisandre
+1749760;828489;False;Melisandre
+1749760;828490;False;Melisandre
+1754420;828420;False;Ellaria Sand
+1754420;828442;False;Ellaria Sand
+1754420;828456;False;Ellaria Sand
+1754420;828461;False;Ellaria Sand
+1754420;828466;False;Ellaria Sand
+1754420;828470;False;Ellaria Sand
+1754420;828473;False;Ellaria Sand
+1754420;828474;False;Ellaria Sand
+1754420;828481;False;Ellaria Sand
+1754420;828484;False;Ellaria Sand
+1754420;828486;False;Ellaria Sand
+1754420;828487;False;Ellaria Sand
+1774245;828441;False;Dothraki Woman Having Sex
+1774245;828449;False;The Smith
+1774245;828461;False;Whore #3
+1794778;828440;False;Septa Unella
+1794778;828441;False;Septa Unella
+1794778;828448;False;Septa Unella
+1794778;828456;False;Septa Unella
+1794778;828463;False;Septa Unella
+1794778;828469;False;Septa Unella
+1794778;828481;False;Septa Unella
+1794778;828484;False;Septa Unella
+1797495;828459;False;Craster's Wife #2
+1808092;828490;False;Craster's Younger Wife
+1821771;828449;False;Walda Bolton
+1821771;828450;False;Walda Bolton
+1821771;828451;False;Walda Bolton
+1821771;828473;False;Walda Bolton
+1821771;828487;False;Walda Bolton
+1842628;828420;False;Yara Greyjoy
+1842628;828438;False;Yara Greyjoy
+1842628;828441;False;Yara Greyjoy
+1842628;828450;False;Yara Greyjoy
+1842628;828454;False;Yara Greyjoy
+1842628;828463;False;Yara Greyjoy
+1842628;828467;False;Yara Greyjoy
+1842628;828468;False;Yara Greyjoy
+1842628;828472;False;Yara Greyjoy
+1842628;828475;False;Yara Greyjoy
+1842628;828479;False;Yara Greyjoy
+1842628;828484;False;Yara Greyjoy
+1842628;828491;False;Yara Greyjoy
+1859209;828420;False;Arya Stark
+1859209;828434;False;Arya Stark
+1859209;828435;False;Arya Stark
+1859209;828436;False;Arya Stark
+1859209;828437;False;Arya Stark
+1859209;828440;False;Arya Stark
+1859209;828442;False;Arya Stark
+1859209;828443;False;Arya Stark
+1859209;828444;False;Arya Stark
+1859209;828445;False;Arya Stark
+1859209;828446;False;Arya Stark
+1859209;828447;False;Arya Stark
+1859209;828448;False;Arya Stark
+1859209;828449;False;Arya Stark
+1859209;828450;False;Arya Stark
+1859209;828452;False;Arya Stark
+1859209;828453;False;Arya Stark
+1859209;828454;False;Arya Stark
+1859209;828455;False;Arya Stark
+1859209;828456;False;Arya Stark
+1859209;828457;False;Arya Stark
+1859209;828458;False;Arya Stark
+1859209;828460;False;Arya Stark
+1859209;828462;False;Arya Stark
+1859209;828463;False;Arya Stark
+1859209;828464;False;Arya Stark
+1859209;828465;False;Arya Stark
+1859209;828466;False;Arya Stark
+1859209;828467;False;Arya Stark
+1859209;828468;False;Arya Stark
+1859209;828470;False;Arya Stark
+1859209;828471;False;Arya Stark
+1859209;828474;False;Arya Stark
+1859209;828475;False;Arya Stark
+1859209;828476;False;Arya Stark
+1859209;828477;False;Arya Stark
+1859209;828478;False;Arya Stark
+1859209;828479;False;Arya Stark
+1859209;828480;False;Arya Stark
+1859209;828481;False;Arya Stark
+1859209;828484;False;Arya Stark
+1859209;828485;False;Arya Stark
+1859209;828486;False;Arya Stark
+1859209;828487;False;Arya Stark
+1859209;828489;False;Arya Stark
+1859209;828490;False;Arya Stark
+1859209;828491;False;Arya Stark
+1859209;828492;False;Arya Stark
+1859542;828482;False;Young Cersei Lannister
+1873797;828442;False;Mole's Town Whore
+1873797;828474;False;Mole's Town Whore
+1889886;828492;False;Wight Wildling Girl
+1934738;828492;False;Pentoshi Servant

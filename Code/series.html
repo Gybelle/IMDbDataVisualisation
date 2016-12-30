@@ -1,0 +1,125 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>IMDb: Series</title>
+
+        <!-- Stylesheets -->
+        <link href="plugins/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">   <!-- Bootstrap -->
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+    <style>
+      /* Custom style for the rating graph */
+      /* tell the SVG path to be a thin blue line without any area fill */
+      path {
+        stroke: steelblue;
+        stroke-width: 1;
+        fill: none;
+      }
+      
+      .axis {
+        shape-rendering: crispEdges;
+      }
+
+      .x.axis line {
+        stroke: lightgrey;
+      }
+
+      .x.axis .minor {
+        stroke-opacity: .5;
+      }
+
+      .x.axis path {
+        display: none;
+      }
+
+      .y.axis line, .y.axis path {
+        fill: none;
+        stroke: #000;
+      }
+    </style>
+
+    </head>
+
+    <body>
+        <div id="wrapper" class="toggled">
+
+          <div id="page-content-wrapper">
+            <div id="container-fluid">
+              <!-- --------------------------------------------- Navigator --------------------------------------------- -->
+              <nav id="menubar" class="navbar navbar-inverse">
+                <div class="container-fluid">
+                  <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html">IMDb Data Visualisation</a>
+                  </div>
+                  <ul class="nav navbar-nav">
+                    <li><a href="genres.html">Genres</a></li>
+                    <li><a href="actors.html">Actors</a></li>
+                    <li class="active"><a href="series.html">Series</a></li>
+                    <li><a href="flows.html">Flows</a></li>
+                  </ul>
+                </div>
+              </nav>
+
+              <div class="row">
+                <div id="colActorDistribution" class="col-md-8">
+                  <div class="actor-distribution chart" id="actorDistribution"></div>
+                </div>
+                <div id="colSearchBox" class="col-md-4">
+                  <div class="search-box chart" id="searchBox">
+                    <div class="input-group" id="custom-search-input">
+                        <input type="text" class="form-control input-lg" placeholder="Search..." id="custom-search-input-field"/>
+                        <span class="input-group-btn" id="search-button-container">
+                            <button class="btn btn-info btn-lg" type="button">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <div id="filter-results">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div id="colRatingLineChart" class="col-md-8">
+                  <div class="bottom-chart chart" id="ratingLineChart"></div>
+                </div>
+                <div id="colKeywordBubbles" class="col-md-4">
+                  <div class="bottom-chart chart" id="keywordBubbles"></div>
+                </div>
+              </div>
+            </div> <!-- End container fluid content -->
+        </div> <!-- End wrapper page content -->
+      </div> <!-- End wrapper div -->
+
+
+      <!-- Scripts -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script type="text/javascript" src="plugins/bootstrap-3.3.7/js/bootstrap.js"></script>
+      <script src="https://d3js.org/d3.v3.min.js"></script>
+      
+      <script src="scripts/Series_init.js"></script>
+
+      <script>
+        heightSmallRow = document.getElementById("ratingLineChart").offsetHeight;
+        widthSmallChart = document.getElementById("colRatingLineChart").offsetWidth;
+        $(".bottom-chart").css('height', heightSmallRow);
+
+        heightNavbar = document.getElementById("menubar").offsetHeight;
+        heightLargeRow = $(document).height() - heightNavbar - heightSmallRow;
+
+        widthLargeChart = document.getElementById("colActorDistribution").offsetWidth;
+        $(".actor-distribution").css('width', widthLargeChart);
+        $(".actor-distribution").css('height', heightLargeRow);
+        $('.search-box').css('height', heightLargeRow);
+        $("#ratingLineChart").css('width', widthLargeChart);
+
+        widthBubbles = $(document).width() - widthLargeChart;
+        $('#keywordBubbles').css('width', widthBubbles);
+
+        initialiseSeries();
+
+      </script>
+    </body>
+
+</html>
