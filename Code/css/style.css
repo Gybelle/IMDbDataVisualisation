@@ -312,6 +312,11 @@ body {
     stroke-opacity: .5;
 }
 
+#sankeyChart{
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* -------------------------------- Biography -------------------------------- */
 .lifetimeImg {
     margin: 20px;
@@ -369,6 +374,11 @@ body {
     display: inline-block;
 }
 
+#languageInfo  {
+    z-index: 10;
+    position: absolute;
+    top: 150px;
+}
 
 /* -------------------------------- Series -------------------------------- */
 .search-box {

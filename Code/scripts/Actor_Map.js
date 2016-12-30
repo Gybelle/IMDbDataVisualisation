@@ -105,6 +105,7 @@ function addMoviesToMap(movieMap) {
     var countryMap = {};
     var locationMap = {};
     var yearMap = {};
+    var languageMap = {};
     var q = d3.queue();
     for (var letter in movieMap) {
         q.defer(d3.dsv(';'), "data/movies/movies_" + letter + ".csv");
@@ -114,10 +115,20 @@ function addMoviesToMap(movieMap) {
         files.forEach(function (file) {
             file.forEach(function (movie) {
                 if (movieMap[movie.Title[0]] && movieMap[movie.Title[0]][movie.ID]) {
+                    // Get year
                     if (!yearMap[movie.Year]) {
                         yearMap[movie.Year ] = 0;
                     }
                     yearMap[movie.Year]++;
+                    // Get languages
+                    movie.Language.split("*").forEach(function (language) {
+                        if (language != "" && language != "None") {
+                            if (!languageMap[language]) {
+                                languageMap[language] = 0;
+                            }
+                            languageMap[language]++;
+                        }
+                    });
                     if (movie.Countries != "") {
                         movie.Countries.split("*").forEach(function (country) {
                             if (!countryMap[country]) {
@@ -139,6 +150,11 @@ function addMoviesToMap(movieMap) {
             });
         });
         setBiographyWidgetMovieMap(yearMap);
+        var languageList = [];
+        for (var language in languageMap) {
+            languageList.push({language: language, count: languageMap[language]});
+        }
+        createActorPieChart("#languageChart", languageList);
 
         // add locations to map
         var locationMinMax = getMovieCountRange(locationMap);
