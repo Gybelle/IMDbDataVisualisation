@@ -25,6 +25,7 @@ rangeLimitGross = RangeLimits(-1, -1)
 rangeLimitScore = RangeLimits(0, 10)
 
 Ranges4 = recordclass('Ranges4', 'r1 r2 r3 r4')
+Ranges8 = recordclass('Ranges11', 'r1 r2 r3 r4 r5 r6 r7 r8')
 Ranges11 = recordclass('Ranges11', 'r1 r2 r3 r4 r5 r6 r7 r8 r9 r10 r11')
 Ranges14 = recordclass('Ranges14', 'r1 r2 r3 r4 r5 r6 r7 r8 r9 r10 r11 r12 r13 r14')
 Ranges15 = recordclass('Ranges15', 'r1 r2 r3 r4 r5 r6 r7 r8 r9 r10 r11 r12 r13 r14 r15')
@@ -32,7 +33,7 @@ Ranges15 = recordclass('Ranges15', 'r1 r2 r3 r4 r5 r6 r7 r8 r9 r10 r11 r12 r13 r
 rangeScore = Ranges11(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 rangeScoreClasses = Ranges4(0, 0, 0, 0)
 rangeRuntime = Ranges14(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-rangeFilmingDays = Ranges15(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+rangeFilmingDays = Ranges8(0, 0, 0, 0, 0, 0, 0, 0)
 rangeBudget = Ranges11(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 rangeGross = Ranges4(0, 0, 0, 0)
 
@@ -40,7 +41,7 @@ RangeNames = recordclass('RangeNames', 't1 t2 t3 t4 t5 t6 t7 t8 t9 t10 t11')
 rangeNamesScore = Ranges11("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10")
 rangeNamesScoreClasses = Ranges4("", "", "", "")
 rangeNamesRuntime = Ranges14("", "", "", "", "", "", "", "", "", "", "", "", "", "")
-rangeNamesFilmingDays = Ranges15("", "", "", "", "", "", "", "", "", "", "", "", "", "", "")
+rangeNamesFilmingDays = Ranges8("", "", "", "", "", "", "", "")
 rangeNamesBudget = Ranges11("", "", "", "", "", "", "", "", "", "", "")
 rangeNamesGross = Ranges4("", "", "", "")
 
@@ -289,38 +290,24 @@ def generateRunTimeNames():
     rangeNamesRuntime.r14 = ">= 4h"
 
 def calculateFilmingDaysRanges():
-    rangeFilmingDays.r1 = 5
-    rangeFilmingDays.r2 = 15
-    rangeFilmingDays.r3 = 30
-    rangeFilmingDays.r4 = 45
-    rangeFilmingDays.r5 = 60
-    rangeFilmingDays.r6 = 75
-    rangeFilmingDays.r7 = 90
-    rangeFilmingDays.r8 = 105
-    rangeFilmingDays.r9 = 120
-    rangeFilmingDays.r10 = 135
-    rangeFilmingDays.r11 = 150
-    rangeFilmingDays.r12 = 165
-    rangeFilmingDays.r13 = 180
-    rangeFilmingDays.r14 = 195
-    rangeFilmingDays.r15 = rangeLimitFilmingDays.max + 1
+    rangeFilmingDays.r1 = 7
+    rangeFilmingDays.r2 = 30
+    rangeFilmingDays.r3 = 60
+    rangeFilmingDays.r4 = 90
+    rangeFilmingDays.r5 = 120
+    rangeFilmingDays.r6 = 150
+    rangeFilmingDays.r7 = 180
+    rangeFilmingDays.r8 = rangeLimitFilmingDays.max + 1
 
 def generateFilmingDaysNames():
-    rangeNamesFilmingDays.r1 = "< 5"
-    rangeNamesFilmingDays.r2 = "[5-15["
-    rangeNamesFilmingDays.r3 = "[15-30["
-    rangeNamesFilmingDays.r4 = "[30-45["
-    rangeNamesFilmingDays.r5 = "[45-60["
-    rangeNamesFilmingDays.r6 = "[60-75["
-    rangeNamesFilmingDays.r7 = "[75-90["
-    rangeNamesFilmingDays.r8 = "[90-105["
-    rangeNamesFilmingDays.r9 = "[105-120["
-    rangeNamesFilmingDays.r10 = "[120-135["
-    rangeNamesFilmingDays.r11 = "[135-150["
-    rangeNamesFilmingDays.r12 = "[150-165["
-    rangeNamesFilmingDays.r13 = "[165-180["
-    rangeNamesFilmingDays.r14 = "[180-190["
-    rangeNamesFilmingDays.r15 = ">= 190"
+    rangeNamesFilmingDays.r1 = "Less then a week"
+    rangeNamesFilmingDays.r2 = "One month"
+    rangeNamesFilmingDays.r3 = "Two months"
+    rangeNamesFilmingDays.r4 = "Three months"
+    rangeNamesFilmingDays.r5 = "Four months"
+    rangeNamesFilmingDays.r6 = "Five months"
+    rangeNamesFilmingDays.r7 = "Six months"
+    rangeNamesFilmingDays.r8 = "More then six months"
 
 def calculateBudgetRanges():
     rangeBudget.r1 = 1000
