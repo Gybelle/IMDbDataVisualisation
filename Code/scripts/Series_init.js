@@ -251,13 +251,13 @@ function drawActorPanels(selectedShow, numSeasons, numEpisodes) {
 	    .attr("width", $('#actorDistribution').width())
 	    .attr("height", $('#actorDistribution').height());
 
-	var row = grid.selectAll(".row")
+	/*var row = grid.selectAll(".row")
 	    .data(divisionData)
 	    .enter().append("g")
-	    .attr("class", "row");
+	    .attr("class", "row");*/
 
-	var column = row.selectAll(".square")
-	    .data(function(d) { return d; })
+	var column = grid.selectAll(".square")
+	    .data(divisionData)
 	    .enter().append("rect")
 	    .attr("class","square")
 	    .attr("x", function(d) { return d.x; })
@@ -267,17 +267,19 @@ function drawActorPanels(selectedShow, numSeasons, numEpisodes) {
 	    .style("fill", function(d) { return d.color; })
 	    .style("stroke", "#222");
 
-    column.append("text")
-	    .attr("x", function(d){ return d.x; })
-	    .attr("y", function(d){ return d.y + 5; })
+    grid.selectAll(".actor-desc").data(divisionData)
+    	.enter().append("text")
+    	.attr("class", "actor-desc")
+	    .attr("x", function(d){ return d.x + d.width / 2; })
+	    .attr("y", function(d){ return d.y + d.height / 2; })
 	    .attr("text-anchor", "middle")
 	    .text(function(d){
-	      return d.actor.FirstName + " " + d.actor.Las;
+	      return d.actor.FirstName + " " + d.actor.LastName;
 	    })
 	    .style({
 	        "fill":"white",
 	        "font-family":"Helvetica Neue, Helvetica, Arial, san-serif",
-	        "font-size": "12px",
+	        "font-size": "20px",
 	    });
 
 }
@@ -294,41 +296,88 @@ function calculateActorDivisionData(mainActors, actorOccurrences) {
 	$.each(mainActors, function( index, value ) {
 		actor = new Object();
 		actor.actor = value;
-		actor.percentage = total / actorOccurrences[value.ActorID];
+		actor.percentage = total / actorOccurrences[value.ActorID] / 100;
 		division.push(actor);
 	});
 
+
+
+
+	//let's say 60% of our surface is the 'max'
+	var totalHeigthFactor = 1;
 	var widthTotal = $('#actorDistribution').width();
 	var heightTotal = $('#actorDistribution').height();
 
+	var totalSurface = widthTotal * totalHeigthFactor * heightTotal ;
+
+
+	/*
+	actorSurface = actorHeight * actorWidth
+	realSurface = realHeight * realWidth
+	actorSurface = realSurface * actorPercentage
+	actorHeight * actorWidth = realHeight * realWidth * actorPercentage
+	*/
+
 
 	var data = new Array();
+	var numCols = 5;
+	//var numRows = 2;
     var xpos = 1;
     var ypos = 1;
-    var width = widthTotal / 5; //this should be calculated using the percentages
-    var height = heightTotal / 2; //this should be calculated using the percentages
+    var width = widthTotal / numCols; //this should be calculated using the percentages
+    //var height = heightTotal / numRows; //this should be calculated using the percentages
 
-    for (var row = 0; row < 2; row++) {
-        data.push( new Array() );
+    var currentColumn  = 0;
 
-        for (var column = 0; column < 5; column++) {
-            data[row].push({
-            	actor: mainActors[row * 5 + column],
+    for (var i = 0; i < mainActors.length; i++) {
+    	var currentActor = mainActors[i];
+
+    	console.log(division[i].percentage);
+
+    	var height = (totalSurface * division[i].percentage) / width;
+
+	    data.push({
+        	actor: currentActor,
+            x: xpos,
+            y: ypos,
+            width: width,
+            height: height,
+            color: getNewColor()
+        })
+
+
+	    //currentColumn++;
+
+	   	if (currentColumn >= numCols) {
+	   		currentColumn = 0;
+	   		xpos = 1;
+	   	} else {
+	   		xpos += width;
+	   	}
+
+
+    }
+
+
+
+/*
+    for (var row = 0; row < numRows; row++) {
+
+        for (var column = 0; column < numCols; column++) {
+            data.push({
+            	actor: mainActors[row * numCols + column],
                 x: xpos,
                 y: ypos,
                 width: width,
                 height: height,
                 color: getNewColor()
             })
-            // increment the x position. I.e. move it over by (width variable)
             xpos += width;
         }
-        // reset the x position after a row is complete
         xpos = 1;
-        // increment the y position for the next row. Move it down (height variable)
         ypos += height; 
     }
-
+*/
 	return data;
 }
 
