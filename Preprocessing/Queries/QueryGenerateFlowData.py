@@ -11,6 +11,8 @@ import math
 import re
 
 printScores = False
+printScoreClasses = True
+
 
 movieList = []      # (id, title, runtime, filmingDays, budget, gross, rating)
 flowDict = {}       # (t1, t2) , count
@@ -23,20 +25,24 @@ rangeLimitGross = RangeLimits(-1, -1)
 rangeLimitScore = RangeLimits(0, 10)
 
 Ranges4 = recordclass('Ranges4', 'r1 r2 r3 r4')
+Ranges7 = recordclass('Ranges7', 'r1 r2 r3 r4 r5 r6 r7')
+Ranges8 = recordclass('Ranges8', 'r1 r2 r3 r4 r5 r6 r7 r8')
 Ranges11 = recordclass('Ranges11', 'r1 r2 r3 r4 r5 r6 r7 r8 r9 r10 r11')
 Ranges14 = recordclass('Ranges14', 'r1 r2 r3 r4 r5 r6 r7 r8 r9 r10 r11 r12 r13 r14')
 Ranges15 = recordclass('Ranges15', 'r1 r2 r3 r4 r5 r6 r7 r8 r9 r10 r11 r12 r13 r14 r15')
 
 rangeScore = Ranges11(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-rangeRuntime = Ranges14(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-rangeFilmingDays = Ranges15(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+rangeScoreClasses = Ranges4(0, 0, 0, 0)
+rangeRuntime = Ranges7(0, 0, 0, 0, 0, 0, 0)
+rangeFilmingDays = Ranges8(0, 0, 0, 0, 0, 0, 0, 0)
 rangeBudget = Ranges11(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 rangeGross = Ranges4(0, 0, 0, 0)
 
 RangeNames = recordclass('RangeNames', 't1 t2 t3 t4 t5 t6 t7 t8 t9 t10 t11')
 rangeNamesScore = Ranges11("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10")
-rangeNamesRuntime = Ranges14("", "", "", "", "", "", "", "", "", "", "", "", "", "")
-rangeNamesFilmingDays = Ranges15("", "", "", "", "", "", "", "", "", "", "", "", "", "", "")
+rangeNamesScoreClasses = Ranges4("", "", "", "")
+rangeNamesRuntime = Ranges7("", "", "", "", "", "", "")
+rangeNamesFilmingDays = Ranges8("", "", "", "", "", "", "", "")
 rangeNamesBudget = Ranges11("", "", "", "", "", "", "", "", "", "", "")
 rangeNamesGross = Ranges4("", "", "", "")
 
@@ -243,76 +249,52 @@ def calculateRanges():
     calculateGrossRanges()
     generateGrossNames()
 
+    if printScoreClasses:
+        calculateScoreClassRanges()
+        generateScoreClassNames()
+
     #checkRanges()
 
     printMessage_CalculatingRangesEnded()
     printMessage_GeneratingNamesRangesEnded()
 
 def calculateRunTimeRanges():
-    rangeRuntime.r1 = 5
-    rangeRuntime.r2 = 15
-    rangeRuntime.r3 = 30
-    rangeRuntime.r4 = 45
-    rangeRuntime.r5 = 60
-    rangeRuntime.r6 = 75
-    rangeRuntime.r7 = 90
-    rangeRuntime.r8 = 105
-    rangeRuntime.r9 = 120
-    rangeRuntime.r10 = 135
-    rangeRuntime.r11 = 150
-    rangeRuntime.r12 = 180
-    rangeRuntime.r13 = 240
-    rangeRuntime.r14 = rangeLimitRuntime.max + 1
+    rangeRuntime.r1 = 15 + 1
+    rangeRuntime.r2 = 30 + 1
+    rangeRuntime.r3 = 60 + 1
+    rangeRuntime.r4 = 90 + 1
+    rangeRuntime.r5 = 120 + 1
+    rangeRuntime.r6 = 180 + 1
+    rangeRuntime.r7 = rangeLimitRuntime.max + 1
 
 def generateRunTimeNames():
-    rangeNamesRuntime.r1 = "< 5min"
-    rangeNamesRuntime.r2 = "[5min - 15min["
-    rangeNamesRuntime.r3 = "[15min - 30min["
-    rangeNamesRuntime.r4 = "[30min - 45min["
-    rangeNamesRuntime.r5 = "[45min - 1h["
-    rangeNamesRuntime.r6 = "[1h - 1h15["
-    rangeNamesRuntime.r7 = "[1h15 - 1h30["
-    rangeNamesRuntime.r8 = "[1h30 - 1h45["
-    rangeNamesRuntime.r9 = "[1h45 - 2h["
-    rangeNamesRuntime.r10 = "[2h - 2h15["
-    rangeNamesRuntime.r11 = "[2h15 - 2h30["
-    rangeNamesRuntime.r12 = "[2h30 - 3h["
-    rangeNamesRuntime.r13 = "[3h - 4h["
-    rangeNamesRuntime.r14 = ">= 4h"
+    rangeNamesRuntime.r1 = "Less then 15 minutes"
+    rangeNamesRuntime.r2 = "30 minutes"
+    rangeNamesRuntime.r3 = "1 hour"
+    rangeNamesRuntime.r4 = "1.5 hours"
+    rangeNamesRuntime.r5 = "2 hours"
+    rangeNamesRuntime.r6 = "3 hours"
+    rangeNamesRuntime.r7 = "More then 3 hours"
 
 def calculateFilmingDaysRanges():
-    rangeFilmingDays.r1 = 5
-    rangeFilmingDays.r2 = 15
-    rangeFilmingDays.r3 = 30
-    rangeFilmingDays.r4 = 45
-    rangeFilmingDays.r5 = 60
-    rangeFilmingDays.r6 = 75
-    rangeFilmingDays.r7 = 90
-    rangeFilmingDays.r8 = 105
-    rangeFilmingDays.r9 = 120
-    rangeFilmingDays.r10 = 135
-    rangeFilmingDays.r11 = 150
-    rangeFilmingDays.r12 = 165
-    rangeFilmingDays.r13 = 180
-    rangeFilmingDays.r14 = 195
-    rangeFilmingDays.r15 = rangeLimitFilmingDays.max + 1
+    rangeFilmingDays.r1 = 7
+    rangeFilmingDays.r2 = 30
+    rangeFilmingDays.r3 = 60
+    rangeFilmingDays.r4 = 90
+    rangeFilmingDays.r5 = 120
+    rangeFilmingDays.r6 = 150
+    rangeFilmingDays.r7 = 180
+    rangeFilmingDays.r8 = rangeLimitFilmingDays.max + 1
 
 def generateFilmingDaysNames():
-    rangeNamesFilmingDays.r1 = "< 5"
-    rangeNamesFilmingDays.r2 = "[5-15["
-    rangeNamesFilmingDays.r3 = "[15-30["
-    rangeNamesFilmingDays.r4 = "[30-45["
-    rangeNamesFilmingDays.r5 = "[45-60["
-    rangeNamesFilmingDays.r6 = "[60-75["
-    rangeNamesFilmingDays.r7 = "[75-90["
-    rangeNamesFilmingDays.r8 = "[90-105["
-    rangeNamesFilmingDays.r9 = "[105-120["
-    rangeNamesFilmingDays.r10 = "[120-135["
-    rangeNamesFilmingDays.r11 = "[135-150["
-    rangeNamesFilmingDays.r12 = "[150-165["
-    rangeNamesFilmingDays.r13 = "[165-180["
-    rangeNamesFilmingDays.r14 = "[180-190["
-    rangeNamesFilmingDays.r15 = ">= 190"
+    rangeNamesFilmingDays.r1 = "Less then a week"
+    rangeNamesFilmingDays.r2 = "One month"
+    rangeNamesFilmingDays.r3 = "Two months"
+    rangeNamesFilmingDays.r4 = "Three months"
+    rangeNamesFilmingDays.r5 = "Four months"
+    rangeNamesFilmingDays.r6 = "Five months"
+    rangeNamesFilmingDays.r7 = "Six months"
+    rangeNamesFilmingDays.r8 = "More then six months"
 
 def calculateBudgetRanges():
     rangeBudget.r1 = 1000
@@ -351,6 +333,19 @@ def generateGrossNames():
     rangeNamesGross.r2 = "[1M-10M["
     rangeNamesGross.r3 = "[10M-100M["
     rangeNamesGross.r4 = "> 100M"
+
+def calculateScoreClassRanges():
+    max = 10
+    rangeScoreClasses.r1 = 4
+    rangeScoreClasses.r2 = 6
+    rangeScoreClasses.r3 = 8
+    rangeScoreClasses.r4 = max + 1
+
+def generateScoreClassNames():
+    rangeNamesScoreClasses.r1 = "Bad"
+    rangeNamesScoreClasses.r2 = "Below average"
+    rangeNamesScoreClasses.r3 = "Good"
+    rangeNamesScoreClasses.r4 = "Excellent"
 
 def calculateRangesFor(ranges, max):
     step = max/11
@@ -445,14 +440,16 @@ def distributeDataInRanges():
     initializeDictionary()
     updateDictionary()
     writeDictToFile()
-    #TODO write this further
 
 def initializeDictionary():
     #Pairs: [Runtime, FilmingDays]  [FilmingDays, Budget]   [Budget, Revenue]   [Revenue, Score]
     initializeDictPairs(rangeNamesRuntime, rangeNamesFilmingDays)
     initializeDictPairs(rangeNamesFilmingDays, rangeNamesBudget)
     initializeDictPairs(rangeNamesBudget, rangeNamesGross)
-    initializeDictPairs(rangeNamesGross, rangeNamesScore)
+    if printScores:
+        initializeDictPairs(rangeNamesGross, rangeNamesScore)
+    if printScoreClasses:
+        initializeDictPairs(rangeNamesGross, rangeNamesScoreClasses)
 
 def initializeDictPairs(range1, range2):
     for x in range1:
@@ -491,6 +488,12 @@ def updateDictionary():
                 rangeInfo2 = (rangeScore, rangeNamesScore, ratingValue)
                 pairList.append(createDictPair(rangeInfo1, rangeInfo2))
 
+        if printScoreClasses:
+            if (grossValue != None and ratingValue != None):
+                rangeInfo1 = (rangeGross, rangeNamesGross, grossValue)
+                rangeInfo2 = (rangeScoreClasses, rangeNamesScoreClasses, ratingValue)
+                pairList.append(createDictPair(rangeInfo1, rangeInfo2))
+
         updateDictCount(pairList)
 
 def createDictPair(rangeInfo1, rangeInfo2):
@@ -525,8 +528,13 @@ def updateDictCount(pairList):
 def writeDictToFile():
     file = open("../../Data/flowData.json", "w", encoding="utf8", errors="ignore")
     file.write("{\n\"links\": [\n")
+    index = 1
     for element in flowDict:
-        file.write("{\"source\":\"%s\",\"target\":\"%s\",\"value\":\"%d\"},\n" % (element[0], element[1], flowDict[element]))
+        if index == len(flowDict):
+            file.write("{\"source\":\"%s\",\"target\":\"%s\",\"value\":\"%d\"}\n" % (element[0], element[1], flowDict[element]))
+        else:
+            file.write("{\"source\":\"%s\",\"target\":\"%s\",\"value\":\"%d\"},\n" % (element[0], element[1], flowDict[element]))
+        index += 1
     file.write("] , \n")
 
     writeNodesToFile(file)
@@ -534,18 +542,29 @@ def writeDictToFile():
     file.close()
 
 def writeNodesToFile(file):
+    last = False
     file.write("\"nodes\": [\n")
-    writeNodes(file, rangeNamesRuntime)
-    writeNodes(file, rangeNamesFilmingDays)
-    writeNodes(file, rangeNamesBudget)
-    writeNodes(file, rangeNamesGross)
+    writeNodes(file, rangeNamesRuntime, last)
+    writeNodes(file, rangeNamesFilmingDays, last)
+    writeNodes(file, rangeNamesBudget, last)
+    if not printScoreClasses and not printScores:
+        last = True
+    writeNodes(file, rangeNamesGross, last)
+    last = True
     if printScores:
-        writeNodes(file, rangeNamesScore)
+        writeNodes(file, rangeNamesScore, last)
+    elif printScoreClasses:
+        writeNodes(file, rangeNamesScoreClasses, last)
     file.write("] } \n")
 
-def writeNodes(file, rangeNames):
+def writeNodes(file, rangeNames, last):
+    index = 1
     for range in rangeNames:
-        file.write("{\"name\":\"%s\"},\n" % range)
+        if index == len(rangeNames) and last:
+            file.write("{\"name\":\"%s\"}\n" % range)
+        else:
+            file.write("{\"name\":\"%s\"},\n" % range)
+        index += 1
 
 
 #######################################################################################################################

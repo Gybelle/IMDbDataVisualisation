@@ -311,12 +311,6 @@ body {
 .link:hover {
     stroke-opacity: .5;
 }
-
-#sankeyChart{
-  margin-left: auto;
-  margin-right: auto;
-}
-
 /* -------------------------------- Biography -------------------------------- */
 .lifetimeImg {
     margin: 20px;
