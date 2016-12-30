@@ -31,7 +31,7 @@ function createSankeyChart(){
 
 
   // load the data
-  d3.json("data/flowData/flowDataSmall.json", function(error, graph) {
+  d3.json("data/flowData/flowData_withScoreClass.json", function(error, graph) {
       var nodeMap = {};
       graph.nodes.forEach(function(x) { nodeMap[x.name] = x; });
       graph.links = graph.links.map(function(x) {

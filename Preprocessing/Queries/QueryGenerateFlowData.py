@@ -11,6 +11,8 @@ import math
 import re
 
 printScores = False
+printScoreClasses = True
+
 
 movieList = []      # (id, title, runtime, filmingDays, budget, gross, rating)
 flowDict = {}       # (t1, t2) , count
@@ -28,6 +30,7 @@ Ranges14 = recordclass('Ranges14', 'r1 r2 r3 r4 r5 r6 r7 r8 r9 r10 r11 r12 r13 r
 Ranges15 = recordclass('Ranges15', 'r1 r2 r3 r4 r5 r6 r7 r8 r9 r10 r11 r12 r13 r14 r15')
 
 rangeScore = Ranges11(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+rangeScoreClasses = Ranges4(0, 0, 0, 0)
 rangeRuntime = Ranges14(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 rangeFilmingDays = Ranges15(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 rangeBudget = Ranges11(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -35,6 +38,7 @@ rangeGross = Ranges4(0, 0, 0, 0)
 
 RangeNames = recordclass('RangeNames', 't1 t2 t3 t4 t5 t6 t7 t8 t9 t10 t11')
 rangeNamesScore = Ranges11("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10")
+rangeNamesScoreClasses = Ranges4("", "", "", "")
 rangeNamesRuntime = Ranges14("", "", "", "", "", "", "", "", "", "", "", "", "", "")
 rangeNamesFilmingDays = Ranges15("", "", "", "", "", "", "", "", "", "", "", "", "", "", "")
 rangeNamesBudget = Ranges11("", "", "", "", "", "", "", "", "", "", "")
@@ -243,6 +247,10 @@ def calculateRanges():
     calculateGrossRanges()
     generateGrossNames()
 
+    if printScoreClasses:
+        calculateScoreClassRanges()
+        generateScoreClassNames()
+
     #checkRanges()
 
     printMessage_CalculatingRangesEnded()
@@ -352,6 +360,19 @@ def generateGrossNames():
     rangeNamesGross.r3 = "[10M-100M["
     rangeNamesGross.r4 = "> 100M"
 
+def calculateScoreClassRanges():
+    max = 10
+    rangeScoreClasses.r1 = 4
+    rangeScoreClasses.r2 = 6
+    rangeScoreClasses.r3 = 8
+    rangeScoreClasses.r4 = max + 1
+
+def generateScoreClassNames():
+    rangeNamesScoreClasses.r1 = "Bad"
+    rangeNamesScoreClasses.r2 = "Below average"
+    rangeNamesScoreClasses.r3 = "Good"
+    rangeNamesScoreClasses.r4 = "Excellent"
+
 def calculateRangesFor(ranges, max):
     step = max/11
     if step < 1.0:
@@ -445,14 +466,16 @@ def distributeDataInRanges():
     initializeDictionary()
     updateDictionary()
     writeDictToFile()
-    #TODO write this further
 
 def initializeDictionary():
     #Pairs: [Runtime, FilmingDays]  [FilmingDays, Budget]   [Budget, Revenue]   [Revenue, Score]
     initializeDictPairs(rangeNamesRuntime, rangeNamesFilmingDays)
     initializeDictPairs(rangeNamesFilmingDays, rangeNamesBudget)
     initializeDictPairs(rangeNamesBudget, rangeNamesGross)
-    initializeDictPairs(rangeNamesGross, rangeNamesScore)
+    if printScores:
+        initializeDictPairs(rangeNamesGross, rangeNamesScore)
+    if printScoreClasses:
+        initializeDictPairs(rangeNamesGross, rangeNamesScoreClasses)
 
 def initializeDictPairs(range1, range2):
     for x in range1:
@@ -491,6 +514,12 @@ def updateDictionary():
                 rangeInfo2 = (rangeScore, rangeNamesScore, ratingValue)
                 pairList.append(createDictPair(rangeInfo1, rangeInfo2))
 
+        if printScoreClasses:
+            if (grossValue != None and ratingValue != None):
+                rangeInfo1 = (rangeGross, rangeNamesGross, grossValue)
+                rangeInfo2 = (rangeScoreClasses, rangeNamesScoreClasses, ratingValue)
+                pairList.append(createDictPair(rangeInfo1, rangeInfo2))
+
         updateDictCount(pairList)
 
 def createDictPair(rangeInfo1, rangeInfo2):
@@ -525,8 +554,13 @@ def updateDictCount(pairList):
 def writeDictToFile():
     file = open("../../Data/flowData.json", "w", encoding="utf8", errors="ignore")
     file.write("{\n\"links\": [\n")
+    index = 1
     for element in flowDict:
-        file.write("{\"source\":\"%s\",\"target\":\"%s\",\"value\":\"%d\"},\n" % (element[0], element[1], flowDict[element]))
+        if index == len(flowDict):
+            file.write("{\"source\":\"%s\",\"target\":\"%s\",\"value\":\"%d\"}\n" % (element[0], element[1], flowDict[element]))
+        else:
+            file.write("{\"source\":\"%s\",\"target\":\"%s\",\"value\":\"%d\"},\n" % (element[0], element[1], flowDict[element]))
+        index += 1
     file.write("] , \n")
 
     writeNodesToFile(file)
@@ -534,18 +568,29 @@ def writeDictToFile():
     file.close()
 
 def writeNodesToFile(file):
+    last = False
     file.write("\"nodes\": [\n")
-    writeNodes(file, rangeNamesRuntime)
-    writeNodes(file, rangeNamesFilmingDays)
-    writeNodes(file, rangeNamesBudget)
-    writeNodes(file, rangeNamesGross)
+    writeNodes(file, rangeNamesRuntime, last)
+    writeNodes(file, rangeNamesFilmingDays, last)
+    writeNodes(file, rangeNamesBudget, last)
+    if not printScoreClasses and not printScores:
+        last = True
+    writeNodes(file, rangeNamesGross, last)
+    last = True
     if printScores:
-        writeNodes(file, rangeNamesScore)
+        writeNodes(file, rangeNamesScore, last)
+    elif printScoreClasses:
+        writeNodes(file, rangeNamesScoreClasses, last)
     file.write("] } \n")
 
-def writeNodes(file, rangeNames):
+def writeNodes(file, rangeNames, last):
+    index = 1
     for range in rangeNames:
-        file.write("{\"name\":\"%s\"},\n" % range)
+        if index == len(rangeNames) and last:
+            file.write("{\"name\":\"%s\"}\n" % range)
+        else:
+            file.write("{\"name\":\"%s\"},\n" % range)
+        index += 1
 
 
 #######################################################################################################################

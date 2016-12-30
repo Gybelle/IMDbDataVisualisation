@@ -311,12 +311,6 @@ body {
 .link:hover {
     stroke-opacity: .5;
 }
-
-#sankeyChart{
-  margin-left: auto;
-  margin-right: auto;
-}
-
 /* -------------------------------- Biography -------------------------------- */
 .lifetimeImg {
     margin: 20px;
@@ -372,56 +366,4 @@ body {
 .lifetimeWrapperLegend > .legendText {
     float: right;
     display: inline-block;
-}
-
-#languageInfo  {
-    z-index: 10;
-    position: absolute;
-    top: 150px;
-}
-
-/* -------------------------------- Series -------------------------------- */
-.search-box {
-    padding-top: 20px;
-    padding-left: 20px;
-}
-
-.search-box #custom-search-input {
-    height: 20%;
-}
-
-.search-box #filter-results {
-    /*border: 1px solid black;*/
-    overflow: scroll;
-    overflow-x: hidden;
-    height: 75%;
-}
-
-.search-box #filter-results a {
-    display: block;
-}
-
-.search-box input#custom-search-input-field {
-    height: 65%;
-}
-
-.search-box #search-button-container {
-    vertical-align: top;
-}
-
-.search-box #search-button-container button {
-    height: 65%;
-}
-
-#actorDistribution {
-    border: 1px solid;
-    border-top: none;
-}
-
-#searchBox {
-    border-bottom: 1px solid
-}
-
-#ratingLineChart {
-    border-right: 1px solid
 }
