@@ -304,37 +304,86 @@ function calculateActorDivisionData(mainActors, actorOccurrences) {
 
 
 	//let's say 60% of our surface is the 'max'
-	var totalHeigthFactor = 1;
+	var totalHeigthFactor = .9;
 	var widthTotal = $('#actorDistribution').width();
 	var heightTotal = $('#actorDistribution').height();
 
 	var totalSurface = widthTotal * totalHeigthFactor * heightTotal ;
 
 
-	/*
-	actorSurface = actorHeight * actorWidth
-	realSurface = realHeight * realWidth
-	actorSurface = realSurface * actorPercentage
-	actorHeight * actorWidth = realHeight * realWidth * actorPercentage
-	*/
-
-
 	var data = new Array();
 	var numCols = 5;
 	//var numRows = 2;
-    var xpos = 1;
-    var ypos = 1;
-    var width = widthTotal / numCols; //this should be calculated using the percentages
+    var width = Math.round(widthTotal / numCols); //this should be calculated using the percentages
     //var height = heightTotal / numRows; //this should be calculated using the percentages
 
     var currentColumn  = 0;
 
     for (var i = 0; i < mainActors.length; i++) {
     	var currentActor = mainActors[i];
-
+    	console.log(currentActor);
     	console.log(division[i].percentage);
 
-    	var height = (totalSurface * division[i].percentage) / width;
+    	var height = Math.round((totalSurface * division[i].percentage) / width);
+
+
+    	//now calculate the position, trying to fill top-down from left to right
+    	//use the data object as reference for already placed squares
+
+		//we'll start at (1, 1) and see if spaces are occupied
+	    var xpos = 1;
+    	var ypos = 1;
+    	var nextYPos = 1;
+
+    	var positionFound = false;
+    	while (!positionFound) {
+
+    		if (data.length == 0) {
+    			//edge condition: the first one will always be placed top left
+    			positionFound = true;
+    			continue;
+    		}
+
+    		positionFound = true;
+	    	for (var j = 0; j < data.length && positionFound; j++) {
+
+	    		//2 conditions need to be met:
+	    		// * The space may not already be occupied
+	    		// * The space has to be inside our bounds 
+	    		//    --> doesn't get checked for now to avoid infinite loops, probably needs revision
+	    		//    --> Ideally the solution would be to change the totalHeightFactor variable for this, if we need to go out of x bounds
+	    		//    --> So every time we dont have enough room, lower the totalHeightFactor and repeat this whole process
+
+	    		var xTaken = (xpos >= data[j].x && xpos < data[j].x + data[j].width);
+	    		var yTaken = (ypos >= data[j].y && ypos < data[j].y + data[j].height);
+
+	    		if (xTaken && yTaken) {
+    				positionFound = false;
+	    		}
+
+	    		//store information for later to avoid doing this same loop:
+	    		if (data[j].x == xpos) {
+	    			if ((data[j].y + data[j].height) > nextYPos) {
+	    				nextYPos = data[j].y + data[j].height;
+	    			}
+	    		}
+	    	}
+
+	    	if (positionFound) {
+	    		continue;
+	    	}
+
+	    	//if the position wasnt found, we need to determine the next available position
+	    	//in case the height fits in our window, we can place it to the next Y
+	    	if (nextYPos > ypos && (nextYPos + height <= heightTotal)) {
+	    		ypos = nextYPos;
+	    	} else {
+	    		xpos += width;
+	    		ypos = 1;
+	    		nextYPos = 1;
+	    	}
+
+    	}
 
 	    data.push({
         	actor: currentActor,
@@ -343,41 +392,10 @@ function calculateActorDivisionData(mainActors, actorOccurrences) {
             width: width,
             height: height,
             color: getNewColor()
-        })
-
-
-	    //currentColumn++;
-
-	   	if (currentColumn >= numCols) {
-	   		currentColumn = 0;
-	   		xpos = 1;
-	   	} else {
-	   		xpos += width;
-	   	}
-
+        });
 
     }
 
-
-
-/*
-    for (var row = 0; row < numRows; row++) {
-
-        for (var column = 0; column < numCols; column++) {
-            data.push({
-            	actor: mainActors[row * numCols + column],
-                x: xpos,
-                y: ypos,
-                width: width,
-                height: height,
-                color: getNewColor()
-            })
-            xpos += width;
-        }
-        xpos = 1;
-        ypos += height; 
-    }
-*/
 	return data;
 }
 
