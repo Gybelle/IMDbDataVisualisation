@@ -106,6 +106,11 @@ $(document.body).on('click', '.selectSeries' ,function(){
 	//first of all, search the number of seasons and max amount of episodes per season
 	var numSeasons = 0;
 	var numEpisodes = 0;
+
+	filtered = episodes.filter(function(d) {
+		return (d.Title === selectedShow.Title && d.Season !== 0 && d.Episode !== 0);
+	});
+
 	$.each(filtered, function( index, value ) {
 		if (value.Season > numSeasons) {
 			numSeasons = value.Season;
@@ -130,10 +135,11 @@ function drawRatingsPerEpisode(selectedShow, numSeasons, numEpisodes) {
 		return (d.Title === selectedShow.Title && d.Season !== 0 && d.Episode !== 0);
 	});
 
+	var epsPerSeason = [];
 	var data = [];
 	$.each(filtered, function( index, value ) {
 		var episode = new Object();
-		episode.episodeNr = (value.Season - 1) * numSeasons + value.Episode;
+		episode.episodeNr = (value.Season - 1) * numEpisodes + value.Episode;
 		episode.season = value.Season;
 		episode.episode = value.Episode;
 		episode.rating = value.Rating;
@@ -141,6 +147,11 @@ function drawRatingsPerEpisode(selectedShow, numSeasons, numEpisodes) {
 		if (episode.rating > 0) {
 			data.push(episode);
 		}
+
+		if (epsPerSeason[episode.season] === undefined) {
+			epsPerSeason[episode.season] = 0;
+		}
+		epsPerSeason[episode.season]++;
 	});
 
 	// define dimensions of graph
@@ -182,13 +193,49 @@ function drawRatingsPerEpisode(selectedShow, numSeasons, numEpisodes) {
 		    .append("svg:g")
 		      .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
 
+
+		//calculate the ticks that represent the first episode of a new season
+		var tickValues = [];
+		var epCounter = 1;
+
+		for (var i = 1; i <= epsPerSeason.length; i++) {
+			tickValues.push(epCounter - 1);
+			if (epsPerSeason[i] !== undefined) {
+				epCounter += epsPerSeason[i];
+			}
+		}
+
+		var seasonNr = 0;
 		// create yAxis
-		var xAxis = d3.svg.axis().scale(x).tickSize(-h).tickSubdivide(true);
+		var xAxis = d3.svg.axis().scale(x).tickSize(-h).tickSubdivide(true).tickValues(tickValues).tickFormat(function(d) {
+			//find the season this episodeNr belongs to
+
+			seasonNr++;
+			return "Season " + seasonNr;
+
+
+	/*		var seasonNr = 0;
+			var filtered = data.filter(function(v) {
+				return (v.episodeNr === d);
+			});
+
+			if (filtered.length > 0) {
+				return "Season " + filtered[0].season;
+			}
+			return ""; */
+		});
+
+
 		// Add the x-axis.
 		graph.append("svg:g")
 		      .attr("class", "x axis")
 		      .attr("transform", "translate(0," + h + ")")
 		      .call(xAxis);
+
+
+		graph.selectAll('g.tick').select('text')
+			.style("text-anchor", "middle")
+		    .attr("x", 0); //change this 0 to something else to center the ticks
 
 		// create left yAxis
 		var yAxisLeft = d3.svg.axis().scale(y).ticks(4).orient("left");
@@ -321,8 +368,6 @@ function calculateActorDivisionData(mainActors, actorOccurrences) {
 
     for (var i = 0; i < mainActors.length; i++) {
     	var currentActor = mainActors[i];
-    	console.log(currentActor);
-    	console.log(division[i].percentage);
 
     	var height = Math.round((totalSurface * division[i].percentage) / width);
 
