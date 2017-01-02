@@ -29,7 +29,6 @@ function createSankeyChart(){
 
   var path = sankey.link();
 
-
   // load the data
   d3.json("data/flowData/flowData.json", function(error, graph) {
       var nodeMap = {};
@@ -80,7 +79,11 @@ function createSankeyChart(){
         .attr("height", function(d) { return d.dy; })
         .attr("width", sankey.nodeWidth())
         .style("fill", function(d) {
-  		  return d.color = color(d.name.replace(/ .*/, "")); })
+            console.log(d)
+            console.log(d.name)
+            return d.color = colorsSankey[d.name];
+  		      //return d.color = color(d.name.replace(/ .*/, ""));
+          })
         .style("stroke", function(d) {
   		  return d3.rgb(d.color).darker(2); })
       .append("title")
