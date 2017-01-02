@@ -2,7 +2,6 @@ function createSankeyChart(){
   // Based on http://bl.ocks.org/d3noob/5015397
   var parentW = $("#sankeyChart").width();
   var parentH = 740;
-  console.log(parentW);
   var units = "Widgets";
 
   var margin = {top: 10, right: 10, bottom: 10, left: 10},
@@ -79,8 +78,6 @@ function createSankeyChart(){
         .attr("height", function(d) { return d.dy; })
         .attr("width", sankey.nodeWidth())
         .style("fill", function(d) {
-            console.log(d)
-            console.log(d.name)
             return d.color = colorsSankey[d.name];
   		      //return d.color = color(d.name.replace(/ .*/, ""));
           })
@@ -112,5 +109,17 @@ function createSankeyChart(){
       link.attr("d", path);
     }
   }); //end load data
+
+  // The Legend
+
+  var categories = ["RunningTimes", "FilmingDays", "Budged", "Gross", "Rating"];
+  var legend = d3.select("#sankeyChart").append('div').attr("class", "legend");
+  categories.forEach(function(c) {
+    categorie = legend.append('div');
+    categorie.append('div').attr("class", "series-marker")
+          .style("background-color", colorsSankey[c]);
+    categorie.append('p').text(sankeyCategories[c]);
+  });
+
 
 } // end createSankeyChart()

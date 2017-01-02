@@ -597,7 +597,6 @@ def generateColorFile(fileName):
     writeToColorFile(colorFile, rangeNamesScoreClasses, col_rating)
 
     colorFile.write("}")
-
     colorFile.close()
 
 def writeToColorFile(colorFile, rangeNames, colorValue):

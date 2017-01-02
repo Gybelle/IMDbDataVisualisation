@@ -39,4 +39,12 @@ var colorsSankey = {
 	"Below average": "#F0CC76",
 	"Good": "#F0CC76",
 	"Excellent": "#F0CC76"
-}
+};
+
+var sankeyCategories = {
+	"RunningTimes": "Movie duration",
+	"FilmingDays": "Filming duration",
+	"Budged": "Budget (in EUR)",
+	"Gross": "Revenue (in EUR)",
+	"Rating": "Rating"
+};

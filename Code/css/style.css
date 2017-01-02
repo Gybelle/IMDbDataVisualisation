@@ -311,6 +311,33 @@ body {
 .link:hover {
     stroke-opacity: .5;
 }
+
+#sankeyChart .legend {
+  position: absolute;
+  right: 0px;
+}
+
+#sankeyChart .legend > div {
+    margin: 10px 25px 10px 10px;
+    display: inline-block;
+}
+
+#sankeyChart .legend p {
+    display:inline;
+    font-size: 0.8em;
+    font-family: sans-serif;
+    font-weight: 600;
+}
+#sankeyChart .legend .series-marker {
+    height: 1em;
+    width: 1em;
+    border-radius: 35%;
+    background-color: crimson;
+    display: inline-block;
+    margin-right: 4px;
+    margin-bottom: -0.16rem;
+}
+
 /* -------------------------------- Biography -------------------------------- */
 .lifetimeImg {
     margin: 20px;
