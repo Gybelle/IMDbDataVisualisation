@@ -328,7 +328,8 @@ body {
     font-family: sans-serif;
     font-weight: 600;
 }
-#sankeyChart .legend .series-marker {
+
+#sankeyChart .legend .categories-marker {
     height: 1em;
     width: 1em;
     border-radius: 35%;
@@ -337,6 +338,12 @@ body {
     margin-right: 4px;
     margin-bottom: -0.16rem;
 }
+
+#sankeyChart .highlighted_link {
+  stroke: #FF183C;
+  stroke-opacity: .8;
+}
+
 
 /* -------------------------------- Biography -------------------------------- */
 .lifetimeImg {

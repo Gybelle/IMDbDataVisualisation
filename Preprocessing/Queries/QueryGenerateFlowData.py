@@ -294,7 +294,7 @@ def generateFilmingDaysNames():
     rangeNamesFilmingDays.r5 = "Four months"
     rangeNamesFilmingDays.r6 = "Five months"
     rangeNamesFilmingDays.r7 = "Six months"
-    rangeNamesFilmingDays.r8 = "More then six months"
+    rangeNamesFilmingDays.r8 = "More than six months"
 
 def calculateBudgetRanges():
     rangeBudget.r1 = 1000

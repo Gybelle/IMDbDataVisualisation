@@ -12,6 +12,7 @@
         <script src="http://d3js.org/d3.v3.js"></script>
         <script src="plugins/sankey.js"></script>
         <script type="text/javascript" src="scripts/flows_sankey.js"></script>
+        <script type="text/javascript" src="scripts/flows_sankey_highlight.js"></script>
 
     </head>
 
@@ -47,10 +48,12 @@
         </div>
       -->
 
-        <script>
-          createSankeyChart()
-        </script>
+      <button onclick="highlightPathInSankey()">Click me</button>
+      <script>
+        createSankeyChart();
+      </script>
 
     </body>
+
 
 </html>

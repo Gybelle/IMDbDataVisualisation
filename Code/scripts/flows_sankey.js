@@ -1,8 +1,11 @@
+
+
 function createSankeyChart(){
+
   // Based on http://bl.ocks.org/d3noob/5015397
   var parentW = $("#sankeyChart").width();
   var parentH = 740;
-  var units = "Widgets";
+  var units = "links";
 
   var margin = {top: 10, right: 10, bottom: 10, left: 10},
       width = parentW - margin.left - margin.right,
@@ -58,7 +61,7 @@ function createSankeyChart(){
     link.append("title")
           .text(function(d) {
       		return d.source.name + " → " +
-                  d.target.name + "\n" + format(d.value); });
+                  d.target.name + ":\n" + format(d.value); });
 
   // add in the nodes
     var node = svg.append("g").selectAll(".node")
@@ -116,10 +119,8 @@ function createSankeyChart(){
   var legend = d3.select("#sankeyChart").append('div').attr("class", "legend");
   categories.forEach(function(c) {
     categorie = legend.append('div');
-    categorie.append('div').attr("class", "series-marker")
+    categorie.append('div').attr("class", "categories-marker")
           .style("background-color", colorsSankey[c]);
     categorie.append('p').text(sankeyCategories[c]);
   });
-
-
 } // end createSankeyChart()

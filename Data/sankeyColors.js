@@ -16,7 +16,7 @@ var colorsSankey = {
 	"Four months": "#C25D7F"
 	"Five months": "#C25D7F"
 	"Six months": "#C25D7F"
-	"More then six months": "#C25D7F"
+	"More than six months": "#C25D7F"
 	"Budged": "#73539F"
 	"< 1K": "#73539F"
 	"[1K-5K[": "#73539F"
