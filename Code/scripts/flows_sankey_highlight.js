@@ -3,33 +3,30 @@ arrow = " → "
 classHighlight = "highlighted_link"
 
 function highlightPathInSankey(){
-  removePreviousHighlight()
+  var links = getLinkObjects();
+  removePreviousHighlight(links);
 
+  for(i = 0; i < links.length; i++){
+    var link = links[i];
+    var text = $(link).text();
+    var foundLink = false;
 
-
+    for(j = 0; j < pathHighlighted.length && !foundLink; j++){
+      path = pathHighlighted[j];
+      if (text.indexOf(path) != -1){
+        foundLink = true;
+        $(link).addClass(classHighlight);
+        pathHighlighted.p
+      }
+    }
+  }
 }
 
-function removePreviousHighlight(){
-   var links = getLinkObjects();
-   console.log("start");
-
+function removePreviousHighlight(links){
    for(i = 0; i < links.length; i++){
      var link = links[i];
-     var text = $(link).text();
-
-     for(j = 0; j < pathHighlighted.length; j++){
-       console.log(text);
-       path = pathHighlighted[j];
-       console.log(path);
-       if (text.indexOf(path) != -1){
-         console.log("found!");
-         $(link).addClass(classHighlight);
-       }
-     }
-     //console.log(text);
+     $(link).removeClass(classHighlight);
    }
-
-   console.log("end");
 }
 
 
@@ -41,4 +38,20 @@ function getLinkObjects(){
    });
 
    return links;
+}
+
+
+function setFlowChartFilterMenu(){
+  pathHighlighted = []
+  $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+  });
+}
+
+function getMovieFlowDatalist(objectID){
+  movieList = "Java, JavaScript, Python";
+  $("#"+objectID).attr("data-list", movieList);
+  
+
 }

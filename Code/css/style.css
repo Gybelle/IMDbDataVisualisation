@@ -289,6 +289,10 @@ body {
     }
 }
 
+.awesomplete {
+  margin-left: 10px;
+}
+
 /* --------------------------- Sankey diagram --------------------------- */
 /* Based on: http://bl.ocks.org/d3noob/5015397 */
 .node rect {
