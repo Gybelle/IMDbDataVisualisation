@@ -26,6 +26,33 @@ function createActorPieChart(divID, movies) {
     drawPieChart(divID, data);
 }
 
+function createMoviePieChart(divID, actors) {
+    var data = [];
+    if (actors == null || actors.length == 0) {
+        data = [
+            {language: 'No data', count: 0}
+        ];
+    } else {
+        var nationalityMap = {};
+        actors.forEach(function (actor) {
+            if (actor.birthLocation != "") {
+                var nationality = getCountry(actor.birthLocation);
+                if (!nationalityMap[nationality]) {
+                    nationalityMap[nationality] = 0;
+                }
+                nationalityMap[nationality]++;
+            }
+        });
+        for (var nationality in nationalityMap) {
+            data.push({language: nationality, count: nationalityMap[nationality]});
+        }
+    }
+    data.sort(function (x, y) {
+        return d3.descending(x.count, y.count);
+    });
+    drawPieChart(divID, data);
+}
+
 function drawPieChart(divID, data) {
     var width = widthSmallLargeChart - 10;
     var height = heightSmallRow - 10;
@@ -102,10 +129,19 @@ function drawPieChart(divID, data) {
 function addMouseOver(svg, path, arc, arcOver) {
     var slice = svg.selectAll("path.slice");
     slice.on("mousemove", function (d) {
-        if (d.data.count == 1) {
-            $("#languageInfo").html(d.data.language + ": " + d.data.count + " movie");
-        } else {
-            $("#languageInfo").html(d.data.language + ": " + d.data.count + " movies");
+        if (selectedActor != null) {
+            if (d.data.count == 1) {
+                $("#languageInfo").html(d.data.language + ": " + d.data.count + " movie");
+            } else {
+                $("#languageInfo").html(d.data.language + ": " + d.data.count + " movies");
+            }
+        }
+        else if (selectedMovie != null) {
+            if (d.data.count == 1) {
+                $("#languageInfo").html(d.data.language + ": " + d.data.count + " actor");
+            } else {
+                $("#languageInfo").html(d.data.language + ": " + d.data.count + " actors");
+            }
         }
     });
     path.on("click", function (d) {

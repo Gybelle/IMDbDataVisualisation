@@ -3,9 +3,11 @@ bucket2 = 10;
 bucket3 = 25;
 bucket4 = 50;
 actor = null;
+movie = null;
 actorAge = null;
 
 function setBiographyWidgetActor(newActor) {
+    movie = null;
     if (newActor == null || newActor.birthYear == "") {
         setIcons(6, 6, 6, 6, 1);
         setBiographyText();
@@ -53,6 +55,50 @@ function setBiographyWidgetMovieMap(movies) {
     setIconScale(count1, count2, count3, count4);
 }
 
+function setBiographyWidgetMovie(newMovie) {
+    actor = null;
+    actorAge = null;
+    if (newMovie == null || newMovie.year == "") {
+        setIcons(6, 6, 6, 6, 1);
+        setBiographyText();
+        movie = null;
+        return;
+    }
+    movie = newMovie;
+    setIcons(0, 0, 0, 0, 1, -1, -1, -1, -1);
+    setBiographyText();
+}
+
+function setBiographyWidgetActorMap(actors) {
+    if (movie == null) {
+        return;
+    }
+    var actorAgeMap = {};
+    var year = parseInt(movie.year);
+    actors.forEach(function (actor) {
+        if (actor.birthYear != "" && (actor.deathYear == "" || parseInt(actor.deathYear) >= year)) {
+            var age = year - parseInt(actor.birthYear);
+            if (!actorAgeMap[age]) {
+                actorAgeMap[age] = 0;
+            }
+            actorAgeMap[age]++;
+        }
+    });
+    var count1 = 0, count2 = 0, count3 = 0, count4 = 0;
+    for (var age in actorAgeMap) {
+        if (age <= bucket2) {
+            count1 += actorAgeMap[age];
+        } else if (age <= bucket3) {
+            count2 += actorAgeMap[age];
+        } else if (age <= bucket4) {
+            count3 += actorAgeMap[age];
+        } else if (age > bucket4) {
+            count4 += actorAgeMap[age];
+        }
+    }
+    setIconScale(count1, count2, count3, count4);
+}
+
 function getActorAge() {
     if (actor == null || actor.birthYear == "") {
         actorAge = null;
@@ -71,13 +117,14 @@ function getActorAge() {
 }
 
 function setIcons(color1, color2, color3, color4, max, count1, count2, count3, count4) {
-    male = true;
+    var genderLetter = "x";
     if (actor != null) {
+        var male = true;
         male = actor.isMale;
-    }
-    var genderLetter = "m";
-    if (!male) {
-        genderLetter = "f";
+        var genderLetter = "m";
+        if (!male) {
+            genderLetter = "f";
+        }
     }
     if (actorAge != null) {
         if (actorAge < bucket1) {
@@ -99,10 +146,18 @@ function setIcons(color1, color2, color3, color4, max, count1, count2, count3, c
     document.getElementById("lifetimeImg3").src = "img/AgeIcons/" + genderLetter + "_age3_col" + color3 + ".png";
     document.getElementById("lifetimeImg4").src = "img/AgeIcons/" + genderLetter + "_age4_col" + color4 + ".png";
     document.getElementById("lifetimeLegend").src = "img/AgeIcons/" + genderLetter + "_legend.png";
-    if (max == 1) {
-        document.getElementById("lifetimeLegendLabelTop").innerHTML = max + " movie";
+    if (movie == null) {
+        if (max == 1) {
+            document.getElementById("lifetimeLegendLabelTop").innerHTML = max + " movie";
+        } else {
+            document.getElementById("lifetimeLegendLabelTop").innerHTML = max + " movies";
+        }
     } else {
-        document.getElementById("lifetimeLegendLabelTop").innerHTML = max + " movies";
+        if (max == 1) {
+            document.getElementById("lifetimeLegendLabelTop").innerHTML = max + " actor";
+        } else {
+            document.getElementById("lifetimeLegendLabelTop").innerHTML = max + " actors";
+        }
     }
     if (actor != null && actor.birthYear != null && actorAge != null) {
         var birthYear = +actor.birthYear;
@@ -125,6 +180,21 @@ function setIcons(color1, color2, color3, color4, max, count1, count2, count3, c
         makeIconClickable("lifetimeWrapper2", year2, year3, count2);
         makeIconClickable("lifetimeWrapper3", year4, year5, count3);
         makeIconClickable("lifetimeWrapper4", year6, year7, count4);
+    } else if (movie != null) {
+        var year = parseInt(movie.year);
+        var year0, year1, year2, year3, year4, year5, year6, year7;
+        year0 = year - bucket1;
+        year1 = year - bucket2;
+        year2 = year - bucket2 - 1;
+        year3 = year - bucket3;
+        year4 = year - bucket3 - 1;
+        year5 = year - bucket4;
+        year6 = year - bucket4 - 1;
+        year7 = null;
+        makeIconClickable("lifetimeWrapper1", year1, year0, count1);
+        makeIconClickable("lifetimeWrapper2", year3, year2, count2);
+        makeIconClickable("lifetimeWrapper3", year5, year4, count3);
+        makeIconClickable("lifetimeWrapper4", year7, year6, count4);
     }
 }
 
@@ -144,10 +214,27 @@ function makeIconClickable(divID, beginYear, endYear, count) {
         }
     });
     div.on("mousemove", function (d) {
-        if (count == 1) {
-            $("#lifetimeInfo").html(beginYear + " - " + endYear + ": " + count + " movie");
-        } else if (count != -1) {
-            $("#lifetimeInfo").html(beginYear + " - " + endYear + ": " + count + " movies");
+        if (actor != null) {
+            if (count == 1) {
+                $("#lifetimeInfo").html(beginYear + " - " + endYear + ": " + count + " movie");
+            } else if (count != -1) {
+                $("#lifetimeInfo").html(beginYear + " - " + endYear + ": " + count + " movies");
+            }
+        } else if (movie != null) {
+            if (beginYear != null) {
+                if (count == 1) {
+                    $("#lifetimeInfo").html("Born between " + beginYear + " and " + endYear + ": " + count + " actor");
+                } else if (count != -1) {
+                    $("#lifetimeInfo").html("Born between " + beginYear + " and " + endYear + ": " + count + " actors");
+                }
+            } else {
+                if (count == 1) {
+                    $("#lifetimeInfo").html("Born before " + endYear + ": " + count + " actor");
+                } else if (count != -1) {
+                    $("#lifetimeInfo").html("Born before " + (endYear + 1) + ": " + count + " actors");
+                }
+            }
+
         }
     });
     div.on("mouseout", function (d) {
@@ -210,28 +297,25 @@ function setIconScale(count1, count2, count3, count4) {
 }
 
 function setBiographyText() {
-    var name, birthLocation, ages;
-    if (actor == null) {
-        name = "No actor selected";
-        birthLocation = "";
-        ages = "";
-    } else {
-        name = actor.name;
+    var field1 = "No actor selected", field2 = "", field3 = "";
+    if (actor != null) {
+        field1 = actor.name;
         if (actor.birthLocation != "") {
-            birthLocation = actor.birthLocation;
+            field2 = actor.birthLocation;
         } else {
-            birthLocation = "Location of birth unknown.";
+            field2 = "Location of birth unknown.";
         }
-        ages = "";
         if (actor.birthYear != "") {
-            ages = "" + actor.birthYear;
+            field3 = "" + actor.birthYear;
         }
         if (actor.deathYear != "") {
-            ages += " - " + actor.deathYear;
+            field3 += " - " + actor.deathYear;
         }
+    } else if (movie != null) {
+        field1 = movie.title;
+        field2 = movie.year;
     }
-    document.getElementById("bio_name").innerHTML = name;
-    document.getElementById("bio_birthLocation").innerHTML = birthLocation;
-    document.getElementById("bio_birthDeathYear").innerHTML = ages;
-
+    document.getElementById("bio_name").innerHTML = field1;
+    document.getElementById("bio_birthLocation").innerHTML = field2;
+    document.getElementById("bio_birthDeathYear").innerHTML = field3;
 }
