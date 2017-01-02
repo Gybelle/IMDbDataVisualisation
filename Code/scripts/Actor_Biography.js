@@ -14,14 +14,21 @@ function setBiographyWidgetActor(newActor) {
     }
     actor = newActor;
     getActorAge();
-    setIcons(0, 0, 0, 0, 1);
+    setIcons(0, 0, 0, 0, 1, -1, -1, -1, -1);
     setBiographyText();
 }
 
-function setBiographyWidgetMovieMap(yearMovieMap) {
+function setBiographyWidgetMovieMap(movies) {
     if (actor == null) {
         return;
     }
+    var yearMovieMap = {};
+    movies.forEach(function (movie) {
+        if (!yearMovieMap[movie.year]) {
+            yearMovieMap[movie.year] = [];
+        }
+        yearMovieMap[movie.year].push(movie);
+    });
     var birthYear = parseInt(actor.birthYear);
     var deathYear = new Date().getFullYear() + 1000;
     if (actor.deathYear != "") {
@@ -33,13 +40,13 @@ function setBiographyWidgetMovieMap(yearMovieMap) {
         if (year <= deathYear) {
             var age = year - birthYear;
             if (age <= bucket2) {
-                count1++;
+                count1 += yearMovieMap[yearObj].length;
             } else if (age <= bucket3) {
-                count2++;
+                count2 += yearMovieMap[yearObj].length;
             } else if (age <= bucket4) {
-                count3++;
+                count3 += yearMovieMap[yearObj].length;
             } else if (age > bucket4) {
-                count4++;
+                count4 += yearMovieMap[yearObj].length;
             }
         }
     }
@@ -63,7 +70,7 @@ function getActorAge() {
     actorAge = currentAge;
 }
 
-function setIcons(color1, color2, color3, color4, max) {
+function setIcons(color1, color2, color3, color4, max, count1, count2, count3, count4) {
     male = true;
     if (actor != null) {
         male = actor.isMale;
@@ -86,7 +93,7 @@ function setIcons(color1, color2, color3, color4, max) {
             color4 = 6;
         }
     }
-    console.log("Age icons: " + genderLetter + " " + color1 + " " + color2 + " " + color3 + " " + color4);
+    //console.log("Age icons: " + genderLetter + " " + color1 + " " + color2 + " " + color3 + " " + color4);
     document.getElementById("lifetimeImg1").src = "img/AgeIcons/" + genderLetter + "_age1_col" + color1 + ".png";
     document.getElementById("lifetimeImg2").src = "img/AgeIcons/" + genderLetter + "_age2_col" + color2 + ".png";
     document.getElementById("lifetimeImg3").src = "img/AgeIcons/" + genderLetter + "_age3_col" + color3 + ".png";
@@ -97,6 +104,55 @@ function setIcons(color1, color2, color3, color4, max) {
     } else {
         document.getElementById("lifetimeLegendLabelTop").innerHTML = max + " movies";
     }
+    if (actor != null && actor.birthYear != null && actorAge != null) {
+        var birthYear = +actor.birthYear;
+        var deathYear = 0;
+        var age = actorAge;
+        if (actor.deathYear != null) {
+            deathYear = +actor.deathYear;
+        }
+        var currentYear = new Date().getFullYear();
+        var year0, year1, year2, year3, year4, year5, year6, year7;
+        year0 = birthYear + bucket1;
+        year1 = (year0 != null) ? birthYear + ((bucket2 > age) ? age : bucket2) : null;
+        year2 = (year1 != null && year1 + 1 <= birthYear + age) ? year1 + 1 : null;
+        year3 = (year2 != null) ? birthYear + ((bucket3 > age) ? age : bucket3) : null;
+        year4 = (year3 != null && year3 + 1 <= birthYear + age) ? year3 + 1 : null;
+        year5 = (year4 != null) ? birthYear + ((bucket4 > age) ? age : bucket4) : null;
+        year6 = (year5 != null && year5 + 1 <= birthYear + age) ? year5 + 1 : null;
+        year7 = (year6 != null) ? ((deathYear == 0) ? currentYear : deathYear) : null;
+        makeIconClickable("lifetimeWrapper1", year0, year1, count1);
+        makeIconClickable("lifetimeWrapper2", year2, year3, count2);
+        makeIconClickable("lifetimeWrapper3", year4, year5, count3);
+        makeIconClickable("lifetimeWrapper4", year6, year7, count4);
+    }
+}
+
+function makeIconClickable(divID, beginYear, endYear, count) {
+    var div = d3.select("#" + divID);
+    div.on("click", function (d) {
+        if (div.classed("selectedLifetimeWrapper")) {
+            div.attr("class", "lifetimeWrapper");
+            filterYears(null, null);
+        } else {
+            d3.select("#lifetimeWrapper1").attr("class", "lifetimeWrapper");
+            d3.select("#lifetimeWrapper2").attr("class", "lifetimeWrapper");
+            d3.select("#lifetimeWrapper3").attr("class", "lifetimeWrapper");
+            d3.select("#lifetimeWrapper4").attr("class", "lifetimeWrapper");
+            div.attr("class", "lifetimeWrapper selectedLifetimeWrapper");
+            filterYears(beginYear, endYear);
+        }
+    });
+    div.on("mousemove", function (d) {
+        if (count == 1) {
+            $("#lifetimeInfo").html(beginYear + " - " + endYear + ": " + count + " movie");
+        } else if (count != -1) {
+            $("#lifetimeInfo").html(beginYear + " - " + endYear + ": " + count + " movies");
+        }
+    });
+    div.on("mouseout", function (d) {
+        $("#lifetimeInfo").html("");
+    });
 }
 
 function setIconScale(count1, count2, count3, count4) {
@@ -125,6 +181,9 @@ function setIconScale(count1, count2, count3, count4) {
     if (count4 != 0 && count4 > max) {
         max = count4;
     }
+    if (max == -1) {
+        max = 1;
+    }
     var color1, color2, color3, color4;
     var bucketSize = (max - min) / 4;
     if (count1 == 0) {
@@ -147,7 +206,7 @@ function setIconScale(count1, count2, count3, count4) {
     } else {
         color4 = Math.floor((count4 - min) / bucketSize) + 1;
     }
-    setIcons(color1, color2, color3, color4, max);
+    setIcons(color1, color2, color3, color4, max, count1, count2, count3, count4);
 }
 
 function setBiographyText() {

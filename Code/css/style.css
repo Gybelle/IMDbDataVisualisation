@@ -340,7 +340,7 @@ body {
 
 /* -------------------------------- Biography -------------------------------- */
 .lifetimeImg {
-    margin: 20px;
+    margin: 10px;
     height: 85px;
     width: 85px;
 }
@@ -372,8 +372,14 @@ body {
 }
 
 .lifetimeWrapper {
-    margin: auto;
+    margin-top: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     display: inline-block;
+    border-color: transparent;
+    border-style: solid;
+    background: transparent;
+    cursor: pointer;
 }
 
 .lifetimeWrapperLegend {
@@ -395,10 +401,27 @@ body {
     display: inline-block;
 }
 
-#languageInfo  {
+.selectedLifetimeWrapper {
+    border-color: #BD9797;
+    border-style: solid;
+    background: #E0CDCD;
+}
+
+.info  {
     z-index: 10;
     position: absolute;
     top: 150px;
+}
+#lifetimeInfo {
+    top: 170px;
+}
+
+#languageChart > svg {
+    margin-top: 5px;
+}
+
+.slice {
+    cursor: pointer;
 }
 
 /* -------------------------------- Series -------------------------------- */
