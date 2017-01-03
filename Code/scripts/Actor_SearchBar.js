@@ -28,7 +28,7 @@ heightLargeRow = 0;
  * Use setActor(actorName) and setMovie(movieName) to set a new actor or movie.
  */
 
-// CREATE ----------------------------------------------------------------------
+// CREATE CHARTS----------------------------------------------------------------
 
 function initialiseCharts(idMap, idLanguageChart) {
     divIDMap = idMap;
@@ -54,20 +54,22 @@ function initialiseCharts(idMap, idLanguageChart) {
 }
 
 function setLayout() {
-    heightSmallRow = document.getElementById("lifetime").offsetHeight;
-    widthSmallChart = document.getElementById("colLifetime").offsetWidth;
-    $("#lifetime").css('width', widthSmallChart);
     heightNavbar = document.getElementById("menubar").offsetHeight;
+    heightSmallRow = document.getElementById("lifetime").offsetHeight;
     heightLargeRow = $(document).height() - heightNavbar - heightSmallRow;
-    widthSmallLargeChart = document.getElementById("colLanguageChart").offsetWidth;
-    $(".small_large_chart").css('width', widthSmallLargeChart);
-    widthLargeChart = document.getElementById("colActorMap").offsetWidth;
-    $(".large_chart").css('width', widthLargeChart);
+    widthLargeChart = document.getElementById("actorsMap").offsetWidth - 10;
+    widthSmallChart = document.getElementById("menubar").offsetWidth - widthLargeChart - 200;
+    //$("#lifetime").css('width', widthLargeChart * (5 / 9));
+    //$(".small_chart").css('width', widthSmallChart);
+    //$(".large_chart").css('width', widthLargeChart);
     $(".large_chart").css('height', heightLargeRow);
-    $("#languageInfo").css('top', heightSmallRow - 25);
+    $("#languageInfo").css('top', heightSmallRow - 20);
+    $("#lifetimeInfo").css('top', heightSmallRow - 20);
+    $("#filter-results").css('height', heightLargeRow - 100);
+    console.log(heightLargeRow);
 }
 
-// UPDATE ----------------------------------------------------------------------
+// UPDATE CHARTS----------------------------------------------------------------
 
 function setActor(actorName) {
     yearFilterStart = null;

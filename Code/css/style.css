@@ -25,7 +25,6 @@ body {
     font-style: normal;
 }
 
-
 /* -------------------------------- Slider -------------------------------- */
 .range_slider{
     padding-top: 15px;
@@ -290,12 +289,7 @@ body {
 }
 
 .awesomplete {
-  margin-left: 10px;
-}
-
-.flowQuery {
-  margin-top: 20px;
-  width: 185px;
+    margin-left: 10px;
 }
 
 /* --------------------------- Sankey diagram --------------------------- */
@@ -322,8 +316,8 @@ body {
 }
 
 #sankeyChart .legend {
-  position: absolute;
-  right: 0px;
+    position: absolute;
+    right: 0px;
 }
 
 #sankeyChart .legend > div {
@@ -349,8 +343,8 @@ body {
 }
 
 #sankeyChart .highlighted_link {
-  stroke: #FF183C;
-  stroke-opacity: .8;
+    stroke: #FF183C;
+    stroke-opacity: .8;
 }
 
 
@@ -360,19 +354,16 @@ body {
     height: 85px;
     width: 85px;
 }
-
 .lifetimeLegend {
     margin: 20px;
     height: 130px;
     width: 30px;
 }
-
 .lifetimeLabel {
     font-size: 16px;
     margin: 0 auto;
     text-align: center;
 }
-
 .lifetimeLegendLabel {
     font-size: 16px;
     margin: 0 auto;
@@ -386,7 +377,6 @@ body {
     top: 65%;
     position: absolute;
 }
-
 .lifetimeWrapper {
     margin-top: 10px;
     padding-top: 5px;
@@ -397,15 +387,18 @@ body {
     background: transparent;
     cursor: pointer;
 }
-
 .lifetimeWrapperLegend {
     vertical-align: top;
     display: inline-block;
 }
 
+#lifetime {
+    //width: 600px;
+}
+
 #bio {
     height: 200px;
-    width: 300px;
+    //width: 200px;
     background-color: #FAF7F7;
     padding: 20px;
     color: black;
@@ -426,10 +419,10 @@ body {
 .info  {
     z-index: 10;
     position: absolute;
-    top: 150px;
 }
-#lifetimeInfo {
-    top: 170px;
+
+#languageChart {
+    //width: 200px;
 }
 
 #languageChart > svg {
