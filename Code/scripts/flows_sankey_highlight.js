@@ -89,11 +89,8 @@ function findMoviePath(movie){
     console.log(movie + " not found.");
     moviePath = [];
   } else {
-    console.log(pathHighlighted);
     addMovieToMoviePath(path);
-    console.log(moviePath);
     addPathsToHighlightedPaths(moviePath)
-    console.log(pathHighlighted)
   }
 }
 
@@ -104,23 +101,17 @@ function addMovieToMoviePath(path){
 }
 
 function addPathsToHighlightedPaths(paths){
-  console.log(pathHighlighted);
   for(i = 0; i < paths.length; i++){
     path = paths[i];
-    console.log(path);
     pathHighlighted.push(path);
   }
-  //pathHighlighted = allPaths;
-  console.log(pathHighlighted);
+}
+
+function removePathsToHighlightedPaths(paths){
+  console.log("hello");
 }
 
 function getMovieFlowDatalist(objectID){
-  movieList = "";
   movieKeys = Object.keys(moviePaths);
-  for(i = 0; i < movieKeys.lenght; i++){
-    if (i != 0){
-      movieList = movieList + ", "+ movieKeys[i];
-    }
-  }
   $("#"+objectID).attr("data-list", movieKeys);
 }
