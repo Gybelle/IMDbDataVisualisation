@@ -517,3 +517,17 @@ body {
 .actor-desc-inner .appearances .season .episode.no {
     background: white;
 }
+
+.avg-rating-container {
+    text-align: center;
+}
+
+.avg-rating-container div {
+    margin-top: 25%;
+}
+
+.avg-rating-container .rating {
+    margin-top: 0;
+    font-size: 20px;
+    font-weight: bold;
+}

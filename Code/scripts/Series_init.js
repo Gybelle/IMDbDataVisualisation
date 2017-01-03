@@ -133,6 +133,9 @@ function drawRatingsPerEpisode(selectedShow, numSeasons, numEpisodes) {
 		return (d.Title === selectedShow.Title && d.Season !== 0 && d.Episode !== 0);
 	});
 
+	var avgRating = 0;
+	var totalEps = 0;
+
 	var epsPerSeason = [];
 	var data = [];
 	$.each(filtered, function( index, value ) {
@@ -144,6 +147,9 @@ function drawRatingsPerEpisode(selectedShow, numSeasons, numEpisodes) {
 
 		if (episode.rating > 0) {
 			data.push(episode);
+
+			avgRating += episode.rating;
+			totalEps++;
 		}
 
 		if (epsPerSeason[episode.season] === undefined) {
@@ -152,6 +158,9 @@ function drawRatingsPerEpisode(selectedShow, numSeasons, numEpisodes) {
 		epsPerSeason[episode.season]++;
 	});
 
+	avgRating /= totalEps;
+	avgRating = Math.round(avgRating * 100) / 100; //round 2 decimals
+
 	// define dimensions of graph
 	var colRatingLineChart = $('#colRatingLineChart');
 	var width = colRatingLineChart.width();
@@ -159,6 +168,9 @@ function drawRatingsPerEpisode(selectedShow, numSeasons, numEpisodes) {
 	var m = [20, 80, 20, 80]; // margins
 	var w = width - m[1] - m[3]; // width
 	var h = height - m[0] - m[2]; // height
+
+	var wAvg = w * 0.1; //width for avg part
+	w = w * 0.9;
 
 	// X scale will fit all values from data[] within pixels 0-w
 	var x = d3.scale.linear().domain([0, data.length]).range([0, w]);
@@ -192,6 +204,19 @@ function drawRatingsPerEpisode(selectedShow, numSeasons, numEpisodes) {
 		      .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
 
 
+		var avg = d3.select("#ratingLineChart").append("svg:svg")
+		      .attr("width", wAvg)
+		      .attr("height", h + m[0] + m[2])
+		      .append("foreignObject")
+    	.attr("class", "avg-rating-container")
+	    /*.attr("x", function(d){ return d.x; })
+	    .attr("y", function(d){ return d.y; })
+        */.attr('width', wAvg)
+        .attr('height', h + m[0] + m[2])          
+        	.append("xhtml:body")
+    .html('<div>Average Rating:</div><div class="rating">' + avgRating + "</div>")
+    .style("background", "none");
+
 		//calculate the ticks that represent the first episode of a new season
 		var tickValues = [];
 		var epCounter = 1;
@@ -219,7 +244,6 @@ function drawRatingsPerEpisode(selectedShow, numSeasons, numEpisodes) {
 		      .attr("class", "x axis")
 		      .attr("transform", "translate(0," + h + ")")
 		      .call(xAxis);
-
 
 		graph.selectAll('g.tick').select('text')
 			.style("text-anchor", "middle")
@@ -311,11 +335,6 @@ function drawActorPanels(selectedShow, numSeasons, numEpisodes) {
 	    .attr("width", $('#actorDistribution').width())
 	    .attr("height", $('#actorDistribution').height());
 
-	/*var row = grid.selectAll(".row")
-	    .data(divisionData)
-	    .enter().append("g")
-	    .attr("class", "row");*/
-
 	var column = grid.selectAll(".square")
 	    .data(divisionData)
 	    .enter().append("rect")
@@ -326,7 +345,6 @@ function drawActorPanels(selectedShow, numSeasons, numEpisodes) {
 	    .attr("height", function(d) { return d.height; })
 	    .style("fill", function(d) { return d.color; })
 	    .style("stroke", "#222");
-
 
     grid.selectAll(".actor-desc").data(divisionData)
     	.enter().append("foreignObject")
@@ -340,26 +358,9 @@ function drawActorPanels(selectedShow, numSeasons, numEpisodes) {
     .style({
     	"background": "none",
     });
-/*
-	    //.attr("text-anchor", "middle")
-	    .html(function(d){
-	      return d.actor.FirstName + " " + d.actor.LastName;
-	    })
-	    .style({
-	        "fill":"white",
-	        "font-family":"Helvetica Neue, Helvetica, Arial, san-serif",
-	        "font-size": "20px",
-	    });
 
 
-	 text = grid.append('foreignObject')
-            .attr('x', 50)
-            .attr('y', 130)
-            .attr('width', 150)
-            .attr('height', 100)
-            .append("xhtml:body")
-    .html('<div>This is some information about whateveasdasd</div>');
-*/
+
 }
 
 function generateActorHtml(data) {
@@ -386,17 +387,17 @@ function generateActorHtml(data) {
 		html += '<div class="season">';
 		html += '<div class="label">S' + index + '</div>'
 
-		console.log(value);
-
 		$.each(value, function(i, v) {
 			if (i == 0)
 				return;
+
 			var cls = "";
 			if (v == 1) {
 				cls = "yes";
 			} else {
 				cls = "no";
 			}
+
 			html += '<div style="width: ' + data.episodeWidth + 'px" class="episode ' + cls + '"></div>';
 		});
 
@@ -404,8 +405,6 @@ function generateActorHtml(data) {
 	});
 
 	html += '</div>';
-
-
 
 	return '<div class="actor-desc-inner">' + html + '</div>';
 }
