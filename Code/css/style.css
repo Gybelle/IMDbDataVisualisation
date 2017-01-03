@@ -293,8 +293,8 @@ body {
 }
 
 .flowQuery {
-  margin-top: 20px;
-  width: 185px;
+    margin-top: 20px;
+    width: 185px;
 }
 
 /* --------------------------- Sankey diagram --------------------------- */
@@ -436,6 +436,21 @@ body {
 
 .slice {
     cursor: pointer;
+}
+
+.searchResult {
+    margin: 10px;
+    padding: 5px;
+    background: lightgoldenrodyellow;
+    border: 1px solid darkgray;
+    cursor: pointer;
+    font-size: 14;
+}
+.searchResultActor {
+    background: lightgoldenrodyellow;
+}
+.searchResultMovie {
+    background: #9DE8EE;
 }
 
 /* -------------------------------- Series -------------------------------- */

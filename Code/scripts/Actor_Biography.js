@@ -8,10 +8,16 @@ actorAge = null;
 
 function setBiographyWidgetActor(newActor) {
     movie = null;
-    if (newActor == null || newActor.birthYear == "") {
+    if (newActor == null) {
         setIcons(6, 6, 6, 6, 1);
         setBiographyText();
         actor = null;
+        return;
+    }
+    if (newActor.birthYear == "") {
+        setIcons(6, 6, 6, 6, 1);
+        actor = newActor;
+        setBiographyText();
         return;
     }
     actor = newActor;
@@ -21,7 +27,7 @@ function setBiographyWidgetActor(newActor) {
 }
 
 function setBiographyWidgetMovieMap(movies) {
-    if (actor == null) {
+    if (actor == null || actor.birthYear == "") {
         return;
     }
     var yearMovieMap = {};

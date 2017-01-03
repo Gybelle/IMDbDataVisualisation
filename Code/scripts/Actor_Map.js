@@ -80,7 +80,8 @@ function addActorFilmingLocations(locationMap) {
             var num = Object.keys(locationMap[location]).length;
             var opacity = 0.3 + 0.1 * (Math.floor((num - locationMinMax[0]) / minMaxStep));
             locationMap[location].forEach(function (movie) {
-                message += "<font color='#FF183C'>" + movie.title + " (" + movie.year + ")</font>";
+                var movieTitle = movie.title + " (" + movie.year + ")";
+                message += '<font color="#FF183C" style="cursor: pointer;" onClick="setMovie(\'' + movieTitle + '\')">' + movieTitle + '</font>';
                 if (movie.role != "") {
                     message += ": " + movie.role;
                 }
@@ -97,7 +98,8 @@ function addActorCountries(countryMap) {
     for (var country in countryMap) {
         var message = "";
         countryMap[country].forEach(function (movie) {
-            message += "<font color='#FF183C'>" + movie.title + " (" + movie.year + ")</font>";
+            var movieTitle = movie.title + " (" + movie.year + ")";
+            message += '<font color="#FF183C" style="cursor: pointer;" onClick="setMovie(\'' + movieTitle + '\')">' + movieTitle + '</font>';
             if (movie.role != "") {
                 message += ": " + movie.role;
             }
@@ -127,7 +129,7 @@ function map_setMovie(movie, actors) {
     if (actors != null) {
         actors.forEach(function (actor) {
             if (actor.birthLocation != "") {
-                var message = "<b><font color='#FF183C'>" + actor.name + "</font>: " + actor.role + "</b><br/>Born in " + actor.birthLocation;
+                var message = '<b><font color="#FF183C" style="cursor: pointer;" onClick="setActor(\'' + actor.name + '\')">' + actor.name + "</font>: " + actor.role + "</b><br/>Born in " + actor.birthLocation;
                 if (actor.birthYear != "") {
                     message += " in " + actor.birthYear + ", age " + (movie.year - parseInt(actor.birthYear)) + " during the movie";
                 }

@@ -1,4 +1,4 @@
-var pathHighlighted = ["2 hours → Two months", "Two months → [1M-5M["];
+var pathHighlighted = [];
 var moviePath = []
 var arrow = " → ";
 var classHighlight = "highlighted_link";
@@ -41,7 +41,7 @@ function getLinkObjects(){
 }
 
 function setFlowChartFilterMenu(){
-  pathHighlighted = ["test", "llala"];
+  pathHighlighted = [];
   $("#menu-toggle").click(function(e) {
       e.preventDefault();
       $("#wrapper").toggleClass("toggled");
@@ -109,6 +109,10 @@ function addPathsToHighlightedPaths(paths){
 
 function removePathsToHighlightedPaths(paths){
   console.log("hello");
+  for(i=0; i < paths.length; i++){
+    path = paths[i];
+    pathHighlighted.splice( pathHighlighted.indexOf(path), 1 );
+  }
 }
 
 function getMovieFlowDatalist(objectID){

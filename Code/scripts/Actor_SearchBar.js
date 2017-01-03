@@ -66,7 +66,6 @@ function setLayout() {
     $("#languageInfo").css('top', heightSmallRow - 20);
     $("#lifetimeInfo").css('top', heightSmallRow - 20);
     $("#filter-results").css('height', heightLargeRow - 100);
-    console.log(heightLargeRow);
 }
 
 // UPDATE CHARTS----------------------------------------------------------------
@@ -75,8 +74,8 @@ function setActor(actorName) {
     yearFilterStart = null;
     yearFilterEnd = null;
     languageFilter = null;
-    selectedMovie = null;
-    selectedMovieActors = [];
+    selectedActor = null;
+    selectedActorMovies = [];
     selectedMovie = null;
     selectedMovieActors = [];
 
@@ -86,7 +85,7 @@ function setActor(actorName) {
     d3.dsv(';')("data/actors/actors_" + actorName[0] + ".csv", function (error, data) {
         // Find actor
         data.some(function (d) { // some stops when true is returned, thus searching can stop when a match is found
-            if (nameMatches(actorName, d.Name)) {
+            if (actorName == d.Name) {
                 selectedActor = {
                     name: d.Name,
                     id: d.ActorID,
@@ -145,6 +144,7 @@ function setActor(actorName) {
                     });
                 });
                 updateCharts();
+                clearSearchBar();
             });
         });
     });
@@ -221,26 +221,10 @@ function setMovie(movieName) {
                     });
                 });
                 updateCharts();
+                clearSearchBar();
             });
         });
     });
-}
-
-function nameMatches(name1, name2) {
-    if (name1 == name2) {
-        return true;
-    }
-    return false;
-    // Activate this code for search bar suggestions
-//    var name1parts = name1.split(" ");
-//    match = true;
-//    name1parts.some(function (namePart) {
-//        if (name2.indexOf(namePart) == -1) {
-//            match = false;
-//            return true;
-//        }
-//    });
-//    return match;
 }
 
 function filterYears(beginYear, endYear) {
@@ -331,4 +315,82 @@ function updateCharts() {
         setBiographyWidgetActorMap(dataOnlyLanguageFilter);
         map_setMovie(selectedMovie, data);
     }
+}
+
+// SEARCH BAR FUNCTIONS --------------------------------------------------------
+
+function initialiseSearchBar() {
+    d3.select('#custom-search-input-field').on('keyup', function (data) {
+        var text = d3.select('#custom-search-input-field').property('value');
+        if (text == "") {
+            addSearchBarSuggestions([], []);
+        } else {
+            findMatching(text);
+        }
+    });
+}
+
+function addSearchBarSuggestions(actors, movies) {
+    var matches = [];
+    actors.forEach(function (item) {
+        matches.push({key: item, value: '<div class="searchResult searchResultActor" onClick="setActor(\'' + item + '\')">' + item + '</div>'});
+    });
+    movies.forEach(function (item) {
+        matches.push({key: item, value: '<div class="searchResult searchResultMovie" onClick="setMovie(\'' + item + '\')">' + item + '</div>'});
+    });
+    matches.sort(function (x, y) {
+        return d3.ascending(x.key, y.key);
+    });
+    var content = "";
+    matches.forEach(function (element) {
+        content += element.value;
+    });
+    d3.select('#filter-results').html(content);
+}
+
+function findMatching(text) {
+    var firstLetter = (text[0].toUpperCase() >= "A" && text[0].toUpperCase() <= "Z") ? text[0] : "-";
+    d3.dsv(';')("data/actors/actors_" + firstLetter + ".csv", function (error, actors) {
+        var matchingActors = [];
+        actors.some(function (actor) {
+            if (nameMatches(text, actor.Name)) {
+                matchingActors.push(actor.Name);
+            }
+            if (matchingActors.length > 50) {
+                return true;
+            }
+        });
+        var matchingMovies = [];
+        d3.dsv(';')("data/movies/movies_" + firstLetter + ".csv", function (error, movies) {
+            movies.some(function (movie) {
+                if (nameMatches(text, movie.Title + " (" + movie.Year + ")")) {
+                    matchingMovies.push(movie.Title + " (" + movie.Year + ")");
+                }
+                if (matchingMovies.length > 50) {
+                    return true;
+                }
+            });
+            addSearchBarSuggestions(matchingActors, matchingMovies);
+        });
+    });
+}
+
+function nameMatches(name1, name2) {
+    if (name1 == name2) {
+        return true;
+    }
+    var name1parts = name1.split(" ");
+    var match = true;
+    name1parts.some(function (namePart) {
+        if (name2.toLowerCase().indexOf(namePart.toLowerCase()) == -1) {
+            match = false;
+            return true; // quit Some()
+        }
+    });
+    return match;
+}
+
+function clearSearchBar() {
+    document.getElementById("custom-search-input-field").value = "";
+    addSearchBarSuggestions([], []);
 }
