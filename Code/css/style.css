@@ -506,16 +506,17 @@ body {
 
 .actor-desc-inner .appearances .season .episode {
     height: 15px;
-    border: 1px black;
     display: inline-block;
 }
 
 .actor-desc-inner .appearances .season .episode.yes {
     background: black;
+    border: 1px white;
 }
 
 .actor-desc-inner .appearances .season .episode.no {
     background: white;
+    border: 1px black;
 }
 
 .avg-rating-container {

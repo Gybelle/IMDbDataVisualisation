@@ -1,3 +1,4 @@
+var loadedSeriesLetter = "";
 var series = [];
 var episodes = [];
 var actors = [];
@@ -7,8 +8,9 @@ function initialiseSeries() {
 	/**
 	 * LOAD THE DATA
 	 */
+	 
 	console.log("Loading data...");
-
+/*
 	var previousTitle = "";
 
 	d3.dsv(';')("data/seriesGOT.csv", function(data) {
@@ -38,7 +40,7 @@ function initialiseSeries() {
 		onFilter();
 	});
 
-	d3.dsv(';')("data/actorsGOT.csv", function(data) {
+	d3.dsv(';')("data/actors.csv", function(data) {
 		data.forEach(function(d) {
 			d.ActorID = +d.ActorID;
 		});
@@ -46,7 +48,7 @@ function initialiseSeries() {
 		actors = data;
 		console.log("Done with actors!");
 	});
-
+/*
 	d3.dsv(';')("data/actorsInMoviesGOT.csv", function(data) {
 		data.forEach(function(d) {
 			d.ActorID = +d.ActorID;
@@ -56,19 +58,70 @@ function initialiseSeries() {
 		actorsInMovies = data;
 		console.log("Done with actorsInMovies!");
 	});
+*/
+}
 
+function loadData(firstLetter) {
+	var previousTitle = "";
 
+	d3.dsv(';')("data/series/series_" + firstLetter + ".csv", function(data) {
+		data.forEach(function(d) {
+			//check if this is a new Series by comparing the Title to the previously parsed entry
+			if (d.Title === previousTitle) {
+				//do nothing?
+			} else {
+				previousTitle = d.Title;
+				var newSeries = new Object();
+				newSeries.ID = +d.ID
+				newSeries.Title = d.Title;
+				newSeries.Year = +d.Year
+				newSeries.Language = d.Language;
+
+				series.push(newSeries);
+			}
+			d.ID = +d.ID;
+			d.Year = +d.Year;
+			d.Episode = +d.Episode;
+			d.Season = +d.Season;
+			d.Rating = +d.Rating;
+		});
+
+		episodes = data;
+		console.log("Done with series " + firstLetter + "!");
+		loadedSeriesLetter = firstLetter;
+		onFilter();
+	});
 }
 
 
 /**
  * Function to show filtered series
  */
-d3.select('#custom-search-input-field').on('keyup', onFilter);
+d3.select('#custom-search-input-field').on('keyup', function() {
+	var value = $(this).val();
+
+	if (value.length === 0) {
+		return;
+	}
+
+	var firstLetter = value[0].toUpperCase();
+	var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+	if (letters.indexOf(firstLetter) < 0) {
+	    firstLetter = "-";
+	}
+
+	if (loadedSeriesLetter !== firstLetter) {
+		loadData(firstLetter)
+		loadedSeriesLetter = firstLetter;
+	} else {
+		onFilter();
+	}
+
+});
 
 function onFilter() {
 	var filterText = d3.select('#custom-search-input-field').property('value');
-
 	filteredData = series;
 
 	if (filterText !== "") {
@@ -77,14 +130,14 @@ function onFilter() {
 		});
 	}
 
-	d3.select('#filter-results').html(filteredData.map(function(d) {
-		var returnValue = "" +
-			"<a class=\"selectSeries\" href=\"#\" data-seriesid=\"" + d.ID + "\"  >" +
-			d.Title + " (" + d.Year + ")" +
-			"</a>";
-		return returnValue;
-	}));
+	var html = "";
+	
+	$.each(filteredData, function(index, value) {
+		html = html + "<a class=\"selectSeries\" href=\"#\" data-seriesid=\"" + value.ID + "\"  >" +
+			value.Title + " (" + value.Year + ")" + "</a>";
+	});
 
+	d3.select('#filter-results').html(html);
 }
 
 /**
