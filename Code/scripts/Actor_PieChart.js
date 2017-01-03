@@ -54,7 +54,7 @@ function createMoviePieChart(divID, actors) {
 }
 
 function drawPieChart(divID, data) {
-    var width = widthSmallLargeChart - 10;
+    var width = document.getElementById("languageChart").offsetWidth - 50;
     var height = heightSmallRow - 10;
     var radius = (Math.min(width, height) / 2) - 5;
     var donutWidth = 30;

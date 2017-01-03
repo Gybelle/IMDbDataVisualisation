@@ -9,16 +9,15 @@
 
         <!-- Scripts -->
         <script src="data/flowData/sankeyColors.js"></script>
+        <script src="data/flowData/moviePaths.js"></script>
+
         <script src="plugins/awesomplete-gh-pages/awesomplete.js" async></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="http://d3js.org/d3.v3.js"></script>
         <script src="plugins/sankey.js"></script>
+
         <script type="text/javascript" src="scripts/flows_sankey.js"></script>
         <script type="text/javascript" src="scripts/flows_sankey_highlight.js"></script>
-
-
-
-
     </head>
 
     <body>
@@ -35,14 +34,100 @@
                 <li>
                   <div class="checkboxWithLabel">
                     <div class="checkboxLabel">
-                      <input id="allCheckbox" type="checkbox" name="Genre" value="All">
+                      <input id="allCheckbox" type="checkbox" name="Flow" value="All">
+                      <text class="genreCheckboxText">All</text>
+                    </div>
+                  </div>
+                  </li>
+                <li>
+                <li>
+                  <div class="checkboxWithLabel flowQuery">
+                    <div class="checkboxLabel">
+                      <input id="movieCheckbox" type="checkbox" name="Flow" value="Movies">
                       <text class="genreCheckboxText">Movie</text>
                       <input id="movieSearch_sankey" class="awesomplete"/>
                     </div>
                   </div>
                 </li>
                 <li>
-
+                  <div class="checkboxWithLabel flowQuery">
+                    <div class="checkboxLabel">
+                      <input id="q1Checkbox" type="checkbox" name="Flow" value="Query1">
+                      <text class="genreCheckboxText">Most popular</text>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="checkboxWithLabel flowQuery">
+                    <div class="checkboxLabel">
+                      <input id="q2Checkbox" type="checkbox" name="Flow" value="Query2">
+                      <text class="genreCheckboxText">Least popular</text>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="checkboxWithLabel flowQuery">
+                    <div class="checkboxLabel">
+                      <input id="q3Checkbox" type="checkbox" name="Flow" value="Query3">
+                      <text class="genreCheckboxText">Shortest duration</text>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="checkboxWithLabel flowQuery">
+                    <div class="checkboxLabel">
+                      <input id="q4Checkbox" type="checkbox" name="Flow" value="Query4">
+                      <text class="genreCheckboxText">Longest duration</text>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="checkboxWithLabel flowQuery">
+                    <div class="checkboxLabel">
+                      <input id="q5Checkbox" type="checkbox" name="Flow" value="Query5">
+                      <text class="genreCheckboxText">Most expensive</text>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="checkboxWithLabel flowQuery">
+                    <div class="checkboxLabel">
+                      <input id="q6Checkbox" type="checkbox" name="Flow" value="Query6">
+                      <text class="genreCheckboxText">Least expensive</text>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="checkboxWithLabel flowQuery">
+                    <div class="checkboxLabel">
+                      <input id="q7Checkbox" type="checkbox" name="Flow" value="Query7">
+                      <text class="genreCheckboxText">Highest revenue</text>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="checkboxWithLabel flowQuery">
+                    <div class="checkboxLabel">
+                      <input id="q8Checkbox" type="checkbox" name="Flow" value="Query8">
+                      <text class="genreCheckboxText">Lowest revenue</text>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="checkboxWithLabel flowQuery">
+                    <div class="checkboxLabel">
+                      <input id="q9Checkbox" type="checkbox" name="Flow" value="Query9">
+                      <text class="genreCheckboxText">Most cost-effective</text>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="checkboxWithLabel flowQuery">
+                    <div class="checkboxLabel">
+                      <input id="q10Checkbox" type="checkbox" name="Flow" value="Query10">
+                      <text class="genreCheckboxText">Least cost-effective</text>
+                    </div>
+                  </div>
                 </li>
       </div> <!-- wrapper sidebar -->
       <div id="page-content-wrapper">
