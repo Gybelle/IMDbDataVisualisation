@@ -1,6 +1,7 @@
-pathHighlighted = ["2 hours → Two months", "Two months → [1M-5M["]
-arrow = " → "
-classHighlight = "highlighted_link"
+var pathHighlighted = ["2 hours → Two months", "Two months → [1M-5M["];
+var moviePath = []
+var arrow = " → ";
+var classHighlight = "highlighted_link";
 
 function highlightPathInSankey(){
   var links = getLinkObjects();
@@ -16,7 +17,6 @@ function highlightPathInSankey(){
       if (text.indexOf(path) != -1){
         foundLink = true;
         $(link).addClass(classHighlight);
-        pathHighlighted.p
       }
     }
   }
@@ -40,21 +40,87 @@ function getLinkObjects(){
    return links;
 }
 
-
 function setFlowChartFilterMenu(){
-  pathHighlighted = []
+  pathHighlighted = ["test", "llala"];
   $("#menu-toggle").click(function(e) {
       e.preventDefault();
       $("#wrapper").toggleClass("toggled");
   });
+
+  // actions when searching a movie
+  $("#movieSearch_sankey").focusout(function(){
+    movie = $(this).val();
+    $("#movieCheckbox").prop('checked', true);
+    findMoviePath(movie);
+    highlightPathInSankey();
+  });
+
+  $("#movieSearch_sankey").keypress(function (e) {
+    if (e.which == 13) {
+      movie = $(this).val();
+      $("#movieCheckbox").prop('checked', true);
+      findMoviePath(movie);
+      highlightPathInSankey();
+      return false;    //<---- Add this line
+    }
+  });
+
+  // highlighting paths
+  setCheckboxEvents();
+}
+
+function setCheckboxEvents(){
+  $("#movieCheckbox").change(function() {
+    if(this.checked) {
+        var movie = $("#movieSearch_sankey").val();
+        findMoviePath(movie);
+    }
+    else {
+      removePathsToHighlightedPaths(moviePath);
+      moviePath = [];
+    }
+    highlightPathInSankey();
+});
+}
+
+function findMoviePath(movie){
+  path = moviePaths[movie]
+  if (path === undefined){
+    console.log(movie + " not found.");
+    moviePath = [];
+  } else {
+    console.log(pathHighlighted);
+    addMovieToMoviePath(path);
+    console.log(moviePath);
+    addPathsToHighlightedPaths(moviePath)
+    console.log(pathHighlighted)
+  }
+}
+
+function addMovieToMoviePath(path){
+  moviePath = [];
+  path = path.replace(/#/g , arrow);
+  moviePath = path.split("*");
+}
+
+function addPathsToHighlightedPaths(paths){
+  console.log(pathHighlighted);
+  for(i = 0; i < paths.length; i++){
+    path = paths[i];
+    console.log(path);
+    pathHighlighted.push(path);
+  }
+  //pathHighlighted = allPaths;
+  console.log(pathHighlighted);
 }
 
 function getMovieFlowDatalist(objectID){
-
-  //TODO Write this!
-
-  movieList = "Java, JavaScript, Python";
-  $("#"+objectID).attr("data-list", movieList);
-
-
+  movieList = "";
+  movieKeys = Object.keys(moviePaths);
+  for(i = 0; i < movieKeys.lenght; i++){
+    if (i != 0){
+      movieList = movieList + ", "+ movieKeys[i];
+    }
+  }
+  $("#"+objectID).attr("data-list", movieKeys);
 }

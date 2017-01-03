@@ -584,10 +584,16 @@ def updateMoviePaths(title, year, pairList):
         moviePaths[key] = value
 
 def writeMoviePathsToFile():
-    file = open("../../Data/flowData_moviePaths.csv", "w", encoding="utf8", errors="ignore")
-    file.write("Movie,Path\n")
+    file = open("../../Data/moviePaths.js", "w", encoding="utf8", errors="ignore")
+    file.write("var moviePaths = {\n")
+    index = 0
     for movie in moviePaths:
-        file.write("%s,%s\n" % (movie, moviePaths[movie]))
+        index += 1
+        if index == len(moviePaths):
+            file.write("\t\"%s\": \"%s\"\n" % (movie, moviePaths[movie]))
+        else:
+            file.write("\t\"%s\": \"%s\",\n" % (movie, moviePaths[movie]))
+    file.write("}\n")
 
     file.close()
 
