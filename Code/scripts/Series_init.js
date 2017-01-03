@@ -10,9 +10,9 @@ function initialiseSeries() {
 	 */
 	 
 	console.log("Loading data...");
-/*
-	var previousTitle = "";
 
+	var previousTitle = "";
+/*
 	d3.dsv(';')("data/seriesGOT.csv", function(data) {
 		data.forEach(function(d) {
 			//check if this is a new Series by comparing the Title to the previously parsed entry
@@ -40,15 +40,16 @@ function initialiseSeries() {
 		onFilter();
 	});
 
-	d3.dsv(';')("data/actors.csv", function(data) {
+	d3.dsv(';')("data/actorsGOT.csv", function(data) {
 		data.forEach(function(d) {
 			d.ActorID = +d.ActorID;
 		});
 
 		actors = data;
 		console.log("Done with actors!");
+		console.log("Actors for GoT: " + actors.length);
 	});
-/*
+
 	d3.dsv(';')("data/actorsInMoviesGOT.csv", function(data) {
 		data.forEach(function(d) {
 			d.ActorID = +d.ActorID;
@@ -61,7 +62,7 @@ function initialiseSeries() {
 */
 }
 
-function loadData(firstLetter) {
+function loadSeriesData(firstLetter) {
 	var previousTitle = "";
 
 	d3.dsv(';')("data/series/series_" + firstLetter + ".csv", function(data) {
@@ -93,6 +94,21 @@ function loadData(firstLetter) {
 	});
 }
 
+function loadActorsInSeriesData(seriesID, followup) {
+	var bucket = Math.floor(seriesID / 50000);
+
+	d3.dsv(';')("data/actorsInSeries/mapping_" + bucket + ".csv", function(data) {
+		data.forEach(function(d) {
+			d.ActorID = +d.ActorID;
+			d.MovieOrSeriesID = +d.MovieOrSeriesID;
+		});
+
+		actorsInMovies = data;
+		console.log("Done with actorsInMovies!");
+		followup();
+	});
+
+}
 
 /**
  * Function to show filtered series
@@ -112,7 +128,7 @@ d3.select('#custom-search-input-field').on('keyup', function() {
 	}
 
 	if (loadedSeriesLetter !== firstLetter) {
-		loadData(firstLetter)
+		loadSeriesData(firstLetter)
 		loadedSeriesLetter = firstLetter;
 	} else {
 		onFilter();
@@ -173,8 +189,12 @@ $(document.body).on('click', '.selectSeries' ,function(){
 		}
 	});
 
-	drawRatingsPerEpisode(selectedShow, numSeasons, numEpisodes);
-	drawActorPanels(selectedShow, numSeasons, numEpisodes);
+	//load the actorsInSeries data
+	loadActorsInSeriesData(seriesID, function() {
+		drawRatingsPerEpisode(selectedShow, numSeasons, numEpisodes);
+		drawActorPanels(selectedShow, numSeasons, numEpisodes);		
+	});
+
 });
 
 
@@ -323,6 +343,7 @@ function drawActorPanels(selectedShow, numSeasons, numEpisodes) {
 		return (d.Title === selectedShow.Title && d.Season !== 0 && d.Episode !== 0);
 	});
 
+	var totalEpisodes = filtered.length;
 	var epsPerSeason = [];
 	var episodeIDs = [];
 	$.each(filtered, function( index, value ) {
@@ -368,52 +389,107 @@ function drawActorPanels(selectedShow, numSeasons, numEpisodes) {
 		actorOccurrencesPerSeason[value.ActorID][episode.Season].push(episode.Episode);
 	});
 
-	var seriesActors = actors.filter(function(d) {
-		return (actorIDs.indexOf(d.ActorID) >= 0);
+	/*
+	 * now load the appropriate actors
+	*/
+
+	//first filter out main actors
+	var mainActorIDs = [];
+	$.each(actorOccurrences, function(k,v) {
+		if ((v / totalEpisodes) >= mainTreshold) {
+			mainActorIDs.push(k);
+		}
 	});
 
-	//filter out main actors
-	var mainActors = seriesActors.filter(function(d) {
-		return ((actorOccurrences[d.ActorID] / filtered.length) >= mainTreshold);
+	var q = d3.queue();
+	var addedBuckets = [];
+
+	$.each(mainActorIDs, function(k,v) {
+		var bucket = Math.floor(v / 10000);
+		if (addedBuckets.indexOf(bucket) < 0) {
+	    	q.defer(d3.dsv(';'), "data/actorsByID/actors_" + bucket + ".csv");
+	    	addedBuckets.push(bucket);
+		}
 	});
 
-	var divisionData = calculateActorDivisionData(mainActors, actorOccurrences, actorOccurrencesPerSeason, epsPerSeason, actorRoles);
+/*
+	d3.dsv(';')("data/actorsGOT.csv", function(data) {
+		data.forEach(function(d) {
+			d.ActorID = +d.ActorID;
+		});
 
-	//clear the old grid first
-	$('#actorDistribution').html('');
+		actors = data;
+		console.log("Done with actors!");
 
-	//draw the grid
-	var grid = d3.select("#actorDistribution")
-	    .append("svg")
-	    .attr("width", $('#actorDistribution').width())
-	    .attr("height", $('#actorDistribution').height());
-
-	var column = grid.selectAll(".square")
-	    .data(divisionData)
-	    .enter().append("rect")
-	    .attr("class","square")
-	    .attr("x", function(d) { return d.x; })
-	    .attr("y", function(d) { return d.y; })
-	    .attr("width", function(d) { return d.width; })
-	    .attr("height", function(d) { return d.height; })
-	    .style("fill", function(d) { return d.color; })
-	    .style("stroke", "#222");
-
-    grid.selectAll(".actor-desc").data(divisionData)
-    	.enter().append("foreignObject")
-    	.attr("class", "actor-desc")
-	    .attr("x", function(d){ return d.x; })
-	    .attr("y", function(d){ return d.y; })
-        .attr('width',  function(d){ return d.width; })
-        .attr('height', function(d){ return d.height; })            
-        	.append("xhtml:body")
-    .html(function(d) {return generateActorHtml(d);} )
-    .style({
-    	"background": "none",
-    });
+	});*/
 
 
+	q.awaitAll(function (error, files) {
+		var mainActors = [];
+	    
+	    files.forEach(function (file) {     
+	        file.forEach(function (d) {
+	        	d.ActorID = +d.ActorID;
 
+	        	var index = mainActorIDs.indexOf(d.ActorID)
+	        	if (index >= 0) {
+	        		mainActors.push(d);
+
+	        		//temp fix for duplicate ActorID bug:
+	        		//remove ID from mainActorIDs
+					mainActorIDs.splice(index, 1);
+	        	}
+
+
+	        });
+	    });
+
+/*
+	    console.log(mainActors);
+	    console.log(actorOccurrences);
+	    console.log(actorOccurrencesPerSeason);
+	    console.log(epsPerSeason);
+	    console.log(actorRoles);
+*/
+
+		var divisionData = calculateActorDivisionData(mainActors, actorOccurrences, actorOccurrencesPerSeason, epsPerSeason, actorRoles);
+
+		console.log(divisionData);
+
+		//clear the old grid first
+		$('#actorDistribution').html('');
+
+		//draw the grid
+		var grid = d3.select("#actorDistribution")
+		    .append("svg")
+		    .attr("width", $('#actorDistribution').width())
+		    .attr("height", $('#actorDistribution').height());
+
+		var column = grid.selectAll(".square")
+		    .data(divisionData)
+		    .enter().append("rect")
+		    .attr("class","square")
+		    .attr("x", function(d) { return d.x; })
+		    .attr("y", function(d) { return d.y; })
+		    .attr("width", function(d) { return d.width; })
+		    .attr("height", function(d) { return d.height; })
+		    .style("fill", function(d) { return d.color; })
+		    .style("stroke", "#222");
+
+	    grid.selectAll(".actor-desc").data(divisionData)
+	    	.enter().append("foreignObject")
+	    	.attr("class", "actor-desc")
+		    .attr("x", function(d){ return d.x; })
+		    .attr("y", function(d){ return d.y; })
+	        .attr('width',  function(d){ return d.width; })
+	        .attr('height', function(d){ return d.height; })            
+	        	.append("xhtml:body")
+	    .html(function(d) {return generateActorHtml(d);} )
+	    .style({
+	    	"background": "none",
+	    });
+
+	});
 }
 
 function generateActorHtml(data) {
@@ -469,12 +545,15 @@ function calculateActorDivisionData(mainActors, actorOccurrences, actorOccurrenc
 		total += actorOccurrences[value.ActorID];
 	});
 
+	var totalMainActors = mainActors.length;
+
 	//now calculate each main actors percentage of occurrence
 	var division = [];
 	$.each(mainActors, function( index, value ) {
 		actor = new Object();
 		actor.actor = value;
-		actor.percentage = total / actorOccurrences[value.ActorID] / 100;
+		actor.percentage = actorOccurrences[value.ActorID] / total;
+
 		division.push(actor);
 	});
 
@@ -487,8 +566,8 @@ function calculateActorDivisionData(mainActors, actorOccurrences, actorOccurrenc
 	});
 
 
-	//let's say 60% of our surface is the 'max'
-	var totalHeigthFactor = .9;
+	//let's say 80% of our surface is the 'max'
+	var totalHeigthFactor = .8;
 	var widthTotal = $('#actorDistribution').width();
 	var heightTotal = $('#actorDistribution').height();
 
@@ -496,7 +575,12 @@ function calculateActorDivisionData(mainActors, actorOccurrences, actorOccurrenc
 
 
 	var data = new Array();
+
 	var numCols = 5;
+	if (totalMainActors < numCols) {
+		numCols = totalMainActors;
+	}
+	
     var width = Math.round(widthTotal / numCols); //this should be calculated using the percentages
 
     var episodeWidth = width * 0.7 / maxEpsPerSeason;
@@ -511,9 +595,14 @@ function calculateActorDivisionData(mainActors, actorOccurrences, actorOccurrenc
 
     	//calculate all appearances for this actor
 		var appearances = [];
+		console.log(actorOccurrencesPerSeason[currentActor.ActorID]);
 		$.each(actorOccurrencesPerSeason[currentActor.ActorID], function(index, value) {
 			//each value is a season
 			appearances[index] = [];
+
+			//if no occurences in this season, we continue
+			if (value === undefined)
+				return;
 
 			for (var j = 1; j <= epsPerSeason[index]; j++) {
 				if (value.indexOf(j) < 0) {
