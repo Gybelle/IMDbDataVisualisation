@@ -9,6 +9,7 @@ from recordclass import recordclass
 import chunk
 import math
 import re
+import operator
 
 printScores = False
 printScoreClasses = True
@@ -440,7 +441,6 @@ def distributeDataInRanges():
     initializeDictionary()
     updateDictionary()
     writeDictToFile()
-    writeMoviePathsToFile()
 
 def initializeDictionary():
     #Pairs: [Runtime, FilmingDays]  [FilmingDays, Budget]   [Budget, Revenue]   [Revenue, Score]
@@ -583,20 +583,6 @@ def updateMoviePaths(title, year, pairList):
 
         moviePaths[key] = value
 
-def writeMoviePathsToFile():
-    file = open("../../Data/moviePaths.js", "w", encoding="utf8", errors="ignore")
-    file.write("var moviePaths = {\n")
-    index = 0
-    for movie in moviePaths:
-        index += 1
-        if index == len(moviePaths):
-            file.write("\t\"%s\": \"%s\"\n" % (movie, moviePaths[movie]))
-        else:
-            file.write("\t\"%s\": \"%s\",\n" % (movie, moviePaths[movie]))
-    file.write("}\n")
-
-    file.close()
-
 
 
 
@@ -640,6 +626,104 @@ def writeToColorFile(colorFile, rangeNames, colorValue):
 
 
 #######################################################################################################################
+#                                   PART FIVE: PERFORM OTHER QUERIES                                                   #
+#######################################################################################################################
+def performOtherQueries():
+    file = open("../../Data/moviePaths.js", "w", encoding="utf8", errors="ignore")
+    writeMoviePathsToFile(file)
+    queryLists = gatherInfoForOtherQueries()
+    (movie_MostPopular, movie_LeastPopular, movie_Shortest, movie_Longest, movie_Exp, movie_Cheap, movie_RevHigh,
+     movie_RevLow, movie_MostCE, movie_LeastCE) = queryLists
+
+    #writeListPathToFile
+    file.close()
+
+
+def writeMoviePathsToFile(file):
+    file.write("var moviePaths = {\n")
+    index = 0
+    for movie in moviePaths:
+        index += 1
+        if index == len(moviePaths):
+            file.write("\t\"%s\": \"%s\"\n" % (movie, moviePaths[movie]))
+        else:
+            file.write("\t\"%s\": \"%s\",\n" % (movie, moviePaths[movie]))
+    file.write("}\n")
+
+
+
+def gatherInfoForOtherQueries():
+    movieCost_list = {}
+    movieRevenue_list = {}
+    movieCE_list = {}
+
+    movie_MostPopular = []
+    movie_LeastPopular = []
+    movie_Shortest = []
+    movie_Longest = []
+    movie_Exp = []
+    movie_Cheap = []
+    movie_RevHigh = []
+    movie_RevLow = []
+    movie_MostCE = []
+    movie_LeastCE = []
+
+    for movieRecord in movieList:
+        title = movieRecord[1]
+        year = movieRecord[7]
+        movie = (title, year)
+
+        (title, runtime, budget, gross, rating, year) = (movieRecord[1], movieRecord[2], movieRecord[4], movieRecord[5], movieRecord[6], movieRecord[7])
+        movie = (title, year)
+
+        if budget:
+            movieCost_list[movie] = budget
+            if budget == 1:
+                movie_Cheap.append(movie)
+        if gross:
+            movieRevenue_list[movie] = gross
+            if gross <= 10:
+                movie_RevLow.append(movie)
+        if budget and gross:
+            ce = gross - budget
+            if ce <= 0:
+                movie_LeastCE.append(ce)
+            else:
+                movieCE_list[movie] = ce
+
+
+        if runtime:
+            if runtime < 5:
+                movie_Shortest.append(movie)
+            elif runtime > 180:
+                movie_Longest.append(movie)
+
+        if rating:
+            if rating <= 2:
+                movie_LeastPopular.append(movie)
+            elif rating >= 9:
+                movie_MostPopular.append(movie)
+
+    movieCost_list = sorted(movieCost_list.items(), key=operator.itemgetter(1))
+    movie_Exp = getMovieKeys(movieCost_list[-10:])
+
+    movieRevenue_list = sorted(movieRevenue_list.items(), key=operator.itemgetter(1))
+    movie_RevHigh = getMovieKeys(movieRevenue_list[-10:])
+
+    movieCE_list = sorted(movieCE_list.items(), key=operator.itemgetter(1))
+    movie_MostCE = getMovieKeys(movieCE_list[-10:])
+
+    return (movie_MostPopular, movie_LeastPopular, movie_Shortest, movie_Longest, movie_Exp, movie_Cheap, movie_RevHigh, movie_RevLow, movie_MostCE, movie_LeastCE)
+
+def getMovieKeys(movies):
+    newList = []
+    for movie in movies:
+        newList.append(movie[0])
+
+    return newList
+
+
+#######################################################################################################################
 #                                               MAIN SCRIPT                                                           #
 #######################################################################################################################
 
@@ -649,6 +733,7 @@ process(movieFile)
 movieFile.close()
 
 calculateRanges()
+performOtherQueries()
 distributeDataInRanges()
 generateColorFile("sankeyColors.js")
 
