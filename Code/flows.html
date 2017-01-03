@@ -3,53 +3,81 @@
         <meta charset="utf-8">
         <title>IMDb: Flows</title>
 
+        <link rel="stylesheet" href="plugins/awesomplete-gh-pages/awesomplete.css" />
         <link href="plugins/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">   <!-- Bootstrap -->
         <link rel="stylesheet" type="text/css" href="css/style.css">
 
         <!-- Scripts -->
+        <script src="data/flowData/sankeyColors.js"></script>
+        <script src="plugins/awesomplete-gh-pages/awesomplete.js" async></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="http://d3js.org/d3.v3.js"></script>
         <script src="plugins/sankey.js"></script>
         <script type="text/javascript" src="scripts/flows_sankey.js"></script>
+        <script type="text/javascript" src="scripts/flows_sankey_highlight.js"></script>
+
+
+
 
     </head>
 
     <body>
-        <!----------------------------------------------- Navigator ----------------------------------------------->
-        <nav class="navbar navbar-inverse">
-          <div class="container-fluid">
-            <div class="navbar-header">
-              <a class="navbar-brand" href="index.html">IMDb Data Visualisation</a>
+
+      <div id="wrapper" class="toggled">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        Highlight paths
+                    </a>
+                </li>
+                <li>
+                  <div class="checkboxWithLabel">
+                    <div class="checkboxLabel">
+                      <input id="allCheckbox" type="checkbox" name="Genre" value="All">
+                      <text class="genreCheckboxText">Movie</text>
+                      <input id="movieSearch_sankey" class="awesomplete"/>
+                    </div>
+                  </div>
+                </li>
+                <li>
+
+                </li>
+      </div> <!-- wrapper sidebar -->
+      <div id="page-content-wrapper">
+        <div id="container-fluid">
+
+          <!----------------------------------------------- Navigator ----------------------------------------------->
+          <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <a class="navbar-brand" href="index.html">IMDb Data Visualisation</a>
+              </div>
+              <ul class="nav navbar-nav">
+                <li><a href="genres.html">Genres</a></li>
+                <li><a href="actors.html">Actors</a></li>
+                <li><a href="series.html">Series</a></li>
+                <li class="active"><a href="flows.html">Flows</a></li>
+                <li><a href="#menu-toggle" id="menu-toggle" class="special-nav-option">[ Search movie ]</a></li>
+              </ul>
             </div>
-            <ul class="nav navbar-nav">
-              <li><a href="genres.html">Genres</a></li>
-              <li><a href="actors.html">Actors</a></li>
-              <li><a href="series.html">Series</a></li>
-              <li class="active"><a href="flows.html">Flows</a></li>
-            </ul>
-          </div>
-        </nav>
+          </nav>
 
-        <p id="sankeyChart">
+          <p id="sankeyChart">
 
-        <!--
-        <div class="row">
-          <div id="colLineChart" class="col-md-10">
-            <div class="chart" id="flowChart">
-              <p id="sankeyChart">
-            </div>
-          </div>
+        <!--<button onclick="highlightPathInSankey()">Click me</button>-->
+      </div> <!-- End container fluid content -->
+    </div> <!-- End wrapper page content -->
+  </div> <!-- End wrapper div -->
 
-          <div id="colBarChart" class="col-md-2">
-            <div class="search" id="flowChartSearch">search</div>
-          </div>
-        </div>
-      -->
-
-        <script>
-          createSankeyChart()
-        </script>
+      <script>
+        setFlowChartFilterMenu();
+        createSankeyChart();
+        getMovieFlowDatalist("movieSearch_sankey");
+      </script>
 
     </body>
+
 
 </html>

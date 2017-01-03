@@ -21,10 +21,10 @@
         <script src="plugins/GeoSearch/src/js/l.geosearch.provider.google.js"></script>
 
         <script src="data/countryCodes.js"></script>
+        <script type="text/javascript" src="scripts/Actor_SearchBar.js"></script>
         <script type="text/javascript" src="scripts/Actor_Biography.js"></script>
         <script type="text/javascript" src="scripts/Actor_Map.js"></script>
         <script type="text/javascript" src="scripts/Actor_PieChart.js"></script>
-        <script type="text/javascript" src="Testing/scripts/DonutChartExmp.js"></script>
     </head>
 
     <body>
@@ -63,19 +63,20 @@
                     </div>
                     <div id="colLifetime" class="col-md-6">
                         <div class="chart" id="lifetime">
-                            <div class="lifetimeWrapper">
+                            <span id="lifetimeInfo" class="info"></span>
+                            <div class="lifetimeWrapper" id="lifetimeWrapper1">
                                 <img class="lifetimeImg" id="lifetimeImg1" src="img/AgeIcons/m_age1_col0.png" alt="Age 0-10"/>
                                 <div class="lifetimeLabel">0-10</div>
                             </div>
-                            <div class="lifetimeWrapper">
+                            <div class="lifetimeWrapper" id="lifetimeWrapper2">
                                 <img class="lifetimeImg" id="lifetimeImg2" src="img/AgeIcons/m_age2_col0.png" alt="Age 11-25"/>
                                 <div class="lifetimeLabel">11-25</div>
                             </div>
-                            <div class="lifetimeWrapper">
+                            <div class="lifetimeWrapper" id="lifetimeWrapper3">
                                 <img class="lifetimeImg" id="lifetimeImg3" src="img/AgeIcons/m_age3_col0.png" alt="Age 26-50"/>
                                 <div class="lifetimeLabel">26-50</div>
                             </div>
-                            <div class="lifetimeWrapper">
+                            <div class="lifetimeWrapper" id="lifetimeWrapper4">
                                 <img class="lifetimeImg" id="lifetimeImg4" src="img/AgeIcons/m_age4_col0.png" alt="Age 51+"/>
                                 <div class="lifetimeLabel">50+</div>
                             </div>
@@ -90,38 +91,17 @@
                     </div>
                     <div id="colLanguageChart" class="col-md-4">
                         <div class="chart" id="languageChart">
-                            <span id="languageInfo"></span>
+                            <span id="languageInfo" class="info"></span>
                         </div>
                     </div>
                 </div>
             </div> <!-- End container fluid content -->
         </div> <!-- End wrapper page content -->
         <script>
-            function setLayout() {
-                //Set width of charts
-                //bar- and linechart:
-                heightSmallRow = document.getElementById("lifetime").offsetHeight;
-                widthSmallChart = document.getElementById("colLifetime").offsetWidth;
-                $("#lifetime").css('width', widthSmallChart);
-                //bubblechart:
-                heightNavbar = document.getElementById("menubar").offsetHeight;
-                heightLargeRow = $(document).height() - heightNavbar - heightSmallRow;
-                widthSmallLargeChart = document.getElementById("colLanguageChart").offsetWidth;
-                $(".small_large_chart").css('width', widthSmallLargeChart);
-                // mapchart
-                widthLargeChart = document.getElementById("colActorMap").offsetWidth;
-                $(".large_chart").css('width', widthLargeChart);
-                $(".large_chart").css('height', heightLargeRow);
-                $("#languageInfo").css('top', heightSmallRow - 25);
-            }
-            setLayout();
-
-            createActorPieChart("#languageChart", null);
-
-            setBiographyWidgetActor(null);
-            var map = createActorsMap("actorsMap");
-            map_setActor("Geoffrey Rush");
-            //map_setMovie("Pirates of the Caribbean: The Curse of the Black Pearl (2003)");
+            initialiseCharts("actorsMap", "languageChart");
+            //setActor("Alan (I) Rickman");
+            setMovie("Pirates of the Caribbean: The Curse of the Black Pearl (2003)");
+            //setMovie("Harry Potter and the Sorcerer's Stone (2001)");
         </script>
     </body>
 

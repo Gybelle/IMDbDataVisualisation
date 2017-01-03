@@ -1,24 +1,63 @@
-var unfilteredData = null;
-var filteredData = null;
-var divID = null;
-
-function createActorPieChart(divId, data) {
-    divID = divId;
-    if (data == null) {
+function createActorPieChart(divID, movies) {
+    var data = [];
+    if (movies == null || movies.length == 0) {
         data = [
             {language: 'No data', count: 0}
         ];
+    } else {
+        var languageMap = {};
+        movies.forEach(function (movie) {
+            movie.languages.forEach(function (language) {
+                if (language != "" && language != "None") {
+                    if (!languageMap[language]) {
+                        languageMap[language] = 0;
+                    }
+                    languageMap[language]++;
+                }
+            });
+        });
+        for (var language in languageMap) {
+            data.push({language: language, count: languageMap[language]});
+        }
     }
-    unfilteredData = data;
-    filteredData = null;
-    drawChart(unfilteredData);
+    data.sort(function (x, y) {
+        return d3.descending(x.count, y.count);
+    });
+    drawPieChart(divID, data);
 }
 
-function drawChart(data) {
-    var width = widthSmallLargeChart;
-    var height = heightSmallRow;
-    var radius = Math.min(width, height) / 2;
-    var donutWidth = 40;
+function createMoviePieChart(divID, actors) {
+    var data = [];
+    if (actors == null || actors.length == 0) {
+        data = [
+            {language: 'No data', count: 0}
+        ];
+    } else {
+        var nationalityMap = {};
+        actors.forEach(function (actor) {
+            if (actor.birthLocation != "") {
+                var nationality = getCountry(actor.birthLocation);
+                if (!nationalityMap[nationality]) {
+                    nationalityMap[nationality] = 0;
+                }
+                nationalityMap[nationality]++;
+            }
+        });
+        for (var nationality in nationalityMap) {
+            data.push({language: nationality, count: nationalityMap[nationality]});
+        }
+    }
+    data.sort(function (x, y) {
+        return d3.descending(x.count, y.count);
+    });
+    drawPieChart(divID, data);
+}
+
+function drawPieChart(divID, data) {
+    var width = widthSmallLargeChart - 10;
+    var height = heightSmallRow - 10;
+    var radius = (Math.min(width, height) / 2) - 5;
+    var donutWidth = 30;
 
     var color = d3.scale.ordinal()
             .range(["FF7F0E", "#6599C0", "#F0CC76", "#64BD91", "#F59A6E", "#AFD572", "#E2D35C", "#D84E67", "#7073A0", "#58B16F", "#A2C5A5", "#C25D7F", "#FCD450", "#FF183C", "#2AB1CF", "#348B85", "#70C256", "#72CAFA", "#3A5DA1", "#4EA6AA", "#916589", "#C25D7F", "#4EE69B", "#D6AA51", "#DE6E48", "#AD6A8B", "#73539F", "#FF185D", "#57C27C", "#696C97", "#F7B6D2", "#DA707A", "#878787"]);
@@ -26,17 +65,20 @@ function drawChart(data) {
     var arc = d3.svg.arc()
             .innerRadius(radius - donutWidth)
             .outerRadius(radius);
+    var arcOver = d3.svg.arc()
+            .innerRadius(radius - donutWidth + 8)
+            .outerRadius(radius + 5);
 
     var labelArc = d3.svg.arc()
-            .outerRadius(radius - 20)
-            .innerRadius(radius - 20);
+            .outerRadius(radius - 15)
+            .innerRadius(radius - 15);
 
     var pie = d3.layout.pie()
             .value(function (d) {
                 return d.count;
             });
 
-    d3.select("svg").remove();
+    d3.select(divID).select("svg").remove();
     var svg = d3.select(divID).append("svg")
             .attr("width", width)
             .attr("height", height)
@@ -66,23 +108,54 @@ function drawChart(data) {
                 return;
             });
 
-    addMouseOver(svg);
+    // highlight an already selected language
+    d3.selectAll("path.slice").forEach(function (slices) {
+        slices.forEach(function (slice) {
+            var language = slice.__data__.data.language;
+            if (language == languageFilter) {
+                slice.id = "selectedLanguage";
+                d3.selectAll("#selectedLanguage").attr("class", "slice selected").transition().attr("d", arcOver);
+                slice.id = "";
+            }
+        });
+    });
+
+    addMouseOver(svg, path, arc, arcOver);
 
     /* The Legend */
     createLegend(data, svg, color);
 }
 
-function addMouseOver(svg) {
+function addMouseOver(svg, path, arc, arcOver) {
     var slice = svg.selectAll("path.slice");
     slice.on("mousemove", function (d) {
-        if (d.data.count == 1) {
-            $("#languageInfo").html(d.data.language + ": " + d.data.count + " movie");
-        } else {
-            $("#languageInfo").html(d.data.language + ": " + d.data.count + " movies");
+        if (selectedActor != null) {
+            if (d.data.count == 1) {
+                $("#languageInfo").html(d.data.language + ": " + d.data.count + " movie");
+            } else {
+                $("#languageInfo").html(d.data.language + ": " + d.data.count + " movies");
+            }
+        }
+        else if (selectedMovie != null) {
+            if (d.data.count == 1) {
+                $("#languageInfo").html(d.data.language + ": " + d.data.count + " actor");
+            } else {
+                $("#languageInfo").html(d.data.language + ": " + d.data.count + " actors");
+            }
         }
     });
-    slice.on("mouseout", function (d) {
-        $("#languageInfo").html("");
+    path.on("click", function (d) {
+        var clicked = d3.select(this);
+        if (clicked.classed("selected")) { // unselect
+            clicked.transition().attr("d", arc);
+            clicked.attr("class", "slice");
+            filterLanguage(null);
+        } else { // select
+            d3.selectAll(".slice").attr("class", "slice").transition().attr("d", arc);
+            clicked.transition().duration(800).attr("d", arcOver);
+            clicked.attr("class", "slice selected");
+            filterLanguage(d.data.language);
+        }
     });
 }
 

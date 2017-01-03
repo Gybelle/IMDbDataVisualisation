@@ -289,6 +289,10 @@ body {
     }
 }
 
+.awesomplete {
+  margin-left: 10px;
+}
+
 /* --------------------------- Sankey diagram --------------------------- */
 /* Based on: http://bl.ocks.org/d3noob/5015397 */
 .node rect {
@@ -311,9 +315,43 @@ body {
 .link:hover {
     stroke-opacity: .5;
 }
+
+#sankeyChart .legend {
+  position: absolute;
+  right: 0px;
+}
+
+#sankeyChart .legend > div {
+    margin: 10px 25px 10px 10px;
+    display: inline-block;
+}
+
+#sankeyChart .legend p {
+    display:inline;
+    font-size: 0.8em;
+    font-family: sans-serif;
+    font-weight: 600;
+}
+
+#sankeyChart .legend .categories-marker {
+    height: 1em;
+    width: 1em;
+    border-radius: 35%;
+    background-color: crimson;
+    display: inline-block;
+    margin-right: 4px;
+    margin-bottom: -0.16rem;
+}
+
+#sankeyChart .highlighted_link {
+  stroke: #FF183C;
+  stroke-opacity: .8;
+}
+
+
 /* -------------------------------- Biography -------------------------------- */
 .lifetimeImg {
-    margin: 20px;
+    margin: 10px;
     height: 85px;
     width: 85px;
 }
@@ -345,8 +383,14 @@ body {
 }
 
 .lifetimeWrapper {
-    margin: auto;
+    margin-top: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     display: inline-block;
+    border-color: transparent;
+    border-style: solid;
+    background: transparent;
+    cursor: pointer;
 }
 
 .lifetimeWrapperLegend {
@@ -368,10 +412,27 @@ body {
     display: inline-block;
 }
 
-#languageInfo  {
+.selectedLifetimeWrapper {
+    border-color: #BD9797;
+    border-style: solid;
+    background: #E0CDCD;
+}
+
+.info  {
     z-index: 10;
     position: absolute;
     top: 150px;
+}
+#lifetimeInfo {
+    top: 170px;
+}
+
+#languageChart > svg {
+    margin-top: 5px;
+}
+
+.slice {
+    cursor: pointer;
 }
 
 /* -------------------------------- Series -------------------------------- */

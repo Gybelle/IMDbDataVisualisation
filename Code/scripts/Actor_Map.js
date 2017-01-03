@@ -2,10 +2,13 @@ var map = null;
 var geocodeDecoder = null;
 var manIcon = null;
 var womanIcon = null;
+var countryCache = {};
+var presentMarkers = [];
 
-/* Initialize map using LeafLet. The created map is returned. */
+// INITIALISE ----------------------------------------------------------------------
+
 function createActorsMap(divID) {
-    var map = L.map(divID, {
+    map = L.map(divID, {
         center: [20.0, 5.0],
         minZoom: 2,
         zoom: 2
@@ -30,315 +33,116 @@ function createActorsMap(divID) {
         iconAnchor: [15, 15],
         popupAnchor: [0, -10]
     });
-
-    //var svg = d3.select(map.getPanes().overlayPane).append("svg");
-    //var g = svg.append("g").attr("class", "leaflet-zoom-hide");
-    return map;
 }
 
-function map_setActor(name) {
-    var actor = null;
-    if (name == "") {
-        console.log("No name to find");
-        return;
+// SET DATA ----------------------------------------------------------------------
+
+function map_setActor(actor, movies) {
+    clearMapLayers();
+    if (actor.birthLocation != "") {
+        addActorLocationMarker(actor.birthLocation, actor.isMale, "<b>Born in</b> " + actor.birthLocation);
     }
-
-    console.log("Finding actor");
-
-    d3.dsv(';')("data/actors/actors_" + name[0] + ".csv", function (error, data) {
-        // Find actor
-        data.some(function (d) {
-            if (nameMatches(name, d.Name)) {
-                console.log("Found " + d.Name);
-                actor = {
-                    name: d.Name,
-                    id: d.ActorID,
-                    isMale: (d.IsMale == "True"),
-                    birthYear: d.BirthYear,
-                    birthLocation: d.BirthLocation,
-                    deathYear: d.DeathYear,
-                    deathLocation: d.DeathLocation
-                };
-                return true;
-            }
-        });
-        if (actor == null) {
-            console.log("Could not find " + name);
-            return;
-        }
-
-        // Process actor
-        if (actor.birthYear != "") {
-            var currentYear = new Date().getFullYear();
-            actor.age = currentYear - +actor.birthYear;
-        }
-
-        // Find birth location
-        if (actor.birthLocation != "") {
-            addActorLocationMarker(actor.birthLocation, actor.isMale, "<b>Born in</b> " + actor.birthLocation);
-        }
-
-        setBiographyWidgetActor(actor);
-
-        // Find movies
-        var movieMap = {};
-        movie = false;
-        idBucket = Math.floor(actor.id / 100000);
-
-        d3.dsv(';')("data/actorsInMovies/actorMapping_" + idBucket + ".csv", function (error, data) {
-            data.forEach(function (d) {
-                if (actor.id == d.ActorID.substring(0, d.ActorID.length - 1)) {// && Boolean(d.IsMovie)) {
-                    var movieLetter = d.MovieID.substring(d.MovieID.length - 1);
-                    if (!movieMap[movieLetter]) {
-                        movieMap[movieLetter] = {};
+    if (movies != null) {
+        var countryMap = {};
+        var locationMap = {};
+        movies.forEach(function (movie) {
+            movie.countries.forEach(function (country) {
+                if (country != "") {
+                    if (!countryMap[country]) {
+                        countryMap[country] = [];
                     }
-                    movieMap[d.MovieID.substring(d.MovieID.length - 1)][d.MovieID.substring(0, d.MovieID.length - 1)] = {role: d.Role};
+                    countryMap[country].push(movie);
                 }
             });
-            addMoviesToMap(movieMap)
-        });
-        //console.log(actor);
-    });
-}
-
-function addMoviesToMap(movieMap) {
-    var countryMap = {};
-    var locationMap = {};
-    var yearMap = {};
-    var languageMap = {};
-    var q = d3.queue();
-    for (var letter in movieMap) {
-        q.defer(d3.dsv(';'), "data/movies/movies_" + letter + ".csv");
-    }
-    q.awaitAll(function (error, files) {
-        // find movies
-        files.forEach(function (file) {
-            file.forEach(function (movie) {
-                if (movieMap[movie.Title[0]] && movieMap[movie.Title[0]][movie.ID]) {
-                    // Get year
-                    if (!yearMap[movie.Year]) {
-                        yearMap[movie.Year ] = 0;
+            movie.locations.forEach(function (location) {
+                if (location != "") {
+                    if (!locationMap[location]) {
+                        locationMap[location] = [];
                     }
-                    yearMap[movie.Year]++;
-                    // Get languages
-                    movie.Language.split("*").forEach(function (language) {
-                        if (language != "" && language != "None") {
-                            if (!languageMap[language]) {
-                                languageMap[language] = 0;
-                            }
-                            languageMap[language]++;
-                        }
-                    });
-                    if (movie.Countries != "") {
-                        movie.Countries.split("*").forEach(function (country) {
-                            if (!countryMap[country]) {
-                                countryMap[country] = [];
-                            }
-                            countryMap[country].push({title: movie.Title, year: movie.Year, role: movieMap[movie.Title[0]][movie.ID].role});
-                        });
-                    }
-                    if (movie.Locations != "") {
-                        movie.Locations.split("*").forEach(function (location) {
-                            var country = getCountry(location);
-                            if (!locationMap[country]) {
-                                locationMap[country] = {};
-                            }
-                            locationMap[country][movie.Title + " (" + movie.Year + ")"] = movieMap[movie.Title[0]][movie.ID].role;
-                        });
-                    }
+                    locationMap[location].push(movie);
                 }
             });
         });
-        setBiographyWidgetMovieMap(yearMap);
-        var languageList = [];
-        for (var language in languageMap) {
-            languageList.push({language: language, count: languageMap[language]});
-        }
-        createActorPieChart("#languageChart", languageList);
+        addActorFilmingLocations(locationMap);
+        addActorCountries(countryMap);
+    }
+}
 
-        // add locations to map
-        var locationMinMax = getMovieCountRange(locationMap);
-        var minMaxStep = (locationMinMax[1] - locationMinMax[0]) / 5;
-        d3.json("data/countries.geo.json", function (error, geojson) { // open file with world data
-            countries = {};
-            // Read geojson countries
-            for (var r = 0; r < geojson.features.length; r++) { // for each country in geojson
-                var countryData = geojson.features[r];
-                var countryName = countryData.properties.name;
-                var countryCode = findCountryCode(countryName);
-                countries[countryCode] = countryData;
-            }
-            for (var location in locationMap) {
-                var message = "";
-                var num = Object.keys(locationMap[location]).length;
-                var opacity = 0.3 + 0.1 * (Math.floor((num - locationMinMax[0]) / minMaxStep));
-                for (var movie in locationMap[location]) {
-                    message += "<font color='#FF183C'>" + movie + "</font>";
-                    if (locationMap[location][movie] && locationMap[location][movie] != "") {
-                        message += ": " + locationMap[location][movie];
-                    }
-                    message += "</br>";
-                }
-                countryCode = findCountryCode(location);
-                if (countryCode && countries[countryCode]) {
-                    addMovieFilmingLocation(countries[countryCode], "<b>Filmed in " + location + "</b></br>" + message, opacity);
-                } else {
-                    //console.log("Could not find " + location);
-                }
-            }
-        });
-
-        // add countries to map
-        for (var country in countryMap) {
+function addActorFilmingLocations(locationMap) {
+    var locationMinMax = getMovieCountRange(locationMap);
+    if (locationMinMax[0] == locationMinMax[1]) {
+        locationMinMax[0] = locationMinMax[1] - 1;
+    }
+    var minMaxStep = (locationMinMax[1] - locationMinMax[0]) / 5;
+    if (countriesGeoJSON != null) {
+        for (var location in locationMap) {
             var message = "";
-            countryMap[country].forEach(function (movie) {
+            var num = Object.keys(locationMap[location]).length;
+            var opacity = 0.3 + 0.1 * (Math.floor((num - locationMinMax[0]) / minMaxStep));
+            locationMap[location].forEach(function (movie) {
                 message += "<font color='#FF183C'>" + movie.title + " (" + movie.year + ")</font>";
                 if (movie.role != "") {
                     message += ": " + movie.role;
                 }
-                message += "</br>";
+                message += "<br/>";
             });
-            var tries = 0;
-            var success = false;
-            while (!success && tries < 3000) {
-                ++tries;
-                success = addMovieLocationMarker(country, "<b>Produced in " + country + "</b></br>" + message);
+            addMovieFilmingLocation(location, "<b>Filmed in " + location + "</b><br/>" + message, opacity);
+        }
+    } else {
+        console.log("CountriesGeoJSON is null");
+    }
+}
+
+function addActorCountries(countryMap) {
+    for (var country in countryMap) {
+        var message = "";
+        countryMap[country].forEach(function (movie) {
+            message += "<font color='#FF183C'>" + movie.title + " (" + movie.year + ")</font>";
+            if (movie.role != "") {
+                message += ": " + movie.role;
             }
+            message += "<br/>";
+        });
+        var tries = 0;
+        var success = false;
+        while (!success && tries < 3000) {
+            ++tries;
+            success = addMovieLocationMarker(country, "<b>Produced in " + country + "</b><br/>" + message);
+        }
+    }
+}
+
+function map_setMovie(movie, actors) {
+    clearMapLayers();
+    if (countriesGeoJSON != null) {
+        movie.locations.forEach(function (location) {
+            addMovieFilmingLocation(location, "<b>Filmed in </b>" + location, 0.7);
+        });
+    }
+    movie.countries.forEach(function (country) {
+        if (country != "") {
+            addMovieLocationMarker(country, "<b>Produced in </b>" + country);
         }
     });
-}
-
-function map_setMovie(name) {
-    var movie = null;
-    if (name == "") {
-        console.log("No name to find");
-        return;
-    }
-    console.log("Finding movie " + name);
-    var movieTitle = name.substring(0, name.indexOf("(")).trim();
-    var movieYear = name.substring(name.indexOf("(") + 1, name.indexOf(")"));
-    //console.log(movieTitle + ": " + movieYear);
-
-    d3.dsv(';')("data/movies/movies_" + name[0] + ".csv", function (error, data) {
-        // Find movie
-        data.some(function (d) {
-            if (movieTitle == d.Title && movieYear == d.Year) {
-                console.log("Found " + d.Title);
-                movie = {
-                    id: d.ID,
-                    title: d.Title,
-                    year: d.Year,
-                    locations: d.Locations,
-                    countries: d.Countries
-                };
-                return true;
+    if (actors != null) {
+        actors.forEach(function (actor) {
+            if (actor.birthLocation != "") {
+                var message = "<b><font color='#FF183C'>" + actor.name + "</font>: " + actor.role + "</b><br/>Born in " + actor.birthLocation;
+                if (actor.birthYear != "") {
+                    message += " in " + actor.birthYear + ", age " + (movie.year - parseInt(actor.birthYear)) + " during the movie";
+                }
+                var location = actor.birthLocation;
+                var success = addActorLocationMarker(location, actor.isMale, message);
+                while (!success && location.indexOf(",") != -1) {
+                    location = location.substring(location.indexOf(",") + 1).trim();
+                    success = addActorLocationMarker(location, actor.isMale, message);
+                }
             }
         });
-        if (movie == null) {
-            console.log("Could not find " + name);
-            return;
-        }
-        //console.log(movie);
-
-        if (movie.locations != "") {
-            var locationList = {};
-            movie.locations.split("*").forEach(function (location) {
-                location = getCountry(location);
-                var countryCode = findCountryCode(location);
-                if (!locationList[countryCode]) {
-                    locationList[countryCode] = location;
-                }
-            });
-            d3.json("data/countries.geo.json", function (error, geojson) { // open file with world data
-                countries = {};
-                // Read geojson countries
-                for (var r = 0; r < geojson.features.length; r++) { // for each country in geojson
-                    var countryData = geojson.features[r];
-                    var countryName = countryData.properties.name;
-                    var countryCode = findCountryCode(countryName);
-                    countries[countryCode] = countryData;
-                }
-                for (var countryCode in locationList) {
-                    if (countries[countryCode]) {
-                        addMovieFilmingLocation(countries[countryCode], "<b>Filmed in </b>" + locationList[countryCode], 0.7);
-                    } else {
-                        console.log("Could not find " + locationList[countryCode]);
-                    }
-                }
-            });
-        }
-
-        if (movie.countries != "") {
-            movie.countries.split("*").forEach(function (country) {
-                addMovieLocationMarker(country, "<b>Produced in </b>" + country);
-            });
-        }
-
-        // Find actors
-        var actorMap = {};
-        idBucket = Math.floor(movie.id / 50000); // id = 3524657P
-        console.log("Bucket: " + idBucket);
-
-        d3.dsv(';')("data/actorsInMovies/movieMapping_" + idBucket + ".csv", function (error, data) {
-            data.forEach(function (d) {
-                if (movie.id == d.MovieID.substring(0, d.MovieID.length - 1)) {// && Boolean(d.IsMovie)) {
-                    var actorLetter = d.ActorID.substring(d.ActorID.length - 1);
-                    if (!actorMap[actorLetter]) {
-                        actorMap[actorLetter] = {};
-                    }
-                    actorMap[d.ActorID.substring(d.ActorID.length - 1)][d.ActorID.substring(0, d.ActorID.length - 1)] = {role: d.Role};
-                }
-            });
-            addActorsToMap(actorMap);
-        });
-    });
-
-}
-
-function addActorsToMap(actorMap) {
-    var countryList = [];
-    var q = d3.queue();
-    for (var letter in actorMap) {
-        q.defer(d3.dsv(';'), "data/actors/actors_" + letter + ".csv");
     }
-    q.awaitAll(function (error, files) {
-        files.forEach(function (file) {
-            file.forEach(function (actor) {
-                if (actorMap[actor.Name[0]] && actorMap[actor.Name[0]][actor.ActorID]) {
-                    if (actor.BirthLocation != "") {
-                        countryList.push({name: actor.Name, isMale: (actor.IsMale == "True"), location: actor.BirthLocation, role: actorMap[actor.Name[0]][actor.ActorID].role});
-                    }
-                }
-            });
-        });
-        countryList.forEach(function (actor) {
-            var message = "<b><font color='#FF183C'>" + actor.name + "</font>: " + actor.role + "</b></br>Born in " + actor.location;
-            var tries = 0;
-            var success = false;
-            while (!success && tries < 5000) {
-                ++tries;
-                success = addActorLocationMarker(actor.location, actor.isMale, message);
-            }
-        });
-    });
 }
 
-function nameMatches(name1, name2) {
-    if (name1 == name2) {
-        return true;
-    }
-    return false;
-    // Activate this code for search bar suggestions
-//    var name1parts = name1.split(" ");
-//    match = true;
-//    name1parts.some(function (namePart) {
-//        if (name2.indexOf(namePart) == -1) {
-//            match = false;
-//            return true;
-//        }
-//    });
-//    return match;
-}
+// ADD MARKERS ----------------------------------------------------------------------
 
 function addActorLocationMarker(location, isMale, message) {
     try {
@@ -349,24 +153,54 @@ function addActorLocationMarker(location, isMale, message) {
         else {
             icon = womanIcon;
         }
-        geocodeDecoder.GetLocations(location, function (data) {
+        if (!countryCache[location]) {
+            geocodeDecoder.GetLocations(location, function (data) {
+                if (!data) {
+                    return false;
+                }
+                var marker = L.marker([data[0].Y, data[0].X], {icon: icon}).addTo(map);
+                marker.bindPopup(message);
+                marker.on('mouseover', function (e) {
+                    this.openPopup();
+                });
+                presentMarkers.push(marker);
+                countryCache[location] = data;
+            });
+        } else {
+            var data = countryCache[location];
             var marker = L.marker([data[0].Y, data[0].X], {icon: icon}).addTo(map);
             marker.bindPopup(message);
             marker.on('mouseover', function (e) {
                 this.openPopup();
             });
-        });
+            presentMarkers.push(marker);
+            countryCache[location] = data;
+        }
         return true;
     }
     catch (TypeError) {
-        console.log("GeoCoder cannot find " + location);
+        //console.log("GeoCoder cannot find " + location);
         return false;
     }
 }
 
 function addMovieLocationMarker(location, message) {
     try {
-        geocodeDecoder.GetLocations(location, function (data) {
+        if (!countryCache[location]) {
+            geocodeDecoder.GetLocations(location, function (data) {
+                var marker = L.marker([data[0].Y, data[0].X]).addTo(map);
+                var popup = L.popup({
+                    maxHeight: 250
+                }).setContent(message);
+                marker.bindPopup(popup);
+                marker.on('mouseover', function (e) {
+                    this.openPopup();
+                });
+                presentMarkers.push(marker);
+                countryCache[location] = data;
+            });
+        } else {
+            var data = countryCache[location];
             var marker = L.marker([data[0].Y, data[0].X]).addTo(map);
             var popup = L.popup({
                 maxHeight: 250
@@ -375,7 +209,9 @@ function addMovieLocationMarker(location, message) {
             marker.on('mouseover', function (e) {
                 this.openPopup();
             });
-        });
+            presentMarkers.push(marker);
+            countryCache[location] = data;
+        }
         return true;
     }
     catch (TypeError) {
@@ -383,31 +219,35 @@ function addMovieLocationMarker(location, message) {
     }
 }
 
-function addMovieFilmingLocation(countryData, message, opacity) {
-    L.geoJson(countryData, {
-        style: function (feature) {
-            return {
-                "fillColor": "#FCD450",
-                "color": "#000000",
-                "weight": 0.5,
-                "opacity": 0.8,
-                "fillOpacity": opacity
-            };
-        },
-        onEachFeature: function (feature, layer) {
-            var popup = L.popup({
-                maxHeight: 250
-            }).setContent(message);
-            layer.bindPopup(popup);
-        }
-    }).addTo(map);
+function addMovieFilmingLocation(location, message, opacity) {
+    var countryCode = findCountryCode(location);
+    if (countryCode && countriesGeoJSON[countryCode]) {
+        countryData = countriesGeoJSON[countryCode];
+        L.geoJson(countryData, {
+            style: function (feature) {
+                return {
+                    "fillColor": "#FCD450",
+                    "color": "#000000",
+                    "weight": 0.5,
+                    "opacity": 0.8,
+                    "fillOpacity": opacity
+                };
+            },
+            onEachFeature: function (feature, layer) {
+                var popup = L.popup({
+                    maxHeight: 250
+                }).setContent(message);
+                layer.bindPopup(popup);
+            }
+        }).addTo(map);
+    }
 }
 
 function getMovieCountRange(locationMap) {
     var min = -1;
     var max = -1;
     for (var location in locationMap) {
-        num = Object.keys(locationMap[location]).length;
+        var num = locationMap[location].length;
         if (min == -1 || num < min) {
             min = num;
         }
@@ -418,7 +258,11 @@ function getMovieCountRange(locationMap) {
     return [min, max];
 }
 
-function clearMapLayers(map) {
+function clearMapLayers() {
+    presentMarkers.forEach(function (marker) {
+        map.removeLayer(marker);
+    });
+    presentMarkers = [];
     map.eachLayer(function (layer) {
         if (layer._path != undefined) {
             map.removeLayer(layer);
@@ -436,4 +280,15 @@ function getCountry(location) {
         return location;
     }
     return location.substring(location.lastIndexOf(",") + 1).trim();
+}
+
+function uniqueCountriesOf(list) {
+    var result = [];
+    list.forEach(function (item) {
+        var country = getCountry(item);
+        if (result.indexOf(country) == -1) {
+            result.push(country);
+        }
+    });
+    return result;
 }

@@ -268,13 +268,13 @@ def calculateRunTimeRanges():
     rangeRuntime.r7 = rangeLimitRuntime.max + 1
 
 def generateRunTimeNames():
-    rangeNamesRuntime.r1 = "Less then 15 minutes"
+    rangeNamesRuntime.r1 = "Less than 15 minutes"
     rangeNamesRuntime.r2 = "30 minutes"
     rangeNamesRuntime.r3 = "1 hour"
     rangeNamesRuntime.r4 = "1.5 hours"
     rangeNamesRuntime.r5 = "2 hours"
     rangeNamesRuntime.r6 = "3 hours"
-    rangeNamesRuntime.r7 = "More then 3 hours"
+    rangeNamesRuntime.r7 = "More than 3 hours"
 
 def calculateFilmingDaysRanges():
     rangeFilmingDays.r1 = 7
@@ -287,14 +287,14 @@ def calculateFilmingDaysRanges():
     rangeFilmingDays.r8 = rangeLimitFilmingDays.max + 1
 
 def generateFilmingDaysNames():
-    rangeNamesFilmingDays.r1 = "Less then a week"
+    rangeNamesFilmingDays.r1 = "Less than a week"
     rangeNamesFilmingDays.r2 = "One month"
     rangeNamesFilmingDays.r3 = "Two months"
     rangeNamesFilmingDays.r4 = "Three months"
     rangeNamesFilmingDays.r5 = "Four months"
     rangeNamesFilmingDays.r6 = "Five months"
     rangeNamesFilmingDays.r7 = "Six months"
-    rangeNamesFilmingDays.r8 = "More then six months"
+    rangeNamesFilmingDays.r8 = "More than six months"
 
 def calculateBudgetRanges():
     rangeBudget.r1 = 1000
@@ -568,6 +568,43 @@ def writeNodes(file, rangeNames, last):
 
 
 #######################################################################################################################
+#                                 PART FOUR: SET COLORS FOR CATEGORIES                                                #
+#######################################################################################################################
+def generateColorFile(fileName):
+    fileLocation = "../../Data/" + fileName
+    colorFile = open(fileLocation, "w", encoding="utf8", errors="ignore")
+
+    col_selected = "#FF183C"
+    (col_runningtimes, col_filmingdays, col_budget, col_gross, col_rating) = (
+    "#64BD91", "#C25D7F", "#73539F", "#4EA6AA", "#F0CC76")
+
+    colorFile.write("var colorsSankey = {\n")
+    colorFile.write("\t\"Selected\": \"%s\"\n" % col_selected)
+
+    colorFile.write("\t\"RunningTimes\": \"%s\"\n" % col_runningtimes)
+    writeToColorFile(colorFile, rangeNamesRuntime, col_runningtimes)
+
+    colorFile.write("\t\"FilmingDays\": \"%s\"\n" % col_filmingdays)
+    writeToColorFile(colorFile, rangeNamesFilmingDays, col_filmingdays)
+
+    colorFile.write("\t\"Budged\": \"%s\"\n" % col_budget)
+    writeToColorFile(colorFile, rangeNamesBudget, col_budget)
+
+    colorFile.write("\t\"Gross\": \"%s\"\n" % col_gross)
+    writeToColorFile(colorFile, rangeNamesGross, col_gross)
+
+    colorFile.write("\t\"Rating\": \"%s\"\n" % col_rating)
+    writeToColorFile(colorFile, rangeNamesScoreClasses, col_rating)
+
+    colorFile.write("}")
+    colorFile.close()
+
+def writeToColorFile(colorFile, rangeNames, colorValue):
+    for name in rangeNames:
+        colorFile.write("\t\"%s\": \"%s\"\n" % (name, colorValue))
+
+
+#######################################################################################################################
 #                                               MAIN SCRIPT                                                           #
 #######################################################################################################################
 
@@ -580,6 +617,7 @@ runtimeDataFile.close()
 
 calculateRanges()
 distributeDataInRanges()
+generateColorFile("sankeyColors.js")
 
 
 
