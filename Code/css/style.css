@@ -419,3 +419,40 @@ body {
 #ratingLineChart {
     border-right: 1px solid
 }
+
+.actor-desc-inner {
+    font-family: "Helvetica Neue, Helvetica, Arial, san-serif";
+    padding-top: 8%;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+}
+
+.actor-desc-inner .name {
+    font-size: 18px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.actor-desc-inner .role {
+    font-size: 16px;
+    text-align: center;
+}
+
+.actor-desc-inner .appearances {
+    margin-top: 10px;
+}
+
+.actor-desc-inner .appearances .season .episode {
+    height: 15px;
+    border: 1px black;
+    display: inline-block;
+}
+
+.actor-desc-inner .appearances .season .episode.yes {
+    background: black;
+}
+
+.actor-desc-inner .appearances .season .episode.no {
+    background: white;
+}
