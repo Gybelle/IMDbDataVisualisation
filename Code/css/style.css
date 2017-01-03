@@ -293,6 +293,11 @@ body {
   margin-left: 10px;
 }
 
+.flowQuery {
+  margin-top: 20px;
+  width: 185px;
+}
+
 /* --------------------------- Sankey diagram --------------------------- */
 /* Based on: http://bl.ocks.org/d3noob/5015397 */
 .node rect {

@@ -5,7 +5,7 @@ function createSankeyChart(){
   // Based on http://bl.ocks.org/d3noob/5015397
   var parentW = $("#sankeyChart").width();
   var parentH = 740;
-  var units = "links";
+  var units = "movies";
 
   var margin = {top: 10, right: 10, bottom: 10, left: 10},
       width = parentW - margin.left - margin.right,

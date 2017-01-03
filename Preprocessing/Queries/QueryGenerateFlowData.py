@@ -14,8 +14,9 @@ printScores = False
 printScoreClasses = True
 
 
-movieList = []      # (id, title, runtime, filmingDays, budget, gross, rating)
+movieList = []      # (id, title, runtime, filmingDays, budget, gross, rating, year)
 flowDict = {}       # (t1, t2) , count
+moviePaths = {}
 
 RangeLimits = recordclass('RangeLimits', 'min max')
 rangeLimitRuntime = RangeLimits(-1, -1)
@@ -50,12 +51,11 @@ rangeNamesGross = Ranges4("", "", "", "")
 #######################################################################################################################
 #                    PART ONE: PROCESSING MOVIES.CSV AND CALCULATING RANGES MIN AND MAX                               #
 #######################################################################################################################
-def process(file, outputFile):
+def process(file):
     header = file.readline()
-    outputFile.write("id;title;gross\n")
 
     for line in file:
-        movieRecord = processLine(line, outputFile)
+        movieRecord = processLine(line)
         updateMinMax(movieRecord)
         addToMovieList(movieRecord)
 
@@ -72,11 +72,12 @@ def fixRanges():
     if rangeLimitGross.min < 0:
         rangeLimitGross.min = 1
 
-def processLine(line, outputFile):
+def processLine(line):
     # Get data
     items = line.strip("\r\n").split(";")
     id = items[0]
     title = items[1]
+    year = items[2]
     duration = processDuration(items[12])
 
     filmingDays = items[7]
@@ -112,13 +113,12 @@ def processLine(line, outputFile):
     if gross:
         try:
             gross = int(gross)
-            outputFile.write("%s;%s;%d\n" % (id, title, gross))
         except:
             print(line)
     else:
         gross = None
 
-    return (id, title, duration, filmingDays, budget, gross, rating)
+    return (id, title, duration, filmingDays, budget, gross, rating, year)
 
 def processDuration(durationString):
     duration = None
@@ -440,6 +440,7 @@ def distributeDataInRanges():
     initializeDictionary()
     updateDictionary()
     writeDictToFile()
+    writeMoviePathsToFile()
 
 def initializeDictionary():
     #Pairs: [Runtime, FilmingDays]  [FilmingDays, Budget]   [Budget, Revenue]   [Revenue, Score]
@@ -464,6 +465,8 @@ def updateDictionary():
         budgetValue = record[4]
         grossValue = record[5]
         ratingValue = record[6]
+        title = record[1]
+        year = record[7]
 
         pairList = []
 
@@ -495,6 +498,7 @@ def updateDictionary():
                 pairList.append(createDictPair(rangeInfo1, rangeInfo2))
 
         updateDictCount(pairList)
+        updateMoviePaths(title, year, pairList)
 
 def createDictPair(rangeInfo1, rangeInfo2):
     rangeValue1 = getRange(rangeInfo1)
@@ -566,6 +570,31 @@ def writeNodes(file, rangeNames, last):
             file.write("{\"name\":\"%s\"},\n" % range)
         index += 1
 
+def updateMoviePaths(title, year, pairList):
+    key = "%s (%s)" % (title, year)
+    value = ""
+
+    if pairList:
+        for pair in pairList:
+            pairString = "%s#%s*" % (pair[0], pair[1])
+            value += pairString
+
+        value = value[:-1]
+
+        moviePaths[key] = value
+
+def writeMoviePathsToFile():
+    file = open("../../Data/flowData_moviePaths.csv", "w", encoding="utf8", errors="ignore")
+    file.write("Movie,Path\n")
+    for movie in moviePaths:
+        file.write("%s,%s\n" % (movie, moviePaths[movie]))
+
+    file.close()
+
+
+
+
+
 
 #######################################################################################################################
 #                                 PART FOUR: SET COLORS FOR CATEGORIES                                                #
@@ -610,10 +639,8 @@ def writeToColorFile(colorFile, rangeNames, colorValue):
 
 
 movieFile = open("../../Data/movies.csv", "r", encoding="utf8", errors="ignore")
-runtimeDataFile = open("../../Data/moviesGross.csv", "w", encoding="utf8", errors="ignore")
-process(movieFile, runtimeDataFile)
+process(movieFile)
 movieFile.close()
-runtimeDataFile.close()
 
 calculateRanges()
 distributeDataInRanges()
