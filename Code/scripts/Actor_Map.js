@@ -81,7 +81,7 @@ function addActorFilmingLocations(locationMap) {
             var opacity = 0.3 + 0.1 * (Math.floor((num - locationMinMax[0]) / minMaxStep));
             locationMap[location].forEach(function (movie) {
                 var movieTitle = movie.title + " (" + movie.year + ")";
-                message += '<font color="#FF183C" style="cursor: pointer;" onClick="setMovie(\'' + movieTitle + '\')">' + movieTitle + '</font>';
+                message += '<font color="#FF183C" style="cursor: pointer;" onClick="setMovieByID(\'' + movie.id + movie.title[0] + '\')">' + movieTitle + '</font>';
                 if (movie.role != "") {
                     message += ": " + movie.role;
                 }
@@ -99,7 +99,7 @@ function addActorCountries(countryMap) {
         var message = "";
         countryMap[country].forEach(function (movie) {
             var movieTitle = movie.title + " (" + movie.year + ")";
-            message += '<font color="#FF183C" style="cursor: pointer;" onClick="setMovie(\'' + movieTitle + '\')">' + movieTitle + '</font>';
+            message += '<font color="#FF183C" style="cursor: pointer;" onClick="setMovieByID(\'' + movie.id + movie.title[0] + '\')">' + movieTitle + '</font>';
             if (movie.role != "") {
                 message += ": " + movie.role;
             }
@@ -129,7 +129,7 @@ function map_setMovie(movie, actors) {
     if (actors != null) {
         actors.forEach(function (actor) {
             if (actor.birthLocation != "") {
-                var message = '<b><font color="#FF183C" style="cursor: pointer;" onClick="setActor(\'' + actor.name + '\')">' + actor.name + "</font>: " + actor.role + "</b><br/>Born in " + actor.birthLocation;
+                var message = '<b><font color="#FF183C" style="cursor: pointer;" onClick="setActorByID(\'' + actor.id + actor.name[0] + '\')">' + actor.name + "</font>: " + actor.role + "</b><br/>Born in " + actor.birthLocation;
                 if (actor.birthYear != "") {
                     message += " in " + actor.birthYear + ", age " + (movie.year - parseInt(actor.birthYear)) + " during the movie";
                 }
@@ -157,7 +157,8 @@ function addActorLocationMarker(location, isMale, message) {
         }
         if (!countryCache[location]) {
             geocodeDecoder.GetLocations(location, function (data) {
-                if (!data) {
+                if (!data || !data[0]) {
+                    console.log("Went wrong at " + location);
                     return false;
                 }
                 var marker = L.marker([data[0].Y, data[0].X], {icon: icon}).addTo(map);

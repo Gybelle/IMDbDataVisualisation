@@ -409,6 +409,9 @@ body {
     color: black;
     word-wrap: break-word;
 }
+#bio > h3 {
+    margin-top: 0px;
+}
 
 .lifetimeWrapperLegend > .legendText {
     float: right;
