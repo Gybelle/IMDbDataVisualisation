@@ -1,8 +1,15 @@
 var pathHighlighted = [];
-var moviePath = []
-var query1Path = []
-var query2Path = []
-var query3Path = []
+var moviePath = [];
+var query1Path = [];
+var query2Path = [];
+var query3Path = [];
+var query4Path = [];
+var query5Path = [];
+var query6Path = [];
+var query7Path = [];
+var query8Path = [];
+var query9Path = [];
+var query10Path = [];
 var arrow = " → ";
 var classHighlight = "highlighted_link";
 
@@ -73,6 +80,12 @@ function setFlowChartFilterMenu(){
   query2Path = findQueryMoviePaths(leastPopularMoviePaths);
   query3Path = findQueryMoviePaths(shortestMoviePaths);
   query4Path = findQueryMoviePaths(longestMoviePaths);
+  query5Path = findQueryMoviePaths(mostExpensiveMoviePaths);
+  query6Path = findQueryMoviePaths(leastExpensiveMoviePaths);
+  query7Path = findQueryMoviePaths(highestRevenueMoviePaths);
+  query8Path = findQueryMoviePaths(lowestRevenueMoviePaths);
+  query9Path = findQueryMoviePaths(mostCEMoviePaths);
+  query10Path = findQueryMoviePaths(leastCEMoviePaths);
 
 
   // highlighting paths
@@ -131,6 +144,67 @@ function setCheckboxEvents(){
     }
     highlightPathInSankey();
   });
+
+  $("#q5Checkbox").change(function() {
+    if(this.checked) {
+      addMoviePathsToHighlightedPaths(query5Path);
+    }
+    else {
+      removeMoviePathsFromHighlightedPaths(query5Path);
+    }
+    highlightPathInSankey();
+  });
+
+  $("#q6Checkbox").change(function() {
+    if(this.checked) {
+      addMoviePathsToHighlightedPaths(query6Path);
+    }
+    else {
+      removeMoviePathsFromHighlightedPaths(query6Path);
+    }
+    highlightPathInSankey();
+  });
+
+  $("#q7Checkbox").change(function() {
+    if(this.checked) {
+      addMoviePathsToHighlightedPaths(query7Path);
+    }
+    else {
+      removeMoviePathsFromHighlightedPaths(query7Path);
+    }
+    highlightPathInSankey();
+  });
+
+  $("#q8Checkbox").change(function() {
+    if(this.checked) {
+      addMoviePathsToHighlightedPaths(query8Path);
+    }
+    else {
+      removeMoviePathsFromHighlightedPaths(query8Path);
+    }
+    highlightPathInSankey();
+  });
+
+  $("#q9Checkbox").change(function() {
+    if(this.checked) {
+      addMoviePathsToHighlightedPaths(query9Path);
+    }
+    else {
+      removeMoviePathsFromHighlightedPaths(query9Path);
+    }
+    highlightPathInSankey();
+  });
+
+  $("#q10Checkbox").change(function() {
+    if(this.checked) {
+      addMoviePathsToHighlightedPaths(query10Path);
+    }
+    else {
+      removeMoviePathsFromHighlightedPaths(query10Path);
+    }
+    highlightPathInSankey();
+  });
+
 
 }
 
