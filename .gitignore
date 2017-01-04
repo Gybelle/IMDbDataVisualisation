@@ -35,3 +35,7 @@ Data/moviesRuntimes.csv
 Data/flowData.csv
 
 Data/flowData.json
+
+Code/data/actorsByID/*
+Code/data/actorsInSeries/*
+Code/data/series/*
