@@ -92,13 +92,38 @@ function setFlowChartFilterMenu(){
   setCheckboxEvents();
 }
 
+function setAllUnchecked(){
+  $( ":checkbox" ).each(function(index ) {
+    $(this).prop('checked', false);
+  });
+}
+
+function setAllChecked(){
+  $( ":checkbox" ).each(function(index ) {
+    $(this).prop('checked', true);
+  });
+}
+
 function setCheckboxEvents(){
+  $("#allCheckbox").change(function() {
+    if(this.checked) {
+        activateAllQueries();
+        setAllChecked();
+    }
+    else {
+      deactivateAllQueries();
+      setAllUnchecked();
+    }
+    highlightPathInSankey();
+  });
+
   $("#movieCheckbox").change(function() {
     if(this.checked) {
         var movie = $("#movieSearch_sankey").val();
         findMoviePath(movie);
     }
     else {
+      $("#allCheckbox").prop('checked', false);
       removeMoviePathsFromHighlightedPaths(moviePath);
     }
     highlightPathInSankey();
@@ -110,6 +135,7 @@ function setCheckboxEvents(){
       addMoviePathsToHighlightedPaths(query1Path);
     }
     else {
+      $("#allCheckbox").prop('checked', false);
       removeMoviePathsFromHighlightedPaths(query1Path);
     }
     highlightPathInSankey();
@@ -120,6 +146,7 @@ function setCheckboxEvents(){
       addMoviePathsToHighlightedPaths(query2Path);
     }
     else {
+      $("#allCheckbox").prop('checked', false);
       removeMoviePathsFromHighlightedPaths(query2Path);
     }
     highlightPathInSankey();
@@ -130,6 +157,7 @@ function setCheckboxEvents(){
       addMoviePathsToHighlightedPaths(query3Path);
     }
     else {
+      $("#allCheckbox").prop('checked', false);
       removeMoviePathsFromHighlightedPaths(query3Path);
     }
     highlightPathInSankey();
@@ -140,6 +168,7 @@ function setCheckboxEvents(){
       addMoviePathsToHighlightedPaths(query4Path);
     }
     else {
+      $("#allCheckbox").prop('checked', false);
       removeMoviePathsFromHighlightedPaths(query4Path);
     }
     highlightPathInSankey();
@@ -150,6 +179,7 @@ function setCheckboxEvents(){
       addMoviePathsToHighlightedPaths(query5Path);
     }
     else {
+      $("#allCheckbox").prop('checked', false);
       removeMoviePathsFromHighlightedPaths(query5Path);
     }
     highlightPathInSankey();
@@ -160,6 +190,7 @@ function setCheckboxEvents(){
       addMoviePathsToHighlightedPaths(query6Path);
     }
     else {
+      $("#allCheckbox").prop('checked', false);
       removeMoviePathsFromHighlightedPaths(query6Path);
     }
     highlightPathInSankey();
@@ -170,6 +201,7 @@ function setCheckboxEvents(){
       addMoviePathsToHighlightedPaths(query7Path);
     }
     else {
+      $("#allCheckbox").prop('checked', false);
       removeMoviePathsFromHighlightedPaths(query7Path);
     }
     highlightPathInSankey();
@@ -180,6 +212,7 @@ function setCheckboxEvents(){
       addMoviePathsToHighlightedPaths(query8Path);
     }
     else {
+      $("#allCheckbox").prop('checked', false);
       removeMoviePathsFromHighlightedPaths(query8Path);
     }
     highlightPathInSankey();
@@ -190,6 +223,7 @@ function setCheckboxEvents(){
       addMoviePathsToHighlightedPaths(query9Path);
     }
     else {
+      $("#allCheckbox").prop('checked', false);
       removeMoviePathsFromHighlightedPaths(query9Path);
     }
     highlightPathInSankey();
@@ -200,12 +234,32 @@ function setCheckboxEvents(){
       addMoviePathsToHighlightedPaths(query10Path);
     }
     else {
+      $("#allCheckbox").prop('checked', false);
       removeMoviePathsFromHighlightedPaths(query10Path);
     }
     highlightPathInSankey();
   });
 
 
+}
+
+function activateAllQueries(){
+  var movie = $("#movieSearch_sankey").val();
+  findMoviePath(movie);
+  addMoviePathsToHighlightedPaths(query1Path);
+  addMoviePathsToHighlightedPaths(query2Path);
+  addMoviePathsToHighlightedPaths(query3Path);
+  addMoviePathsToHighlightedPaths(query4Path);
+  addMoviePathsToHighlightedPaths(query5Path);
+  addMoviePathsToHighlightedPaths(query6Path);
+  addMoviePathsToHighlightedPaths(query7Path);
+  addMoviePathsToHighlightedPaths(query8Path);
+  addMoviePathsToHighlightedPaths(query9Path);
+  addMoviePathsToHighlightedPaths(query10Path);
+}
+
+function deactivateAllQueries(){
+  pathHighlighted = [];
 }
 
 function findMoviePath(movie){
