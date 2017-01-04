@@ -1,6 +1,8 @@
 //Inspiration: https://jrue.github.io/coding/2014/exercises/basicbubblepackchart/
 
 function genreBubbles(divID, w, h, inputdata) {
+  console.log(inputdata);
+    
   var margin = {top: 6, right: 6, bottom: 6, left: 6};
   w = w - margin.left - margin.right;
   h = h - margin.top - margin.bottom;
@@ -14,6 +16,9 @@ function genreBubbles(divID, w, h, inputdata) {
             .attr('height', h + margin.top + margin.bottom)
             .attr('class', 'genreBubble');
 
+  if(inputdata.length == 0) {
+      return;
+  }
 
   data = groupDataBubbleChart(inputdata)
           .map(function(d){ d.value = +d["Count"]; return d;});

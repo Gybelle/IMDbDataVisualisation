@@ -428,6 +428,12 @@ body {
     z-index: 10;
     position: absolute;
 }
+#chartInfo {
+    background-color: #FAF7F7;
+    padding: 10px;
+    font-size: 14;
+    visibility: hidden;
+}
 
 #languageChart {
     //width: 200px;

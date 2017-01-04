@@ -63,16 +63,18 @@ function createCharts() {
 // UPDATE ----------------------------------------------------------------------
 
 function updateView(beginYear, endYear, genreFilter, countryFilter) {
-    //console.log("Updating to " + beginYear.getFullYear() + "-" + endYear.getFullYear());
-
-    if(genreFilter != null && genreFilter.length == 0){
-      genreFilter = null;
+    if (genreFilter != null && genreFilter.length == 0) {
+        genreFilter = null;
     }
 
     filterData(beginYear, endYear, genreFilter, countryFilter);
+    if (genreYearCountryData_filteredByCountry.length == 0) {
+        return;
+    }
+
     setChartLayout();
 
-    updateMap(map, genreYearCountryData_filtered);
+    updateMap(map, genreYearCountryData_filteredByCountry);
 
     var nodeLineChart = document.getElementById(divIDLineChart);
     while (nodeLineChart.firstChild) {
@@ -107,6 +109,7 @@ function setChartLayout() {
     widthLargeChart = document.getElementById("colGenreMap").offsetWidth;
     $(".large_chart").css('width', widthLargeChart);
     $(".large_chart").css('height', heightLargeRow);
+    $("#chartInfo").css('top', heightLargeRow - 39);
 }
 
 // FILTER ----------------------------------------------------------------------
