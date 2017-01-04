@@ -1,5 +1,8 @@
 var pathHighlighted = [];
 var moviePath = []
+var query1Path = []
+var query2Path = []
+var query3Path = []
 var arrow = " → ";
 var classHighlight = "highlighted_link";
 
@@ -61,9 +64,16 @@ function setFlowChartFilterMenu(){
       $("#movieCheckbox").prop('checked', true);
       findMoviePath(movie);
       highlightPathInSankey();
-      return false;    //<---- Add this line
+      return false;
     }
   });
+
+  //Get all query paths
+  query1Path = findQueryMoviePaths(mostPopularMoviePaths);
+  query2Path = findQueryMoviePaths(leastPopularMoviePaths);
+  query3Path = findQueryMoviePaths(shortestMoviePaths);
+  query4Path = findQueryMoviePaths(longestMoviePaths);
+
 
   // highlighting paths
   setCheckboxEvents();
@@ -76,46 +86,126 @@ function setCheckboxEvents(){
         findMoviePath(movie);
     }
     else {
-      removePathsToHighlightedPaths(moviePath);
-      moviePath = [];
+      removeMoviePathsFromHighlightedPaths(moviePath);
     }
     highlightPathInSankey();
-});
+  });
+
+
+  $("#q1Checkbox").change(function() {
+    if(this.checked) {
+      addMoviePathsToHighlightedPaths(query1Path);
+    }
+    else {
+      removeMoviePathsFromHighlightedPaths(query1Path);
+    }
+    highlightPathInSankey();
+  });
+
+  $("#q2Checkbox").change(function() {
+    if(this.checked) {
+      addMoviePathsToHighlightedPaths(query2Path);
+    }
+    else {
+      removeMoviePathsFromHighlightedPaths(query2Path);
+    }
+    highlightPathInSankey();
+  });
+
+  $("#q3Checkbox").change(function() {
+    if(this.checked) {
+      addMoviePathsToHighlightedPaths(query3Path);
+    }
+    else {
+      removeMoviePathsFromHighlightedPaths(query3Path);
+    }
+    highlightPathInSankey();
+  });
+
+  $("#q4Checkbox").change(function() {
+    if(this.checked) {
+      addMoviePathsToHighlightedPaths(query4Path);
+    }
+    else {
+      removeMoviePathsFromHighlightedPaths(query4Path);
+    }
+    highlightPathInSankey();
+  });
+
 }
 
 function findMoviePath(movie){
   path = moviePaths[movie]
   if (path === undefined){
     console.log(movie + " not found.");
-    moviePath = [];
   } else {
     addMovieToMoviePath(path);
-    addPathsToHighlightedPaths(moviePath)
+    addMoviePathsToHighlightedPaths(moviePath);
   }
 }
 
 function addMovieToMoviePath(path){
-  moviePath = [];
   path = path.replace(/#/g , arrow);
   moviePath = path.split("*");
 }
 
-function addPathsToHighlightedPaths(paths){
+
+function addMoviePathsToHighlightedPaths(paths){
   for(i = 0; i < paths.length; i++){
     path = paths[i];
     pathHighlighted.push(path);
   }
 }
 
-function removePathsToHighlightedPaths(paths){
-  console.log("hello");
+function addPathsToHighlightedPaths(pathsDict){
+  paths = Object.keys(pathsDict);
+  for(i = 0; i < Object.keys(paths).length; i++){
+    movie = paths[i];
+    pathsMovie = pathsDict[movie].replace(/#/g , arrow).split("*");
+    for(j = 0; j < pathsMovie.length; j++) {
+      path = pathsMovie[j];
+      pathHighlighted.push(path);
+    }
+  }
+}
+
+function removeMoviePathsFromHighlightedPaths(paths){
   for(i=0; i < paths.length; i++){
     path = paths[i];
     pathHighlighted.splice( pathHighlighted.indexOf(path), 1 );
   }
 }
 
+function removePathsFromHighlightedPaths(paths){
+  paths = Object.keys(pathsDict);
+  for(i = 0; i < Object.keys(paths).length; i++){
+    movie = paths[i];
+    pathsMovie = pathsDict[movie].replace(/#/g , arrow).split("*");
+    for(j = 0; j < pathsMovie.length; j++) {
+      path = pathsMovie[j];
+      pathHighlighted.splice( pathHighlighted.indexOf(path), 1 );
+    }
+  }
+}
+
 function getMovieFlowDatalist(objectID){
   movieKeys = Object.keys(moviePaths);
   $("#"+objectID).attr("data-list", movieKeys);
+}
+
+
+function findQueryMoviePaths(pathsDict){
+  result = [];
+  paths = Object.keys(pathsDict);
+  for(i = 0; i < Object.keys(paths).length; i++){
+    movie = paths[i];
+    pathsMovie = pathsDict[movie].replace(/#/g , arrow).split("*");
+    for(j = 0; j < pathsMovie.length; j++) {
+      path = pathsMovie[j];
+      if (result.indexOf(path) == -1){
+        result.push(path);
+      }
+    }
+  }
+  return result;
 }

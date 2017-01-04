@@ -32929,7 +32929,7 @@ var mostPopularMoviePaths = {
 	"Who Art in Heaven (2013)": "Less than a week#< 1K",
 	"Yarns to Be Spun on the Way to the Happy Home (2007)": "Less than 15 minutes#Two months*Two months#[5K-10K[",
 	"Young Gentlemen (2004)": "30 minutes#Three months*Three months#[10K-50K[",
-	"vora (2013)": "Less than a week#[10K-50K[",
+	"vora (2013)": "Less than a week#[10K-50K["
 };
 var leastPopularMoviePaths = {
 	"Ace Ventura: Pet Detective Jr. (2009)": "2 hours#Two months*Two months#[5M-10M[*[5M-10M[#< 1M*< 1M#Bad",
