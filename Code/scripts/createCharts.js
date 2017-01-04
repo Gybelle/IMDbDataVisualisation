@@ -15,6 +15,12 @@ heightSmallRow = 0;
 widthSmallLargeChart = 0;
 heightLargeRow = 0;
 
+// Filters
+currentFilter_beginYear = null;
+currentFilter_endYear = null;
+currentFilter_genreFilter = null;
+currentFilter_countryFilter = null;
+
 /*
  * HOW TO USE:
  *
@@ -91,6 +97,22 @@ function updateView(beginYear, endYear, genreFilter, countryFilter) {
     genreProductionMax("#" + divIDBarChart, widthSmallChart, heightSmallRow, genreYearCountryData_filteredByCountry);
     genreProductionRate("#" + divIDLineChart, widthSmallChart, heightSmallRow, genreYearCountryData_filteredByCountry);
     genreBubbles("#" + divIDBubbleChart, widthSmallLargeChart, heightLargeRow, genreYearCountryData_filteredByCountry);
+}
+
+function setFilterYear(beginYear, endYear) {
+    currentFilter_beginYear = beginYear;
+    currentFilter_endYear = endYear;
+    updateView(beginYear, endYear, currentFilter_genreFilter, currentFilter_countryFilter);
+}
+
+function setFilterGenre(genreFilter) {
+    currentFilter_genreFilter = genreFilter;
+    updateView(currentFilter_beginYear, currentFilter_endYear, genreFilter, currentFilter_countryFilter);
+}
+
+function setFilterCountry(countryFilter) {
+    currentFilter_countryFilter = countryFilter;
+    updateView(currentFilter_beginYear, currentFilter_endYear, currentFilter_genreFilter, countryFilter);
 }
 
 function setChartLayout() {

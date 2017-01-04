@@ -3,10 +3,15 @@
 // (Barchart)
 
 function genreProductionMax(divID, w, h, inputdata) {
-    var margin = {top: 36, right: 56, bottom: 36, left: 36};
+    var margin = {top: 10, right: 56, bottom: 36, left: 36};
     w = w - margin.left - margin.right;
-    h = h - margin.top - margin.bottom;
+    h = h - margin.top - margin.bottom - 35;
 
+    var title = d3.select(divID)
+            .append('div')
+            .attr('id', "barChartTitle")
+            .attr('class', "chartTitle")
+            .html("Highest rated genre per year");
     var svg = d3.select(divID)
             .append('svg')
             .attr('width', w + margin.left + margin.right)
@@ -54,6 +59,12 @@ function genreProductionMax(divID, w, h, inputdata) {
             })
             .attr("height", function (d) {
                 return h - y(1);
+            })
+            .on("mouseover", function (d) {
+                d3.select("#barChartTitle").html("Highest rated genre in " + d.Year.getFullYear() + ": " + d.MaxGenre);
+            })
+            .on("mouseleave", function (d) {
+                d3.select("#barChartTitle").html("Highest rated genre per year");
             });
 }
 

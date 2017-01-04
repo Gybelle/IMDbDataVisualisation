@@ -32,7 +32,7 @@ function updateMap(map, inputdata) {
             var countryCode = findCountryCode(countryName);
             var genre = findGenreOfCountry(countryCode, data);
             if (genre != null) {
-                addCountryToMap(map, countryData, colors[genre], countryName, countryName + ": " + genre);
+                addCountryToMap(map, countryData, colors[genre], countryName, "Most produced genre in " + countryName + ": " + genre);
             }
         }
     });
@@ -67,12 +67,12 @@ function addCountryToMap(map, countryData, fillColor, country, tooltip) {
                     document.getElementById("chartInfo").style.visibility = "hidden";
                 });
                 layer.on("click", function (e) {
-                    if (countryFilter == null) {
-                        countryFilter = [findCountry(findCountryCode(country))];
+                    if (currentFilter_countryFilter == null) {
+                        setFilterCountry(findCountry(findCountryCode(country)));
                     } else {
-                        countryFilter = null;
+                        setFilterCountry(null);
                     }
-                    updateView(startDate, endDate, genreFilter, countryFilter);
+
 
                 });
             }

@@ -130,6 +130,11 @@ body {
     opacity: 0.5;
 }
 
+.chartTitle {
+    text-align: center;
+    padding-top: 10px;
+}
+
 @media (max-width:500px){
     #genreProductionRate .line {stroke-width: 3px;}
     #genreProductionRate .legend {font-size: 14px;}

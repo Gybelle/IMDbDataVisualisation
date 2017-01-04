@@ -11,7 +11,6 @@ function createRangePicker(divID, yearMin, yearMax) {
     startDate = parseDate(fromVal.toString());
     endDate = parseDate(toVal.toString());
 
-
     //Create Slider
     $(divID).ionRangeSlider({
         type: "double",
@@ -20,7 +19,7 @@ function createRangePicker(divID, yearMin, yearMax) {
         max: maxVal,
         from: fromVal,
         to: toVal,
-        step: 5,
+        step: 1,
         prettify_enabled: false,
         grid_snap: false,
         onFinish: function (data) {
@@ -28,10 +27,10 @@ function createRangePicker(divID, yearMin, yearMax) {
             startDate = parseDate(data.from.toString());
             endDate = parseDate(data.to.toString());
             console.log(genreFilter);
-            updateView(startDate, endDate, genreFilter, countryFilter);
+            setFilterYear(startDate, endDate);
         }
     });
-    $('body').mouseup(function(e){}); // fix to make slider not stick to mouse pointer
+    $('body').mouseup(function (e) {}); // fix to make slider not stick to mouse pointer
 }
 
 function getYearRange() {
