@@ -412,18 +412,6 @@ function drawActorPanels(selectedShow, numSeasons, numEpisodes) {
 		}
 	});
 
-/*
-	d3.dsv(';')("data/actorsGOT.csv", function(data) {
-		data.forEach(function(d) {
-			d.ActorID = +d.ActorID;
-		});
-
-		actors = data;
-		console.log("Done with actors!");
-
-	});*/
-
-
 	q.awaitAll(function (error, files) {
 		var mainActors = [];
 	    
@@ -439,65 +427,66 @@ function drawActorPanels(selectedShow, numSeasons, numEpisodes) {
 	        		//remove ID from mainActorIDs
 					mainActorIDs.splice(index, 1);
 	        	}
-
-
 	        });
 	    });
 
-/*
-	    console.log(mainActors);
-	    console.log(actorOccurrences);
-	    console.log(actorOccurrencesPerSeason);
-	    console.log(epsPerSeason);
-	    console.log(actorRoles);
-*/
-
 		var divisionData = calculateActorDivisionData(mainActors, actorOccurrences, actorOccurrencesPerSeason, epsPerSeason, actorRoles);
-
-		console.log(divisionData);
 
 		//clear the old grid first
 		$('#actorDistribution').html('');
 
-		//draw the grid
-		var grid = d3.select("#actorDistribution")
-		    .append("svg")
-		    .attr("width", $('#actorDistribution').width())
-		    .attr("height", $('#actorDistribution').height());
+		var root = {children: divisionData};
+		//draw the grid	
+		var width = $('#actorDistribution').width();
+		var height = $('#actorDistribution').height();
 
-		var column = grid.selectAll(".square")
-		    .data(divisionData)
-		    .enter().append("rect")
-		    .attr("class","square")
-		    .attr("x", function(d) { return d.x; })
-		    .attr("y", function(d) { return d.y; })
-		    .attr("width", function(d) { return d.width; })
-		    .attr("height", function(d) { return d.height; })
-		    .style("fill", function(d) { return d.color; })
-		    .style("stroke", "#222");
+        var treemap = d3.layout.treemap()
+                          .size([width,height])
+                          .sticky(true)
+                          .value(function(d) { return d.size; });
 
-	    grid.selectAll(".actor-desc").data(divisionData)
-	    	.enter().append("foreignObject")
-	    	.attr("class", "actor-desc")
-		    .attr("x", function(d){ return d.x; })
-		    .attr("y", function(d){ return d.y; })
-	        .attr('width',  function(d){ return d.width; })
-	        .attr('height', function(d){ return d.height; })            
-	        	.append("xhtml:body")
-	    .html(function(d) {return generateActorHtml(d);} )
-	    .style({
-	    	"background": "none",
-	    });
+        var div = d3.select("#actorDistribution").append("div")
+                          .style("position", "relative")
+                          .style("width", width)
+	    				  .style("height", height);
+
+		var node = div.datum(root).selectAll(".node")
+			.data(treemap.nodes)
+			.enter().append("div")
+			.attr("class", "node")
+			.call(position)
+			.style("background", function(d,i) { return d.color; })
+			.html(function(d) {return d.children ? null : generateActorHtml(d, Math.max(0, d.dx - 1))} );
+
+		node.data(treemap.value(function(d) { return d.size; }).nodes).transition().duration(1500).call(position);
+
+        function position() {
+		this.style("left", function(d) { return d.x + "px"; })
+			.style("top", function(d) { return d.y + "px"; })
+			.style("width", function(d) { return Math.max(0, d.dx - 1) + "px"; })
+			.style("height", function(d) { return Math.max(0, d.dy - 1) + "px"; });
+        }
+
+        d3.selectAll('.node').on('mouseover',function(){
+			d3.select(this).style('box-shadow','3px 0px 30px #fff');
+        });
+
+        d3.selectAll('.node').on('mouseout',function(){
+			d3.select(this).style('box-shadow','none');
+        });
 
 	});
 }
 
-function generateActorHtml(data) {
+function generateActorHtml(data, width) {
 	var html = "";
+
+	//calculate episodeWidth
+	var episodeWidth = width * 0.7 / data.maxEpsPerSeason;
 
 	//name
 	html = html + '<div class="name">'
-		+ data.actor.FirstName + " " + data.actor.LastName
+		+ data.actor.FirstName + " " + data.actor.LastName + "(" + data.size + ")"
 		+ '</div>';
 
 	//role
@@ -527,7 +516,7 @@ function generateActorHtml(data) {
 				cls = "no";
 			}
 
-			html += '<div style="width: ' + data.episodeWidth + 'px" class="episode ' + cls + '"></div>';
+			html += '<div style="width: ' + episodeWidth + 'px" class="episode ' + cls + '"></div>';
 		});
 
 		html += '</div>'
@@ -539,23 +528,6 @@ function generateActorHtml(data) {
 }
 
 function calculateActorDivisionData(mainActors, actorOccurrences, actorOccurrencesPerSeason, epsPerSeason, actorRoles) {
-	//first, calculate the total amount of occurences
-	var total = 0;
-	$.each(mainActors, function( index, value ) {
-		total += actorOccurrences[value.ActorID];
-	});
-
-	var totalMainActors = mainActors.length;
-
-	//now calculate each main actors percentage of occurrence
-	var division = [];
-	$.each(mainActors, function( index, value ) {
-		actor = new Object();
-		actor.actor = value;
-		actor.percentage = actorOccurrences[value.ActorID] / total;
-
-		division.push(actor);
-	});
 
 	//calculate the max amount of epsPerSeason
 	var maxEpsPerSeason = 0;
@@ -565,44 +537,23 @@ function calculateActorDivisionData(mainActors, actorOccurrences, actorOccurrenc
 		}
 	});
 
-
-	//let's say 80% of our surface is the 'max'
-	var totalHeigthFactor = .8;
-	var widthTotal = $('#actorDistribution').width();
-	var heightTotal = $('#actorDistribution').height();
-
-	var totalSurface = widthTotal * totalHeigthFactor * heightTotal ;
-
-
 	var data = new Array();
-
-	var numCols = 5;
-	if (totalMainActors < numCols) {
-		numCols = totalMainActors;
-	}
 	
-    var width = Math.round(widthTotal / numCols); //this should be calculated using the percentages
-
-    var episodeWidth = width * 0.7 / maxEpsPerSeason;
-
-
-    var currentColumn  = 0;
-
     for (var i = 0; i < mainActors.length; i++) {
     	var currentActor = mainActors[i];
 
-    	var height = Math.round((totalSurface * division[i].percentage) / width);
+		var size = actorOccurrences[currentActor.ActorID];
 
     	//calculate all appearances for this actor
 		var appearances = [];
-		console.log(actorOccurrencesPerSeason[currentActor.ActorID]);
+
 		$.each(actorOccurrencesPerSeason[currentActor.ActorID], function(index, value) {
 			//each value is a season
 			appearances[index] = [];
 
-			//if no occurences in this season, we continue
+			//if no occurences in this season, we need to instantiate value
 			if (value === undefined)
-				return;
+				value = [];
 
 			for (var j = 1; j <= epsPerSeason[index]; j++) {
 				if (value.indexOf(j) < 0) {
@@ -615,73 +566,12 @@ function calculateActorDivisionData(mainActors, actorOccurrences, actorOccurrenc
 
 		var role = actorRoles[currentActor.ActorID];
 
-    	//now calculate the position, trying to fill top-down from left to right
-    	//use the data object as reference for already placed squares
-
-		//we'll start at (1, 1) and see if spaces are occupied
-	    var xpos = 1;
-    	var ypos = 1;
-    	var nextYPos = 1;
-
-    	var positionFound = false;
-    	while (!positionFound) {
-
-    		if (data.length == 0) {
-    			//edge condition: the first one will always be placed top left
-    			positionFound = true;
-    			continue;
-    		}
-
-    		positionFound = true;
-	    	for (var j = 0; j < data.length && positionFound; j++) {
-
-	    		//2 conditions need to be met:
-	    		// * The space may not already be occupied
-	    		// * The space has to be inside our bounds 
-	    		//    --> doesn't get checked for now to avoid infinite loops, probably needs revision
-	    		//    --> Ideally the solution would be to change the totalHeightFactor variable for this, if we need to go out of x bounds
-	    		//    --> So every time we dont have enough room, lower the totalHeightFactor and repeat this whole process
-
-	    		var xTaken = (xpos >= data[j].x && xpos < data[j].x + data[j].width);
-	    		var yTaken = (ypos >= data[j].y && ypos < data[j].y + data[j].height);
-
-	    		if (xTaken && yTaken) {
-    				positionFound = false;
-	    		}
-
-	    		//store information for later to avoid doing this same loop:
-	    		if (data[j].x == xpos) {
-	    			if ((data[j].y + data[j].height) > nextYPos) {
-	    				nextYPos = data[j].y + data[j].height;
-	    			}
-	    		}
-	    	}
-
-	    	if (positionFound) {
-	    		continue;
-	    	}
-
-	    	//if the position wasnt found, we need to determine the next available position
-	    	//in case the height fits in our window, we can place it to the next Y
-	    	if (nextYPos > ypos && (nextYPos + height <= heightTotal)) {
-	    		ypos = nextYPos;
-	    	} else {
-	    		xpos += width;
-	    		ypos = 1;
-	    		nextYPos = 1;
-	    	}
-
-    	}
-
 	    data.push({
         	actor: currentActor,
         	appearances: appearances,
-        	episodeWidth: episodeWidth,
+        	maxEpsPerSeason: maxEpsPerSeason,
         	role: role,
-            x: xpos,
-            y: ypos,
-            width: width,
-            height: height,
+        	size: size,
             color: getNewColor()
         });
 
