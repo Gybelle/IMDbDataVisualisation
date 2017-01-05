@@ -3,13 +3,13 @@ var queryTooltips = {
 	"Query2": "Display information about movies with a 2- score.",
 	"Query3": "Display information about movies with a duration less than 5 minutes.",
 	"Query4": "Display information about movies with a duration more than 3 hours.",
-	"Query5": "Display information about the 10 most expensive movies.",
+	"Query5": "Display information about the 10 movies with the highest budget.",
 	"Query6": "Display information about movies with a budget of 1 EUR or less.",
 	"Query7": "Display information about 10 movies with the highest revenue.",
 	"Query8": "Display information about movies with a revenue which is less than 10 EUR.",
 	"Query9": "Display information about the 10 most cost-effective movies.",
 	"Query10": "Display information about movies with no profit.",
-	"MovieSearch": "Display information about a specific movie.",
+	"Movies": "Display information about a specific movie.",
 	"All": "Activate all filters."
 };
 

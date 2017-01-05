@@ -90,6 +90,9 @@ function setFlowChartFilterMenu(){
 
   // highlighting paths
   setCheckboxEvents();
+
+  // Tooltips
+  setQueryTooltips()
 }
 
 function setAllUnchecked(){
@@ -241,6 +244,18 @@ function setCheckboxEvents(){
   });
 
 
+}
+
+function setQueryTooltips(){
+  $(".checkboxLabel").mouseover(function() {
+                        setTooltipField($(this).find('input:checkbox:first').val());
+                      })
+                   .mouseout(function() {
+                        $("#checkBoxInformationText").text("");
+                      });
+}
+function setTooltipField(checkboxValue){
+  $("#checkBoxInformationText").text(queryTooltips[checkboxValue]);
 }
 
 function activateAllQueries(){
