@@ -481,6 +481,9 @@ body {
     background: #9DE8EE;
 }
 
+.smallChartZoom{
+  margin-right: 25px;
+}
 /* -------------------------------- Series -------------------------------- */
 .search-box {
     padding-top: 20px;
