@@ -1,18 +1,21 @@
 var numKeywordBubbles = 15;
 
 function seriesBubbles(episodes) {
-    var divID = "#keywordBubbles", w = widthBubbles, h = heightSmallRow;
     var data = processSeriesBubbleChartData(episodes);
     if (data.length == 0) {
         d3.select(divID).select("svg").remove();
         return;
     }
+    createBubbleChart(data, "#keywordBubbles", widthBubbles, heightSmallRow);
+    createBubbleChart(data, "#keywordBubblesLarge", 500, 490);
+}
 
+function createBubbleChart(data, divID, w, h) {
     var margin = {top: 3, right: 3, bottom: 3, left: 3};
     w = w - margin.left - margin.right;
     h = h - margin.top - margin.bottom;
     var diameter = h; //max size of the bubbles
-    var bubble = d3.layout.pack().sort(null).size([diameter, diameter]).padding(2.5);
+    var bubble = d3.layout.pack().size([w, h]).padding(2.5).sort(null);
     var color = d3.scale.ordinal()
             .range(["FF7F0E", "#6599C0", "#F0CC76", "#64BD91", "#F59A6E", "#AFD572", "#E2D35C", "#D84E67", "#7073A0", "#58B16F", "#A2C5A5", "#C25D7F", "#FCD450", "#FF183C", "#2AB1CF", "#348B85", "#70C256", "#72CAFA", "#3A5DA1", "#4EA6AA", "#916589", "#C25D7F", "#4EE69B", "#D6AA51", "#DE6E48", "#AD6A8B", "#73539F", "#FF185D", "#57C27C", "#696C97", "#F7B6D2", "#DA707A", "#878787"]);
 
@@ -28,13 +31,13 @@ function seriesBubbles(episodes) {
         return !d.children;
     });
 
-    // Create bubbles
-    var bubbles2 = svg.append("g")
+    // Create bubbles   
+    var bubbles = svg.append("g")
             .attr("transform", "translate(0,0)")
             .selectAll(".bubble")
             .data(nodes);
-    var bubbles = bubbles2.enter();
-    bubbles.append("circle")
+    bubbles.enter()
+            .append("circle")
             .attr("r", function (d) {
                 return 0;
             })
@@ -47,16 +50,12 @@ function seriesBubbles(episodes) {
             .style("fill", function (d) {
                 return color(d.key);
             });
-
-    bubbles2.transition()
-            .duration(2000)
-            .delay(700)
-            .attr('r', function (d) {
-                return d.r;
-            });
+    bubbles.transition().duration(2000).delay(700).attr('r', function (d) {
+        return d.r;
+    });
 
     // Format the text within each bubble
-    var text = bubbles.append("text")
+    var text = bubbles.enter().append("text")
             .attr("x", function (d) {
                 return d.x;
             })
@@ -78,7 +77,6 @@ function seriesBubbles(episodes) {
                 "font-weight": "bold",
                 "font-size": "11px"
             });
-
     text.attr("fill-opacity", 0).transition().duration(3000).delay(700).attr("fill-opacity", 1);
 }
 
