@@ -5,7 +5,7 @@ function genreBubbles(divID, w, h, inputdata) {
     w = w - margin.left - margin.right;
     h = h - margin.top - margin.bottom - 35;
 
-    var diameter = w; //max size of the bubbles
+    var diameter = h; //max size of the bubbles
     var bubble = d3.layout.pack().sort(null).size([diameter, diameter]).padding(1.5);
 
     var title = d3.select(divID)

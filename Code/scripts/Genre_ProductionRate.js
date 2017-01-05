@@ -22,8 +22,8 @@ function genreProductionRate(divID, w, h, inputdata) {
     var y = d3.scale.linear().range([h, 0]);
 
     // Axes:
-    var xAxis = d3.svg.axis().scale(x).orient("bottom").ticks(10);
-    var yAxis = d3.svg.axis().scale(y).orient("left").ticks(10);
+    var xAxis = d3.svg.axis().scale(x).orient("bottom").ticks(7);
+    var yAxis = d3.svg.axis().scale(y).orient("left").ticks(8);
 
     //Define the line
     var countLine = d3.svg.line().interpolate("basis")

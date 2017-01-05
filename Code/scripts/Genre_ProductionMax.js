@@ -25,7 +25,7 @@ function genreProductionMax(divID, w, h, inputdata) {
     var y = d3.scale.linear().range([h, 0]);
 
     // Axes:
-    var xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(d3.time.format("%Y")); // .ticks(10)
+    var xAxis = d3.svg.axis().scale(x).orient("bottom") //.tickFormat(d3.time.format("%Y")); // .ticks(10)
     var yAxis = d3.svg.axis().scale(y).orient("left").ticks(10);
 
     // Get the data
@@ -61,11 +61,15 @@ function genreProductionMax(divID, w, h, inputdata) {
                 return h - y(1);
             })
             .on("mouseover", function (d) {
-                d3.select("#barChartTitle").html("Highest rated genre in " + d.Year.getFullYear() + ": " + d.MaxGenre);
+                if (d.Year) {
+                    d3.select("#barChartTitle").html("Highest rated genre in " + d.Year + ": " + d.MaxGenre);
+                }
             })
             .on("mouseleave", function (d) {
                 d3.select("#barChartTitle").html("Highest rated genre per year");
             });
+
+    correctTicks(x.domain());
 }
 
 function groupDataBarChart(data) {
@@ -103,10 +107,32 @@ function groupDataBarChart(data) {
             }
         });
         maxPerYear.push({
-            Year: new Date(d.key),
+            Year: new Date(d.key).getFullYear(),
             MaxGenre: maxGenre,
             MaxGenreCount: maxGenreRating
         });
     });
     return maxPerYear;
+}
+
+function correctTicks(domain) {
+    var numTicks = 7;
+    console.log(domain);
+    if (domain.length <= numTicks) {
+        return;
+    }
+    var min = domain[0], max = domain[domain.length - 1];
+    var diff = max - min;
+    var step = diff / (numTicks - 1);
+    var desiredTicks = [];
+    for (var i = 0; i < numTicks; i++) {
+        desiredTicks.push(Math.round(min + (step * i)));
+    }
+    var ticks = d3.select("#genreProductionMax").selectAll(".tick");
+    console.log(ticks);
+    ticks[0].forEach(function (tick) {
+        if (desiredTicks.indexOf(tick.__data__) == -1) {
+            tick.remove();
+        }
+    });
 }
