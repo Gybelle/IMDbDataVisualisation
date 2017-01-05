@@ -6,6 +6,7 @@
         <!-- Stylesheets -->
         <link href="plugins/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">   <!-- Bootstrap -->
         <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script type="text/javascript" src="scripts/Series_BubbleChartLarge.js"></script>
     <style>
       /* Custom style for the rating graph */
       /* tell the SVG path to be a thin blue line without any area fill */
@@ -14,7 +15,7 @@
         stroke-width: 1;
         fill: none;
       }
-      
+
       .axis {
         shape-rendering: crispEdges;
       }
@@ -85,6 +86,7 @@
                   <div class="bottom-chart chart" id="ratingLineChart"></div>
                 </div>
                 <div id="colKeywordBubbles" class="col-md-4">
+                  <button type="button" onclick="zoomBubbleChart()">Toggle zoom</button>
                   <div class="bottom-chart chart" id="keywordBubbles"></div>
                 </div>
               </div>
@@ -98,7 +100,7 @@
       <script type="text/javascript" src="plugins/bootstrap-3.3.7/js/bootstrap.js"></script>
       <script src="https://d3js.org/d3.v3.min.js"></script>
       <script src="https://d3js.org/d3-queue.v3.min.js"></script>
-      
+
       <script src="scripts/Series_init.js"></script>
 
       <script>
