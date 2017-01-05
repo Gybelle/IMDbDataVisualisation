@@ -86,13 +86,33 @@
                   <div class="bottom-chart chart" id="ratingLineChart"></div>
                 </div>
                 <div id="colKeywordBubbles" class="col-md-4">
-                  <button type="button" onclick="zoomBubbleChart()">Toggle zoom</button>
+                  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#bubbleChartModal">Open Large Bubblechart</button>
+
                   <div class="bottom-chart chart" id="keywordBubbles"></div>
                 </div>
               </div>
             </div> <!-- End container fluid content -->
         </div> <!-- End wrapper page content -->
       </div> <!-- End wrapper div -->
+
+
+      <!-- Large Bubble chart Modal -->
+      <div id="bubbleChartModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Large bubble chart</h4>
+            </div>
+            <div class="modal-body">
+              <p>Placeholder bubbles</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
 
 
       <!-- Scripts -->
