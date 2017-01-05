@@ -1,3 +1,18 @@
+var queryTooltips = {
+	"Query1": "A",
+	"Query2": "B",
+	"Query3": "C",
+	"Query4": "D",
+	"Query5": "E",
+	"Query6": "F",
+	"Query7": "G",
+	"Query8": "H",
+	"Query9": "I",
+	"Query10": "J",
+	"MovieSearch": "Search",
+	"All": "All filters"
+};
+
 var mostPopularMoviePaths = {
 	"45rpm (2009)": "Less than 15 minutes#Less than a week",
 	"A Brush Soaked in Carmine (2016)": "Five months#[10K-50K[",
