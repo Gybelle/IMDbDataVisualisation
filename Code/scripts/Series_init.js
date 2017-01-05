@@ -195,6 +195,7 @@ $(document.body).on('click', '.selectSeries' ,function(){
 		drawActorPanels(selectedShow, numSeasons, numEpisodes);		
 	});
 
+        seriesBubbles(filtered);
 });
 
 
