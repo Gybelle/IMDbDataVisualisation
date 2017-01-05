@@ -20,7 +20,6 @@ function genreProductionMax(divID, w, h, inputdata) {
             .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
     // Ranges:
-    //var x = d3.time.scale().range([0, w]);
     var x = d3.scale.ordinal().rangeRoundBands([0, w], 0);
     var y = d3.scale.linear().range([h, 0]);
 
@@ -117,7 +116,6 @@ function groupDataBarChart(data) {
 
 function correctTicks(domain) {
     var numTicks = 7;
-    console.log(domain);
     if (domain.length <= numTicks) {
         return;
     }
@@ -129,7 +127,6 @@ function correctTicks(domain) {
         desiredTicks.push(Math.round(min + (step * i)));
     }
     var ticks = d3.select("#genreProductionMax").selectAll(".tick");
-    console.log(ticks);
     ticks[0].forEach(function (tick) {
         if (desiredTicks.indexOf(tick.__data__) == -1) {
             tick.remove();
