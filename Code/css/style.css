@@ -484,6 +484,13 @@ body {
 .smallChartZoom{
   margin-right: 25px;
 }
+
+.larger_chart{
+  width: 500px;
+  height: 500px;
+
+}
+
 /* -------------------------------- Series -------------------------------- */
 .search-box {
     padding-top: 20px;
@@ -580,4 +587,10 @@ body {
     margin-top: 0;
     font-size: 20px;
     font-weight: bold;
+}
+
+
+/* -------------------------------- Navigator (overwrite Bootstrap) -------------------------------- */
+.vis_modal {
+  background-color: #FAF7F7;
 }
