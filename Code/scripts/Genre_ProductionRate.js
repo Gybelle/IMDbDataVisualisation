@@ -1,10 +1,15 @@
 // Inspiration: http://bl.ocks.org/d3noob/d8be922a10cb0b148cd5
 
 function genreProductionRate(divID, w, h, inputdata) {
-    var margin = {top: 36, right: 36, bottom: 36, left: 42};
+    var margin = {top: 10, right: 36, bottom: 36, left: 42};
     w = w - margin.left - margin.right;
-    h = h - margin.top - margin.bottom;
+    h = h - margin.top - margin.bottom - 35;
 
+    var title = d3.select(divID)
+            .append('div')
+            .attr('id', "lineChartTitle")
+            .attr('class', "chartTitle")
+            .html("Movies produced per genre");
     var svg = d3.select(divID)
             .append('svg')
             .attr('width', w + margin.left + margin.right)
@@ -17,8 +22,8 @@ function genreProductionRate(divID, w, h, inputdata) {
     var y = d3.scale.linear().range([h, 0]);
 
     // Axes:
-    var xAxis = d3.svg.axis().scale(x).orient("bottom").ticks(10);
-    var yAxis = d3.svg.axis().scale(y).orient("left").ticks(10);
+    var xAxis = d3.svg.axis().scale(x).orient("bottom").ticks(7);
+    var yAxis = d3.svg.axis().scale(y).orient("left").ticks(8);
 
     //Define the line
     var countLine = d3.svg.line().interpolate("basis")
@@ -62,7 +67,13 @@ function genreProductionRate(divID, w, h, inputdata) {
         svg.append("path")
                 .attr("class", "line")
                 .attr("d", countLine(newValues))
-                .style("stroke", colors[d.key]);
+                .style("stroke", colors[d.key])
+                .on("mouseover", function () {
+                    d3.select("#lineChartTitle").html("Movies produced in genre " + d.key);
+                })
+                .on("mouseleave", function () {
+                    d3.select("#lineChartTitle").html("Movies produced per genre");
+                });
     });
 
     // Add x and y axis to svg

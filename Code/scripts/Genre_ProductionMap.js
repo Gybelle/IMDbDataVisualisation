@@ -17,9 +17,6 @@ function createGenreProductionMap(divID) {
         noWrap: true
     }).addTo(map);
     map.keyboard.disable();
-
-    //var svg = d3.select(map.getPanes().overlayPane).append("svg");
-    //var g = svg.append("g").attr("class", "leaflet-zoom-hide");
     return map;
 }
 
@@ -35,7 +32,7 @@ function updateMap(map, inputdata) {
             var countryCode = findCountryCode(countryName);
             var genre = findGenreOfCountry(countryCode, data);
             if (genre != null) {
-                addCountryToMap(map, countryData, colors[genre]);
+                addCountryToMap(map, countryData, colors[genre], countryName, "Most produced genre in " + countryName + ": " + genre);
             }
         }
     });
@@ -49,14 +46,36 @@ function clearMapLayers(map) {
     });
 }
 
-function addCountryToMap(map, countryData, fillColor) {
+function addCountryToMap(map, countryData, fillColor, country, tooltip) {
     if (map != null) {
         L.geoJson(countryData, {
-            fillColor: fillColor,
-            color: "#000000",
-            weight: 0.5,
-            opacity: 0.8,
-            fillOpacity: 0.8
+            style: function (feature) {
+                return {
+                    "fillColor": fillColor,
+                    "color": "#000000",
+                    "weight": 0.5,
+                    "opacity": 0.8,
+                    "fillOpacity": 0.8
+                };
+            },
+            onEachFeature: function (feature, layer) {
+                layer.on("mouseover", function (e) {
+                    document.getElementById("chartInfo").innerHTML = tooltip;
+                    document.getElementById("chartInfo").style.visibility = "visible";
+                });
+                layer.on("mouseout", function (e) {
+                    document.getElementById("chartInfo").style.visibility = "hidden";
+                });
+                layer.on("click", function (e) {
+                    if (currentFilter_countryFilter == null) {
+                        setFilterCountry(findCountry(findCountryCode(country)));
+                    } else {
+                        setFilterCountry(null);
+                    }
+
+
+                });
+            }
         }).addTo(map);
     } else {
         console.log("Map is null");

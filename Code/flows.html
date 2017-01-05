@@ -10,6 +10,7 @@
         <!-- Scripts -->
         <script src="data/flowData/sankeyColors.js"></script>
         <script src="data/flowData/moviePaths.js"></script>
+        <script src="data/flowData/otherQueryPaths.js"></script>
 
         <script src="plugins/awesomplete-gh-pages/awesomplete.js" async></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -129,6 +130,11 @@
                     </div>
                   </div>
                 </li>
+                <li>
+                  <div class="checkBoxInformation">
+                    <text id="checkBoxInformationText">Display information about movies with a revenue which is less than 10 EUR.</text>
+                  </div>
+                </li>
       </div> <!-- wrapper sidebar -->
       <div id="page-content-wrapper">
         <div id="container-fluid">
@@ -144,7 +150,7 @@
                 <li><a href="actors.html">Actors</a></li>
                 <li><a href="series.html">Series</a></li>
                 <li class="active"><a href="flows.html">Movies</a></li>
-                <li><a href="#menu-toggle" id="menu-toggle" class="special-nav-option">[ Filter ]</a></li>
+                <li><a href="#menu-toggle" id="menu-toggle" class="special-nav-option">[ Toggle filter ]</a></li>
               </ul>
             </div>
           </nav>

@@ -64,8 +64,8 @@ var countryCodes = {
     "Falkland Islands": "FLK",
     "France": "FRA",
     "Gabon": "GAB",
-    "United Kingdom": "GBR",
     "UK": "GBR",
+    "United Kingdom": "GBR",
     "Isle of Man": "GBR",
     "Georgia": "GEO",
     "Ghana": "GHA",
@@ -184,8 +184,8 @@ var countryCodes = {
     "Uganda": "UGA",
     "Ukraine": "UKR",
     "Uruguay": "URY",
-    "United States of America": "USA",
     "USA": "USA",
+    "United States of America": "USA",
     "Uzbekistan": "UZB",
     "Venezuela": "VEN",
     "Vietnam": "VNM",
@@ -200,4 +200,12 @@ var countryCodes = {
 
 function findCountryCode(countryName) {
     return countryCodes[countryName];
+}
+
+function findCountry(countryCode) {
+    for (var country in countryCodes) {
+        if (countryCode == countryCodes[country]) {
+            return country;
+        }
+    }
 }

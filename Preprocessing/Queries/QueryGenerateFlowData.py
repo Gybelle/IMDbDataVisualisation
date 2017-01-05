@@ -162,7 +162,6 @@ def extractDigitalTime(durationString):
         print(splittedDur)
 
     return extractDecimalTime(min)
-    #print("here")
 
 def extractTextTime(durationString):
     splittedDur = durationString.split("min")
@@ -410,13 +409,11 @@ def checkRange(ranges, rangeNames, indexRecord):
     for record in movieList:
         value = record[indexRecord]
         if value:
-            #print(value)
             rangeFound = False
             index = -1
             while not rangeFound:
                 index += 1
                 if value < ranges[index]:
-                    #print("%d, %d" % (value, ranges[index]))
                     rangeFound = True
                     if rangeNames[index] in runtimeDistribution:
                         count = runtimeDistribution[rangeNames[index]] + 1
@@ -573,7 +570,6 @@ def writeNodes(file, rangeNames, last):
 def updateMoviePaths(title, year, pairList):
     key = "%s (%s)" % (title, year)
     value = ""
-
     if pairList:
         for pair in pairList:
             pairString = "%s#%s*" % (pair[0], pair[1])
@@ -630,27 +626,48 @@ def writeToColorFile(colorFile, rangeNames, colorValue):
 #######################################################################################################################
 def performOtherQueries():
     file = open("../../Data/moviePaths.js", "w", encoding="utf8", errors="ignore")
-    writeMoviePathsToFile(file)
+    writeMoviePathsToFile(file, "moviePaths", moviePaths)
     queryLists = gatherInfoForOtherQueries()
     (movie_MostPopular, movie_LeastPopular, movie_Shortest, movie_Longest, movie_Exp, movie_Cheap, movie_RevHigh,
      movie_RevLow, movie_MostCE, movie_LeastCE) = queryLists
 
-    #writeListPathToFile
+    writeOtherQueryPathsToFile(file, "mostPopularMoviePaths", movie_MostPopular)
+    writeOtherQueryPathsToFile(file, "leastPopularMoviePaths", movie_LeastPopular)
+    writeOtherQueryPathsToFile(file, "shortestMoviePaths", movie_Shortest)
+    writeOtherQueryPathsToFile(file, "longestMoviePaths", movie_Longest)
+    writeOtherQueryPathsToFile(file, "mostExpensiveMoviePaths", movie_Exp)
+    writeOtherQueryPathsToFile(file, "leastExpensiveMoviePaths", movie_Cheap)
+    writeOtherQueryPathsToFile(file, "highestRevenueMoviePaths", movie_RevHigh)
+    writeOtherQueryPathsToFile(file, "lowestRevenueMoviePaths", movie_RevLow)
+    writeOtherQueryPathsToFile(file, "mostCEMoviePaths", movie_MostCE)
+    writeOtherQueryPathsToFile(file, "leastCEMoviePaths", movie_LeastCE)
+
     file.close()
 
-
-def writeMoviePathsToFile(file):
-    file.write("var moviePaths = {\n")
-    index = 0
-    for movie in moviePaths:
+def writeMoviePathsToFile(file, varName, pathList):
+    file.write("var %s = {\n" % varName)
+    index  = 0
+    for movie in pathList:
         index += 1
-        if index == len(moviePaths):
+        if index == len(pathList):
             file.write("\t\"%s\": \"%s\"\n" % (movie, moviePaths[movie]))
         else:
             file.write("\t\"%s\": \"%s\",\n" % (movie, moviePaths[movie]))
-    file.write("}\n")
+    file.write("};\n")
 
 
+def writeOtherQueryPathsToFile(file, varName, pathList):
+    file.write("var %s = {\n" % varName)
+    index  = 0
+    for movieRecord in pathList:
+        movie = "%s (%s)" % (movieRecord[0], movieRecord[1])
+        if movie in moviePaths:
+            index += 1
+            if index == len(pathList):
+                file.write("\t\"%s\": \"%s\"\n" % (movie, moviePaths[movie]))
+            else:
+                file.write("\t\"%s\": \"%s\",\n" % (movie, moviePaths[movie]))
+    file.write("};\n")
 
 def gatherInfoForOtherQueries():
     movieCost_list = {}
@@ -687,7 +704,7 @@ def gatherInfoForOtherQueries():
         if budget and gross:
             ce = gross - budget
             if ce <= 0:
-                movie_LeastCE.append(ce)
+                movie_LeastCE.append(movie)
             else:
                 movieCE_list[movie] = ce
 
@@ -733,9 +750,9 @@ process(movieFile)
 movieFile.close()
 
 calculateRanges()
-performOtherQueries()
 distributeDataInRanges()
 generateColorFile("sankeyColors.js")
+performOtherQueries()
 
 
 

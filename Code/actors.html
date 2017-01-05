@@ -54,8 +54,8 @@
                             <div class="input-group" id="custom-search-input" style="padding-bottom: 20px;">
                                 <input type="text" class="form-control input-lg" placeholder="Search actor or movie..." id="custom-search-input-field" style="height: 40px;"/>
                                 <span class="input-group-btn" id="search-button-container">
-                                    <button class="btn btn-info btn-lg" type="button" style="height: 40px;">
-                                        <i class="glyphicon glyphicon-search"></i>
+                                    <button class="btn btn-info btn-lg" type="button" style="height: 40px;" id="searchButton">
+                                        <i class="glyphicon glyphicon-search" id="searchIcon"></i>
                                     </button>
                                 </span>
                             </div>
@@ -101,13 +101,38 @@
                         </div>
                     </div>
                     <div id="colLanguageChart" class="col-md-4">
+                        <button type="button" class="close smallChartZoom" data-toggle="modal" data-target="#languageChartModal"><span class="glyphicon glyphicon-fullscreen"></span></button>
                         <div class="small_chart chart" id="languageChart">
                             <span id="languageInfo" class="info"></span>
                         </div>
                     </div>
                 </div>
             </div> <!-- End container fluid content -->
+
+            <!-- Language chart Modal -->
+            <div id="languageChartModal" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Languages</h4>
+                  </div>
+                  <div class="modal-body vis_modal">
+                    <div class="larger_chart chart" id="languageChartLarge">
+                        <span id="languageInfoLarge" class="info"></span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
         </div> <!-- End wrapper page content -->
+
+
+        <script type="text/javascript" src="plugins/bootstrap-3.3.7/js/bootstrap.js"></script>
         <script>
             initialiseCharts("actorsMap", "languageChart");
             initialiseSearchBar();

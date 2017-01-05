@@ -1,3 +1,10 @@
+var modalH = 500 - 10;
+var modalW = 500;
+var legendSizeSmall = 5;
+var legendSizeLarge = 20;
+var donutWidthSmall = 30;
+var donutWidthLarge = 50;
+
 function createActorPieChart(divID, movies) {
     var data = [];
     if (movies == null || movies.length == 0) {
@@ -23,7 +30,11 @@ function createActorPieChart(divID, movies) {
     data.sort(function (x, y) {
         return d3.descending(x.count, y.count);
     });
-    drawPieChart(divID, data);
+    var smallChartH = heightSmallRow - 10;
+    var smallChartW = document.getElementById("languageChart").offsetWidth - 50;
+
+    drawPieChart("#languageChartLarge", data, "#languageInfoLarge", "languageChartLarge", modalH, modalW, legendSizeLarge, donutWidthLarge);
+    drawPieChart(divID, data, "#languageInfo", "languageChart", smallChartH, smallChartW, legendSizeSmall, donutWidthSmall);
 }
 
 function createMoviePieChart(divID, actors) {
@@ -50,14 +61,19 @@ function createMoviePieChart(divID, actors) {
     data.sort(function (x, y) {
         return d3.descending(x.count, y.count);
     });
-    drawPieChart(divID, data);
+    var smallChartH = heightSmallRow - 10 ;
+    var smallChartW = document.getElementById("languageChart").offsetWidth - 50;
+
+    drawPieChart("#languageChartLarge", data, "#languageInfoLarge", "languageChartLarge", modalH, modalW, legendSizeLarge, donutWidthLarge);
+    drawPieChart(divID, data, "#languageInfo", "languageChart", smallChartH, smallChartW, legendSizeSmall, donutWidthSmall);
+
 }
 
-function drawPieChart(divID, data) {
-    var width = document.getElementById("languageChart").offsetWidth - 50;
-    var height = heightSmallRow - 10;
+function drawPieChart(divID, data, divIDinfo, divIDLangChart, h, w, sizeLegend, donutWidth) {
+    $(divIDinfo).html("");
+    var width = w;
+    var height = h;
     var radius = (Math.min(width, height) / 2) - 5;
-    var donutWidth = 30;
 
     var color = d3.scale.ordinal()
             .range(["FF7F0E", "#6599C0", "#F0CC76", "#64BD91", "#F59A6E", "#AFD572", "#E2D35C", "#D84E67", "#7073A0", "#58B16F", "#A2C5A5", "#C25D7F", "#FCD450", "#FF183C", "#2AB1CF", "#348B85", "#70C256", "#72CAFA", "#3A5DA1", "#4EA6AA", "#916589", "#C25D7F", "#4EE69B", "#D6AA51", "#DE6E48", "#AD6A8B", "#73539F", "#FF185D", "#57C27C", "#696C97", "#F7B6D2", "#DA707A", "#878787"]);
@@ -120,27 +136,27 @@ function drawPieChart(divID, data) {
         });
     });
 
-    addMouseOver(svg, path, arc, arcOver);
+    addMouseOver(svg, path, arc, arcOver, divIDinfo);
 
     /* The Legend */
-    createLegend(data, svg, color);
+    createLegend(data, svg, color, sizeLegend);
 }
 
-function addMouseOver(svg, path, arc, arcOver) {
+function addMouseOver(svg, path, arc, arcOver, divIDinfo) {
     var slice = svg.selectAll("path.slice");
     slice.on("mousemove", function (d) {
         if (selectedActor != null) {
             if (d.data.count == 1) {
-                $("#languageInfo").html(d.data.language + ": " + d.data.count + " movie");
+                $(divIDinfo).html(d.data.language + ": " + d.data.count + " movie");
             } else {
-                $("#languageInfo").html(d.data.language + ": " + d.data.count + " movies");
+                $(divIDinfo).html(d.data.language + ": " + d.data.count + " movies");
             }
         }
         else if (selectedMovie != null) {
             if (d.data.count == 1) {
-                $("#languageInfo").html(d.data.language + ": " + d.data.count + " actor");
+                $(divIDinfo).html(d.data.language + ": " + d.data.count + " actor");
             } else {
-                $("#languageInfo").html(d.data.language + ": " + d.data.count + " actors");
+                $(divIDinfo).html(d.data.language + ": " + d.data.count + " actors");
             }
         }
     });
@@ -159,10 +175,10 @@ function addMouseOver(svg, path, arc, arcOver) {
     });
 }
 
-function createLegend(data, svg, color) {
+function createLegend(data, svg, color, sizeLegend) {
     var legendRectSize = 12;
     var legendSpacing = 4;
-    var topDataColors = getTopData(data);
+    var topDataColors = getTopData(data, sizeLegend);
 
     var legend = svg.selectAll('.legend').remove()
             .data(topDataColors).enter()
@@ -189,8 +205,8 @@ function createLegend(data, svg, color) {
             });
 }
 
-function getTopData(data) {
-    var topSize = 5;
+function getTopData(data, sizeLegend) {
+    var topSize = sizeLegend;
     if (data.length > topSize) {
         data = data.sort(function (x, y) {
             return d3.descending(x.count, y.count);

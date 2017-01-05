@@ -15,6 +15,12 @@ heightSmallRow = 0;
 widthSmallLargeChart = 0;
 heightLargeRow = 0;
 
+// Filters
+currentFilter_beginYear = null;
+currentFilter_endYear = null;
+currentFilter_genreFilter = null;
+currentFilter_countryFilter = null;
+
 /*
  * HOW TO USE:
  *
@@ -63,16 +69,18 @@ function createCharts() {
 // UPDATE ----------------------------------------------------------------------
 
 function updateView(beginYear, endYear, genreFilter, countryFilter) {
-    //console.log("Updating to " + beginYear.getFullYear() + "-" + endYear.getFullYear());
-
-    if(genreFilter != null && genreFilter.length == 0){
-      genreFilter = null;
+    if (genreFilter != null && genreFilter.length == 0) {
+        genreFilter = null;
     }
 
     filterData(beginYear, endYear, genreFilter, countryFilter);
+    if (genreYearCountryData_filteredByCountry.length == 0) {
+        return;
+    }
+
     setChartLayout();
 
-    updateMap(map, genreYearCountryData_filtered);
+    updateMap(map, genreYearCountryData_filteredByCountry);
 
     var nodeLineChart = document.getElementById(divIDLineChart);
     while (nodeLineChart.firstChild) {
@@ -91,6 +99,22 @@ function updateView(beginYear, endYear, genreFilter, countryFilter) {
     genreBubbles("#" + divIDBubbleChart, widthSmallLargeChart, heightLargeRow, genreYearCountryData_filteredByCountry);
 }
 
+function setFilterYear(beginYear, endYear) {
+    currentFilter_beginYear = beginYear;
+    currentFilter_endYear = endYear;
+    updateView(beginYear, endYear, currentFilter_genreFilter, currentFilter_countryFilter);
+}
+
+function setFilterGenre(genreFilter) {
+    currentFilter_genreFilter = genreFilter;
+    updateView(currentFilter_beginYear, currentFilter_endYear, genreFilter, currentFilter_countryFilter);
+}
+
+function setFilterCountry(countryFilter) {
+    currentFilter_countryFilter = countryFilter;
+    updateView(currentFilter_beginYear, currentFilter_endYear, currentFilter_genreFilter, countryFilter);
+}
+
 function setChartLayout() {
     //Set width of charts
     //bar- and linechart:
@@ -107,6 +131,7 @@ function setChartLayout() {
     widthLargeChart = document.getElementById("colGenreMap").offsetWidth;
     $(".large_chart").css('width', widthLargeChart);
     $(".large_chart").css('height', heightLargeRow);
+    $("#chartInfo").css('top', heightLargeRow - 39);
 }
 
 // FILTER ----------------------------------------------------------------------

@@ -3,10 +3,15 @@
 // (Barchart)
 
 function genreProductionMax(divID, w, h, inputdata) {
-    var margin = {top: 36, right: 56, bottom: 36, left: 36};
+    var margin = {top: 10, right: 56, bottom: 36, left: 36};
     w = w - margin.left - margin.right;
-    h = h - margin.top - margin.bottom;
+    h = h - margin.top - margin.bottom - 35;
 
+    var title = d3.select(divID)
+            .append('div')
+            .attr('id', "barChartTitle")
+            .attr('class', "chartTitle")
+            .html("Highest rated genre per year");
     var svg = d3.select(divID)
             .append('svg')
             .attr('width', w + margin.left + margin.right)
@@ -15,12 +20,11 @@ function genreProductionMax(divID, w, h, inputdata) {
             .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
     // Ranges:
-    //var x = d3.time.scale().range([0, w]);
     var x = d3.scale.ordinal().rangeRoundBands([0, w], 0);
     var y = d3.scale.linear().range([h, 0]);
 
     // Axes:
-    var xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(d3.time.format("%Y")); // .ticks(10)
+    var xAxis = d3.svg.axis().scale(x).orient("bottom") //.tickFormat(d3.time.format("%Y")); // .ticks(10)
     var yAxis = d3.svg.axis().scale(y).orient("left").ticks(10);
 
     // Get the data
@@ -54,7 +58,17 @@ function genreProductionMax(divID, w, h, inputdata) {
             })
             .attr("height", function (d) {
                 return h - y(1);
+            })
+            .on("mouseover", function (d) {
+                if (d.Year) {
+                    d3.select("#barChartTitle").html("Highest rated genre in " + d.Year + ": " + d.MaxGenre);
+                }
+            })
+            .on("mouseleave", function (d) {
+                d3.select("#barChartTitle").html("Highest rated genre per year");
             });
+
+    correctTicks(x.domain());
 }
 
 function groupDataBarChart(data) {
@@ -92,10 +106,30 @@ function groupDataBarChart(data) {
             }
         });
         maxPerYear.push({
-            Year: new Date(d.key),
+            Year: new Date(d.key).getFullYear(),
             MaxGenre: maxGenre,
             MaxGenreCount: maxGenreRating
         });
     });
     return maxPerYear;
+}
+
+function correctTicks(domain) {
+    var numTicks = 7;
+    if (domain.length <= numTicks) {
+        return;
+    }
+    var min = domain[0], max = domain[domain.length - 1];
+    var diff = max - min;
+    var step = diff / (numTicks - 1);
+    var desiredTicks = [];
+    for (var i = 0; i < numTicks; i++) {
+        desiredTicks.push(Math.round(min + (step * i)));
+    }
+    var ticks = d3.select("#genreProductionMax").selectAll(".tick");
+    ticks[0].forEach(function (tick) {
+        if (desiredTicks.indexOf(tick.__data__) == -1) {
+            tick.remove();
+        }
+    });
 }

@@ -130,6 +130,11 @@ body {
     opacity: 0.5;
 }
 
+.chartTitle {
+    text-align: center;
+    padding-top: 10px;
+}
+
 @media (max-width:500px){
     #genreProductionRate .line {stroke-width: 3px;}
     #genreProductionRate .legend {font-size: 14px;}
@@ -297,6 +302,20 @@ body {
     width: 185px;
 }
 
+.checkBoxInformation {
+  margin-top: 40px;
+  font-weight: lighter;
+  letter-spacing: 1px;
+  font-size: small;
+}
+
+#checkBoxInformationText{
+  color: #acd2e2;
+  margin-left: 25px;
+  display: block;
+  text-indent: 0px;
+}
+
 /* --------------------------- Sankey diagram --------------------------- */
 /* Based on: http://bl.ocks.org/d3noob/5015397 */
 .node rect {
@@ -409,6 +428,9 @@ body {
     color: black;
     word-wrap: break-word;
 }
+#bio > h3 {
+    margin-top: 0px;
+}
 
 .lifetimeWrapperLegend > .legendText {
     float: right;
@@ -424,6 +446,12 @@ body {
 .info  {
     z-index: 10;
     position: absolute;
+}
+#chartInfo {
+    background-color: #FAF7F7;
+    padding: 10px;
+    font-size: 14;
+    visibility: hidden;
 }
 
 #languageChart {
@@ -451,6 +479,16 @@ body {
 }
 .searchResultMovie {
     background: #9DE8EE;
+}
+
+.smallChartZoom{
+  margin-right: 25px;
+}
+
+.larger_chart{
+  width: 500px;
+  height: 500px;
+
 }
 
 /* -------------------------------- Series -------------------------------- */
@@ -560,4 +598,10 @@ body {
     margin-top: 0;
     font-size: 20px;
     font-weight: bold;
+}
+
+
+/* -------------------------------- Navigator (overwrite Bootstrap) -------------------------------- */
+.vis_modal {
+  background-color: #FAF7F7;
 }

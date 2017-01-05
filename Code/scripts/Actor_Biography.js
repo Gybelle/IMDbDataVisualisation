@@ -22,6 +22,10 @@ function setBiographyWidgetActor(newActor) {
     }
     actor = newActor;
     getActorAge();
+    d3.select("#lifetimeWrapper1").attr("class", "lifetimeWrapper");
+    d3.select("#lifetimeWrapper2").attr("class", "lifetimeWrapper");
+    d3.select("#lifetimeWrapper3").attr("class", "lifetimeWrapper");
+    d3.select("#lifetimeWrapper4").attr("class", "lifetimeWrapper");
     setIcons(0, 0, 0, 0, 1, -1, -1, -1, -1);
     setBiographyText();
 }
@@ -71,6 +75,10 @@ function setBiographyWidgetMovie(newMovie) {
         return;
     }
     movie = newMovie;
+    d3.select("#lifetimeWrapper1").attr("class", "lifetimeWrapper");
+    d3.select("#lifetimeWrapper2").attr("class", "lifetimeWrapper");
+    d3.select("#lifetimeWrapper3").attr("class", "lifetimeWrapper");
+    d3.select("#lifetimeWrapper4").attr("class", "lifetimeWrapper");
     setIcons(0, 0, 0, 0, 1, -1, -1, -1, -1);
     setBiographyText();
 }
