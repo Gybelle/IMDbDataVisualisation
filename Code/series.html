@@ -86,7 +86,7 @@
                   <div class="bottom-chart chart" id="ratingLineChart"></div>
                 </div>
                 <div id="colKeywordBubbles" class="col-md-4">
-                  <button type="button" class="close smallChartZoom" data-toggle="modal" data-target="#bubbleChartModal"><span class="glyphicon glyphicon-fullscreen"></span></button>
+                  <button type="button" class="close smallChartZoom" data-toggle="modal" data-target="#bubbleChartModal"><span class="glyphicon glyphicon-fullscreen" style="z-index: 1000; position: absolute; top: 5px;"></span></button>
 
                   <div class="bottom-chart chart" id="keywordBubbles"></div>
                 </div>
@@ -104,10 +104,12 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Large bubble chart</h4>
+              <h4 class="modal-title">Keywords</h4>
             </div>
             <div class="modal-body vis_modal">
-              <p>Placeholder bubbles</p>
+              <div class="larger_chart chart" id="keywordBubblesLarge">
+                <span id="keywordInfoLarge" class="info"></span>
+              </div>
             </div>
           </div>
 
@@ -123,6 +125,7 @@
 
       <script src="https://d3js.org/d3-queue.v3.min.js"></script>
 
+      <script src="scripts/Series_BubbleChart.js"></script>
       <script src="scripts/Series_init.js"></script>
 
       <script>

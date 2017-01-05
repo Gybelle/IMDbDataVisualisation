@@ -61,7 +61,7 @@ function createMoviePieChart(divID, actors) {
     data.sort(function (x, y) {
         return d3.descending(x.count, y.count);
     });
-    var smallChartH = heightSmallRow - 10 ;
+    var smallChartH = heightSmallRow - 10;
     var smallChartW = document.getElementById("languageChart").offsetWidth - 50;
 
     drawPieChart("#languageChartLarge", data, "#languageInfoLarge", "languageChartLarge", modalH, modalW, legendSizeLarge, donutWidthLarge);
@@ -130,7 +130,7 @@ function drawPieChart(divID, data, divIDinfo, divIDLangChart, h, w, sizeLegend, 
             var language = slice.__data__.data.language;
             if (language == languageFilter) {
                 slice.id = "selectedLanguage";
-                d3.selectAll("#selectedLanguage").attr("class", "slice selected").transition().attr("d", arcOver);
+                d3.select(divID).selectAll("#selectedLanguage").attr("class", "slice selected").transition().attr("d", arcOver);
                 slice.id = "";
             }
         });
@@ -144,7 +144,7 @@ function drawPieChart(divID, data, divIDinfo, divIDLangChart, h, w, sizeLegend, 
 
 function addMouseOver(svg, path, arc, arcOver, divIDinfo) {
     var slice = svg.selectAll("path.slice");
-    slice.on("mousemove", function (d) {
+    slice.on("mouseover", function (d) {
         if (selectedActor != null) {
             if (d.data.count == 1) {
                 $(divIDinfo).html(d.data.language + ": " + d.data.count + " movie");
@@ -159,6 +159,9 @@ function addMouseOver(svg, path, arc, arcOver, divIDinfo) {
                 $(divIDinfo).html(d.data.language + ": " + d.data.count + " actors");
             }
         }
+    });
+    slice.on("mouseleave", function (d) {
+        $(divIDinfo).html("");
     });
     path.on("click", function (d) {
         var clicked = d3.select(this);
