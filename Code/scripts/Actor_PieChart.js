@@ -6,8 +6,6 @@ var donutWidthSmall = 30;
 var donutWidthLarge = 50;
 
 function createActorPieChart(divID, movies) {
-    //modalH = window.innerHeight;
-    //modalW = window.innerWidth;
     var data = [];
     if (movies == null || movies.length == 0) {
         data = [
@@ -35,13 +33,11 @@ function createActorPieChart(divID, movies) {
     var smallChartH = heightSmallRow - 10;
     var smallChartW = document.getElementById("languageChart").offsetWidth - 50;
 
-    drawPieChart(divID, data, "#languageInfo", "languageChart", smallChartH, smallChartW, legendSizeSmall, donutWidthSmall);
     drawPieChart("#languageChartLarge", data, "#languageInfoLarge", "languageChartLarge", modalH, modalW, legendSizeLarge, donutWidthLarge);
+    drawPieChart(divID, data, "#languageInfo", "languageChart", smallChartH, smallChartW, legendSizeSmall, donutWidthSmall);
 }
 
 function createMoviePieChart(divID, actors) {
-    //modalH = window.innerHeight;
-    //modalW = window.innerWidth;
     var data = [];
     if (actors == null || actors.length == 0) {
         data = [
@@ -68,17 +64,15 @@ function createMoviePieChart(divID, actors) {
     var smallChartH = heightSmallRow - 10 ;
     var smallChartW = document.getElementById("languageChart").offsetWidth - 50;
 
-    drawPieChart(divID, data, "#languageInfo", "languageChart", smallChartH, smallChartW, legendSizeSmall, donutWidthSmall);
     drawPieChart("#languageChartLarge", data, "#languageInfoLarge", "languageChartLarge", modalH, modalW, legendSizeLarge, donutWidthLarge);
+    drawPieChart(divID, data, "#languageInfo", "languageChart", smallChartH, smallChartW, legendSizeSmall, donutWidthSmall);
+
 }
 
 function drawPieChart(divID, data, divIDinfo, divIDLangChart, h, w, sizeLegend, donutWidth) {
     $(divIDinfo).html("");
     var width = w;
     var height = h;
-    console.log(document.getElementById(divIDLangChart));
-    console.log(width);
-    console.log(height);
     var radius = (Math.min(width, height) / 2) - 5;
 
     var color = d3.scale.ordinal()
