@@ -305,10 +305,8 @@ function drawRatingsPerEpisode(selectedShow, numSeasons, numEpisodes) {
 		// create yAxis
 		var xAxis = d3.svg.axis().scale(x).tickSize(-h).tickSubdivide(true).tickValues(tickValues).tickFormat(function(d) {
 			//find the season this episodeNr belongs to
-
 			seasonNr++;
 			return "Season " + seasonNr;
-
 		});
 
 
@@ -330,9 +328,81 @@ function drawRatingsPerEpisode(selectedShow, numSeasons, numEpisodes) {
 		      .attr("transform", "translate(-25,0)")
 		      .call(yAxisLeft);
 		
-			// Add the line by appending an svg:path element with the data line we created above
+		// Add the line by appending an svg:path element with the data line we created above
 		// do this AFTER the axes above so that the line is above the tick-lines
-			graph.append("svg:path").attr("d", line(data));
+		graph.append("svg:path").attr("d", line(data));
+
+
+		//make the tick lines black for better visiblity
+		d3.selectAll('g.x.axis g.tick line').style("stroke", "black");
+
+}
+
+function highlightEpisodesOnRatings(episodes) {
+	//if episodes is empty or null we have to remove all highlighting
+	if (episodes === undefined || episodes === null || episodes.length == 0) {
+		d3.selectAll('g.x.axis rect').remove();
+		return;
+	}
+
+	var ticks = d3.selectAll('.x.axis g.tick')[0];
+
+	var prevTickWidth = -1;
+	var prevTickPos = -1;
+
+	var currentSeason = 1;
+
+
+	var currentEpisodePos = 0;
+
+	$.each(ticks, function() {
+		var tickWidth = $(this).width();
+
+		var height = (-1) * $(this).find('line')[0].y2.baseVal.value; //well...
+		var tickPos = this.transform.baseVal[0].matrix.e; //trial and error :p
+
+		if (prevTickWidth == -1) {
+			//skip the first tick
+			prevTickWidth = tickWidth;
+			prevTickPos = tickPos;
+			return;
+		}
+
+		//lets try and draw a rectangle for the entire season first :p
+		var prevMiddle, middle;
+
+		prevMiddle = (prevTickWidth / 2) + prevTickPos;
+		middle = (tickWidth / 2) + tickPos;
+
+		var seasonWidth = middle - prevMiddle;
+		var season = episodes[currentSeason];
+
+		if (season === undefined)
+			return;
+
+		var episodeWidth = seasonWidth / season.length;
+		var xAxis = d3.select('g.x.axis');
+
+
+		for (var i = 1; i < season.length; i++) {
+			if (season[i] == 1) {
+				//draw rectangle
+				xAxis.append("rect")
+					.attr("x", currentEpisodePos)
+					.attr("y", -height)
+					.attr("width", episodeWidth)
+					.attr("height", height)
+					.style("opacity", 0.1);						
+			}
+
+			currentEpisodePos += episodeWidth;
+		}
+
+		prevTickWidth = tickWidth;
+		prevTickPos = tickPos;
+		currentSeason++;
+	});
+
 }
 
 function drawActorPanels(selectedShow, numSeasons, numEpisodes) {
@@ -456,7 +526,11 @@ function drawActorPanels(selectedShow, numSeasons, numEpisodes) {
 			.attr("class", "node")
 			.call(position)
 			.style("background", function(d,i) { return d.color; })
-			.html(function(d) {return d.children ? null : generateActorHtml(d, Math.max(0, d.dx - 1))} );
+			.html(function(d) {return d.children ? null : generateActorHtml(d, Math.max(0, d.dx - 1))} )
+			.on('mouseover', function(d) {
+				d3.select(this).style('box-shadow','3px 0px 30px #fff');
+				highlightEpisodesOnRatings(d.appearances); 
+			});
 
 		node.data(treemap.value(function(d) { return d.size; }).nodes).transition().duration(1500).call(position);
 
@@ -467,12 +541,14 @@ function drawActorPanels(selectedShow, numSeasons, numEpisodes) {
 			.style("height", function(d) { return Math.max(0, d.dy - 1) + "px"; });
         }
 
-        d3.selectAll('.node').on('mouseover',function(){
+        /*d3.selectAll('.node').on('mouseover',function(){
 			d3.select(this).style('box-shadow','3px 0px 30px #fff');
-        });
+			highlightEpisodesOnRatings(); 
+        });*/
 
         d3.selectAll('.node').on('mouseout',function(){
 			d3.select(this).style('box-shadow','none');
+			highlightEpisodesOnRatings(); 
         });
 
 	});
