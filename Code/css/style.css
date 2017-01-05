@@ -302,6 +302,20 @@ body {
     width: 185px;
 }
 
+.checkBoxInformation {
+  margin-top: 40px;
+  font-weight: lighter;
+  letter-spacing: 1px;
+  font-size: small;
+}
+
+#checkBoxInformationText{
+  color: #acd2e2;
+  margin-left: 25px;
+  display: block;
+  text-indent: 0px;
+}
+
 /* --------------------------- Sankey diagram --------------------------- */
 /* Based on: http://bl.ocks.org/d3noob/5015397 */
 .node rect {

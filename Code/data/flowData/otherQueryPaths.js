@@ -1,16 +1,16 @@
 var queryTooltips = {
-	"Query1": "A",
-	"Query2": "B",
-	"Query3": "C",
-	"Query4": "D",
-	"Query5": "E",
-	"Query6": "F",
-	"Query7": "G",
-	"Query8": "H",
-	"Query9": "I",
-	"Query10": "J",
-	"MovieSearch": "Search",
-	"All": "All filters"
+	"Query1": "Display information about movies with a 9+ score.",
+	"Query2": "Display information about movies with a 2- score.",
+	"Query3": "Display information about movies with a duration less than 5 minutes.",
+	"Query4": "Display information about movies with a duration more than 3 hours.",
+	"Query5": "Display information about the 10 most expensive movies.",
+	"Query6": "Display information about movies with a budget of 1 EUR or less.",
+	"Query7": "Display information about 10 movies with the highest revenue.",
+	"Query8": "Display information about movies with a revenue which is less than 10 EUR.",
+	"Query9": "Display information about the 10 most cost-effective movies.",
+	"Query10": "Display information about movies with no profit.",
+	"MovieSearch": "Display information about a specific movie.",
+	"All": "Activate all filters."
 };
 
 var mostPopularMoviePaths = {
