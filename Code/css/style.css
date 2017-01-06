@@ -591,19 +591,24 @@ body {
     margin-top: 10px;
 }
 
+.actor-desc-inner .appearances .season .label {
+    color: black;
+}
+
+
 .actor-desc-inner .appearances .season .episode {
     height: 15px;
     display: inline-block;
 }
 
 .actor-desc-inner .appearances .season .episode.yes {
-    background: black;
-    border: 1px white;
+    background: darkgray;
+    border: 1px solid black;
 }
 
 .actor-desc-inner .appearances .season .episode.no {
     background: white;
-    border: 1px black;
+    border: 1px solid black;
 }
 
 .avg-rating-container {
