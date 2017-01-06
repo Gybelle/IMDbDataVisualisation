@@ -303,17 +303,17 @@ body {
 }
 
 .checkBoxInformation {
-  margin-top: 40px;
-  font-weight: lighter;
-  letter-spacing: 1px;
-  font-size: small;
+    margin-top: 40px;
+    font-weight: lighter;
+    letter-spacing: 1px;
+    font-size: small;
 }
 
 #checkBoxInformationText{
-  color: #acd2e2;
-  margin-left: 25px;
-  display: block;
-  text-indent: 0px;
+    color: #acd2e2;
+    margin-left: 25px;
+    display: block;
+    text-indent: 0px;
 }
 
 /* --------------------------- Sankey diagram --------------------------- */
@@ -473,6 +473,16 @@ body {
     border: 1px solid darkgray;
     cursor: pointer;
     font-size: 14;
+    color: black;
+    text-decoration: none;
+}
+.searchResult:hover, .searchResult:visited, .searchResult:active, .searchResult:link {
+    color: black;
+    text-decoration: none;
+}
+.searchResult:visited {
+    color: black;
+    text-decoration: none;
 }
 .searchResultActor {
     background: lightgoldenrodyellow;
@@ -482,12 +492,12 @@ body {
 }
 
 .smallChartZoom{
-  margin-right: 25px;
+    margin-right: 25px;
 }
 
 .larger_chart{
-  width: 500px;
-  height: 500px;
+    width: 500px;
+    height: 500px;
 
 }
 
@@ -603,5 +613,5 @@ body {
 
 /* -------------------------------- Navigator (overwrite Bootstrap) -------------------------------- */
 .vis_modal {
-  background-color: #FAF7F7;
+    background-color: #FAF7F7;
 }
