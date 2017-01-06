@@ -505,13 +505,20 @@ function drawActorPanels() {
 			$('#fullActorInformation').css({
 				left:  posX + 20,
 				top:   posY + (height / 2),
-				width: width + 50
+				width: width + 50,
+                                visibility: "visible"
 			});
 
 
 			var $info = $($(this).clone());
 			$info.find('.actor-desc-inner').children().show();
-			$('#fullActorInformation').html($info.html());			
+			$('#fullActorInformation').html($info.html());
+                        d3.select("#fullActorInformation>div").attr("style", "transform: translateY(0)");
+		});
+                $('#colActorDistribution').on('mouseout', function(e){
+			$('#fullActorInformation').css({
+                                visibility: "visible"
+			});
 		});
 
 		node.data(treemap.value(function(d) { return d.size; }).nodes).transition().duration(1500).call(position);
