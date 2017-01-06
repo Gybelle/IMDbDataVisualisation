@@ -119,7 +119,7 @@ $(document.body).on('click', '.selectSeries' ,function(){
 	if (filtered.length === 0)
 		return;
 
-    setLoading(true);
+    startLoading();
 
 	selectedShow = filtered[0];
 
@@ -145,8 +145,7 @@ $(document.body).on('click', '.selectSeries' ,function(){
 		drawRatingsPerEpisode();
 		drawActorPanels();		
         seriesBubbles(filtered);
-        setLoading(false);
-        });
+    });
 });
 
 
@@ -287,7 +286,7 @@ function drawRatingsPerEpisode() {
 
 		//make the tick lines black for better visiblity
 		d3.selectAll('g.x.axis g.tick line').style("stroke", "black");
-
+		doneLoading("ratingLineChart");
 }
 
 function highlightEpisodesOnRatings(episodes) {
@@ -363,8 +362,6 @@ function drawActorPanels() {
 	if (selectedShow === undefined || selectedShow === null) {
 		return;
 	}
-
-	$('#actorDistribution').html('');
 
 	//filter out all the episodes for the show
 	var filtered = episodes.filter(function(d) {
@@ -461,6 +458,11 @@ function drawActorPanels() {
 		var divisionData = calculateActorDivisionData(mainActors, actorOccurrences, actorOccurrencesPerSeason, epsPerSeason, actorRoles);
 
 		//clear the old grid first
+		console.log(divisionData);
+		if (divisionData.length == 0) {
+			$('#actorDistribution').html('No actors found.');
+			return;
+		}
 		$('#actorDistribution').html('');
 
 		var root = {children: divisionData};
@@ -545,7 +547,7 @@ function drawActorPanels() {
 			d3.select(this).style('box-shadow','none');
 			highlightEpisodesOnRatings();
         });
-		setLoading(false);
+		doneLoading("actorDistribution");
 	});
 }
 
@@ -670,6 +672,58 @@ function getNewColor() {
 	}
 	return color;
 } 
+
+var loadedParts = {
+	"actorDistribution": true,
+	"ratingLineChart": true,
+	"keywordBubbles": true
+};
+
+function startLoading(part) {
+	if (part === undefined || part === null) {
+		loadedParts.actorDistribution = false;
+		loadedParts.ratingLinechart = false;
+		loadedParts.keywordBubbles = false;
+	}
+	if (part === "actorDistribution") {
+		loadedParts.actorDistribution = false;
+	}
+	if (part === "ratingLineChart") {
+		loadedParts.ratingLineChart = false;
+	}
+	if (part === "keywordBubbles") {
+		loadedParts.keywordBubbles = false;
+	}
+
+	if (!loadedParts.actorDistribution || !loadedParts.ratingLineChart || !loadedParts.keywordBubbles) {
+        d3.select("#searchIcon").attr("class", "glyphicon glyphicon-time");
+        d3.select("#searchButton").attr("style", "background-color: darkorange; border-color: darkred;");
+	}
+}
+
+function doneLoading(part) {
+	if (part === undefined || part === null) {
+		loadedParts.actorDistribution = true;
+		loadedParts.ratingLinechart = true;
+		loadedParts.keywordBubbles = true;
+	}
+
+	if (part === "actorDistribution") {
+		loadedParts.actorDistribution = true;
+	}
+	if (part === "ratingLineChart") {
+		loadedParts.ratingLineChart = true;
+	}
+	if (part === "keywordBubbles") {
+		loadedParts.keywordBubbles = true;
+	}
+
+	if (loadedParts.actorDistribution && loadedParts.ratingLineChart && loadedParts.keywordBubbles) {
+        d3.select("#searchIcon").attr("class", "glyphicon glyphicon-search");
+        d3.select("#searchButton").attr("style", "background-color: #31b0d5; border-color: #268abc;");
+	}
+
+}
 
 function setLoading(loading) {
     if (loading) {

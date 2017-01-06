@@ -78,6 +78,7 @@ function createBubbleChart(data, divID, w, h) {
                 "font-size": "11px"
             });
     text.attr("fill-opacity", 0).transition().duration(3000).delay(700).attr("fill-opacity", 1);
+    doneLoading("keywordBubbles");
 }
 
 function processSeriesBubbleChartData(episodeData, numKeywordBubbles) {
@@ -147,9 +148,9 @@ function createSlider(divID) {
             d3.select("#percentage").html(data.from);
         },
         onFinish: function (data) {
-            setLoading(true);
             d3.select("#percentage").html(data.from);
             mainTreshold = data.from / 100;
+            startLoading("actorDistribution");
             drawActorPanels();
         }
     });
