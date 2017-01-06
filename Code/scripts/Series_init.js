@@ -295,6 +295,8 @@ function drawRatingsPerEpisode(selectedShow, numSeasons, numEpisodes) {
 		var tickValues = [];
 		var epCounter = 1;
 
+		console.log(epsPerSeason);
+
 		for (var i = 1; i <= epsPerSeason.length; i++) {
 			tickValues.push(epCounter - 1);
 			if (epsPerSeason[i] !== undefined) {
@@ -341,10 +343,7 @@ function drawRatingsPerEpisode(selectedShow, numSeasons, numEpisodes) {
 
 function highlightEpisodesOnRatings(episodes) {
 	//if episodes is empty or null we have to remove all highlighting
-	if (episodes === undefined || episodes === null || episodes.length == 0) {
 		d3.selectAll('g.x.axis rect').remove();
-		return;
-	}
 
 	var ticks = d3.selectAll('.x.axis g.tick')[0];
 
@@ -381,7 +380,7 @@ function highlightEpisodesOnRatings(episodes) {
 		if (season === undefined)
 			return;
 
-		var episodeWidth = seasonWidth / season.length;
+		var episodeWidth = seasonWidth / (season.length - 1);
 		var xAxis = d3.select('g.x.axis');
 
 
@@ -389,7 +388,7 @@ function highlightEpisodesOnRatings(episodes) {
 			if (season[i] == 1) {
 				//draw rectangle
 				xAxis.append("rect")
-					.attr("x", currentEpisodePos)
+					.attr("x", currentEpisodePos - (episodeWidth / 2))
 					.attr("y", -height)
 					.attr("width", episodeWidth)
 					.attr("height", height)
@@ -521,6 +520,7 @@ function drawActorPanels(selectedShow, numSeasons, numEpisodes) {
                           .style("width", width)
 	    				  .style("height", height);
 
+	    var actorClicked = false;
 		var node = div.datum(root).selectAll(".node")
 			.data(treemap.nodes)
 			.enter().append("div")
@@ -530,7 +530,12 @@ function drawActorPanels(selectedShow, numSeasons, numEpisodes) {
 			.html(function(d) {return d.children ? null : generateActorHtml(d, Math.max(0, d.dx - 1))} )
 			.on('mouseover', function(d) {
 				d3.select(this).style('box-shadow','3px 0px 30px #fff');
+				if (actorClicked == false)
+					highlightEpisodesOnRatings(d.appearances); 
+			})
+			.on('click', function(d) {
 				highlightEpisodesOnRatings(d.appearances); 
+				actorClicked = true;
 			});
 
 		node.data(treemap.value(function(d) { return d.size; }).nodes).transition().duration(1500).call(position);
@@ -549,7 +554,9 @@ function drawActorPanels(selectedShow, numSeasons, numEpisodes) {
 
         d3.selectAll('.node').on('mouseout',function(){
 			d3.select(this).style('box-shadow','none');
-			highlightEpisodesOnRatings(); 
+			if (actorClicked === false) {
+				highlightEpisodesOnRatings(); 
+			}
         });
 
 	});
