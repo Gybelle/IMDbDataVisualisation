@@ -571,8 +571,8 @@ function drawActorPanels(selectedShow, numSeasons, numEpisodes) {
 		});
 
 		function position() {
-			this.style("left", function(d) { return d.x + "px"; })
-				.style("top", function(d) { return d.y + "px"; })
+			this.style("right", function(d) { return d.x + "px"; })
+				.style("bottom", function(d) { return d.y + "px"; })
 				.style("width", function(d) { return Math.max(0, d.dx - 1) + "px"; })
 				.style("height", function(d) { return Math.max(0, d.dy - 1) + "px"; });
 		}
