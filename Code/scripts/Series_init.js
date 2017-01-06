@@ -493,9 +493,7 @@ function drawActorPanels() {
 
 		//show popover div with all the information visible
 		$('.node').on('mouseover', function(e){
-
 			var position = $(this).offset();
-
 			var offset = $(this).offset();
 			var posY = offset.top - $(window).scrollTop();
 			var posX = offset.left - $(window).scrollLeft(); 
@@ -508,17 +506,23 @@ function drawActorPanels() {
 				width: width + 50,
                                 visibility: "visible"
 			});
-
-
 			var $info = $($(this).clone());
 			$info.find('.actor-desc-inner').children().show();
 			$('#fullActorInformation').html($info.html());
                         d3.select("#fullActorInformation>div").attr("style", "transform: translateY(0)");
+                        console.log();
 		});
                 $('#colActorDistribution').on('mouseout', function(e){
 			$('#fullActorInformation').css({
+                                visibility: "hidden"
+			});
+                        highlightEpisodesOnRatings();
+		});
+                $('#fullActorInformation').on('mouseover', function(e){
+			$('#fullActorInformation').css({
                                 visibility: "visible"
 			});
+                        //highlightEpisodesOnRatings(d.appearances);
 		});
 
 		node.data(treemap.value(function(d) { return d.size; }).nodes).transition().duration(1500).call(position);
@@ -551,7 +555,7 @@ function drawActorPanels() {
 
         d3.selectAll('.node').on('mouseout',function(){
 			d3.select(this).style('box-shadow','none');
-			highlightEpisodesOnRatings();
+			//highlightEpisodesOnRatings();
         });
 		doneLoading("actorDistribution");
 	});
