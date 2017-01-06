@@ -558,14 +558,18 @@ body {
 }
 
 .actor-desc-inner {
-    font-family: "Helvetica Neue, Helvetica, Arial, san-serif";
-    padding-top: 8%;
+    /* Vertically center */
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+
+/*    font-family: "Helvetica Neue, Helvetica, Arial, san-serif";*/
     padding-left: 5px;
     padding-right: 5px;
-    padding-bottom: 5px;
 }
 
 .actor-desc-inner .name {
+    margin-top: 10px;
     font-size: 18px;
     text-align: center;
     font-weight: bold;
@@ -610,6 +614,10 @@ body {
     font-weight: bold;
 }
 
+#fullActorInformation {
+    position: absolute;
+    float: left;
+}
 
 /* -------------------------------- Navigator (overwrite Bootstrap) -------------------------------- */
 .vis_modal {
