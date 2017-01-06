@@ -16,6 +16,7 @@ function loadSeriesData(firstLetter) {
 	var previousTitle = "";
 
 	d3.dsv(';')("data/series/series_" + firstLetter + ".csv", function(data) {
+                series = [];
 		data.forEach(function(d) {
 			//check if this is a new Series by comparing the Title to the previously parsed entry
 			if (d.Title === previousTitle) {
@@ -160,9 +161,9 @@ function drawRatingsPerEpisode() {
 		return (d.Title === selectedShow.Title && d.Season !== 0 && d.Episode !== 0);
 	});
 
-	var avgRating = 0;
+	var rated = false;
 	var totalEps = 0;
-
+        var avgRating = 0;
 	var epsPerSeason = [];
 	var data = [];
 	$.each(filtered, function( index, value ) {
@@ -174,7 +175,7 @@ function drawRatingsPerEpisode() {
 
 		if (episode.rating > 0) {
 			data.push(episode);
-
+                        rated = true;
 			avgRating += episode.rating;
 			totalEps++;
 		}
@@ -185,9 +186,13 @@ function drawRatingsPerEpisode() {
 		epsPerSeason[episode.season]++;
 	});
 
-	avgRating /= totalEps;
-	avgRating = Math.round(avgRating * 100) / 100; //round 2 decimals
-
+        if(rated) {
+            avgRating /= totalEps;
+            avgRating = Math.round(avgRating * 100) / 100; //round 2 decimals
+        } else {
+            avgRating = "None";
+        }
+        
 	// define dimensions of graph
 	var colRatingLineChart = $('#colRatingLineChart');
 	var width = colRatingLineChart.width();
@@ -231,18 +236,18 @@ function drawRatingsPerEpisode() {
 		      .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
 
 
-		var avg = d3.select("#ratingLineChart").append("svg:svg")
-		      .attr("width", wAvg)
-		      .attr("height", h + m[0] + m[2])
-		      .append("foreignObject")
-    	.attr("class", "avg-rating-container")
-	    /*.attr("x", function(d){ return d.x; })
-	    .attr("y", function(d){ return d.y; })
-        */.attr('width', wAvg)
-        .attr('height', h + m[0] + m[2])          
-        	.append("xhtml:body")
-    .html('<div>Average Rating:</div><div class="rating">' + avgRating + "</div>")
-    .style("background", "none");
+                var avg = d3.select("#ratingLineChart").append("svg:svg")
+                        .attr("width", wAvg)
+                        .attr("height", h + m[0] + m[2])
+                        .append("foreignObject")
+                        .attr("class", "avg-rating-container")
+                        /*.attr("x", function(d){ return d.x; })
+                         .attr("y", function(d){ return d.y; })
+                         */.attr('width', wAvg)
+                        .attr('height', h + m[0] + m[2])
+                        .append("xhtml:body")
+                        .html('<div style="padding-top: 30px;">Average Rating:</div><div class="rating">' + avgRating + "</div>")
+                        .style("background", "none");
 
 		//calculate the ticks that represent the first episode of a new season
 		var tickValues = [];
