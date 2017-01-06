@@ -5,62 +5,11 @@ var actors = [];
 var actorsInMovies = [];
 var mainTreshold = 0.5;
 
+var selectedShow = null;
+var numSeasons = 0
+var numEpisodes = 0;
+
 function initialiseSeries() {
-	/**
-	 * LOAD THE DATA
-	 */
-	 
-	console.log("Loading data...");
-
-	var previousTitle = "";
-/*
-	d3.dsv(';')("data/seriesGOT.csv", function(data) {
-		data.forEach(function(d) {
-			//check if this is a new Series by comparing the Title to the previously parsed entry
-			if (d.Title === previousTitle) {
-				//do nothing?
-			} else {
-				previousTitle = d.Title;
-				var newSeries = new Object();
-				newSeries.ID = +d.ID
-				newSeries.Title = d.Title;
-				newSeries.Year = +d.Year
-				newSeries.Language = d.Language;
-
-				series.push(newSeries);
-			}
-			d.ID = +d.ID;
-			d.Year = +d.Year;
-			d.Episode = +d.Episode;
-			d.Season = +d.Season;
-			d.Rating = +d.Rating;
-		});
-
-		episodes = data;
-		console.log("Done with series!");
-		onFilter();
-	});
-
-	d3.dsv(';')("data/actorsGOT.csv", function(data) {
-		data.forEach(function(d) {
-			d.ActorID = +d.ActorID;
-		});
-
-		actors = data;
-		console.log("Done with actors!");
-		console.log("Actors for GoT: " + actors.length);
-	});
-
-	d3.dsv(';')("data/actorsInMoviesGOT.csv", function(data) {
-		data.forEach(function(d) {
-			d.ActorID = +d.ActorID;
-			d.MovieOrSeriesID = +d.MovieOrSeriesID;
-		});
-
-		actorsInMovies = data;
-		console.log("Done with actorsInMovies!");
-	});
-*/
 }
 
 function loadSeriesData(firstLetter) {
@@ -173,13 +122,13 @@ $(document.body).on('click', '.selectSeries' ,function(){
 	if (filtered.length === 0)
 		return;
 
-        setLoading(true);
+    setLoading(true);
 
-	var selectedShow = filtered[0];
+	selectedShow = filtered[0];
 
 	//first of all, search the number of seasons and max amount of episodes per season
-	var numSeasons = 0;
-	var numEpisodes = 0;
+	numSeasons = 0;
+	numEpisodes = 0;
 
 	filtered = episodes.filter(function(d) {
 		return (d.Title === selectedShow.Title && d.Season !== 0 && d.Episode !== 0);
@@ -196,15 +145,15 @@ $(document.body).on('click', '.selectSeries' ,function(){
 
 	//load the actorsInSeries data
 	loadActorsInSeriesData(seriesID, function() {
-		drawRatingsPerEpisode(selectedShow, numSeasons, numEpisodes);
-		drawActorPanels(selectedShow, numSeasons, numEpisodes);		
-                seriesBubbles(filtered);
-                setLoading(false);
+		drawRatingsPerEpisode();
+		drawActorPanels();		
+        seriesBubbles(filtered);
+        setLoading(false);
         });
 });
 
 
-function drawRatingsPerEpisode(selectedShow, numSeasons, numEpisodes) {
+function drawRatingsPerEpisode() {
 	//thanks to http://bl.ocks.org/benjchristensen/2579599
 
 	//filter out all the episodes for the show
@@ -299,8 +248,6 @@ function drawRatingsPerEpisode(selectedShow, numSeasons, numEpisodes) {
 		//calculate the ticks that represent the first episode of a new season
 		var tickValues = [];
 		var epCounter = 1;
-
-		console.log(epsPerSeason);
 
 		for (var i = 1; i <= epsPerSeason.length; i++) {
 			tickValues.push(epCounter - 1);
@@ -415,14 +362,20 @@ function highlightEpisodesOnRatings(episodes) {
 
 }
 
-function drawActorPanels(selectedShow, numSeasons, numEpisodes) {
+function drawActorPanels() {
+	if (selectedShow === undefined || selectedShow === null) {
+		return;
+	}
+
+	$('#actorDistribution').html('');
+
 	//filter out all the episodes for the show
 	var filtered = episodes.filter(function(d) {
 		return (d.Title === selectedShow.Title && d.Season !== 0 && d.Episode !== 0);
 	});
 
 	var totalEpisodes = filtered.length;
-	var epsPerSeason = [];
+	epsPerSeason = [];
 	var episodeIDs = [];
 	$.each(filtered, function( index, value ) {
 		episodeIDs.push(value.ID);
@@ -439,9 +392,9 @@ function drawActorPanels(selectedShow, numSeasons, numEpisodes) {
 	});
 
 	var actorIDs = [];
-	var actorOccurrences = [];
-	var actorOccurrencesPerSeason = []
-	var actorRoles = [];
+	actorOccurrences = [];
+	actorOccurrencesPerSeason = []
+	actorRoles = [];
 
 	$.each(seriesActorsInMovies, function( index, value ) {
 		if (actorIDs.indexOf(value.ActorID) < 0) {
@@ -491,7 +444,7 @@ function drawActorPanels(selectedShow, numSeasons, numEpisodes) {
 	});
 
 	q.awaitAll(function (error, files) {
-		var mainActors = [];
+		mainActors = [];
 	    
 	    files.forEach(function (file) {     
 	        file.forEach(function (d) {
@@ -549,11 +502,13 @@ function drawActorPanels(selectedShow, numSeasons, numEpisodes) {
 			var posY = offset.top - $(window).scrollTop();
 			var posX = offset.left - $(window).scrollLeft(); 
 			var height = $(this).height();
+			var width = $(this).width();
 
 			//$('#fullActorInformation').css({position});
 			$('#fullActorInformation').css({
 				left:  posX + 20,
-				top:   posY + (height / 2)
+				top:   posY + (height / 2),
+				width: width + 50
 			});
 /*
 			$('#fullActorInformation').css({
@@ -601,7 +556,7 @@ function drawActorPanels(selectedShow, numSeasons, numEpisodes) {
 			d3.select(this).style('box-shadow','none');
 			highlightEpisodesOnRatings();
         });
-
+		setLoading(false);
 	});
 }
 
@@ -724,12 +679,7 @@ function getNewColor() {
 	return color;
 } 
 
-function redraw() {
-    // redraw the panels
-}
-
 function setLoading(loading) {
-    console.log("Loading " + ((loading) ? "" : "done"));
     if (loading) {
         d3.select("#searchIcon").attr("class", "glyphicon glyphicon-time");
         d3.select("#searchButton").attr("style", "background-color: darkorange; border-color: darkred;");

@@ -145,8 +145,10 @@ function createSlider(divID) {
             d3.select("#percentage").html(data.from);
         },
         onFinish: function (data) {
+            setLoading(true);
             d3.select("#percentage").html(data.from);
             mainTreshold = data.from / 100;
+            drawActorPanels();
         }
     });
     $('body').mouseup(function (e) {
