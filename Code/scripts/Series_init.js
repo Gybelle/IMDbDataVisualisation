@@ -540,10 +540,31 @@ function drawActorPanels(selectedShow, numSeasons, numEpisodes) {
 
 		//show popover div with all the information visible
 		$('.node').on('mouseover', function(e){
+
+			var position = $(this).offset();
+
+			var offset = $(this).offset();
+			var posY = offset.top - $(window).scrollTop();
+			var posX = offset.left - $(window).scrollLeft(); 
+			var height = $(this).height();
+
+			//$('#fullActorInformation').css({position});
+			$('#fullActorInformation').css({
+				left:  posX + 20,
+				top:   posY + (height / 2)
+			});
+/*
 			$('#fullActorInformation').css({
 				left:  e.pageX + 20,
 				top:   e.pageY
 			});
+*/
+
+
+			var $info = $($(this).clone());
+			$info.find('.actor-desc-inner').children().show();
+			$('#fullActorInformation').html($info.html());			
+
 		});
 
 		node.data(treemap.value(function(d) { return d.size; }).nodes).transition().duration(1500).call(position);
@@ -565,7 +586,6 @@ function drawActorPanels(selectedShow, numSeasons, numEpisodes) {
 				var name = innerHtml.find('.name');
 				$(name).hide();
 			}
-
 		});
 
 		function position() {
