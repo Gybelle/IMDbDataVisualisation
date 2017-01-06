@@ -1,3 +1,7 @@
+/*
+ * @author: Michelle Gybels
+ */
+
 minVal = 0, maxVal = 0, fromVal = 0, toVal = 0;
 var startDate;
 var endDate;
@@ -26,11 +30,12 @@ function createRangePicker(divID, yearMin, yearMax) {
             countryFilter = null;
             startDate = parseDate(data.from.toString());
             endDate = parseDate(data.to.toString());
-            console.log(genreFilter);
+            //console.log(genreFilter);
             setFilterYear(startDate, endDate);
         }
     });
-    $('body').mouseup(function (e) {}); // fix to make slider not stick to mouse pointer
+    $('body').mouseup(function (e) {
+    }); // fix to make slider not stick to mouse pointer
 }
 
 function getYearRange() {

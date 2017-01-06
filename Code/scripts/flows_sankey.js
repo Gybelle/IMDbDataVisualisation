@@ -1,4 +1,6 @@
-
+/*
+ * @author: Michelle Gybels
+ */
 
 function createSankeyChart(){
 

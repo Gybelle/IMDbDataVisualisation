@@ -1,3 +1,7 @@
+/*
+ * @author: Anaïs Ools
+ */
+
 bucket1 = 0;
 bucket2 = 10;
 bucket3 = 25;

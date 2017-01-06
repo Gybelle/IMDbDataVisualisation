@@ -1,4 +1,6 @@
-// Inspiration: http://bl.ocks.org/d3noob/d8be922a10cb0b148cd5
+/*
+ * @author: Michelle Gybels, Anaïs Ools
+ */
 
 function genreProductionRate(divID, w, h, inputdata) {
     var margin = {top: 10, right: 36, bottom: 36, left: 42};

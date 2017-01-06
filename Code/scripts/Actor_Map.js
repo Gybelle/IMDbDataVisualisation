@@ -1,3 +1,7 @@
+/*
+ * @author: Anaïs Ools
+ */
+
 var map = null;
 var geocodeDecoder = null;
 var manIcon = null;
@@ -90,7 +94,7 @@ function addActorFilmingLocations(locationMap) {
             addMovieFilmingLocation(location, "<b>Filmed in " + location + "</b><br/>" + message, opacity);
         }
     } else {
-        console.log("CountriesGeoJSON is null");
+        //console.log("CountriesGeoJSON is null");
     }
 }
 
@@ -158,7 +162,7 @@ function addActorLocationMarker(location, isMale, message) {
         if (!countryCache[location]) {
             geocodeDecoder.GetLocations(location, function (data) {
                 if (!data || !data[0]) {
-                    console.log("Went wrong at " + location);
+                    //console.log("Went wrong at " + location);
                     return false;
                 }
                 var marker = L.marker([data[0].Y, data[0].X], {icon: icon}).addTo(map);

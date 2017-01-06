@@ -1,3 +1,7 @@
+/*
+ * @author: Michelle Gybels
+ */
+
 var pathHighlighted = [];
 var moviePath = [];
 var query1Path = [];
@@ -280,7 +284,7 @@ function deactivateAllQueries(){
 function findMoviePath(movie){
   path = moviePaths[movie]
   if (path === undefined){
-    console.log(movie + " not found.");
+    //console.log(movie + " not found.");
   } else {
     addMovieToMoviePath(path);
     addMoviePathsToHighlightedPaths(moviePath);

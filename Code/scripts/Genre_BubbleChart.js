@@ -1,4 +1,6 @@
-//Inspiration: https://jrue.github.io/coding/2014/exercises/basicbubblepackchart/
+/*
+ * @author: Michelle Gybels
+ */
 
 function genreBubbles(divID, w, h, inputdata) {
     var margin = {top: 6, right: 6, bottom: 6, left: 6};

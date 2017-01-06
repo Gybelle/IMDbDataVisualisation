@@ -1,3 +1,7 @@
+/*
+ * @author: Anaïs Ools
+ */
+
 function seriesBubbles(episodes) {
     var data = processSeriesBubbleChartData(episodes, 15);
     if (data.length == 0) {
@@ -104,7 +108,7 @@ function processSeriesBubbleChartData(episodeData, numKeywordBubbles) {
     }
     list.sort(function (x, y) {
         return d3.descending(x.value, y.value);
-    })
+    });
     if (list.length > numKeywordBubbles) {
         list = list.slice(0, numKeywordBubbles);
     }

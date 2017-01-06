@@ -1,6 +1,8 @@
-// Inspiration: https://gist.github.com/d3noob/9211665
-// Country data source: http://bl.ocks.org/mbostock/raw/4090846/world-110m.json
-// Country data source: http://bl.ocks.org/mbostock/raw/4090846/world-country-names.tsv
+/*
+ * @author: Anaïs Ools
+ * Country data source: http://bl.ocks.org/mbostock/raw/4090846/world-110m.json
+ * Country data source: http://bl.ocks.org/mbostock/raw/4090846/world-country-names.tsv
+ */
 
 var map = null;
 
@@ -78,7 +80,7 @@ function addCountryToMap(map, countryData, fillColor, country, tooltip) {
             }
         }).addTo(map);
     } else {
-        console.log("Map is null");
+        //console.log("Map is null");
     }
 }
 

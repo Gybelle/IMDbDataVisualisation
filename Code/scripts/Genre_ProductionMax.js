@@ -1,6 +1,6 @@
-// Inspiration: https://bl.ocks.org/mbostock/3885304
-// Inspiration: http://bl.ocks.org/d3noob/8952219
-// (Barchart)
+/*
+ * @author: Anaïs Ools
+ */
 
 function genreProductionMax(divID, w, h, inputdata) {
     var margin = {top: 10, right: 56, bottom: 36, left: 36};

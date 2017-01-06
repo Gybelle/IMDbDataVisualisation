@@ -1,3 +1,7 @@
+/*
+ * @author: Anaïs Ools, Michelle Gybels
+ */
+
 var modalH = 500 - 10;
 var modalW = 500;
 var legendSizeSmall = 5;

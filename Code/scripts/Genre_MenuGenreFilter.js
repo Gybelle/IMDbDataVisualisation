@@ -1,3 +1,7 @@
+/*
+ * @author: Michelle Gybels
+ */
+
 var genreFilter;
 
 function setGenreFilterMenu() {
@@ -33,7 +37,7 @@ function setGenreFilterMenu() {
                 }
                 setAllUnchecked();
             }
-            console.log(genreFilter);
+            //console.log(genreFilter);
             setFilterGenre(genreFilter);
 
         });
@@ -46,7 +50,7 @@ function setGenreFilterMenu() {
         } else {
             setAllGenresUnChecked();
         }
-        console.log(genreFilter);
+        //console.log(genreFilter);
         setFilterGenre(genreFilter);
     });
 }

@@ -1,3 +1,7 @@
+/*
+ * @author: Anaïs Ools
+ */
+
 genreYearCountryData = [];
 genreYearCountryData_filtered = [];
 genreYearCountryData_filteredByCountry = [];
@@ -51,7 +55,6 @@ function initialiseCharts(idRangePicker, idLineChart, idBarChart, idMap, idBubbl
             }
         });
         genreYearCountryData = data;
-        console.log("Reading data done");
 
         fromVal = yearMin + 50;
         toVal = yearMax - 50;
