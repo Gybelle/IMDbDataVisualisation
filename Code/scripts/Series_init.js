@@ -458,7 +458,6 @@ function drawActorPanels() {
 		var divisionData = calculateActorDivisionData(mainActors, actorOccurrences, actorOccurrencesPerSeason, epsPerSeason, actorRoles);
 
 		//clear the old grid first
-		console.log(divisionData);
 		if (divisionData.length == 0) {
 			$('#actorDistribution').html('No actors found.');
 			return;
