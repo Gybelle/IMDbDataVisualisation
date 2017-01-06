@@ -149,7 +149,7 @@ function onFilter() {
 	var html = "";
 	
 	$.each(filteredData, function(index, value) {
-		html = html + "<a class=\"selectSeries\" href=\"#\" data-seriesid=\"" + value.ID + "\"  >" +
+		html = html + "<a class=\"selectSeries searchResult searchResultActor\" href=\"#\" data-seriesid=\"" + value.ID + "\"  >" +
 			value.Title + " (" + value.Year + ")" + "</a>";
 	});
 
@@ -162,6 +162,8 @@ function onFilter() {
 $(document.body).on('click', '.selectSeries' ,function(){
 	//is this possible in D3?
 	var seriesID = $(this).data("seriesid");
+        d3.select(".searchResultMovie").attr("class", "selectSeries searchResult searchResultActor");
+        $(this)[0].className = "selectSeries searchResult searchResultMovie";
 
 	var filtered = series.filter(function(d){
 	    return (d.ID === seriesID);
@@ -663,7 +665,6 @@ var colors = [];
 function initColors() {
 	colors = ["#FF7F0E", "#6599C0", "#F0CC76", "#64BD91", "#F59A6E", "#AFD572", "#E2D35C", "#D84E67", "#7073A0", "#58B16F", "#A2C5A5", "#C25D7F", "#FCD450", "#FF183C", "#2AB1CF", "#348B85", "#70C256", "#72CAFA", "#3A5DA1", "#4EA6AA", "#916589", "#C25D7F", "#4EE69B", "#D6AA51", "#DE6E48", "#AD6A8B", "#73539F", "#FF185D", "#57C27C", "#696C97", "#F7B6D2", "#DA707A", "#878787"];
         colors.reverse();
-        console.log(colors);
 }
 initColors();
 
