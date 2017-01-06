@@ -1,14 +1,13 @@
-var numKeywordBubbles = 15;
-
 function seriesBubbles(episodes) {
-    var data = processSeriesBubbleChartData(episodes);
+    var data = processSeriesBubbleChartData(episodes, 15);
     if (data.length == 0) {
         d3.select("#keywordBubbles").select("svg").remove();
         d3.select("#keywordBubblesLarge").select("svg").remove();
         return;
     }
+    var longData = processSeriesBubbleChartData(episodes, 25);
     createBubbleChart(data, "#keywordBubbles", widthBubbles, heightSmallRow);
-    createBubbleChart(data, "#keywordBubblesLarge", 500, 490);
+    createBubbleChart(longData, "#keywordBubblesLarge", 500, 490);
 }
 
 function createBubbleChart(data, divID, w, h) {
@@ -81,7 +80,7 @@ function createBubbleChart(data, divID, w, h) {
     text.attr("fill-opacity", 0).transition().duration(3000).delay(700).attr("fill-opacity", 1);
 }
 
-function processSeriesBubbleChartData(episodeData) {
+function processSeriesBubbleChartData(episodeData, numKeywordBubbles) {
     var keywords = {};
     episodeData.forEach(function (episode) {
         episode.Keywords.split("*").forEach(function (keyword) {
@@ -102,6 +101,9 @@ function processSeriesBubbleChartData(episodeData) {
     for (var element in filtered) {
         list.push({key: element, value: filtered[element]});
     }
+    list.sort(function (x, y) {
+        return d3.descending(x.value, y.value);
+    })
     if (list.length > numKeywordBubbles) {
         list = list.slice(0, numKeywordBubbles);
     }
