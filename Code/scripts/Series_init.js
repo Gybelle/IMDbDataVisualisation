@@ -173,6 +173,8 @@ $(document.body).on('click', '.selectSeries' ,function(){
 	if (filtered.length === 0)
 		return;
 
+        setLoading(true);
+
 	var selectedShow = filtered[0];
 
 	//first of all, search the number of seasons and max amount of episodes per season
@@ -196,9 +198,9 @@ $(document.body).on('click', '.selectSeries' ,function(){
 	loadActorsInSeriesData(seriesID, function() {
 		drawRatingsPerEpisode(selectedShow, numSeasons, numEpisodes);
 		drawActorPanels(selectedShow, numSeasons, numEpisodes);		
-	});
-
-    seriesBubbles(filtered);
+                seriesBubbles(filtered);
+                setLoading(false);
+        });
 });
 
 
@@ -704,4 +706,15 @@ function getNewColor() {
 
 function redraw() {
     // redraw the panels
+}
+
+function setLoading(loading) {
+    console.log("Loading " + ((loading) ? "" : "done"));
+    if (loading) {
+        d3.select("#searchIcon").attr("class", "glyphicon glyphicon-time");
+        d3.select("#searchButton").attr("style", "background-color: darkorange; border-color: darkred;");
+    } else {
+        d3.select("#searchIcon").attr("class", "glyphicon glyphicon-search");
+        d3.select("#searchButton").attr("style", "background-color: #31b0d5; border-color: #268abc;");
+    }
 }

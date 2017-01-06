@@ -137,7 +137,7 @@ function createSlider(divID) {
         type: "single",
         min: 0,
         max: 100,
-        from: 50,
+        from: mainTreshold * 100,
         step: 1,
         prettify_enabled: false,
         grid_snap: false,
