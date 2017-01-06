@@ -515,7 +515,7 @@ body {
     /*border: 1px solid black;*/
     overflow: scroll;
     overflow-x: hidden;
-    height: 75%;
+    height: 65%;
 }
 
 .search-box #filter-results a {

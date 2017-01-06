@@ -3,6 +3,7 @@ var series = [];
 var episodes = [];
 var actors = [];
 var actorsInMovies = [];
+var mainTreshold = 0.5;
 
 function initialiseSeries() {
 	/**
@@ -413,10 +414,6 @@ function highlightEpisodesOnRatings(episodes) {
 }
 
 function drawActorPanels(selectedShow, numSeasons, numEpisodes) {
-	$('#actorDistribution').html('Loading actors...');
-
-	var mainTreshold = .1; //treshold of occurrences to be considered main character in range [0, 1]
-
 	//filter out all the episodes for the show
 	var filtered = episodes.filter(function(d) {
 		return (d.Title === selectedShow.Title && d.Season !== 0 && d.Episode !== 0);
@@ -704,3 +701,7 @@ function getNewColor() {
 	}
 	return color;
 } 
+
+function redraw() {
+    // redraw the panels
+}

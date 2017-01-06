@@ -7,6 +7,19 @@
         <link href="plugins/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">   <!-- Bootstrap -->
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <script type="text/javascript" src="scripts/Series_BubbleChartLarge.js"></script>
+        <link href="plugins/ion.rangeSlider-2.1.5/css/ion.rangeSlider.css" rel="stylesheet">
+        <link href="plugins/ion.rangeSlider-2.1.5/css/normalize.css" rel="stylesheet">
+        <link href="plugins/ion.rangeSlider-2.1.5/css/ion.rangeSlider.skinFlat.css" rel="stylesheet">
+        
+        <!-- Scripts -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="plugins/bootstrap-3.3.7/js/bootstrap.js"></script>
+        <script type="text/javascript" src="plugins/ion.rangeSlider-2.1.5/js/ion-rangeSlider/ion.rangeSlider.min.js"></script>
+        <script src="https://d3js.org/d3.v3.min.js"></script>
+        <script src="https://d3js.org/d3-queue.v3.min.js"></script>
+
+        <script src="scripts/Series_BubbleChart.js"></script>
+        <script src="scripts/Series_init.js"></script>
     <style>
       /* Custom style for the rating graph */
       /* tell the SVG path to be a thin blue line without any area fill */
@@ -75,9 +88,9 @@
                             </button>
                         </span>
                     </div>
-                    <div id="filter-results">
-
-                    </div>
+                    <div id="filter-results"></div>
+                    <div style="margin-top: 5px; margin-bottom: 5px;">Show actors only if they appear in <span id="percentage">50</span>% of the episodes</div>
+                    <input id="slider" class="range_slider"/>
                   </div>
                 </div>
               </div>
@@ -88,7 +101,6 @@
                 </div>
                 <div id="colKeywordBubbles" class="col-md-4">
                   <button type="button" class="close smallChartZoom" data-toggle="modal" data-target="#bubbleChartModal"><span class="glyphicon glyphicon-fullscreen" style="z-index: 1000; position: absolute; top: 5px;"></span></button>
-
                   <div class="bottom-chart chart" id="keywordBubbles"></div>
                 </div>
               </div>
@@ -117,18 +129,6 @@
         </div>
       </div>
 
-
-      <!-- Scripts -->
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-      <script type="text/javascript" src="plugins/bootstrap-3.3.7/js/bootstrap.js"></script>
-      <script src="https://d3js.org/d3.v3.min.js"></script>
-      <!--<script src="https://d3js.org/d3.v4.min.js"></script>-->
-
-      <script src="https://d3js.org/d3-queue.v3.min.js"></script>
-
-      <script src="scripts/Series_BubbleChart.js"></script>
-      <script src="scripts/Series_init.js"></script>
-
       <script>
         heightSmallRow = document.getElementById("ratingLineChart").offsetHeight;
         widthSmallChart = document.getElementById("colRatingLineChart").offsetWidth;
@@ -147,7 +147,7 @@
         $('#keywordBubbles').css('width', widthBubbles);
 
         initialiseSeries();
-
+        createSlider("#slider");
       </script>
     </body>
 
