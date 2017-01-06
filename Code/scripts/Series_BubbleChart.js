@@ -3,7 +3,8 @@ var numKeywordBubbles = 15;
 function seriesBubbles(episodes) {
     var data = processSeriesBubbleChartData(episodes);
     if (data.length == 0) {
-        d3.select(divID).select("svg").remove();
+        d3.select("#keywordBubbles").select("svg").remove();
+        d3.select("#keywordBubblesLarge").select("svg").remove();
         return;
     }
     createBubbleChart(data, "#keywordBubbles", widthBubbles, heightSmallRow);

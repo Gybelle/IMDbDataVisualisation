@@ -661,18 +661,9 @@ function calculateActorDivisionData(mainActors, actorOccurrences, actorOccurrenc
 var colors = [];
 
 function initColors() {
-	colors = [
-	'#2c8af2',
-	'#9eb8cf',
-	'#f43c8f',
-	'#c452f2',
-	'#f80808',
-	'#5ee0a5',
-	'#ffc000',
-	'#c240c8',
-	'#a7c0d6',
-	'#f25913'	
-	];
+	colors = ["#FF7F0E", "#6599C0", "#F0CC76", "#64BD91", "#F59A6E", "#AFD572", "#E2D35C", "#D84E67", "#7073A0", "#58B16F", "#A2C5A5", "#C25D7F", "#FCD450", "#FF183C", "#2AB1CF", "#348B85", "#70C256", "#72CAFA", "#3A5DA1", "#4EA6AA", "#916589", "#C25D7F", "#4EE69B", "#D6AA51", "#DE6E48", "#AD6A8B", "#73539F", "#FF185D", "#57C27C", "#696C97", "#F7B6D2", "#DA707A", "#878787"];
+        colors.reverse();
+        console.log(colors);
 }
 initColors();
 
