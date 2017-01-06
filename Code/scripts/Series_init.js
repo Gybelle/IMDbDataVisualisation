@@ -488,6 +488,7 @@ function drawActorPanels() {
 			.html(function(d) {return d.children ? null : generateActorHtml(d, Math.max(0, d.dx - 1))} )
 			.on('mouseover', function(d) {
 				d3.select(this).style('box-shadow','3px 0px 30px #fff');
+                                d3.select(this).attr('data-appearances', JSON.stringify(d.appearances));
 				highlightEpisodesOnRatings(d.appearances);
 			});
 
@@ -509,8 +510,8 @@ function drawActorPanels() {
 			var $info = $($(this).clone());
 			$info.find('.actor-desc-inner').children().show();
 			$('#fullActorInformation').html($info.html());
+                        $('#fullActorInformation').data('appearances', $info.data('appearances'));
                         d3.select("#fullActorInformation>div").attr("style", "transform: translateY(0)");
-                        console.log();
 		});
                 $('#colActorDistribution').on('mouseout', function(e){
 			$('#fullActorInformation').css({
@@ -522,7 +523,7 @@ function drawActorPanels() {
 			$('#fullActorInformation').css({
                                 visibility: "visible"
 			});
-                        //highlightEpisodesOnRatings(d.appearances);
+                        highlightEpisodesOnRatings($('#fullActorInformation').data('appearances'));
 		});
 
 		node.data(treemap.value(function(d) { return d.size; }).nodes).transition().duration(1500).call(position);
