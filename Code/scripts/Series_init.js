@@ -9,6 +9,9 @@ var selectedShow = null;
 var numSeasons = 0
 var numEpisodes = 0;
 
+
+var popoverWidth = 450;
+
 function loadSeriesData(firstLetter) {
 	var previousTitle = "";
 
@@ -503,7 +506,7 @@ function drawActorPanels() {
 			$('#fullActorInformation').css({
 				left:  posX + 20,
 				top:   posY + (height / 2),
-				width: width + 50,
+				width: popoverWidth,
                                 visibility: "visible"
 			});
 			var $info = $($(this).clone());
@@ -565,7 +568,8 @@ function generateActorHtml(data, width) {
 	var html = "";
 
 	//calculate episodeWidth
-	var episodeWidth = width * 0.7 / data.maxEpsPerSeason;
+	//var episodeWidth = width * 0.7 / data.maxEpsPerSeason;
+	var episodeWidth = popoverWidth * 0.7 / data.maxEpsPerSeason;
 
 	//name
 	html = html + '<div class="name">'
