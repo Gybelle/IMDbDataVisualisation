@@ -9,9 +9,6 @@ var selectedShow = null;
 var numSeasons = 0
 var numEpisodes = 0;
 
-function initialiseSeries() {
-}
-
 function loadSeriesData(firstLetter) {
 	var previousTitle = "";
 
@@ -504,24 +501,16 @@ function drawActorPanels() {
 			var height = $(this).height();
 			var width = $(this).width();
 
-			//$('#fullActorInformation').css({position});
 			$('#fullActorInformation').css({
 				left:  posX + 20,
 				top:   posY + (height / 2),
 				width: width + 50
 			});
-/*
-			$('#fullActorInformation').css({
-				left:  e.pageX + 20,
-				top:   e.pageY
-			});
-*/
 
 
 			var $info = $($(this).clone());
 			$info.find('.actor-desc-inner').children().show();
 			$('#fullActorInformation').html($info.html());			
-
 		});
 
 		node.data(treemap.value(function(d) { return d.size; }).nodes).transition().duration(1500).call(position);
@@ -533,9 +522,9 @@ function drawActorPanels() {
 
 			//keep removing things from the html until it fits or until only the role is left
 			if ((innerHtml.height() + 10) > node.height()) {
-				//first remove the appearances
-				var appearances = innerHtml.find('.appearances');
-				$(appearances).hide();
+				//first remove the number of episodes
+				var episodes = innerHtml.find('.episodes');
+				$(episodes).hide();
 			}
 
 			if ((innerHtml.height() + 10) > node.height()) {
@@ -568,7 +557,7 @@ function generateActorHtml(data, width) {
 
 	//name
 	html = html + '<div class="name">'
-		+ data.actor.FirstName + " " + data.actor.LastName + " (" + data.size + ")"
+		+ data.actor.FirstName + " " + data.actor.LastName
 		+ '</div>';
 
 	//role
@@ -576,9 +565,12 @@ function generateActorHtml(data, width) {
 		+ 'Role: ' + " " + data.role
 		+ '</div>';
 
+	//number of episodes
+	html = html + '<div class="episodes">'
+		+ 'Total Episodes: ' + data.size + '</div>';
 
 	//appearances
-	html += '<div class="appearances">';
+	html += '<div class="appearances" style="display: none">';
 
 	$.each(data.appearances, function (index, value) {
 		if (index == 0)

@@ -581,6 +581,12 @@ body {
     margin-top: 10px;
 }
 
+.actor-desc-inner .episodes {
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px;
+}
+
 .actor-desc-inner .appearances {
     margin-top: 10px;
 }
