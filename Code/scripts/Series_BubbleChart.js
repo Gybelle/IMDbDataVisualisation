@@ -131,3 +131,24 @@ function wrap(text, width) {
         }
     });
 }
+
+function createSlider(divID) {
+    $(divID).ionRangeSlider({
+        type: "single",
+        min: 0,
+        max: 100,
+        from: 50,
+        step: 1,
+        prettify_enabled: false,
+        grid_snap: false,
+        onChange: function (data) {
+            d3.select("#percentage").html(data.from);
+        },
+        onFinish: function (data) {
+            d3.select("#percentage").html(data.from);
+            mainTreshold = data.from / 100;
+        }
+    });
+    $('body').mouseup(function (e) {
+    }); // fix to make slider not stick to mouse pointer
+}

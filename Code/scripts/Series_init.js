@@ -3,6 +3,7 @@ var series = [];
 var episodes = [];
 var actors = [];
 var actorsInMovies = [];
+var mainTreshold = 0.5;
 
 function initialiseSeries() {
 	/**
@@ -408,7 +409,7 @@ function highlightEpisodesOnRatings(episodes) {
 }
 
 function drawActorPanels(selectedShow, numSeasons, numEpisodes) {
-	var mainTreshold = .5; //treshold of occurrences to be considered main character in range [0, 1]
+	//var mainTreshold = .5; //treshold of occurrences to be considered main character in range [0, 1]
 
 	//filter out all the episodes for the show
 	var filtered = episodes.filter(function(d) {
@@ -682,3 +683,7 @@ function getNewColor() {
 	}
 	return color;
 } 
+
+function redraw() {
+    // redraw the panels
+}
