@@ -17,21 +17,22 @@ var popoverWidth = 450;
 
 function loadSeriesData(firstLetter) {
     var previousTitle = "";
+    var previousYear = "";
 
     d3.dsv(';')("data/series/series_" + firstLetter + ".csv", function (data) {
         series = [];
         data.forEach(function (d) {
             //check if this is a new Series by comparing the Title to the previously parsed entry
-            if (d.Title === previousTitle) {
+            if (d.Title === previousTitle && d.Year === previousYear) {
                 //do nothing?
             } else {
                 previousTitle = d.Title;
+                previousYear = d.Year;
                 var newSeries = new Object();
-                newSeries.ID = +d.ID
+                newSeries.ID = +d.ID;
                 newSeries.Title = d.Title;
                 newSeries.Year = +d.Year
                 newSeries.Language = d.Language;
-
                 series.push(newSeries);
             }
             d.ID = +d.ID;
