@@ -1,5 +1,5 @@
 /*
- * @author: Jelco Adamczyk, Michelle Gybels, Anaïs Ools
+ * @author: Jelco Adamczyk, Michelle Gybels, Anaï¿½s Ools
  */
 
 /* -------------------------------- Basics -------------------------------- */
@@ -637,7 +637,31 @@ body {
     background-color: #FAF7F7;
     border: 1px solid darkgrey;
 }
-/* -------------------------------- Navigator (overwrite Bootstrap) -------------------------------- */
+/* -------------------------------- Modal -------------------------------- */
 .vis_modal {
     background-color: #FAF7F7;
+}
+
+/* -------------------------------- index page -------------------------------- */
+#buttonVisPanel {
+  margin: 0 auto;
+  text-align: left;
+  width: 100%;
+  margin-top: 300px;
+  text-align: center;
+}
+
+.visButton{
+  margin-left: 20px;
+  margin-right: 20px;
+  display: inline-block;
+  box-shadow: 7px 7px 3px #888888;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+.center {
+  width: 800px;
 }
