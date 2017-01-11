@@ -65,6 +65,7 @@
 
               <div class="row">
                 <div id="colActorDistribution" class="col-md-8">
+                  <div id="loading-actors" style="display: none" >Loading actors...</div>
                   <div class="actor-distribution chart" id="actorDistribution"></div>
                   <div id="fullActorInformation" style="visibility: hidden"></div>
                 </div>
@@ -141,6 +142,9 @@
         $(".actor-distribution").css('height', heightLargeRow);
         $('.search-box').css('height', heightLargeRow);
         $("#ratingLineChart").css('width', widthLargeChart);
+
+        $('#loading-actors').css('line-height', heightLargeRow + "px");
+        $('#loading-actors').css('width', widthLargeChart);
 
         widthBubbles = $(document).width() - widthLargeChart;
         $('#keywordBubbles').css('width', widthBubbles);

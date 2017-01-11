@@ -368,6 +368,7 @@ function highlightEpisodesOnRatings(episodes) {
 }
 
 function drawActorPanels() {
+
     if (selectedShow === undefined || selectedShow === null) {
         return;
     }
@@ -724,6 +725,7 @@ function startLoading(part) {
     }
     if (part === "actorDistribution") {
         loadedParts.actorDistribution = false;
+        $('#loading-actors').show();
     }
     if (part === "ratingLineChart") {
         loadedParts.ratingLineChart = false;
@@ -743,10 +745,12 @@ function doneLoading(part) {
         loadedParts.actorDistribution = true;
         loadedParts.ratingLinechart = true;
         loadedParts.keywordBubbles = true;
+        $('#loading-actors').hide();
     }
 
     if (part === "actorDistribution") {
         loadedParts.actorDistribution = true;
+        $('#loading-actors').hide();
     }
     if (part === "ratingLineChart") {
         loadedParts.ratingLineChart = true;
@@ -758,16 +762,20 @@ function doneLoading(part) {
     if (loadedParts.actorDistribution && loadedParts.ratingLineChart && loadedParts.keywordBubbles) {
         d3.select("#searchIcon").attr("class", "glyphicon glyphicon-search");
         d3.select("#searchButton").attr("style", "background-color: #31b0d5; border-color: #268abc;");
+        $('#loading-actors').hide();
     }
 
 }
+
 
 function setLoading(loading) {
     if (loading) {
         d3.select("#searchIcon").attr("class", "glyphicon glyphicon-time");
         d3.select("#searchButton").attr("style", "background-color: darkorange; border-color: darkred;");
+        $('#loading-actors').show();
     } else {
         d3.select("#searchIcon").attr("class", "glyphicon glyphicon-search");
         d3.select("#searchButton").attr("style", "background-color: #31b0d5; border-color: #268abc;");
+        $('#loading-actors').hide();
     }
 }

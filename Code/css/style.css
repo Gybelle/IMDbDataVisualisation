@@ -637,6 +637,17 @@ body {
     background-color: #FAF7F7;
     border: 1px solid darkgrey;
 }
+
+#loading-actors {
+    font-size: 36px;
+    text-align: center;
+    position: absolute;
+    z-index: 120;
+    background: rgba(0,0,0,0.5);
+    font-weight: bold;
+    color: white;
+}
+
 /* -------------------------------- Modal -------------------------------- */
 .vis_modal {
     background-color: #FAF7F7;
