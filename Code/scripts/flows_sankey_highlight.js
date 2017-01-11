@@ -79,6 +79,15 @@ function setFlowChartFilterMenu(){
     }
   });
 
+  // actions when searching a movie
+  $("#movieSearch_sankey").on("awesomplete-selectcomplete", function(){
+    removeMoviePathsFromHighlightedPaths(moviePath);
+    movie = $(this).val();
+    $("#movieCheckbox").prop('checked', true);
+    findMoviePath(movie);
+    highlightPathInSankey();
+  });
+
   //Get all query paths
   query1Path = findQueryMoviePaths(mostPopularMoviePaths);
   query2Path = findQueryMoviePaths(leastPopularMoviePaths);
